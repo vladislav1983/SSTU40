@@ -1,12 +1,9 @@
-/*=====================================================================================================================
- * 
- * Repository path:     $HeadURL$
- * Last committed:      $Revision$
- * Last changed by:     $Author$
- * Last changed date:   $Date$
- * ID:                  $Id$
- *
- *===================================================================================================================*/
+/******************************************************************************/
+/* 
+ *                   TEMPERATURE CONTROL AND CONVERSION    
+ *       
+*/
+/******************************************************************************/
 
 /*----------------------------------------------------------------------------*/
 /* Body Identification                                                        */
@@ -116,8 +113,7 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
 				(tc)->T_fbk = (tc)->T_sum >> TMPCTRL_AVERAGE_DIVIDER;
 				(tc)->T_sum = 0;
 				
-				(tc)->T_fbk = ((U32)(tc)->T_fbk * (tc)->T_cal_gain) >> 10;
-                (tc)->T_fbk += (S16)tc->T_cal_offset;
+				(tc)->T_fbk = ((U32)(tc)->T_fbk * (tc)->T_cal_coeff) >> 10;
 				
 				if((tc)->T_fbk > MAX_TEMP_TRIP_RAW) _set_overtemperature_error(1); /* if overtemperature --> trip error */
 				tmpctrl_mainstate = TMPCTRL_CONTROL;

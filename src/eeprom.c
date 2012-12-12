@@ -1,12 +1,20 @@
-/*=====================================================================================================================
- * 
- * Repository path:     $HeadURL$
- * Last committed:      $Revision$
- * Last changed by:     $Author$
- * Last changed date:   $Date$
- * ID:                  $Id$
- *
- *===================================================================================================================*/
+//========================================================================================================== 
+//    Used with pic30-gcc. and dsPIC.
+//    Language tool versions: pic30-as.exe v3.24, pic30-gcc.exe v3.24, pic30-ld.exe v3.24, pic30-ar.exe v3.24
+//==========================================================================================================
+//    File name   : eeprom.c
+//    Description : Internal EEPROM secured strategy routines
+//
+//    History :
+//    1. Date        : 06.03.2011
+//       Author      : V.Gyurov
+//       Description : Create
+//
+//
+//    $Revision: V3.01 $
+//                                  
+//
+//==========================================================================================================
 
 //==========================================================================================================
 // Body Identification                                                        
@@ -29,6 +37,10 @@
 //==========================================================================================================
 // Local constants                                                            
 //==========================================================================================================
+
+#ifndef  dsPIC30F3014_EEPROM_CONFIGURED
+#error "!!! dsPIC30F3014 EEPROM ADDRESS NOT CONFIGURED, PLEASE CHECK 'EE_BASE_ADDR', 'EE_END_ADDR'  AND DEFINE 'dsPIC30F3014_EEPROM_CONFIGURED' TO REMOVE THIS ERROR !!!"
+#endif
 // Define here physical start and end address of eeprom.
 #define EE_BASE_ADDR			    0x7FFC00
 #define EE_END_ADDR				    0x7FFFFE

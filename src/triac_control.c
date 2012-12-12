@@ -1,12 +1,9 @@
-/*=====================================================================================================================
- * 
- * Repository path:     $HeadURL$
- * Last committed:      $Revision$
- * Last changed by:     $Author$
- * Last changed date:   $Date$
- * ID:                  $Id$
- *
- *===================================================================================================================*/
+/******************************************************************************/
+/* 
+ *                        		TRIAC CONTROL     
+ *       
+*/
+/******************************************************************************/
 
 /*----------------------------------------------------------------------------*/
 /* Body Identification                                                        */
@@ -77,11 +74,11 @@ void triac_fire_timer(void)
 {
 	if(_TRIAC())	//if triack fired
 	{
-	    if(!--triac_fire_counter) 
-        {
-		    _TRIAC_OFF();
-		    triac_fire_counter = TRIAC_FIRE_TIME;
-        }
+	if(!--triac_fire_counter) 
+		{
+		_TRIAC_OFF();
+		triac_fire_counter = TRIAC_FIRE_TIME;
+		}
 	}
 
 }

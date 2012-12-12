@@ -1,12 +1,3 @@
-/*=====================================================================================================================
- * 
- * Repository path:     $HeadURL$
- * Last committed:      $Revision$
- * Last changed by:     $Author$
- * Last changed date:   $Date$
- * ID:                  $Id$
- *
- *===================================================================================================================*/
 #ifndef TEMPCTRL_H
 #define TEMPCTRL_H
     
@@ -32,7 +23,7 @@
 *
 * After that bullshits...
 * ------------------------------------------------------------------------------
-*  WE ASSUME THAT Real Temp = Uadc / 2. TEMP IS CALIBRATE USING "T_cal_gain" -> scaled by 1024.
+*  WE ASSUME THAT Real Temp = Uadc / 2. TEMP IS CALIBRATE USING "T_cal_coeff" -> scaled by 1024.
 * ------------------------------------------------------------------------------
 */
 /******************************************************************************/
@@ -89,8 +80,7 @@ struct temperature_control
 	
 	/* PARAMS STORED IN EEPROM */
 	U16 tmpctrl_samp_time;	// Temperature control sample time in line halfperiods.
-	U16 T_cal_gain;		// Scaled by 1024
-    S16 T_cal_offset;
+	U16 T_cal_coeff;		// Scaled by 1024
 	U16 PID_Out_cal;		// Scaled by 1024
 	U16 Ring_reduction_per;
 	

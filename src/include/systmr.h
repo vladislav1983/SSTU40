@@ -1,12 +1,3 @@
-/*=====================================================================================================================
- * 
- * Repository path:     $HeadURL$
- * Last committed:      $Revision$
- * Last changed by:     $Author$
- * Last changed date:   $Date$
- * ID:                  $Id$
- *
- *===================================================================================================================*/
 #ifndef SYSTMR_H
 #define SYSTMR_H
     
@@ -18,7 +9,7 @@
 /*----------------------------------------------------------------------------*/
 /* Constant data                                                              */
 /*----------------------------------------------------------------------------*/
-#define CPU_CYCLE_ns							cTCY_NS
+#define CPU_CYCLE_ns							(31.25)
 
 /* Task 2 Timer reference */
 #define cTMR1_ISR_TICK_us						(5000u)		//timer1 tick in us = task2 time
@@ -44,20 +35,20 @@
 #define TMR2_CLOCK_SOURCE						0
 
 /* Time Parameters */
-#define TIME_PRESCALER                          10000	//	Prescaler for secons count in task1 periods.
+#define TIME_PRESCALER			10000	//	Prescaler for secons count in task1 periods.
 
 /*----------------------------------------------------------------------------*/
 /* Exported type                                                              */
 /*----------------------------------------------------------------------------*/
 struct Times
-{
+	{
 	U16 Timer;
 	U16 sec;
 	U16 min;
 	
 	/* PARAMS STORED IN EEPROM */
 	U16 Hib_Time;
-};
+	};
 /*----------------------------------------------------------------------------*/
 /* Exported data                                                              */
 /*----------------------------------------------------------------------------*/

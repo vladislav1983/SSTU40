@@ -1,25 +1,16 @@
-/*=====================================================================================================================
- * 
- * Repository path:     $HeadURL$
- * Last committed:      $Revision$
- * Last changed by:     $Author$
- * Last changed date:   $Date$
- * ID:                  $Id$
- *
- *===================================================================================================================*/
 #ifndef BASEDEF_H
 #define BASEDEF_H
 
 #define FIRMWARE_BASE_VERSION		4000
 #define FIRMWARE_SUB_VERSION		22
+#define dsPIC30F3014_EEPROM_CONFIGURED
 
 //PLL=16x, OSC=8Mhz -> Freq = (OSC) * PLL;
 #define cOSC_KHz    ((U32)8000ul) 							// Oscillator frequancy
-#define cPLL_KHz    ((U32)8ul*(cOSC_KHz))           		// PLL frequency kHz.
+#define cPLL_KHz    ((U32)16ul*(cOSC_KHz))           		// PLL frequency kHz.
 #define cPLL_MHz    ((U32)(cPLL_KHz)/(U32)1000ul)        	// PLL frequency Mhz
 #define cFCY_HZ     (((cPLL_KHz)*(U32)1000ul)/(U32)4ul)  	// Instruction clock - Hz
 #define cFCY_MHZ    ((cPLL_KHz)/(U32)4ul/(U32)1000ul)	  	// Instruction clock - MHz
-#define cTCY_NS     (1000UL/cFCY_MHZ)
 
 /* INTERRUPT PRIORITY LEVELS */
 #define cISR_PRIORITY_TMR3	(6u)	/*  Timer3  */		/* HIGHEST TASK 1 */
@@ -40,7 +31,7 @@ typedef signed char     S8;
 typedef signed int      S16;
 typedef signed long     S32;
 
-typedef float           F32;
+typedef float           f32;
 typedef double          f64;
 
 typedef U8          	BOOL;
