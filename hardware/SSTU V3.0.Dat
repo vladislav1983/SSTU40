@@ -1,4 +1,4 @@
-Field=Comment~String~Comment~100|Field=Description~String~Description~100|Field=Designator~String~Designator~100|Field=Footprint~String~Footprint~100|Field=LibRef~String~LibRef~100|Field=Quantity~Integer~Quantity~100|ReportField=Currency~<none>|ReportField=ProductionQuantity~1|ReportField=ProjectFileName~SSTU V3.0.PrjPCB|ReportField=ProjectFullPath~D:\My Documents\Projects\JBC Soldering Station\Hardware\SSTU V3.0\SSTU V3.0.PrjPCB|ReportField=Title~Bill of Materials For Project [SSTU V3.0.PrjPCB] (No PCB Document Selected)|ReportField=TotalQuantity~103|ReportField=ReportTime~00:38:15|ReportField=ReportDate~18.4.2010 ã.|ReportField=ReportDateTime~18.4.2010 ã. 00:38:15|ReportField=OutputName~Bill of Materials|ReportField=OutputType~BOM_PartType|ReportField=GeneratorName~BOM|ReportField=GeneratorDescription~Bill of Materials|ReportField=VariantName~None|ReportField=Address1~|ReportField=Address2~|ReportField=Address3~|ReportField=Address4~|ReportField=ApprovedBy~|ReportField=Author~|ReportField=CheckedBy~|ReportField=CompanyName~|ReportField=CurrentDate~18.4.2010 ã.|ReportField=CurrentTime~00:38:13|ReportField=Date~|ReportField=DocumentFullPathAndName~D:\My Documents\Projects\JBC Soldering Station\Hardware\SSTU V3.0\Main.SchDoc|ReportField=DocumentName~Main.SchDoc|ReportField=DocumentNumber~|ReportField=DrawnBy~|ReportField=Engineer~|ReportField=ImagePath~|ReportField=ModifiedDate~17.3.2010 ã.|ReportField=Organization~|ReportField=ProjectName~SSTU V3.0.PrjPCB|ReportField=Revision~|ReportField=Rule~|ReportField=SheetNumber~|ReportField=SheetTotal~|ReportField=Time~|ReportField=Title~|ReportField=DataSourceFileName~SSTU V3.0.PrjPCB|ReportField=DataSourceFullPath~D:\My Documents\Projects\JBC Soldering Station\Hardware\SSTU V3.0\SSTU V3.0.PrjPCB
+Field=Comment~String~Comment~100|Field=Description~String~Description~100|Field=Designator~String~Designator~100|Field=Footprint~String~Footprint~100|Field=LibRef~String~LibRef~100|Field=Quantity~Integer~Quantity~100|ReportField=ProductionQuantity~1|ReportField=ProjectFileName~SSTU V3.0.PrjPCB|ReportField=ProjectFullPath~D:\Projects\SSTU\02_Hardware\SSTU V3.0.PrjPCB|ReportField=Title~Bill of Materials For Project [SSTU V3.0.PrjPCB] (No PCB Document Selected)|ReportField=TotalQuantity~103|ReportField=ReportTime~00:19:03|ReportField=ReportDate~13.12.2012|ReportField=ReportDateTime~13.12.2012 00:19:03|ReportField=OutputName~Bill of Materials|ReportField=OutputType~BOM_PartType|ReportField=GeneratorName~BOM|ReportField=GeneratorDescription~Bill of Materials|ReportField=VariantName~None|ReportField=Address1~|ReportField=Address2~|ReportField=Address3~|ReportField=Address4~|ReportField=ApprovedBy~|ReportField=Author~|ReportField=CheckedBy~|ReportField=CompanyName~|ReportField=CurrentDate~13.12.2012|ReportField=CurrentTime~00:18:59|ReportField=Date~|ReportField=DocumentFullPathAndName~D:\Projects\SSTU\02_Hardware\Main.SchDoc|ReportField=DocumentName~Main.SchDoc|ReportField=DocumentNumber~|ReportField=DrawnBy~|ReportField=Engineer~|ReportField=ImagePath~|ReportField=ModifiedDate~17.3.2010|ReportField=Organization~|ReportField=ProjectName~|ReportField=Revision~|ReportField=Rule~|ReportField=SheetNumber~|ReportField=SheetTotal~|ReportField=Time~|ReportField=Title~|ReportField=DataSourceFileName~SSTU V3.0.PrjPCB|ReportField=DataSourceFullPath~D:\Projects\SSTU\02_Hardware\SSTU V3.0.PrjPCB
 Cap||C200, C202, C204, C207|Cap Electrolyt 7|Cap pol|4
 Cap 1206||C201, C203, C205, C206, C208, C407, C408, C409, C500, C501, C502, C503, C504, C505, C506, C507, C508|3216[1206]|Cap 1206|17
 Cap||C300, C400, C401, C402, C403, C404|3216[1206]|Cap|6
@@ -12,24 +12,24 @@ HEADER X5||H400|SIP5|HEADER X5|1
 SIP2|SIP2|J200|SIP2|SIP2|1
 1-1470156-1|USB 1.1, Right Angle, Thru-Hole, B Type, Receptacle, 4 Position, White|J300|USB2.5-2H4D|1-1470156-1|1
 SIP4|SIP4|J400|SIP4|SIP4|1
-RES||L400, R200, R201, R203, R400, R401, R402, R403, R404, R405, R407, R504, R507, R508, R511, R512, R513, R516, R518, R519, R520, R521, R522, R523, R524, R525, R526|3216[1206]|RES 1|27
+RES||L400, R200, R201, R203, R400, R401, R402, R403, R404, R405, R504, R507, R508, R511, R512, R513, R516, R518, R519, R520, R521, R522, R523, R524, R525, R526|3216[1206]|RES 1|26
 LED||LED200, RX_LED300, TX_LED300, USER_LED400|LED_1206|LED|4
 PWD2S /PHU2||P200|PWD2S /PHU2|PWD2S /PHU2|1
 PWD5S /PHU5||P500|PWD5S/ PHU5|PWD5S /PHU5|1
 Resistor||R300, R301, R302, R303, R406|3216[1206]|RES1|5
-RES||R500, R501, R502, R503, R505, R506, R514|1206_REFLOW|RES 1|7
+RES||R407, R500, R501, R502, R503, R505, R506, R514|1206_REFLOW|RES 1|8
 RES||R509, R510|RA161004|RES 1|2
 2W10M||Rec200|WOB_2WXX[X]M|2W10M|1
 Trimmer||RP400|BOURNS3296W|Res Trim|1
 Tack Button 6x6||SW 400|TS Button|TS-X Button|1
 BTA 26-600B||Th500|TO247|BTA 26-600B|1
 L7805AC-V|Precision 1A Regulator|U200, U202|SFM-T3/E10.4V_L7805AC-V(Primary)|L7805AC-V|2
-H11G1||U201|DIP-6|H11G1|1
+H11AA1||U201|DIP6|H11AA1|1
 FT232RL||U300|SSOP28|FT232RL|1
 DSPIC30F3014-30I/PT|High-Performance 16-bit Digital Signal Controller, 24 KB Flash, 2 KB SRAM, 1 KB EEPROM, 44-Pin TQFP, Industrial Temperature|U400|TQFP-PT44_M|DSPIC30F3014-30I/PT|1
 TL062MD|Low-Power J-FET Dual Bipolar Operational Amplifier|U500|SO8_N|TL062MD|1
 MOC3023||U501|DIP-6|MOC3023|1
-HCF4066BM1|Quad Bilateral Switch For Transmission or Multiplexing of Analog or Digital Signals|U502|SO14_N|HCF4066BM1|1
+74HCT4066D NXP|Quad Bilateral Switch For Transmission or Multiplexing of Analog or Digital Signals|U502|SO14_N|HCF4066BM1|1
 OP07C||U503|SO8|OP07C|1
 HEADER X16||X400|HDR1X16|HEADER X16|1
 XTAL||XTAL400|XTAL|XTAL|1

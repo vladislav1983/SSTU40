@@ -151,52 +151,7 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 
 [GeneratedDocument1]
-DocumentPath=..\OLD\SSU20 27.09\SST20\SST20.PcbDoc.htm
-
-[GeneratedDocument2]
-DocumentPath=Project Outputs for SSTU V3.0\SSTU V3.0.DRL
-
-[GeneratedDocument3]
-DocumentPath=Project Outputs for SSTU V3.0\SSTU V3.0.DRR
-
-[GeneratedDocument4]
-DocumentPath=Project Outputs for SSTU V3.0\SSTU V3.0.EXTREP
-
-[GeneratedDocument5]
-DocumentPath=Project Outputs for SSTU V3.0\SSTU V3.0.GBL
-
-[GeneratedDocument6]
-DocumentPath=Project Outputs for SSTU V3.0\SSTU V3.0.GBS
-
-[GeneratedDocument7]
-DocumentPath=Project Outputs for SSTU V3.0\SSTU V3.0.GD1
-
-[GeneratedDocument8]
-DocumentPath=Project Outputs for SSTU V3.0\SSTU V3.0.GG1
-
-[GeneratedDocument9]
-DocumentPath=Project Outputs for SSTU V3.0\SSTU V3.0.GM15
-
-[GeneratedDocument10]
-DocumentPath=Project Outputs for SSTU V3.0\SSTU V3.0.GTL
-
-[GeneratedDocument11]
-DocumentPath=Project Outputs for SSTU V3.0\SSTU V3.0.GTS
-
-[GeneratedDocument12]
-DocumentPath=Project Outputs for SSTU V3.0\SSTU V3.0.LDP
-
-[GeneratedDocument13]
 DocumentPath=SSTU V3.0.PcbDoc.htm
-
-[GeneratedDocument14]
-DocumentPath=Project Outputs for SSTU V3.0\SSTU V3.0.REP
-
-[GeneratedDocument15]
-DocumentPath=Project Outputs for SSTU V3.0\SSTU V3.0.RUL
-
-[GeneratedDocument16]
-DocumentPath=Project Outputs for SSTU V3.0\SSTU V3.TXT
 
 [Generic_SmartPDF]
 AutoOpenFile=-1
@@ -218,9 +173,9 @@ SCH_ShowNoErc=-1
 SCH_ShowParameter=-1
 SCH_ShowProbes=-1
 SCH_ShowBlankets=-1
-OutputFileName=SSTU V3.0.PrjPCB=D:\My Documents\Projects\JBC Soldering Station\Hardware\SSTU V3.0\SSTU V3.0.pdf
+OutputFileName=SSTU V3.0.PrjPCB=D:\Projects\SSTU\02_Hardware\SSTU V3.0.pdf
 SCH_ExpandLogicalToPhysical=-1
-SCH_VariantName=[No Variations]
+SCH_VariantName=[None]
 SCH_ExpandComponentDesignators=-1
 SCH_ExpandNetlabels=0
 SCH_ExpandPorts=0
