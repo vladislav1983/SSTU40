@@ -123,7 +123,7 @@ void IF_Uart_Init(U32 u32Baudrate)
 	U1MODEbits.PDSEL	= serPARITY_AND_DATA;
 	U1MODEbits.STSEL	= serTWO_STOP_BIT;
                          
-    U1BRG = (U16)(((f32)cFCY_HZ / ((f32)16u * (f32)u32Baudrate)) - (f32)0.5); // U1BRG = Fcy/16/baudrate - 1;
+    U1BRG = (U16)(((F32)cFCY_HZ / ((F32)16u * (F32)u32Baudrate)) - (F32)0.5); // U1BRG = Fcy/16/baudrate - 1;
     
     U1STAbits.UTXISEL	= serTRANSMISSION_INTERRUPT_MODE;
     U1STAbits.UTXBRK	= serTRANSMIT_BREAKE_BIT;
