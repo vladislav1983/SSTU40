@@ -77,8 +77,6 @@ c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(futil.o
                               c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(addsf3.o) (_fPropagateNaN)
 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(funpack.o)
                               c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(fixunssfsi.o) (_funpack)
-c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libc-coff.a(atoi.XXo)
-                              src\hex\main.o (atoi)
 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libc-coff.a(strlen.XXo)
                               src\hex\sirem.o (strlen)
 
@@ -107,20 +105,20 @@ Program Memory  [Origin = 0x100, Length = 0x3efe]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x100               0x468           0x69c  (1692)
-.const                       0x568               0xfaa          0x177f  (6015)
-.text                       0x1512              0x1fd4          0x2fbe  (12222)
-.dinit                      0x34e6                0x8c            0xd2  (210)
-.text                       0x3572                0xe0           0x150  (336)
+.text                        0x100               0x420           0x630  (1584)
+.const                       0x520               0xfa2          0x1773  (6003)
+.text                       0x14c2              0x1fc4          0x2fa6  (12198)
+.dinit                      0x3486                0x84            0xc6  (198)
+.text                       0x350a                0xe0           0x150  (336)
 
-                     Total program memory used (bytes):         0x4ffb  (20475) 84%
+                     Total program memory used (bytes):         0x4f5f  (20319) 84%
 
 
 Data EEPROM Memory  [Origin = 0x7ffc00, Length = 0x400]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-_01b4f23050c90a4c         0x7ffc00               0x400           0x400  (1024)
+_01b4f23050c90b34         0x7ffc00               0x400           0x400  (1024)
 
                         Total data EEPROM used (bytes):          0x400  (1024) 100%
 
@@ -129,14 +127,14 @@ Data Memory  [Origin = 0x800, Length = 0x800]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-_019aaf5050c90a4a            0x800                   0           0x4b4  (1204)
+_019aaf5050c90b31            0x800                   0           0x4b4  (1204)
 .nbss                        0xcb4                   0           0x118  (280)
 .ndata                       0xdcc                   0            0x1c  (28)
 .nbss                        0xde8                   0            0x58  (88)
-.ndata                       0xe40                   0             0x4  (4)
-.nbss                        0xe44                   0             0x6  (6)
+.ndata                       0xe40                   0             0x2  (2)
+.nbss                        0xe42                   0             0x6  (6)
 
-                        Total data memory used (bytes):          0x64a  (1610) 78%
+                        Total data memory used (bytes):          0x648  (1608) 78%
 
 
 Dynamic Memory Usage
@@ -144,9 +142,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0xe4a                               0x1b6  (438)
+stack                        0xe48                               0x1b8  (440)
 
-                        Maximum dynamic memory (bytes):          0x1b6  (438)
+                        Maximum dynamic memory (bytes):          0x1b8  (440)
 
 
 External Symbols in Data Memory (by address):
@@ -195,9 +193,8 @@ External Symbols in Data Memory (by address):
                     0x0e32                  _cart_det_state
                     0x0e34                  _time
                     0x0e3c                  _ADC
-                    0x0e40                  _Revision
-                    0x0e44                  _release
-                    0x0e46                  _u16Nibble_Temp
+                    0x0e42                  _release
+                    0x0e44                  _u16Nibble_Temp
 
 External Symbols in Data Memory (by name):
 
@@ -209,7 +206,6 @@ External Symbols in Data Memory (by name):
                     0x0e00                  _LCD_update_rate
                     0x0df8                  _PC_CONTROL
                     0x0e10                  _ParamAct
-                    0x0e40                  _Revision
                     0x0d8c                  _STORE_POS
                     0x0df6                  _SYS_CONTROL
                     0x0d32                  _TASK_CONTROL
@@ -231,7 +227,7 @@ External Symbols in Data Memory (by name):
                     0x0cf8                  _overprot
                     0x0d92                  _par_trace
                     0x0cd8                  _pid
-                    0x0e44                  _release
+                    0x0e42                  _release
                     0x0da8                  _s16CmpValue
                     0x0d12                  _stat_stat
                     0x0e34                  _time
@@ -245,7 +241,7 @@ External Symbols in Data Memory (by name):
                     0x0d88                  _trace_state
                     0x0d90                  _trace_trigger
                     0x0da6                  _u16CompareParameter
-                    0x0e46                  _u16Nibble_Temp
+                    0x0e44                  _u16Nibble_Temp
                     0x0da2                  _u16TraceParamNumber_1
                     0x0da4                  _u16TraceParamNumber_2
 
@@ -274,155 +270,154 @@ External Symbols in Program Memory (by address):
                   0x0004dc                  __fbopExit
                   0x0004e4                  __fbopReturnNaN
                   0x0004ea                  __funpack
-                  0x000514                  _atoi
-                  0x00055c                  _strlen
-                  0x000568                  _version
-                  0x00056a                  _C30_Version
-                  0x000aaa                  _iopar
-                  0x00150e                  _LCD_INIT_STRING
-                  0x001512                  _state_machine_T1
-                  0x00172c                  _state_machine_T2
-                  0x001a20                  _state_machine_init
-                  0x001a34                  _stm_timer_T2
-                  0x001a4e                  _stm_timer_II_T2
-                  0x001a68                  _stm_timer_T1
-                  0x001a82                  _PrintHibernationTime
-                  0x001ac0                  _Sirem_Engine
-                  0x0021e4                  _ee_param_act
-                  0x0024aa                  _EE_CheckEEprom
-                  0x002536                  _temp_ctrl
-                  0x00266c                  _Reset_TMPCTRL
-                  0x00267c                  _PID
-                  0x002718                  _Reset_PID
-                  0x002728                  _Cartridge_overload_protection
-                  0x002762                  _temp_ctrl_init
-                  0x00276e                  _Get_Temp_Actual
-                  0x00277e                  _Set_User_Temp
-                  0x002784                  _Roll_Back_User_Temp
-                  0x00278a                  _Get_User_Temp
-                  0x00278e                  _Inc_User_Temp
-                  0x00279c                  _Dec_User_Temp
-                  0x0027aa                  _tmpctrl_timer_t1
-                  0x0027c4                  _cartridge_ident
-                  0x00297c                  _bresenham
-                  0x0029d6                  _ident_timer_t1
-                  0x0029f0                  _ident_timeout_timer_t1
-                  0x002a0a                  _IF_DigitalIO_Init
-                  0x002a62                  _Dio_Scan_T2
-                  0x002ae0                  _cart_stat_det
-                  0x002bbc                  _cart_stat_timer_T1
-                  0x002bd6                  _IF_LCDInit
-                  0x002c08                  _IF_LCDPutc
-                  0x002c3a                  _IF_LCDGotoXY
-                  0x002c52                  _IF_LCDPuts
-                  0x002c6a                  _IF_LCDPutn
-                  0x002cee                  _IF_LCD_UpdateState
-                  0x002d00                  _LCDSendNibble
-                  0x002d5a                  _LCDSendByte
-                  0x002d88                  _IF_Uart_Init
-                  0x002e0c                  _IF_Uart_MsgGetDataCnt
-                  0x002e18                  _IF_Uart_MsgGet
-                  0x002e3e                  _IF_Uart_RxPurge
-                  0x002e4a                  _IF_Uart_MsgPut
-                  0x002e72                  _IF_UART_PutByte
-                  0x002e8c                  __U1RXInterrupt
-                  0x002eea                  _sci_timer
-                  0x002f00                  __T3Interrupt
-                  0x002f3c                  __T1Interrupt
-                  0x002f72                  __INT0Interrupt
-                  0x002f76                  _TaskTimesCalc
-                  0x002f8a                  _StationStatistic
-                  0x003042                  _IF_SysTmr1_Init
-                  0x003068                  _IF_SysTmr3_Init
-                  0x00308c                  _IF_SysTmr2_Init
-                  0x0030b0                  _delay_us
-                  0x0030e6                  _delay_ms
-                  0x00311c                  _Timestate_Cartridge_Control
-                  0x00315a                  _IF_Get_TRSB_CntBytes
-                  0x00315e                  _do_trace
-                  0x00322a                  _Clear_Trace_Array
-                  0x00324a                  _trace_init_first
-                  0x003270                  _zero_cross_II
-                  0x0032a0                  _DC_Autotunning
-                  0x0032e8                  _Current_measure
-                  0x003320                  _measure_T2
-                  0x00334c                  _measure_init
-                  0x003352                  _main
-                  0x00342e                  _IF_Parlist_GetCntMembers
-                  0x003432                  _IF_Parlist_GetCntBytes
-                  0x003436                  _IF_Parlist_bnu
-                  0x003460                  _Params_check_limit
-                  0x0034e4                  _Params_Conversion
-                  0x003572                  _IF_ADC_INIT
-                  0x0035c8                  _ADC_Sample_Read
-                  0x0035de                  __OscillatorFail
-                  0x0035f4                  __AddressError
-                  0x00360a                  __StackError
-                  0x003620                  __MathError
-                  0x003636                  _triac_fire_timer
-                  0x00364c                  _triac_control_init
+                  0x000514                  _strlen
+                  0x000520                  _version
+                  0x000522                  _C30_Version
+                  0x000a62                  _iopar
+                  0x0014be                  _LCD_INIT_STRING
+                  0x0014c2                  _state_machine_T1
+                  0x0016dc                  _state_machine_T2
+                  0x0019d0                  _state_machine_init
+                  0x0019e4                  _stm_timer_T2
+                  0x0019fe                  _stm_timer_II_T2
+                  0x001a18                  _stm_timer_T1
+                  0x001a32                  _PrintHibernationTime
+                  0x001a70                  _Sirem_Engine
+                  0x002194                  _ee_param_act
+                  0x00245a                  _EE_CheckEEprom
+                  0x0024e6                  _temp_ctrl
+                  0x00261c                  _Reset_TMPCTRL
+                  0x00262c                  _PID
+                  0x0026c8                  _Reset_PID
+                  0x0026d8                  _Cartridge_overload_protection
+                  0x002712                  _temp_ctrl_init
+                  0x00271e                  _Get_Temp_Actual
+                  0x00272e                  _Set_User_Temp
+                  0x002734                  _Roll_Back_User_Temp
+                  0x00273a                  _Get_User_Temp
+                  0x00273e                  _Inc_User_Temp
+                  0x00274c                  _Dec_User_Temp
+                  0x00275a                  _tmpctrl_timer_t1
+                  0x002774                  _cartridge_ident
+                  0x00292c                  _bresenham
+                  0x002986                  _ident_timer_t1
+                  0x0029a0                  _ident_timeout_timer_t1
+                  0x0029ba                  _IF_DigitalIO_Init
+                  0x002a12                  _Dio_Scan_T2
+                  0x002a90                  _cart_stat_det
+                  0x002b6c                  _cart_stat_timer_T1
+                  0x002b86                  _IF_LCDInit
+                  0x002bb8                  _IF_LCDPutc
+                  0x002bea                  _IF_LCDGotoXY
+                  0x002c02                  _IF_LCDPuts
+                  0x002c1a                  _IF_LCDPutn
+                  0x002c9e                  _IF_LCD_UpdateState
+                  0x002cb0                  _LCDSendNibble
+                  0x002d0a                  _LCDSendByte
+                  0x002d38                  _IF_Uart_Init
+                  0x002dbc                  _IF_Uart_MsgGetDataCnt
+                  0x002dc8                  _IF_Uart_MsgGet
+                  0x002dee                  _IF_Uart_RxPurge
+                  0x002dfa                  _IF_Uart_MsgPut
+                  0x002e22                  _IF_UART_PutByte
+                  0x002e3c                  __U1RXInterrupt
+                  0x002e9a                  _sci_timer
+                  0x002eb0                  __T3Interrupt
+                  0x002eec                  __T1Interrupt
+                  0x002f22                  __INT0Interrupt
+                  0x002f26                  _TaskTimesCalc
+                  0x002f3a                  _StationStatistic
+                  0x002ff2                  _IF_SysTmr1_Init
+                  0x003018                  _IF_SysTmr3_Init
+                  0x00303c                  _IF_SysTmr2_Init
+                  0x003060                  _delay_us
+                  0x003096                  _delay_ms
+                  0x0030cc                  _Timestate_Cartridge_Control
+                  0x00310a                  _IF_Get_TRSB_CntBytes
+                  0x00310e                  _do_trace
+                  0x0031da                  _Clear_Trace_Array
+                  0x0031fa                  _trace_init_first
+                  0x003220                  _zero_cross_II
+                  0x003250                  _DC_Autotunning
+                  0x003298                  _Current_measure
+                  0x0032d0                  _measure_T2
+                  0x0032fc                  _measure_init
+                  0x003302                  _main
+                  0x0033ce                  _IF_Parlist_GetCntMembers
+                  0x0033d2                  _IF_Parlist_GetCntBytes
+                  0x0033d6                  _IF_Parlist_bnu
+                  0x003400                  _Params_check_limit
+                  0x003484                  _Params_Conversion
+                  0x00350a                  _IF_ADC_INIT
+                  0x003560                  _ADC_Sample_Read
+                  0x003576                  __OscillatorFail
+                  0x00358c                  __AddressError
+                  0x0035a2                  __StackError
+                  0x0035b8                  __MathError
+                  0x0035ce                  _triac_fire_timer
+                  0x0035e4                  _triac_control_init
                   0xf8000a                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x0035c8                  _ADC_Sample_Read
-                  0x00056a                  _C30_Version
-                  0x002728                  _Cartridge_overload_protection
-                  0x00322a                  _Clear_Trace_Array
-                  0x0032e8                  _Current_measure
-                  0x0032a0                  _DC_Autotunning
-                  0x00279c                  _Dec_User_Temp
-                  0x002a62                  _Dio_Scan_T2
-                  0x0024aa                  _EE_CheckEEprom
-                  0x00276e                  _Get_Temp_Actual
-                  0x00278a                  _Get_User_Temp
-                  0x003572                  _IF_ADC_INIT
-                  0x002a0a                  _IF_DigitalIO_Init
-                  0x00315a                  _IF_Get_TRSB_CntBytes
-                  0x002c3a                  _IF_LCDGotoXY
-                  0x002bd6                  _IF_LCDInit
-                  0x002c08                  _IF_LCDPutc
-                  0x002c6a                  _IF_LCDPutn
-                  0x002c52                  _IF_LCDPuts
-                  0x002cee                  _IF_LCD_UpdateState
-                  0x003432                  _IF_Parlist_GetCntBytes
-                  0x00342e                  _IF_Parlist_GetCntMembers
-                  0x003436                  _IF_Parlist_bnu
-                  0x003042                  _IF_SysTmr1_Init
-                  0x00308c                  _IF_SysTmr2_Init
-                  0x003068                  _IF_SysTmr3_Init
-                  0x002e72                  _IF_UART_PutByte
-                  0x002d88                  _IF_Uart_Init
-                  0x002e18                  _IF_Uart_MsgGet
-                  0x002e0c                  _IF_Uart_MsgGetDataCnt
-                  0x002e4a                  _IF_Uart_MsgPut
-                  0x002e3e                  _IF_Uart_RxPurge
-                  0x00278e                  _Inc_User_Temp
-                  0x002d5a                  _LCDSendByte
-                  0x002d00                  _LCDSendNibble
-                  0x00150e                  _LCD_INIT_STRING
-                  0x00267c                  _PID
-                  0x0034e4                  _Params_Conversion
-                  0x003460                  _Params_check_limit
-                  0x001a82                  _PrintHibernationTime
-                  0x002718                  _Reset_PID
-                  0x00266c                  _Reset_TMPCTRL
-                  0x002784                  _Roll_Back_User_Temp
-                  0x00277e                  _Set_User_Temp
-                  0x001ac0                  _Sirem_Engine
-                  0x002f8a                  _StationStatistic
-                  0x002f76                  _TaskTimesCalc
-                  0x00311c                  _Timestate_Cartridge_Control
-                  0x0035f4                  __AddressError
+                  0x003560                  _ADC_Sample_Read
+                  0x000522                  _C30_Version
+                  0x0026d8                  _Cartridge_overload_protection
+                  0x0031da                  _Clear_Trace_Array
+                  0x003298                  _Current_measure
+                  0x003250                  _DC_Autotunning
+                  0x00274c                  _Dec_User_Temp
+                  0x002a12                  _Dio_Scan_T2
+                  0x00245a                  _EE_CheckEEprom
+                  0x00271e                  _Get_Temp_Actual
+                  0x00273a                  _Get_User_Temp
+                  0x00350a                  _IF_ADC_INIT
+                  0x0029ba                  _IF_DigitalIO_Init
+                  0x00310a                  _IF_Get_TRSB_CntBytes
+                  0x002bea                  _IF_LCDGotoXY
+                  0x002b86                  _IF_LCDInit
+                  0x002bb8                  _IF_LCDPutc
+                  0x002c1a                  _IF_LCDPutn
+                  0x002c02                  _IF_LCDPuts
+                  0x002c9e                  _IF_LCD_UpdateState
+                  0x0033d2                  _IF_Parlist_GetCntBytes
+                  0x0033ce                  _IF_Parlist_GetCntMembers
+                  0x0033d6                  _IF_Parlist_bnu
+                  0x002ff2                  _IF_SysTmr1_Init
+                  0x00303c                  _IF_SysTmr2_Init
+                  0x003018                  _IF_SysTmr3_Init
+                  0x002e22                  _IF_UART_PutByte
+                  0x002d38                  _IF_Uart_Init
+                  0x002dc8                  _IF_Uart_MsgGet
+                  0x002dbc                  _IF_Uart_MsgGetDataCnt
+                  0x002dfa                  _IF_Uart_MsgPut
+                  0x002dee                  _IF_Uart_RxPurge
+                  0x00273e                  _Inc_User_Temp
+                  0x002d0a                  _LCDSendByte
+                  0x002cb0                  _LCDSendNibble
+                  0x0014be                  _LCD_INIT_STRING
+                  0x00262c                  _PID
+                  0x003484                  _Params_Conversion
+                  0x003400                  _Params_check_limit
+                  0x001a32                  _PrintHibernationTime
+                  0x0026c8                  _Reset_PID
+                  0x00261c                  _Reset_TMPCTRL
+                  0x002734                  _Roll_Back_User_Temp
+                  0x00272e                  _Set_User_Temp
+                  0x001a70                  _Sirem_Engine
+                  0x002f3a                  _StationStatistic
+                  0x002f26                  _TaskTimesCalc
+                  0x0030cc                  _Timestate_Cartridge_Control
+                  0x00358c                  __AddressError
                   0x000190                  __DefaultInterrupt
                   0xf8000a                  __FGS.sec
-                  0x002f72                  __INT0Interrupt
-                  0x003620                  __MathError
-                  0x0035de                  __OscillatorFail
-                  0x00360a                  __StackError
-                  0x002f3c                  __T1Interrupt
-                  0x002f00                  __T3Interrupt
-                  0x002e8c                  __U1RXInterrupt
+                  0x002f22                  __INT0Interrupt
+                  0x0035b8                  __MathError
+                  0x003576                  __OscillatorFail
+                  0x0035a2                  __StackError
+                  0x002eec                  __T1Interrupt
+                  0x002eb0                  __T3Interrupt
+                  0x002e3c                  __U1RXInterrupt
                   0x000272                  ___addsf3
                   0x000394                  ___divsf3
                   0x000418                  ___fixunssfsi
@@ -445,37 +440,36 @@ External Symbols in Program Memory (by name):
                   0x0001e4                  __memcpy_helper
                   0x000122                  __psv_init
                   0x000100                  __resetPRI
-                  0x000514                  _atoi
-                  0x00297c                  _bresenham
-                  0x002ae0                  _cart_stat_det
-                  0x002bbc                  _cart_stat_timer_T1
-                  0x0027c4                  _cartridge_ident
-                  0x0030e6                  _delay_ms
-                  0x0030b0                  _delay_us
-                  0x00315e                  _do_trace
-                  0x0021e4                  _ee_param_act
-                  0x0029f0                  _ident_timeout_timer_t1
-                  0x0029d6                  _ident_timer_t1
-                  0x000aaa                  _iopar
-                  0x003352                  _main
-                  0x003320                  _measure_T2
-                  0x00334c                  _measure_init
-                  0x002eea                  _sci_timer
-                  0x001512                  _state_machine_T1
-                  0x00172c                  _state_machine_T2
-                  0x001a20                  _state_machine_init
-                  0x001a4e                  _stm_timer_II_T2
-                  0x001a68                  _stm_timer_T1
-                  0x001a34                  _stm_timer_T2
-                  0x00055c                  _strlen
-                  0x002536                  _temp_ctrl
-                  0x002762                  _temp_ctrl_init
-                  0x0027aa                  _tmpctrl_timer_t1
-                  0x00324a                  _trace_init_first
-                  0x00364c                  _triac_control_init
-                  0x003636                  _triac_fire_timer
-                  0x000568                  _version
-                  0x003270                  _zero_cross_II
+                  0x00292c                  _bresenham
+                  0x002a90                  _cart_stat_det
+                  0x002b6c                  _cart_stat_timer_T1
+                  0x002774                  _cartridge_ident
+                  0x003096                  _delay_ms
+                  0x003060                  _delay_us
+                  0x00310e                  _do_trace
+                  0x002194                  _ee_param_act
+                  0x0029a0                  _ident_timeout_timer_t1
+                  0x002986                  _ident_timer_t1
+                  0x000a62                  _iopar
+                  0x003302                  _main
+                  0x0032d0                  _measure_T2
+                  0x0032fc                  _measure_init
+                  0x002e9a                  _sci_timer
+                  0x0014c2                  _state_machine_T1
+                  0x0016dc                  _state_machine_T2
+                  0x0019d0                  _state_machine_init
+                  0x0019fe                  _stm_timer_II_T2
+                  0x001a18                  _stm_timer_T1
+                  0x0019e4                  _stm_timer_T2
+                  0x000514                  _strlen
+                  0x0024e6                  _temp_ctrl
+                  0x002712                  _temp_ctrl_init
+                  0x00275a                  _tmpctrl_timer_t1
+                  0x0031fa                  _trace_init_first
+                  0x0035e4                  _triac_control_init
+                  0x0035ce                  _triac_fire_timer
+                  0x000520                  _version
+                  0x003220                  _zero_cross_II
 
 Memory Configuration
 
@@ -545,7 +539,7 @@ LOAD c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib/dsPIC30F\libp3
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000100        0x468
+.text             0x000100        0x420
  *(.init)
  .init            0x000100         0x32 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(crt0_standard.o)
                   0x000100                  _resetPRI
@@ -593,10 +587,8 @@ LOAD c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib/dsPIC30F\libp3
                   0x0004ea                  _funpack
  *(.libdsp)
  *(.lib*)
- .libc.atoi       0x000514         0x48 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libc-coff.a(atoi.XXo)
-                  0x000514                  atoi
- .libc.strlen     0x00055c          0xc c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libc-coff.a(strlen.XXo)
-                  0x00055c                  strlen
+ .libc.strlen     0x000514          0xc c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libc-coff.a(strlen.XXo)
+                  0x000514                  strlen
 
 usercode
  *(usercode)
@@ -681,23 +673,23 @@ userdata
 
 .ivt              0x000004         0x7c
                   0x000004          0x4 LONG 0x190 DEFINED (__ReservedTrap0)?ABSOLUTE (__ReservedTrap0):ABSOLUTE (__DefaultInterrupt)
-                  0x000006          0x4 LONG 0x35de DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
-                  0x000008          0x4 LONG 0x35f4 DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
-                  0x00000a          0x4 LONG 0x360a DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
-                  0x00000c          0x4 LONG 0x3620 DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
+                  0x000006          0x4 LONG 0x3576 DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
+                  0x000008          0x4 LONG 0x358c DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
+                  0x00000a          0x4 LONG 0x35a2 DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
+                  0x00000c          0x4 LONG 0x35b8 DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
                   0x00000e          0x4 LONG 0x190 DEFINED (__ReservedTrap5)?ABSOLUTE (__ReservedTrap5):ABSOLUTE (__DefaultInterrupt)
                   0x000010          0x4 LONG 0x190 DEFINED (__ReservedTrap6)?ABSOLUTE (__ReservedTrap6):ABSOLUTE (__DefaultInterrupt)
                   0x000012          0x4 LONG 0x190 DEFINED (__ReservedTrap7)?ABSOLUTE (__ReservedTrap7):ABSOLUTE (__DefaultInterrupt)
-                  0x000014          0x4 LONG 0x2f72 DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000014          0x4 LONG 0x2f22 DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000016          0x4 LONG 0x190 DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000018          0x4 LONG 0x190 DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00001a          0x4 LONG 0x2f3c DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00001a          0x4 LONG 0x2eec DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001c          0x4 LONG 0x190 DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001e          0x4 LONG 0x190 DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000020          0x4 LONG 0x190 DEFINED (__T2Interrupt)?ABSOLUTE (__T2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000022          0x4 LONG 0x2f00 DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000022          0x4 LONG 0x2eb0 DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000024          0x4 LONG 0x190 DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000026          0x4 LONG 0x2e8c DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000026          0x4 LONG 0x2e3c DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000028          0x4 LONG 0x190 DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00002a          0x4 LONG 0x190 DEFINED (__ADCInterrupt)?ABSOLUTE (__ADCInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00002c          0x4 LONG 0x190 DEFINED (__NVMInterrupt)?ABSOLUTE (__NVMInterrupt):ABSOLUTE (__DefaultInterrupt)
@@ -745,23 +737,23 @@ userdata
 
 .aivt             0x000084         0x7c
                   0x000084          0x4 LONG 0x190 DEFINED (__AltReservedTrap0)?ABSOLUTE (__AltReservedTrap0):DEFINED (__ReservedTrap0)?ABSOLUTE (__ReservedTrap0):ABSOLUTE (__DefaultInterrupt)
-                  0x000086          0x4 LONG 0x35de DEFINED (__AltOscillatorFail)?ABSOLUTE (__AltOscillatorFail):DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
-                  0x000088          0x4 LONG 0x35f4 DEFINED (__AltAddressError)?ABSOLUTE (__AltAddressError):DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
-                  0x00008a          0x4 LONG 0x360a DEFINED (__AltStackError)?ABSOLUTE (__AltStackError):DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
-                  0x00008c          0x4 LONG 0x3620 DEFINED (__AltMathError)?ABSOLUTE (__AltMathError):DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
+                  0x000086          0x4 LONG 0x3576 DEFINED (__AltOscillatorFail)?ABSOLUTE (__AltOscillatorFail):DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
+                  0x000088          0x4 LONG 0x358c DEFINED (__AltAddressError)?ABSOLUTE (__AltAddressError):DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
+                  0x00008a          0x4 LONG 0x35a2 DEFINED (__AltStackError)?ABSOLUTE (__AltStackError):DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
+                  0x00008c          0x4 LONG 0x35b8 DEFINED (__AltMathError)?ABSOLUTE (__AltMathError):DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
                   0x00008e          0x4 LONG 0x190 DEFINED (__AltReservedTrap5)?ABSOLUTE (__AltReservedTrap5):DEFINED (__ReservedTrap5)?ABSOLUTE (__ReservedTrap5):ABSOLUTE (__DefaultInterrupt)
                   0x000090          0x4 LONG 0x190 DEFINED (__AltReservedTrap6)?ABSOLUTE (__AltReservedTrap6):DEFINED (__ReservedTrap6)?ABSOLUTE (__ReservedTrap6):ABSOLUTE (__DefaultInterrupt)
                   0x000092          0x4 LONG 0x190 DEFINED (__AltReservedTrap7)?ABSOLUTE (__AltReservedTrap7):DEFINED (__ReservedTrap7)?ABSOLUTE (__ReservedTrap7):ABSOLUTE (__DefaultInterrupt)
-                  0x000094          0x4 LONG 0x2f72 DEFINED (__AltINT0Interrupt)?ABSOLUTE (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000094          0x4 LONG 0x2f22 DEFINED (__AltINT0Interrupt)?ABSOLUTE (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000096          0x4 LONG 0x190 DEFINED (__AltIC1Interrupt)?ABSOLUTE (__AltIC1Interrupt):DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000098          0x4 LONG 0x190 DEFINED (__AltOC1Interrupt)?ABSOLUTE (__AltOC1Interrupt):DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00009a          0x4 LONG 0x2f3c DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00009a          0x4 LONG 0x2eec DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00009c          0x4 LONG 0x190 DEFINED (__AltIC2Interrupt)?ABSOLUTE (__AltIC2Interrupt):DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00009e          0x4 LONG 0x190 DEFINED (__AltOC2Interrupt)?ABSOLUTE (__AltOC2Interrupt):DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000a0          0x4 LONG 0x190 DEFINED (__AltT2Interrupt)?ABSOLUTE (__AltT2Interrupt):DEFINED (__T2Interrupt)?ABSOLUTE (__T2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000a2          0x4 LONG 0x2f00 DEFINED (__AltT3Interrupt)?ABSOLUTE (__AltT3Interrupt):DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000a2          0x4 LONG 0x2eb0 DEFINED (__AltT3Interrupt)?ABSOLUTE (__AltT3Interrupt):DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000a4          0x4 LONG 0x190 DEFINED (__AltSPI1Interrupt)?ABSOLUTE (__AltSPI1Interrupt):DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000a6          0x4 LONG 0x2e8c DEFINED (__AltU1RXInterrupt)?ABSOLUTE (__AltU1RXInterrupt):DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000a6          0x4 LONG 0x2e3c DEFINED (__AltU1RXInterrupt)?ABSOLUTE (__AltU1RXInterrupt):DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000a8          0x4 LONG 0x190 DEFINED (__AltU1TXInterrupt)?ABSOLUTE (__AltU1TXInterrupt):DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000aa          0x4 LONG 0x190 DEFINED (__AltADCInterrupt)?ABSOLUTE (__AltADCInterrupt):DEFINED (__ADCInterrupt)?ABSOLUTE (__ADCInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000ac          0x4 LONG 0x190 DEFINED (__AltNVMInterrupt)?ABSOLUTE (__AltNVMInterrupt):DEFINED (__NVMInterrupt)?ABSOLUTE (__NVMInterrupt):ABSOLUTE (__DefaultInterrupt)
@@ -1213,7 +1205,7 @@ LOAD data_init
 LOAD default_isr
 
 __c30_signature
-                  0x000000         0xc6
+                  0x000000         0xc0
  __c30_signature
                   0x000000          0x6 src\hex\DigitalIO.o
  __c30_signature
@@ -1277,13 +1269,11 @@ __c30_signature
  __c30_signature
                   0x0000b4          0x6 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(funpack.o)
  __c30_signature
-                  0x0000ba          0x6 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libc-coff.a(atoi.XXo)
- __c30_signature
-                  0x0000c0          0x6 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libc-coff.a(strlen.XXo)
+                  0x0000ba          0x6 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libc-coff.a(strlen.XXo)
 
-_019aaf5050c90a4a
+_019aaf5050c90b31
                     0x0800        0x4b4
- _019aaf5050c90a4a
+ _019aaf5050c90b31
                     0x0800        0x4b4 src\hex\trace.o
                     0x0800                  TRSB
 
@@ -1349,135 +1339,133 @@ _019aaf5050c90a4a
  .nbss              0x0e3c          0x4 src\hex\vADC.o
                     0x0e3c                  ADC
 
-.ndata              0x0e40          0x4
- .ndata             0x0e40          0x2 src\hex\main.o
-                    0x0e40                  Revision
- .ndata             0x0e42          0x2 src\hex\task.o
+.ndata              0x0e40          0x2
+ .ndata             0x0e40          0x2 src\hex\task.o
 
-.nbss               0x0e44          0x6
- .nbss              0x0e44          0x2 src\hex\PARLIST.o
-                    0x0e44                  release
- .nbss              0x0e46          0x2 src\hex\LCD.o
-                    0x0e46                  u16Nibble_Temp
- .nbss              0x0e48          0x2 src\hex\triac_control.o
+.nbss               0x0e42          0x6
+ .nbss              0x0e42          0x2 src\hex\PARLIST.o
+                    0x0e42                  release
+ .nbss              0x0e44          0x2 src\hex\LCD.o
+                    0x0e44                  u16Nibble_Temp
+ .nbss              0x0e46          0x2 src\hex\triac_control.o
 
-.const              0x8568        0xfaa load address 0x000568  
- .const             0x8568        0xeaa src\hex\PARLIST.o
-                    0x8568                  version
-                    0x856a                  C30_Version
-                    0x8aaa                  iopar
- .const             0x9412         0xaa src\hex\statemachine.o
- .const             0x94bc         0x36 src\hex\traps.o
- .const             0x94f2         0x1c src\hex\main.o
- .const             0x950e          0x4 src\hex\LCD.o
-                    0x950e                  LCD_INIT_STRING
+.const              0x8520        0xfa2 load address 0x000520  
+ .const             0x8520        0xeaa src\hex\PARLIST.o
+                    0x8520                  version
+                    0x8522                  C30_Version
+                    0x8a62                  iopar
+ .const             0x93ca         0xaa src\hex\statemachine.o
+ .const             0x9474         0x36 src\hex\traps.o
+ .const             0x94aa         0x14 src\hex\main.o
+ .const             0x94be          0x4 src\hex\LCD.o
+                    0x94be                  LCD_INIT_STRING
 
-.text             0x001512       0x1fd4
- .text            0x001512        0x5ae src\hex\statemachine.o
-                  0x001512                  state_machine_T1
-                  0x00172c                  state_machine_T2
-                  0x001a20                  state_machine_init
-                  0x001a34                  stm_timer_T2
-                  0x001a4e                  stm_timer_II_T2
-                  0x001a68                  stm_timer_T1
-                  0x001a82                  PrintHibernationTime
- .text            0x001ac0        0x554 src\hex\sirem.o
-                  0x001ac0                  Sirem_Engine
- .text            0x002014        0x522 src\hex\eeprom.o
-                  0x0021e4                  ee_param_act
-                  0x0024aa                  EE_CheckEEprom
- .text            0x002536        0x28e src\hex\tempctrl.o
-                  0x002536                  temp_ctrl
-                  0x00266c                  Reset_TMPCTRL
-                  0x00267c                  PID
-                  0x002718                  Reset_PID
-                  0x002728                  Cartridge_overload_protection
-                  0x002762                  temp_ctrl_init
-                  0x00276e                  Get_Temp_Actual
-                  0x00277e                  Set_User_Temp
-                  0x002784                  Roll_Back_User_Temp
-                  0x00278a                  Get_User_Temp
-                  0x00278e                  Inc_User_Temp
-                  0x00279c                  Dec_User_Temp
-                  0x0027aa                  tmpctrl_timer_t1
- .text            0x0027c4        0x246 src\hex\IDENT.o
-                  0x0027c4                  cartridge_ident
-                  0x00297c                  bresenham
-                  0x0029d6                  ident_timer_t1
-                  0x0029f0                  ident_timeout_timer_t1
- .text            0x002a0a        0x1cc src\hex\DigitalIO.o
-                  0x002a0a                  IF_DigitalIO_Init
-                  0x002a62                  Dio_Scan_T2
-                  0x002ae0                  cart_stat_det
-                  0x002bbc                  cart_stat_timer_T1
- .text            0x002bd6        0x1b2 src\hex\LCD.o
-                  0x002bd6                  IF_LCDInit
-                  0x002c08                  IF_LCDPutc
-                  0x002c3a                  IF_LCDGotoXY
-                  0x002c52                  IF_LCDPuts
-                  0x002c6a                  IF_LCDPutn
-                  0x002cee                  IF_LCD_UpdateState
-                  0x002d00                  LCDSendNibble
-                  0x002d5a                  LCDSendByte
- .text            0x002d88        0x178 src\hex\vuart.o
-                  0x002d88                  IF_Uart_Init
-                  0x002e0c                  IF_Uart_MsgGetDataCnt
-                  0x002e18                  IF_Uart_MsgGet
-                  0x002e3e                  IF_Uart_RxPurge
-                  0x002e4a                  IF_Uart_MsgPut
-                  0x002e72                  IF_UART_PutByte
-                  0x002e8c                  _U1RXInterrupt
-                  0x002eea                  sci_timer
- .text            0x002f00        0x142 src\hex\task.o
-                  0x002f00                  _T3Interrupt
-                  0x002f3c                  _T1Interrupt
-                  0x002f72                  _INT0Interrupt
-                  0x002f76                  TaskTimesCalc
-                  0x002f8a                  StationStatistic
- .text            0x003042        0x118 src\hex\systmr.o
-                  0x003042                  IF_SysTmr1_Init
-                  0x003068                  IF_SysTmr3_Init
-                  0x00308c                  IF_SysTmr2_Init
-                  0x0030b0                  delay_us
-                  0x0030e6                  delay_ms
-                  0x00311c                  Timestate_Cartridge_Control
- .text            0x00315a        0x116 src\hex\trace.o
-                  0x00315a                  IF_Get_TRSB_CntBytes
-                  0x00315e                  do_trace
-                  0x00322a                  Clear_Trace_Array
-                  0x00324a                  trace_init_first
- .text            0x003270         0xe2 src\hex\measure.o
-                  0x003270                  zero_cross_II
-                  0x0032a0                  DC_Autotunning
-                  0x0032e8                  Current_measure
-                  0x003320                  measure_T2
-                  0x00334c                  measure_init
- .text            0x003352         0xdc src\hex\main.o
-                  0x003352                  main
- .text            0x00342e         0xb8 src\hex\PARLIST.o
-                  0x00342e                  IF_Parlist_GetCntMembers
-                  0x003432                  IF_Parlist_GetCntBytes
-                  0x003436                  IF_Parlist_bnu
-                  0x003460                  Params_check_limit
-                  0x0034e4                  Params_Conversion
+.text             0x0014c2       0x1fc4
+ .text            0x0014c2        0x5ae src\hex\statemachine.o
+                  0x0014c2                  state_machine_T1
+                  0x0016dc                  state_machine_T2
+                  0x0019d0                  state_machine_init
+                  0x0019e4                  stm_timer_T2
+                  0x0019fe                  stm_timer_II_T2
+                  0x001a18                  stm_timer_T1
+                  0x001a32                  PrintHibernationTime
+ .text            0x001a70        0x554 src\hex\sirem.o
+                  0x001a70                  Sirem_Engine
+ .text            0x001fc4        0x522 src\hex\eeprom.o
+                  0x002194                  ee_param_act
+                  0x00245a                  EE_CheckEEprom
+ .text            0x0024e6        0x28e src\hex\tempctrl.o
+                  0x0024e6                  temp_ctrl
+                  0x00261c                  Reset_TMPCTRL
+                  0x00262c                  PID
+                  0x0026c8                  Reset_PID
+                  0x0026d8                  Cartridge_overload_protection
+                  0x002712                  temp_ctrl_init
+                  0x00271e                  Get_Temp_Actual
+                  0x00272e                  Set_User_Temp
+                  0x002734                  Roll_Back_User_Temp
+                  0x00273a                  Get_User_Temp
+                  0x00273e                  Inc_User_Temp
+                  0x00274c                  Dec_User_Temp
+                  0x00275a                  tmpctrl_timer_t1
+ .text            0x002774        0x246 src\hex\IDENT.o
+                  0x002774                  cartridge_ident
+                  0x00292c                  bresenham
+                  0x002986                  ident_timer_t1
+                  0x0029a0                  ident_timeout_timer_t1
+ .text            0x0029ba        0x1cc src\hex\DigitalIO.o
+                  0x0029ba                  IF_DigitalIO_Init
+                  0x002a12                  Dio_Scan_T2
+                  0x002a90                  cart_stat_det
+                  0x002b6c                  cart_stat_timer_T1
+ .text            0x002b86        0x1b2 src\hex\LCD.o
+                  0x002b86                  IF_LCDInit
+                  0x002bb8                  IF_LCDPutc
+                  0x002bea                  IF_LCDGotoXY
+                  0x002c02                  IF_LCDPuts
+                  0x002c1a                  IF_LCDPutn
+                  0x002c9e                  IF_LCD_UpdateState
+                  0x002cb0                  LCDSendNibble
+                  0x002d0a                  LCDSendByte
+ .text            0x002d38        0x178 src\hex\vuart.o
+                  0x002d38                  IF_Uart_Init
+                  0x002dbc                  IF_Uart_MsgGetDataCnt
+                  0x002dc8                  IF_Uart_MsgGet
+                  0x002dee                  IF_Uart_RxPurge
+                  0x002dfa                  IF_Uart_MsgPut
+                  0x002e22                  IF_UART_PutByte
+                  0x002e3c                  _U1RXInterrupt
+                  0x002e9a                  sci_timer
+ .text            0x002eb0        0x142 src\hex\task.o
+                  0x002eb0                  _T3Interrupt
+                  0x002eec                  _T1Interrupt
+                  0x002f22                  _INT0Interrupt
+                  0x002f26                  TaskTimesCalc
+                  0x002f3a                  StationStatistic
+ .text            0x002ff2        0x118 src\hex\systmr.o
+                  0x002ff2                  IF_SysTmr1_Init
+                  0x003018                  IF_SysTmr3_Init
+                  0x00303c                  IF_SysTmr2_Init
+                  0x003060                  delay_us
+                  0x003096                  delay_ms
+                  0x0030cc                  Timestate_Cartridge_Control
+ .text            0x00310a        0x116 src\hex\trace.o
+                  0x00310a                  IF_Get_TRSB_CntBytes
+                  0x00310e                  do_trace
+                  0x0031da                  Clear_Trace_Array
+                  0x0031fa                  trace_init_first
+ .text            0x003220         0xe2 src\hex\measure.o
+                  0x003220                  zero_cross_II
+                  0x003250                  DC_Autotunning
+                  0x003298                  Current_measure
+                  0x0032d0                  measure_T2
+                  0x0032fc                  measure_init
+ .text            0x003302         0xcc src\hex\main.o
+                  0x003302                  main
+ .text            0x0033ce         0xb8 src\hex\PARLIST.o
+                  0x0033ce                  IF_Parlist_GetCntMembers
+                  0x0033d2                  IF_Parlist_GetCntBytes
+                  0x0033d6                  IF_Parlist_bnu
+                  0x003400                  Params_check_limit
+                  0x003484                  Params_Conversion
 
-.dinit            0x0034e6         0x8c
- .dinit           0x0034e6         0x8c data_init
+.dinit            0x003486         0x84
+ .dinit           0x003486         0x84 data_init
 
-.text             0x003572         0xe0
- .text            0x003572         0x6c src\hex\vADC.o
-                  0x003572                  IF_ADC_INIT
-                  0x0035c8                  ADC_Sample_Read
- .text            0x0035de         0x58 src\hex\traps.o
-                  0x0035de                  _OscillatorFail
-                  0x0035f4                  _AddressError
-                  0x00360a                  _StackError
-                  0x003620                  _MathError
- .text            0x003636         0x1c src\hex\triac_control.o
-                  0x003636                  triac_fire_timer
-                  0x00364c                  triac_control_init
+.text             0x00350a         0xe0
+ .text            0x00350a         0x6c src\hex\vADC.o
+                  0x00350a                  IF_ADC_INIT
+                  0x003560                  ADC_Sample_Read
+ .text            0x003576         0x58 src\hex\traps.o
+                  0x003576                  _OscillatorFail
+                  0x00358c                  _AddressError
+                  0x0035a2                  _StackError
+                  0x0035b8                  _MathError
+ .text            0x0035ce         0x1c src\hex\triac_control.o
+                  0x0035ce                  triac_fire_timer
+                  0x0035e4                  triac_control_init
 
-_01b4f23050c90a4c
+_01b4f23050c90b34
                     0xfc00        0x400 load address 0x7ffc00  
- _01b4f23050c90a4c
+ _01b4f23050c90b34
                     0xfc00        0x400 src\hex\eeprom.o
