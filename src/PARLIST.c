@@ -177,7 +177,7 @@ const iolist iopar[] =
   {250,"Temp Ref User (Real)",		(U16 *)&T_ctrl.T_Ref_User,			(U16 *)&T_ctrl.T_Ref_User,				2,"unr",	450ul,		 	 0,0,0,1},
   {251,"Temp Ref User Sleep (Real)",(U16 *)&T_ctrl.T_Ref_User_Sleep,	(U16 *)&T_ctrl.T_Ref_User_Sleep,		2,"unr",	450ul,		 	 0,0,0,1},
   {252,"TMPCTRL Sample Time",		(U16 *)&T_ctrl.tmpctrl_samp_time,	(U16 *)&T_ctrl.tmpctrl_samp_time,		2,"unr",	100ul,		 	 0,0,0,1},
-  {253,"Temp Calibration Coeff",	(U16 *)&T_ctrl.T_cal_coeff,			(U16 *)&T_ctrl.T_cal_coeff,				2,"unr",	32767ul,		 0,0,0,1024},
+  {253,"Temp Calibration Gain",	    (U16 *)&T_ctrl.T_cal_gain,			(U16 *)&T_ctrl.T_cal_gain,				2,"unr",	32767ul,		 0,0,0,1024},
   {254,"Overload Periods Trip",		(U16 *)&overprot.cop_periods_trip,	(U16 *)&overprot.cop_periods_trip,		2,"unr",	0xFFFFul,	     0,0,0,1},
   {255,"Overload Time Trip",		(U16 *)&overprot.cop_time_trip_sec,	(U16 *)&overprot.cop_time_trip_sec,		2,"unr",	0xFFFFul,		 0,0,0,1},
   {256,"Temp Feedback",				(U16 *)&T_ctrl.T_fbk,				(U16 *)&T_ctrl.T_fbk,					2,"urr",	0xFFFFul,		 0,5,0,1},
@@ -188,11 +188,12 @@ const iolist iopar[] =
   {261,"Triac State",				(U16 *)&T_ctrl.tmpctrl_triac_state,	(U16 *)&T_ctrl.tmpctrl_triac_state,		2,"urr",	0xFFFFul,		 0,5,0,1},
   {262,"TMPCTRL State",				(U16 *)&tmpctrl_mainstate,			(U16 *)&tmpctrl_mainstate,				2,"urr",	0xFFFFul,		 0,5,0,1},
   {263,"Ring Reduction Periods",	(U16 *)&T_ctrl.Ring_reduction_per,	(U16 *)&T_ctrl.Ring_reduction_per,		2,"unr",	50ul,		 	 0,0,0,1},
+  {264,"Temp Calibration Offset",	(S16 *)&T_ctrl.T_cal_offset,        (S16 *)&T_ctrl.T_cal_offset,            2,"snr",	50ul,		   -50,0,0,1},
   
   //PI Controller
   {270,"Kp",						(U16 *)&pid.Kp,						(U16 *)&pid.Kp,							2,"unr",	0xFFFFul,		 0,0,0,1024},
   {271,"Ki",						(U16 *)&pid.Ki,						(U16 *)&pid.Ki,							2,"unr",	0xFFFFul,		 0,0,0,1024},
-  {272,"Kd",						(U16 *)&pid.Kd,						(U16 *)&pid.Kd,							2,"unr",	0xFFFFul,		 0,0,0,1024},
+  {272,"Kd",						(U16 *)&pid.Kd,						(U16 *)&pid.Kd,							2,"unr",	0xFFFFul,	     0,0,0,1024},
   {273,"Ki_Limit",					(S16 *)&pid.Ki_Limit,				(S16 *)&pid.Ki_Limit,					2,"snr",	32767ul,	-32768,0,0,1},
   {274,"Out",						(S16 *)&pid.Out,					(S16 *)&pid.Out,						2,"srr",	32767ul,	-32768,5,0,1},
   {275,"P_term",					(S16 *)&pid.P_term,					(S16 *)&pid.P_term,						2,"srr",	32767ul,	-32768,5,0,1},
@@ -300,7 +301,7 @@ void Params_check_limit(void)
 	
 	if(T_ctrl.T_Ref_User > TEMP_USER_MAX) _set_param_limit_error(1);
 	if((T_ctrl.tmpctrl_samp_time < 0) || (T_ctrl.tmpctrl_samp_time > 50)) _set_param_limit_error(1);
-	if(T_ctrl.T_cal_coeff < 10) _set_param_limit_error(1);
+	if(T_ctrl.T_cal_gain < 10) _set_param_limit_error(1);
 	if(T_ctrl.PID_Out_cal > 10000) _set_param_limit_error(1);
 	if(T_ctrl.heat_periods_debug > 50) _set_param_limit_error(1);
 	
