@@ -12,7 +12,6 @@
 
 #define FIRMWARE_BASE_VERSION		4000
 #define FIRMWARE_SUB_VERSION		22
-#define dsPIC30F3014_EEPROM_CONFIGURED
 
 //PLL=16x, OSC=8Mhz -> Freq = (OSC) * PLL;
 #define cOSC_KHz    ((U32)8000ul) 							// Oscillator frequancy

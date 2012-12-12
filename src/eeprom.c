@@ -29,10 +29,6 @@
 //==========================================================================================================
 // Local constants                                                            
 //==========================================================================================================
-
-#ifndef  dsPIC30F3014_EEPROM_CONFIGURED
-#error "!!! dsPIC30F3014 EEPROM ADDRESS NOT CONFIGURED, PLEASE CHECK 'EE_BASE_ADDR', 'EE_END_ADDR'  AND DEFINE 'dsPIC30F3014_EEPROM_CONFIGURED' TO REMOVE THIS ERROR !!!"
-#endif
 // Define here physical start and end address of eeprom.
 #define EE_BASE_ADDR			    0x7FFC00
 #define EE_END_ADDR				    0x7FFFFE
