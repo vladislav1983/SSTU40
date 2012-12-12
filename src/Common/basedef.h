@@ -11,7 +11,7 @@
 #define BASEDEF_H
 
 #define FIRMWARE_BASE_VERSION		4000
-#define FIRMWARE_SUB_VERSION		22
+#define FIRMWARE_SUB_VERSION		23
 
 //PLL=16x, OSC=8Mhz -> Freq = (OSC) * PLL;
 #define cOSC_KHz    ((U32)8000ul) 							// Oscillator frequancy
