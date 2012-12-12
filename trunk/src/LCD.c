@@ -321,10 +321,8 @@ void LCDSendNibble(U8 u8Nibble)
 {
 	LCD_DATA_WRITE(u8Nibble);
 	Nop();
-	Nop();
 	pinLCD_E = 1;
-	delay_us(5);
-	Nop();
+	delay_us(2);
 	pinLCD_E = 0;
 
 }
@@ -339,7 +337,7 @@ void LCDSendNibble(U8 u8Nibble)
 void LCDSendByte(U8 u8ByteToLcd,U8 u8Adress)
 {
 	pinLCD_RS = 0;
-	delay_us(60);
+	delay_us(5);
 	pinLCD_RS = u8Adress;
 	Nop();
 	Nop();
