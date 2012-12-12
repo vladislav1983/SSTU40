@@ -1,0 +1,5 @@
+Record=SheetSymbol|SourceDocument=Main.SchDoc|Designator=ANA_TRIAC|SchDesignator=ANA_TRIAC|FileName=ANALOG_TRIAC.SCHDOC|SymbolType=Normal|RawFileName=ANALOG_TRIAC.SCHDOC|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol
+Record=SheetSymbol|SourceDocument=Main.SchDoc|Designator=COMM|SchDesignator=COMM|FileName=RS232 - USB.SCHDOC|SymbolType=Normal|RawFileName=RS232 - USB.SCHDOC|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol
+Record=SheetSymbol|SourceDocument=Main.SchDoc|Designator=CTR|SchDesignator=CTR|FileName=CONTROLLER.SCHDOC|SymbolType=Normal|RawFileName=CONTROLLER.SCHDOC|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol
+Record=SheetSymbol|SourceDocument=Main.SchDoc|Designator=PWR|SchDesignator=PWR|FileName=POWER SUPPLY.SCHDOC|SymbolType=Normal|RawFileName=POWER SUPPLY.SCHDOC|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol
+Record=TopLevelDocument|FileName=Main.SchDoc
