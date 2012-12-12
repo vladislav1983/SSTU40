@@ -39,9 +39,6 @@ Command:
   src\hex\traps.o \
   -Tp30F3014.gld.00 \
   --defsym=__MPLAB_BUILD=1 \
-  --defsym=__MPLAB_DEBUG=1 \
-  --defsym=__MPLAB_DEBUGGER_PK3=1 \
-  --defsym=__ICD2RAM=1 \
   -Map=.\src\hex\SST40 V4.0.map \
   --report-mem \
   -start-group \
@@ -86,7 +83,7 @@ c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libc-coff.a(strlen.
 
 Selected CodeGuard Options:
   FGS:GWRP:GWRP_OFF
-  FGS:GCP:CODE_PROT_OFF
+  FGS:GCP:CODE_PROT_ON
 
 CodeGuard FLASH Memory:
   boot    (none)
@@ -121,7 +118,7 @@ Data EEPROM Memory  [Origin = 0x7ffc00, Length = 0x400]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-_01b4e23050c8fdd7         0x7ffc00               0x400           0x400  (1024)
+_01b4f23050c906e1         0x7ffc00               0x400           0x400  (1024)
 
                         Total data EEPROM used (bytes):          0x400  (1024) 100%
 
@@ -130,15 +127,14 @@ Data Memory  [Origin = 0x800, Length = 0x800]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.icd                         0x800                0x50            0x50  (80)
-_01975f5050c8fdd5            0x850                   0           0x4b4  (1204)
-.nbss                        0xd04                   0           0x118  (280)
-.ndata                       0xe1c                   0            0x1c  (28)
-.nbss                        0xe38                   0            0x58  (88)
-.ndata                       0xe90                   0             0x2  (2)
-.nbss                        0xe92                   0             0x6  (6)
+_019aaf5050c906de            0x800                   0           0x4b4  (1204)
+.nbss                        0xcb4                   0           0x118  (280)
+.ndata                       0xdcc                   0            0x1c  (28)
+.nbss                        0xde8                   0            0x58  (88)
+.ndata                       0xe40                   0             0x2  (2)
+.nbss                        0xe42                   0             0x6  (6)
 
-                        Total data memory used (bytes):          0x698  (1688) 82%
+                        Total data memory used (bytes):          0x648  (1608) 78%
 
 
 Dynamic Memory Usage
@@ -146,108 +142,108 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0xe98                               0x168  (360)
+stack                        0xe48                               0x1b8  (440)
 
-                        Maximum dynamic memory (bytes):          0x168  (360)
+                        Maximum dynamic memory (bytes):          0x1b8  (440)
 
 
 External Symbols in Data Memory (by address):
 
-                    0x0850                  _TRSB
-                    0x0d0a                  _T_ctrl
-                    0x0d28                  _pid
-                    0x0d40                  _brs
-                    0x0d48                  _overprot
-                    0x0d54                  _tmpctrl_mainstate
-                    0x0d56                  _tmpctrl_nextstate
-                    0x0d62                  _stat_stat
-                    0x0d76                  _Ttime
-                    0x0d82                  _TASK_CONTROL
-                    0x0db0                  _mes1
-                    0x0dba                  _mes2
-                    0x0dc4                  _mespar
-                    0x0dd8                  _trace_state
-                    0x0dda                  _trace_control
-                    0x0ddc                  _STORE_POS
-                    0x0dde                  _trace_counter
-                    0x0de0                  _trace_trigger
-                    0x0de2                  _par_trace
-                    0x0dee                  _trace_config
-                    0x0df0                  _trace_every_period
-                    0x0df2                  _u16TraceParamNumber_1
-                    0x0df4                  _u16TraceParamNumber_2
-                    0x0df6                  _u16CompareParameter
-                    0x0df8                  _s16CmpValue
-                    0x0dfe                  _ident
-                    0x0e1c                  _trace_source_addr
-                    0x0e46                  _SYS_CONTROL
-                    0x0e48                  _PC_CONTROL
-                    0x0e4a                  _ERR_CONTROL
-                    0x0e4c                  _mainstate_T2
-                    0x0e4e                  _mainstate_T1
-                    0x0e50                  _LCD_update_rate
-                    0x0e5a                  _EE_CHKS
-                    0x0e5c                  _EE_Valid
-                    0x0e5e                  _EE_par_update
-                    0x0e60                  _ParamAct
-                    0x0e7a                  _debounce_timer_2
-                    0x0e7c                  _deb_timer_cart
-                    0x0e7e                  _deb_timer_stand
-                    0x0e80                  _deb_timer_extr
-                    0x0e82                  _cart_det_state
-                    0x0e84                  _time
-                    0x0e8c                  _ADC
-                    0x0e92                  _release
-                    0x0e94                  _u16Nibble_Temp
+                    0x0800                  _TRSB
+                    0x0cba                  _T_ctrl
+                    0x0cd8                  _pid
+                    0x0cf0                  _brs
+                    0x0cf8                  _overprot
+                    0x0d04                  _tmpctrl_mainstate
+                    0x0d06                  _tmpctrl_nextstate
+                    0x0d12                  _stat_stat
+                    0x0d26                  _Ttime
+                    0x0d32                  _TASK_CONTROL
+                    0x0d60                  _mes1
+                    0x0d6a                  _mes2
+                    0x0d74                  _mespar
+                    0x0d88                  _trace_state
+                    0x0d8a                  _trace_control
+                    0x0d8c                  _STORE_POS
+                    0x0d8e                  _trace_counter
+                    0x0d90                  _trace_trigger
+                    0x0d92                  _par_trace
+                    0x0d9e                  _trace_config
+                    0x0da0                  _trace_every_period
+                    0x0da2                  _u16TraceParamNumber_1
+                    0x0da4                  _u16TraceParamNumber_2
+                    0x0da6                  _u16CompareParameter
+                    0x0da8                  _s16CmpValue
+                    0x0dae                  _ident
+                    0x0dcc                  _trace_source_addr
+                    0x0df6                  _SYS_CONTROL
+                    0x0df8                  _PC_CONTROL
+                    0x0dfa                  _ERR_CONTROL
+                    0x0dfc                  _mainstate_T2
+                    0x0dfe                  _mainstate_T1
+                    0x0e00                  _LCD_update_rate
+                    0x0e0a                  _EE_CHKS
+                    0x0e0c                  _EE_Valid
+                    0x0e0e                  _EE_par_update
+                    0x0e10                  _ParamAct
+                    0x0e2a                  _debounce_timer_2
+                    0x0e2c                  _deb_timer_cart
+                    0x0e2e                  _deb_timer_stand
+                    0x0e30                  _deb_timer_extr
+                    0x0e32                  _cart_det_state
+                    0x0e34                  _time
+                    0x0e3c                  _ADC
+                    0x0e42                  _release
+                    0x0e44                  _u16Nibble_Temp
 
 External Symbols in Data Memory (by name):
 
-                    0x0e8c                  _ADC
-                    0x0e5a                  _EE_CHKS
-                    0x0e5c                  _EE_Valid
-                    0x0e5e                  _EE_par_update
-                    0x0e4a                  _ERR_CONTROL
-                    0x0e50                  _LCD_update_rate
-                    0x0e48                  _PC_CONTROL
-                    0x0e60                  _ParamAct
-                    0x0ddc                  _STORE_POS
-                    0x0e46                  _SYS_CONTROL
-                    0x0d82                  _TASK_CONTROL
-                    0x0850                  _TRSB
-                    0x0d0a                  _T_ctrl
-                    0x0d76                  _Ttime
-                    0x0d40                  _brs
-                    0x0e82                  _cart_det_state
-                    0x0e7c                  _deb_timer_cart
-                    0x0e80                  _deb_timer_extr
-                    0x0e7e                  _deb_timer_stand
-                    0x0e7a                  _debounce_timer_2
-                    0x0dfe                  _ident
-                    0x0e4e                  _mainstate_T1
-                    0x0e4c                  _mainstate_T2
-                    0x0db0                  _mes1
-                    0x0dba                  _mes2
-                    0x0dc4                  _mespar
-                    0x0d48                  _overprot
-                    0x0de2                  _par_trace
-                    0x0d28                  _pid
-                    0x0e92                  _release
-                    0x0df8                  _s16CmpValue
-                    0x0d62                  _stat_stat
-                    0x0e84                  _time
-                    0x0d54                  _tmpctrl_mainstate
-                    0x0d56                  _tmpctrl_nextstate
-                    0x0dee                  _trace_config
-                    0x0dda                  _trace_control
-                    0x0dde                  _trace_counter
-                    0x0df0                  _trace_every_period
-                    0x0e1c                  _trace_source_addr
-                    0x0dd8                  _trace_state
-                    0x0de0                  _trace_trigger
-                    0x0df6                  _u16CompareParameter
-                    0x0e94                  _u16Nibble_Temp
-                    0x0df2                  _u16TraceParamNumber_1
-                    0x0df4                  _u16TraceParamNumber_2
+                    0x0e3c                  _ADC
+                    0x0e0a                  _EE_CHKS
+                    0x0e0c                  _EE_Valid
+                    0x0e0e                  _EE_par_update
+                    0x0dfa                  _ERR_CONTROL
+                    0x0e00                  _LCD_update_rate
+                    0x0df8                  _PC_CONTROL
+                    0x0e10                  _ParamAct
+                    0x0d8c                  _STORE_POS
+                    0x0df6                  _SYS_CONTROL
+                    0x0d32                  _TASK_CONTROL
+                    0x0800                  _TRSB
+                    0x0cba                  _T_ctrl
+                    0x0d26                  _Ttime
+                    0x0cf0                  _brs
+                    0x0e32                  _cart_det_state
+                    0x0e2c                  _deb_timer_cart
+                    0x0e30                  _deb_timer_extr
+                    0x0e2e                  _deb_timer_stand
+                    0x0e2a                  _debounce_timer_2
+                    0x0dae                  _ident
+                    0x0dfe                  _mainstate_T1
+                    0x0dfc                  _mainstate_T2
+                    0x0d60                  _mes1
+                    0x0d6a                  _mes2
+                    0x0d74                  _mespar
+                    0x0cf8                  _overprot
+                    0x0d92                  _par_trace
+                    0x0cd8                  _pid
+                    0x0e42                  _release
+                    0x0da8                  _s16CmpValue
+                    0x0d12                  _stat_stat
+                    0x0e34                  _time
+                    0x0d04                  _tmpctrl_mainstate
+                    0x0d06                  _tmpctrl_nextstate
+                    0x0d9e                  _trace_config
+                    0x0d8a                  _trace_control
+                    0x0d8e                  _trace_counter
+                    0x0da0                  _trace_every_period
+                    0x0dcc                  _trace_source_addr
+                    0x0d88                  _trace_state
+                    0x0d90                  _trace_trigger
+                    0x0da6                  _u16CompareParameter
+                    0x0e44                  _u16Nibble_Temp
+                    0x0da2                  _u16TraceParamNumber_1
+                    0x0da4                  _u16TraceParamNumber_2
 
 External Symbols in Program Memory (by address):
 
@@ -637,10 +633,6 @@ __ICD
 
 user_eedata
  *(user_eedata)
-
-.icd                0x0800         0x50
-                    0x0850                  . = (. + DEFINED (__ICD2RAM)?0x50:0x0)
- *fill*             0x0800         0x5000
 
 userdata
  *(userdata)
@@ -1202,9 +1194,6 @@ userdata
                     0x0216                  UART2 = 0x216
                     0x0216                  _UART2 = 0x216
                     0x0001                  __MPLAB_BUILD = 0x1
-                    0x0001                  __MPLAB_DEBUG = 0x1
-                    0x0001                  __MPLAB_DEBUGGER_PK3 = 0x1
-                    0x0001                  __ICD2RAM = 0x1
 START GROUP
 LOAD c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a
 LOAD c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a
@@ -1282,83 +1271,83 @@ __c30_signature
  __c30_signature
                   0x0000ba          0x6 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libc-coff.a(strlen.XXo)
 
-_01975f5050c8fdd5
-                    0x0850        0x4b4
- _01975f5050c8fdd5
-                    0x0850        0x4b4 src\hex\trace.o
-                    0x0850                  TRSB
+_019aaf5050c906de
+                    0x0800        0x4b4
+ _019aaf5050c906de
+                    0x0800        0x4b4 src\hex\trace.o
+                    0x0800                  TRSB
 
-.nbss               0x0d04        0x118
- .nbss              0x0d04         0x54 src\hex\tempctrl.o
-                    0x0d0a                  T_ctrl
-                    0x0d28                  pid
-                    0x0d40                  brs
-                    0x0d48                  overprot
-                    0x0d54                  tmpctrl_mainstate
-                    0x0d56                  tmpctrl_nextstate
- .nbss              0x0d58         0x2c src\hex\task.o
-                    0x0d62                  stat_stat
-                    0x0d76                  Ttime
-                    0x0d82                  TASK_CONTROL
- .nbss              0x0d84         0x2c src\hex\sirem.o
- .nbss              0x0db0         0x26 src\hex\measure.o
-                    0x0db0                  mes1
-                    0x0dba                  mes2
-                    0x0dc4                  mespar
- .nbss              0x0dd6         0x24 src\hex\trace.o
-                    0x0dd8                  trace_state
-                    0x0dda                  trace_control
-                    0x0ddc                  STORE_POS
-                    0x0dde                  trace_counter
-                    0x0de0                  trace_trigger
-                    0x0de2                  par_trace
-                    0x0dee                  trace_config
-                    0x0df0                  trace_every_period
-                    0x0df2                  u16TraceParamNumber_1
-                    0x0df4                  u16TraceParamNumber_2
-                    0x0df6                  u16CompareParameter
-                    0x0df8                  s16CmpValue
- .nbss              0x0dfa         0x22 src\hex\IDENT.o
-                    0x0dfe                  ident
+.nbss               0x0cb4        0x118
+ .nbss              0x0cb4         0x54 src\hex\tempctrl.o
+                    0x0cba                  T_ctrl
+                    0x0cd8                  pid
+                    0x0cf0                  brs
+                    0x0cf8                  overprot
+                    0x0d04                  tmpctrl_mainstate
+                    0x0d06                  tmpctrl_nextstate
+ .nbss              0x0d08         0x2c src\hex\task.o
+                    0x0d12                  stat_stat
+                    0x0d26                  Ttime
+                    0x0d32                  TASK_CONTROL
+ .nbss              0x0d34         0x2c src\hex\sirem.o
+ .nbss              0x0d60         0x26 src\hex\measure.o
+                    0x0d60                  mes1
+                    0x0d6a                  mes2
+                    0x0d74                  mespar
+ .nbss              0x0d86         0x24 src\hex\trace.o
+                    0x0d88                  trace_state
+                    0x0d8a                  trace_control
+                    0x0d8c                  STORE_POS
+                    0x0d8e                  trace_counter
+                    0x0d90                  trace_trigger
+                    0x0d92                  par_trace
+                    0x0d9e                  trace_config
+                    0x0da0                  trace_every_period
+                    0x0da2                  u16TraceParamNumber_1
+                    0x0da4                  u16TraceParamNumber_2
+                    0x0da6                  u16CompareParameter
+                    0x0da8                  s16CmpValue
+ .nbss              0x0daa         0x22 src\hex\IDENT.o
+                    0x0dae                  ident
 
-.ndata              0x0e1c         0x1c
- .ndata             0x0e1c         0x1c src\hex\trace.o
-                    0x0e1c                  trace_source_addr
+.ndata              0x0dcc         0x1c
+ .ndata             0x0dcc         0x1c src\hex\trace.o
+                    0x0dcc                  trace_source_addr
 
-.nbss               0x0e38         0x58
- .nbss              0x0e38         0x1a src\hex\statemachine.o
-                    0x0e46                  SYS_CONTROL
-                    0x0e48                  PC_CONTROL
-                    0x0e4a                  ERR_CONTROL
-                    0x0e4c                  mainstate_T2
-                    0x0e4e                  mainstate_T1
-                    0x0e50                  LCD_update_rate
- .nbss              0x0e52         0x16 src\hex\eeprom.o
-                    0x0e5a                  EE_CHKS
-                    0x0e5c                  EE_Valid
-                    0x0e5e                  EE_par_update
-                    0x0e60                  ParamAct
- .nbss              0x0e68         0x10 src\hex\vuart.o
- .nbss              0x0e78          0xc src\hex\DigitalIO.o
-                    0x0e7a                  debounce_timer_2
-                    0x0e7c                  deb_timer_cart
-                    0x0e7e                  deb_timer_stand
-                    0x0e80                  deb_timer_extr
-                    0x0e82                  cart_det_state
- .nbss              0x0e84          0x8 src\hex\systmr.o
-                    0x0e84                  time
- .nbss              0x0e8c          0x4 src\hex\vADC.o
-                    0x0e8c                  ADC
+.nbss               0x0de8         0x58
+ .nbss              0x0de8         0x1a src\hex\statemachine.o
+                    0x0df6                  SYS_CONTROL
+                    0x0df8                  PC_CONTROL
+                    0x0dfa                  ERR_CONTROL
+                    0x0dfc                  mainstate_T2
+                    0x0dfe                  mainstate_T1
+                    0x0e00                  LCD_update_rate
+ .nbss              0x0e02         0x16 src\hex\eeprom.o
+                    0x0e0a                  EE_CHKS
+                    0x0e0c                  EE_Valid
+                    0x0e0e                  EE_par_update
+                    0x0e10                  ParamAct
+ .nbss              0x0e18         0x10 src\hex\vuart.o
+ .nbss              0x0e28          0xc src\hex\DigitalIO.o
+                    0x0e2a                  debounce_timer_2
+                    0x0e2c                  deb_timer_cart
+                    0x0e2e                  deb_timer_stand
+                    0x0e30                  deb_timer_extr
+                    0x0e32                  cart_det_state
+ .nbss              0x0e34          0x8 src\hex\systmr.o
+                    0x0e34                  time
+ .nbss              0x0e3c          0x4 src\hex\vADC.o
+                    0x0e3c                  ADC
 
-.ndata              0x0e90          0x2
- .ndata             0x0e90          0x2 src\hex\task.o
+.ndata              0x0e40          0x2
+ .ndata             0x0e40          0x2 src\hex\task.o
 
-.nbss               0x0e92          0x6
- .nbss              0x0e92          0x2 src\hex\PARLIST.o
-                    0x0e92                  release
- .nbss              0x0e94          0x2 src\hex\LCD.o
-                    0x0e94                  u16Nibble_Temp
- .nbss              0x0e96          0x2 src\hex\triac_control.o
+.nbss               0x0e42          0x6
+ .nbss              0x0e42          0x2 src\hex\PARLIST.o
+                    0x0e42                  release
+ .nbss              0x0e44          0x2 src\hex\LCD.o
+                    0x0e44                  u16Nibble_Temp
+ .nbss              0x0e46          0x2 src\hex\triac_control.o
 
 .const              0x8520        0xfa2 load address 0x000520  
  .const             0x8520        0xeaa src\hex\PARLIST.o
@@ -1476,7 +1465,7 @@ _01975f5050c8fdd5
                   0x0035ce                  triac_fire_timer
                   0x0035e4                  triac_control_init
 
-_01b4e23050c8fdd7
+_01b4f23050c906e1
                     0xfc00        0x400 load address 0x7ffc00  
- _01b4e23050c8fdd7
+ _01b4f23050c906e1
                     0xfc00        0x400 src\hex\eeprom.o

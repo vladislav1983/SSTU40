@@ -21,8 +21,8 @@
 #   endif
 #elif defined(__dsPIC30F4013__)
 /* Configuration Bit Settings */
-    _FOSC(CSW_FSCM_OFF & XT_PLL16);                 //Fail safe monitor ON & HS / 2 * PLLX16
-    _FWDT(WDT_OFF & WDTPSA_1 & XT_PLL8);           //WDT Period = 2 ms • Prescale A • Prescale B
+    _FOSC(CSW_FSCM_OFF & XT_PLL8);                 //Fail safe monitor ON & HS / 2 * PLLX16
+    _FWDT(WDT_OFF & WDTPSA_1 & WDTPSB_16);           //WDT Period = 2 ms • Prescale A • Prescale B
     _FBORPOR(PBOR_ON & BORV27 & PWRT_64 & MCLR_EN);
 #   if defined(__DEBUG)
         _FGS(CODE_PROT_OFF);
