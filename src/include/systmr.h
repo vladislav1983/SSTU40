@@ -18,7 +18,7 @@
 /*----------------------------------------------------------------------------*/
 /* Constant data                                                              */
 /*----------------------------------------------------------------------------*/
-#define CPU_CYCLE_ns							(31.25)
+#define CPU_CYCLE_ns							cTCY_NS
 
 /* Task 2 Timer reference */
 #define cTMR1_ISR_TICK_us						(5000u)		//timer1 tick in us = task2 time
@@ -44,20 +44,20 @@
 #define TMR2_CLOCK_SOURCE						0
 
 /* Time Parameters */
-#define TIME_PRESCALER			10000	//	Prescaler for secons count in task1 periods.
+#define TIME_PRESCALER                          10000	//	Prescaler for secons count in task1 periods.
 
 /*----------------------------------------------------------------------------*/
 /* Exported type                                                              */
 /*----------------------------------------------------------------------------*/
 struct Times
-	{
+{
 	U16 Timer;
 	U16 sec;
 	U16 min;
 	
 	/* PARAMS STORED IN EEPROM */
 	U16 Hib_Time;
-	};
+};
 /*----------------------------------------------------------------------------*/
 /* Exported data                                                              */
 /*----------------------------------------------------------------------------*/

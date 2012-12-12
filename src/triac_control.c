@@ -77,11 +77,11 @@ void triac_fire_timer(void)
 {
 	if(_TRIAC())	//if triack fired
 	{
-	if(!--triac_fire_counter) 
-		{
-		_TRIAC_OFF();
-		triac_fire_counter = TRIAC_FIRE_TIME;
-		}
+	    if(!--triac_fire_counter) 
+        {
+		    _TRIAC_OFF();
+		    triac_fire_counter = TRIAC_FIRE_TIME;
+        }
 	}
 
 }

@@ -14,11 +14,12 @@
 /* Included files to resolve specific definitions in this file                */
 /*----------------------------------------------------------------------------*/
 #include "basedef.h"
+#include "task.h"
 
 /*----------------------------------------------------------------------------*/
 /* Constant data                                                              */
 /*----------------------------------------------------------------------------*/
-#define TRIAC_FIRE_TIME		20u			//triac fire time in task1 periods -->1000us
+#define TRIAC_FIRE_TIME		        (2000ul/T1_TIME)			//triac fire time in task1 periods
 
 /*----------------------------------------------------------------------------*/
 /* Exported type                                                              */
