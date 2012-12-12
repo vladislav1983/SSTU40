@@ -1,3 +1,12 @@
+/*=====================================================================================================================
+ * 
+ * Repository path:     $HeadURL$
+ * Last committed:      $Revision$
+ * Last changed by:     $Author$
+ * Last changed date:   $Date$
+ * ID:                  $Id$
+ *
+ *===================================================================================================================*/
 #ifndef TRIAC_CONTROL_H
 #define TRIAC_CONTROL_H
     
@@ -27,20 +36,20 @@
 /* Exported Macros                                                            */
 /*----------------------------------------------------------------------------*/
 /* Triac control */
-#define _FIRE_TRIAC()(			\
-{								\
-pinTH_FIRE = 1;					\
-_set_triac_state(1);			\
-_set_over_prot_triac_state(1);	\
+#define _FIRE_TRIAC()(			        \
+{								        \
+    pinTH_FIRE = 1;					    \
+    _set_triac_state(1);			    \
+    _set_over_prot_triac_state(1);	    \
 })	
 
-#define _TRIAC_OFF()(			\
-{								\
-pinTH_FIRE = 0;					\
-_set_triac_state(0);			\
+#define _TRIAC_OFF()(			        \
+{								        \
+    pinTH_FIRE = 0;					    \
+    _set_triac_state(0);			    \
 })	
 
-#define _TRIAC()			pinTH_FIRE
+#define _TRIAC()			            pinTH_FIRE
 
 
 
