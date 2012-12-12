@@ -1,0 +1,37 @@
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\DigitalIO.c1
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\main.c1
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\systmr.c1
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\task.c1
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\sirem.c1
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\PARLIST.c1
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\trace.c1
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\vuart.c1
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\vADC.c1
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\statemachine.c1
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\LCD.c1
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\eeprom.c1
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\triac_control.c1
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\IDENT.C1
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\tempctrl.c1
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\measure.c1
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\traps.c1
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\Common\basedef.h0
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\Common\DigitalIoCfg.h0
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\Common\p30f3014.h0
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\include\DigitalIO.h0
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\include\systmr.h0
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\include\task.h0
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\include\sirem.h0
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\include\PARLIST.h0
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\include\trace.h0
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\include\vuart.h0
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\include\vADC.h0
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\include\statemachine.h0
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\include\LCD.h0
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\include\eeprom.h0
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\include\triac_control.h0
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\include\IDENT.H0
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\include\tempctrl.h0
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\SST40 V4.0 Rev.0\src\include\measure.h0
+D:\My Documents\Projects\JBC Soldering Station\Software\SST40\PC LINT\std.lnt
+CMD:-t4
