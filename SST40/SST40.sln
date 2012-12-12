@@ -4,7 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Include", "Include", "{B61D9F21-54EE-4CFD-9B3A-46C78D33EA61}"
 	ProjectSection(SolutionItems) = preProject
 		..\src\Common\basedef.h = ..\src\Common\basedef.h
-		..\src\include\Crc16.h = ..\src\include\Crc16.h
 		..\src\include\DigitalIO.h = ..\src\include\DigitalIO.h
 		..\src\Common\DigitalIoCfg.h = ..\src\Common\DigitalIoCfg.h
 		..\src\include\eeprom.h = ..\src\include\eeprom.h
@@ -27,7 +26,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Include", "Include", "{B61D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AF609F40-9F02-40FE-99E4-9C980085E290}"
 	ProjectSection(SolutionItems) = preProject
-		..\src\Crc16.c = ..\src\Crc16.c
 		..\src\DigitalIO.c = ..\src\DigitalIO.c
 		..\src\eeprom.c = ..\src\eeprom.c
 		..\src\IDENT.C = ..\src\IDENT.C
