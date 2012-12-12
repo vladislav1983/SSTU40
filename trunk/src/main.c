@@ -32,6 +32,7 @@
 #endif
 
 /* User Include */
+#include<stdlib.h>
 #include "DigitalIO.h"
 #include "task.h"
 #include "vuart.h"
@@ -62,6 +63,7 @@ extern U16 TASK_CONTROL;
 /*----------------------------------------------------------------------------*/
 /* Constant exported data                                                     */
 /*----------------------------------------------------------------------------*/
+const char *Revision = "$WCREV$";
 
 /*----------------------------------------------------------------------------*/
 /* Exported Macros                                                            */
@@ -78,6 +80,8 @@ extern U16 TASK_CONTROL;
 int main()
 {
 	struct sTaskTimesStruct *pTtime_pointer = &Ttime;
+    U16 u16Rev;
+    U16 u16SubRev;
 
 /*----------------------------------------------------------------------------*/
 /*								SYSTEM INIT			                          */
@@ -117,14 +121,15 @@ int main()
 	temp_ctrl_init();
 	
 	/* END INIT */
-	
+	u16Rev = atoi(Revision);
+
 	IF_LCDPutc('\f');
 	IF_LCDPuts("    SSTU 4.0");
 	IF_LCDPutc('\n');
 	IF_LCDPuts("     V");
-	IF_LCDPutn((FIRMWARE_BASE_VERSION / 100));
+	IF_LCDPutn((u16Rev / 100));
 	IF_LCDPutc('.');
-	IF_LCDPutn(FIRMWARE_SUB_VERSION);
+	IF_LCDPutn(u16Rev - ((u16Rev / 100) * 100));
 	
 	delay_ms(200);
 	
