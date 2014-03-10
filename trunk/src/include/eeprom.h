@@ -53,7 +53,7 @@ extern sParamAct ParamAct;
 
 
 //==========================================================================================================
-// Exported functions                     				                        
+// Exported functions                                                             
 //==========================================================================================================
 void ee_param_act(BOOL init,BOOL read_all_params);
 HRESULT EE_CheckEEprom(void);

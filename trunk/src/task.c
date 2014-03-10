@@ -88,39 +88,39 @@ void __attribute__((__interrupt__,no_auto_psv)) _INT0Interrupt(void);
 /******************************************************************************/
 void __attribute__((__interrupt__,no_auto_psv)) _T3Interrupt(void)
 {
-	struct sTaskTimesStruct *pT1time;
+    struct sTaskTimesStruct *pT1time;
 
-	pT1time = _get_Ttime();
-	_set_task1_execute(1); 	// Task is executing
-	_Task2_Timer_Stop();	// Stop task2 timer when task1 execute.	
-	
-	zero_cross_II();
-	
-	ADC_Sample_Read();
-	
-	state_machine_T1();
-	
-	Current_measure(ADC[AdcCh_1]);
-	
-	cart_stat_det();
-	
-	triac_fire_timer();	/* Triac power off control */
-	
-	do_trace();
-	
-	Cartridge_overload_protection();
-	
-	sci_timer();
-	
-	StationStatistic();
-	
-	_set_zero_cross(0); //<----- Zero cross cleared at end of interrupt
-	
-	_Task1_GetTime(pT1time);
-	_Task2_Timer_Start();
-	_set_task1_execute(0); //task ended
-	
-	_T3IF = 0;	/* clear interrupt flag */
+    pT1time = _get_Ttime();
+    _set_task1_execute(1);     // Task is executing
+    _Task2_Timer_Stop();    // Stop task2 timer when task1 execute.    
+    
+    zero_cross_II();
+    
+    ADC_Sample_Read();
+    
+    state_machine_T1();
+    
+    Current_measure(ADC[AdcCh_1]);
+    
+    cart_stat_det();
+    
+    triac_fire_timer();    /* Triac power off control */
+    
+    do_trace();
+    
+    Cartridge_overload_protection();
+    
+    sci_timer();
+    
+    StationStatistic();
+    
+    _set_zero_cross(0); //<----- Zero cross cleared at end of interrupt
+    
+    _Task1_GetTime(pT1time);
+    _Task2_Timer_Start();
+    _set_task1_execute(0); //task ended
+    
+    _T3IF = 0;    /* clear interrupt flag */
 }
 
 /******************************************************************************/
@@ -132,25 +132,25 @@ void __attribute__((__interrupt__,no_auto_psv)) _T3Interrupt(void)
 /******************************************************************************/
 void __attribute__((__interrupt__,no_auto_psv)) _T1Interrupt(void)
 {
-	struct sTaskTimesStruct *pT1time;
-	
-  	pT1time = _get_Ttime();
-  	
-  	_Task2_Timer_Clear();
-	_set_task2_execute(1); //task2 is executing
-	
-	measure_T2();
-	
-	Dio_Scan_T2();
-	
-	state_machine_T2();
+    struct sTaskTimesStruct *pT1time;
+    
+      pT1time = _get_Ttime();
+      
+      _Task2_Timer_Clear();
+    _set_task2_execute(1); //task2 is executing
+    
+    measure_T2();
+    
+    Dio_Scan_T2();
+    
+    state_machine_T2();
 
-	_RESET_ERROR_PC_HANDLER(); /* Check for reset errors from PC_CONTROL:3 */
-	
-	_Task2_GetTime(pT1time);
-	_set_task2_execute(0); //task ended
-	
-	_T1IF = 0; /* clear interrupt flag */
+    _RESET_ERROR_PC_HANDLER(); /* Check for reset errors from PC_CONTROL:3 */
+    
+    _Task2_GetTime(pT1time);
+    _set_task2_execute(0); //task ended
+    
+    _T1IF = 0; /* clear interrupt flag */
 }
 
 /******************************************************************************/
@@ -162,7 +162,7 @@ void __attribute__((__interrupt__,no_auto_psv)) _T1Interrupt(void)
 /******************************************************************************/
 void __attribute__((__interrupt__,no_auto_psv)) _INT0Interrupt(void)
 {
-	Nop();
+    Nop();
 }
 
 
@@ -175,9 +175,9 @@ void __attribute__((__interrupt__,no_auto_psv)) _INT0Interrupt(void)
 /******************************************************************************/
 void TaskTimesCalc(struct sTaskTimesStruct *p)
 {
-	
-	(p)->Task1Time_us = (U32)(CPU_CYCLE_ns * (p)->Task1Ticks);
-	(p)->Task2Time_us = (U32)(CPU_CYCLE_ns * (p)->Task2Ticks);
+    
+    (p)->Task1Time_us = (U32)(CPU_CYCLE_ns * (p)->Task1Ticks);
+    (p)->Task2Time_us = (U32)(CPU_CYCLE_ns * (p)->Task2Ticks);
 
 }
 
@@ -191,89 +191,89 @@ void TaskTimesCalc(struct sTaskTimesStruct *p)
 /******************************************************************************/
 void StationStatistic(void)
 {
-	struct sStationStatistic *ss;
-	static U16 counter = 0;
-	static U16 seconds = 0;
-	static teStationStatStates ss_state_stand;
-	static teStationStatStates old_ss_state_stand = SS_Stand;
-	static teStationStatStates ss_state_extr;
-	static teStationStatStates old_ss_state_extr = SS_Extractor;
-	
-	ss = &stat_stat;
-	
-	counter ++;
-	
-	if(counter >= 10000)	// 1s
-	{
-		counter = 0;
-		
-		if( ++seconds >= 60)
-		{
-			seconds = 0;
-			
-			if( ++(ss)->OpTime_Minutes >= 60 )
-			{
-				(ss)->OpTime_Minutes = 0;
-				(ss)->OpTime_Hours++;
-			}
-		}
-	}
-	
-	if(_power_up_ok())
-	{
-		if(_stand() && !_extractor())
-		{
-			if(old_ss_state_stand != ss_state_stand)
-			{
-				(ss)->Cart_Stand_Counter++;
-			}
-			
-			ss_state_stand = SS_Stand;
-			old_ss_state_stand = ss_state_stand;
-			
-		}
-		else
-		{
-			ss_state_stand = SS_Norm_Operation;
-		}
-		
-	
-		if(_extractor() && !_stand())
-		{
-			if(old_ss_state_extr != ss_state_extr)
-			{
-				(ss)->Cart_Change_Counter++;
-			}
-			
-			ss_state_extr = SS_Stand;
-			old_ss_state_extr = ss_state_extr;
-			
-		}
-		else
-		{
-			ss_state_extr = SS_Norm_Operation;
-		}
-	}
-	
-	// Hibernation Time Measure
-	if(_hibernate())
-	{
-    	(ss)->HibCounter++;
-    	
-    	if((ss)->HibCounter >= 10000)
-    	{
-        	(ss)->HibCounter = 0;
-        	
-        	if(++(ss)->HibTimeSeconds >= 60)
-        	{
-            	(ss)->HibTimeSeconds = 0;
-            	
-            	if(++(ss)->HibTimeMinutes >= 60)
-            	{
-            	    (ss)->HibTimeMinutes = 0;
-            	    (ss)->HibTimeHours++;
-            	}
-        	}	
-        }   		
-    }   	
+    struct sStationStatistic *ss;
+    static U16 counter = 0;
+    static U16 seconds = 0;
+    static teStationStatStates ss_state_stand;
+    static teStationStatStates old_ss_state_stand = SS_Stand;
+    static teStationStatStates ss_state_extr;
+    static teStationStatStates old_ss_state_extr = SS_Extractor;
+    
+    ss = &stat_stat;
+    
+    counter ++;
+    
+    if(counter >= 10000)    // 1s
+    {
+        counter = 0;
+        
+        if( ++seconds >= 60)
+        {
+            seconds = 0;
+            
+            if( ++(ss)->OpTime_Minutes >= 60 )
+            {
+                (ss)->OpTime_Minutes = 0;
+                (ss)->OpTime_Hours++;
+            }
+        }
+    }
+    
+    if(_power_up_ok())
+    {
+        if(_stand() && !_extractor())
+        {
+            if(old_ss_state_stand != ss_state_stand)
+            {
+                (ss)->Cart_Stand_Counter++;
+            }
+            
+            ss_state_stand = SS_Stand;
+            old_ss_state_stand = ss_state_stand;
+            
+        }
+        else
+        {
+            ss_state_stand = SS_Norm_Operation;
+        }
+        
+    
+        if(_extractor() && !_stand())
+        {
+            if(old_ss_state_extr != ss_state_extr)
+            {
+                (ss)->Cart_Change_Counter++;
+            }
+            
+            ss_state_extr = SS_Stand;
+            old_ss_state_extr = ss_state_extr;
+            
+        }
+        else
+        {
+            ss_state_extr = SS_Norm_Operation;
+        }
+    }
+    
+    // Hibernation Time Measure
+    if(_hibernate())
+    {
+        (ss)->HibCounter++;
+        
+        if((ss)->HibCounter >= 10000)
+        {
+            (ss)->HibCounter = 0;
+            
+            if(++(ss)->HibTimeSeconds >= 60)
+            {
+                (ss)->HibTimeSeconds = 0;
+                
+                if(++(ss)->HibTimeMinutes >= 60)
+                {
+                    (ss)->HibTimeMinutes = 0;
+                    (ss)->HibTimeHours++;
+                }
+            }    
+        }           
+    }       
 }

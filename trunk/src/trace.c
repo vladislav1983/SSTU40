@@ -89,18 +89,18 @@ S16 s16CmpValue;
 
 S16 *trace_source_addr[]  =
 {
-/* 0 */	(S16*)NULL,
+/* 0 */    (S16*)NULL,
 /*******************************************************/
 /* MEASURE.C */
-/* 1 */	(S16*)&ADC[AdcCh_0],
-/* 2 */	(S16*)&ADC[AdcCh_1],
+/* 1 */    (S16*)&ADC[AdcCh_0],
+/* 2 */    (S16*)&ADC[AdcCh_1],
 
-/* 3 */	(S16*)&mes1.Current,
-/* 4 */	(S16*)&mes1.line_phase,
+/* 3 */    (S16*)&mes1.Current,
+/* 4 */    (S16*)&mes1.line_phase,
 
-/* 5 */	(S16*)&T_ctrl.T_fbk,
-/* 6 */	(S16*)&T_ctrl.heat_periods,
-/* 7 */	(S16*)&T_ctrl.tmpctrl_triac_state,
+/* 5 */    (S16*)&T_ctrl.T_fbk,
+/* 6 */    (S16*)&T_ctrl.heat_periods,
+/* 7 */    (S16*)&T_ctrl.tmpctrl_triac_state,
 
 /* 8 */(S16*)&ident.ident_mes_temp,
 /* 9 */(S16*)&ident.U_Temp_in,
@@ -135,7 +135,7 @@ S16 *trace_source_addr[]  =
 /******************************************************************************/
 U16 IF_Get_TRSB_CntBytes(void)
 {
-	return(sizeof(TRSB));
+    return(sizeof(TRSB));
 }
 
 /******************************************************************************/
@@ -147,97 +147,97 @@ U16 IF_Get_TRSB_CntBytes(void)
 /******************************************************************************/
 void do_trace(void)
 {
-	static U16 trace_period;
-	S16 comp_param_local;
-	
-	
-	par_trace.par_ptr[0] =  (S16*)trace_source_addr[u16TraceParamNumber_1];	
-	par_trace.trace_display[0] = *par_trace.par_ptr[0];
+    static U16 trace_period;
+    S16 comp_param_local;
+    
+    
+    par_trace.par_ptr[0] =  (S16*)trace_source_addr[u16TraceParamNumber_1];    
+    par_trace.trace_display[0] = *par_trace.par_ptr[0];
 
-	par_trace.par_ptr[1] =  (S16*)trace_source_addr[u16TraceParamNumber_2];
-	par_trace.trace_display[1] = *par_trace.par_ptr[1];
-	
-	
-	if(_reset_trace_manual() || _reset_trace())
-	{
-		_set_reset_trace_manual(0);
-		_set_reset_trace(0);
-		
-		_set_trace_state(1);
-		STORE_POS = 0;				//perform clear
-		Clear_Trace_Array();
-	}
-	
-	if(_condition_start_bit() && _trace_state() && !_trace_running())
-	{
-		
-		comp_param_local = (S16)*trace_source_addr[u16CompareParameter];
-		
-		if(_more_than_bit())
-		{
-			if(comp_param_local > s16CmpValue)
-			{
-				_set_trace_running(1);
-				//_set_reset_trace(1);
-				STORE_POS = 0;
-			}
-		}
-		else if(_less_than_bit())
-		{
-			if(comp_param_local < s16CmpValue)
-			{
-				_set_trace_running(1);
-				//_set_reset_trace(1);
-				STORE_POS = 0;
-			}
-		}	
-		else if(_equal_bit())
-		{
-			if(comp_param_local == s16CmpValue)
-			{
-				_set_trace_running(1);
-				//_set_reset_trace(1);
-				STORE_POS = 0;
-			}
-		}		
-		else if(_not_equal_bit())
-		{
-			if(comp_param_local != s16CmpValue)
-			{
-				_set_trace_running(1);
-				//_set_reset_trace(1);
-				STORE_POS = 0;
-			}
-		}	
-	}
-	if(_manual_start_trace() && !_trace_running())
-	{
-		_set_manual_start_trace(0);
-		_set_trace_running(1);
-		_set_trace_state(1);
-	}
-	
-	
-	if(_trace_running())	//if trace is running
-	{
+    par_trace.par_ptr[1] =  (S16*)trace_source_addr[u16TraceParamNumber_2];
+    par_trace.trace_display[1] = *par_trace.par_ptr[1];
+    
+    
+    if(_reset_trace_manual() || _reset_trace())
+    {
+        _set_reset_trace_manual(0);
+        _set_reset_trace(0);
+        
+        _set_trace_state(1);
+        STORE_POS = 0;                //perform clear
+        Clear_Trace_Array();
+    }
+    
+    if(_condition_start_bit() && _trace_state() && !_trace_running())
+    {
+        
+        comp_param_local = (S16)*trace_source_addr[u16CompareParameter];
+        
+        if(_more_than_bit())
+        {
+            if(comp_param_local > s16CmpValue)
+            {
+                _set_trace_running(1);
+                //_set_reset_trace(1);
+                STORE_POS = 0;
+            }
+        }
+        else if(_less_than_bit())
+        {
+            if(comp_param_local < s16CmpValue)
+            {
+                _set_trace_running(1);
+                //_set_reset_trace(1);
+                STORE_POS = 0;
+            }
+        }    
+        else if(_equal_bit())
+        {
+            if(comp_param_local == s16CmpValue)
+            {
+                _set_trace_running(1);
+                //_set_reset_trace(1);
+                STORE_POS = 0;
+            }
+        }        
+        else if(_not_equal_bit())
+        {
+            if(comp_param_local != s16CmpValue)
+            {
+                _set_trace_running(1);
+                //_set_reset_trace(1);
+                STORE_POS = 0;
+            }
+        }    
+    }
+    if(_manual_start_trace() && !_trace_running())
+    {
+        _set_manual_start_trace(0);
+        _set_trace_running(1);
+        _set_trace_state(1);
+    }
+    
+    
+    if(_trace_running())    //if trace is running
+    {
 
-		if(STORE_POS >= TRACE_STEPS)
-		{
-			_set_trace_state(0);
-			_set_trace_running(0);
-		}
-		else
-		{
-			if(!trace_period)
-			{
-				TRSB[STORE_POS][0] = (S16)*par_trace.par_ptr[0];
-				TRSB[STORE_POS][1] = (S16)*par_trace.par_ptr[1];
-				STORE_POS++;
-				trace_period = trace_every_period;
-			}
-			else trace_period--;
-		}	
-	}	
+        if(STORE_POS >= TRACE_STEPS)
+        {
+            _set_trace_state(0);
+            _set_trace_running(0);
+        }
+        else
+        {
+            if(!trace_period)
+            {
+                TRSB[STORE_POS][0] = (S16)*par_trace.par_ptr[0];
+                TRSB[STORE_POS][1] = (S16)*par_trace.par_ptr[1];
+                STORE_POS++;
+                trace_period = trace_every_period;
+            }
+            else trace_period--;
+        }    
+    }    
 }
 
 /******************************************************************************/
@@ -249,16 +249,16 @@ void do_trace(void)
 /******************************************************************************/
 void Clear_Trace_Array(void)
 {
-	U16 steps;
-	U16 vars;
+    U16 steps;
+    U16 vars;
 
-	for(vars = 0;vars <= NB_TRACE_VARS;vars++)
-	{
-		for(steps = 0;steps <= TRACE_STEPS;steps++)
-		{
-			TRSB[steps][vars] = 0;
-		}
-	}
+    for(vars = 0;vars <= NB_TRACE_VARS;vars++)
+    {
+        for(steps = 0;steps <= TRACE_STEPS;steps++)
+        {
+            TRSB[steps][vars] = 0;
+        }
+    }
 }
 
 /******************************************************************************/
@@ -270,15 +270,15 @@ void Clear_Trace_Array(void)
 /******************************************************************************/
 void trace_init_first(void)
 {
-	par_trace.trace_length = sizeof(trace_source_addr);
-	
-	Clear_Trace_Array();
-	
-	/* set pc control side config*/
-	_set_reset_trace(1);
-	
-	/* set trace state*/
-	_set_trace_state(0);			//put trace in blocked state
+    par_trace.trace_length = sizeof(trace_source_addr);
+    
+    Clear_Trace_Array();
+    
+    /* set pc control side config*/
+    _set_reset_trace(1);
+    
+    /* set trace state*/
+    _set_trace_state(0);            //put trace in blocked state
 
     // Check that par indexes are bound in trace source address array
     if((u16TraceParamNumber_1 > sizeof(trace_source_addr)) || (u16TraceParamNumber_2 > sizeof(trace_source_addr)) || (u16CompareParameter > sizeof(trace_source_addr)))

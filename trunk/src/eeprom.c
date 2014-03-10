@@ -30,8 +30,8 @@
 // Local constants                                                            
 //==========================================================================================================
 // Define here physical start and end address of eeprom.
-#define EE_BASE_ADDR			    0x7FFC00
-#define EE_END_ADDR				    0x7FFFFE
+#define EE_BASE_ADDR                0x7FFC00
+#define EE_END_ADDR                    0x7FFFFE
 
 #define EE_ALIGNMENT                (2U)
 #define EE_START_LOG_ADDRESS        (0U)
@@ -53,10 +53,10 @@
 #define cBank2                      (1U)
 
 /* Param Actualization states */
-#define PARACT_INIT				    1
-#define PARACT_CHECKSUM_POOL	    2
-#define PARACT_PARAMS_UPDATE	    3
-#define PARACT_PARAMS_READ_ALL	    4
+#define PARACT_INIT                    1
+#define PARACT_CHECKSUM_POOL        2
+#define PARACT_PARAMS_UPDATE        3
+#define PARACT_PARAMS_READ_ALL        4
 
 // Value Type define
 #define cU8ValueType                (0U)
@@ -104,7 +104,7 @@ do{                                                             \
 //==========================================================================================================
 // Local data                                                                 
 //==========================================================================================================
-static U16 _EEDATA(512) 	EEdata[512];
+static U16 _EEDATA(512)     EEdata[512];
 static U16 ee_state;
 
 //==========================================================================================================
@@ -187,7 +187,7 @@ static void EE_Erase_All(void)
 static void EE_Erase_U16(_IN_ _prog_addressT *EEpointer)
 {
     _erase_eedata(*EEpointer, _EE_WORD);
-    _wait_eedata();	
+    _wait_eedata();    
 }
 //==========================================================================================================
 // Function Name: EE_MemCopy  
@@ -201,7 +201,7 @@ static void EE_Erase_U16(_IN_ _prog_addressT *EEpointer)
 //==========================================================================================================
 static void EE_MemCopy(_IN_ _prog_addressT *EEpointer,_OUT_ U16 *U16EE_Read_Temp)
 {
-    (void) _memcpy_p2d16(U16EE_Read_Temp, *EEpointer, _EE_WORD);	//High first
+    (void) _memcpy_p2d16(U16EE_Read_Temp, *EEpointer, _EE_WORD);    //High first
 }
 
 //==========================================================================================================
@@ -220,37 +220,37 @@ static void EE_WriteU32(_IN_ const _prog_addressT pEEpointer, _IN_ iolist *pIop)
     U32 u32ParamTemp;
     U16 u16ParamTemp;
     U16 u16ToEEprom;
-	
-	EEpointer = pEEpointer;
-	
-    u16ToEEprom = (U16)Lou(*(U32*)pIop->read_adress);	// extract low 16 bytes form U32
-					
+    
+    EEpointer = pEEpointer;
+    
+    u16ToEEprom = (U16)Lou(*(U32*)pIop->read_adress);    // extract low 16 bytes form U32
+                    
     _set_eeprom_busy(1);
     
     EE_Erase_U16(&EEpointer);
     EE_Write_U16(&u16ToEEprom, &EEpointer);
-    EEpointer += sizeof(U16);	// increment EEPROM pointer
-					
-    u16ToEEprom = (U16)Hiu(*(U32*)pIop->read_adress);	// extract high 16 bytes from U32
-					
+    EEpointer += sizeof(U16);    // increment EEPROM pointer
+                    
+    u16ToEEprom = (U16)Hiu(*(U32*)pIop->read_adress);    // extract high 16 bytes from U32
+                    
     EE_Erase_U16(&EEpointer);
-    EE_Write_U16(&u16ToEEprom, &EEpointer);	    // Write high 16 bytes to eeprom.
-    EEpointer -= sizeof(U16);					// Move back EEPROM pointer to begin of U32 value
+    EE_Write_U16(&u16ToEEprom, &EEpointer);        // Write high 16 bytes to eeprom.
+    EEpointer -= sizeof(U16);                    // Move back EEPROM pointer to begin of U32 value
     
     _set_eeprom_busy(0);
-					
-    EE_par_update++;	// increment debug counter
-					
+                    
+    EE_par_update++;    // increment debug counter
+                    
     /* Read U32 Param from EEPROM AGAIN to be sure that written value is there :) - Little Endian - LOW FIRST*/
-    EE_MemCopy(&EEpointer, &u16ParamTemp);	    // Copy LOW byte from EEPROM
-    EEpointer += sizeof(U16);				    // increment eeprom pointer with 2 bytes to read next bytes from U32 value
-					
-    u32ParamTemp = (U32)u16ParamTemp;	        // store to U32 low 
-					
-    EE_MemCopy(&EEpointer, &u16ParamTemp);	    // Copy High byte from EEPROM, we do not decrement eeprom pointer, because this is done at end of state
-					
-    u32ParamTemp |=  (U32)u16ParamTemp << 16;	// store U16ParamTemp to high
-					
+    EE_MemCopy(&EEpointer, &u16ParamTemp);        // Copy LOW byte from EEPROM
+    EEpointer += sizeof(U16);                    // increment eeprom pointer with 2 bytes to read next bytes from U32 value
+                    
+    u32ParamTemp = (U32)u16ParamTemp;            // store to U32 low 
+                    
+    EE_MemCopy(&EEpointer, &u16ParamTemp);        // Copy High byte from EEPROM, we do not decrement eeprom pointer, because this is done at end of state
+                    
+    u32ParamTemp |=  (U32)u16ParamTemp << 16;    // store U16ParamTemp to high
+                    
     if(u32ParamTemp != *(U32*)pIop->read_adress)
     {
         _set_ee_write_error(1);
@@ -288,9 +288,9 @@ static void EE_WriteU16(_IN_ const _prog_addressT pEEpointer, _IN_ iolist *pIop,
     EE_Erase_U16(&EEpointer);
     EE_Write_U16(&u16ToEEprom, &EEpointer);
     _set_eeprom_busy(0);
-					
+                    
     EE_par_update++;
-					
+                    
     EE_MemCopy(&EEpointer, &u16ParamTemp);
     
     if(bValueType == cU16ValueType)
@@ -327,14 +327,14 @@ static U32 EE_ReadU32(_IN_ const _prog_addressT pEEpointer)
     EEpointer = pEEpointer;
     
     /* Read U32 Param from EEPROM - LOW 16 Bytes FIRST*/
-    EE_MemCopy(&EEpointer, &u16ParamTemp);	    // Copy LOW byte from EEPROM
-    EEpointer += sizeof(U16);				    // increment eeprom pointer with 2 bytes to read next bytes from U32 value
-				
-    u32ReadValue = (U32)u16ParamTemp;	        // store to U32 low
-				
-    EE_MemCopy(&EEpointer, &u16ParamTemp);	    // Copy High byte from EEPROM
+    EE_MemCopy(&EEpointer, &u16ParamTemp);        // Copy LOW byte from EEPROM
+    EEpointer += sizeof(U16);                    // increment eeprom pointer with 2 bytes to read next bytes from U32 value
+                
+    u32ReadValue = (U32)u16ParamTemp;            // store to U32 low
+                
+    EE_MemCopy(&EEpointer, &u16ParamTemp);        // Copy High byte from EEPROM
 
-    u32ReadValue |= (U32)u16ParamTemp << 16;	// store U16ParamTemp to high
+    u32ReadValue |= (U32)u16ParamTemp << 16;    // store U16ParamTemp to high
     
     return(u32ReadValue);
 }
@@ -430,133 +430,133 @@ static HRESULT EE_VerifyChecksum(_IN_ U16 u16CheksumToVerify,_IN_ const BOOL bBa
 //==========================================================================================================
 void ee_param_act(BOOL init,BOOL read_all_params)
 {
-	sParamAct *pa;
-	static iolist *pio;
-	static _prog_addressT EE_pio;
-	U16 U16ParamTemp;
-	U32 U32ParamTemp = 0;
+    sParamAct *pa;
+    static iolist *pio;
+    static _prog_addressT EE_pio;
+    U16 U16ParamTemp;
+    U32 U32ParamTemp = 0;
     BOOL  bBreak = cFalse;
-	
-	pa = mGet_ParamAct();
-	
-	if(init) ee_state = PARACT_INIT;
-	
-	switch(ee_state)
-	{
-	/*------------------------*/
-	case PARACT_INIT:
-		pio=(iolist*)iopar;
-		(pa)->Iopar_members = IF_Parlist_GetCntMembers();
-		(pa)->Iopar_Index = 0;
-		(pa)->EE_Chk_act = 0;
+    
+    pa = mGet_ParamAct();
+    
+    if(init) ee_state = PARACT_INIT;
+    
+    switch(ee_state)
+    {
+    /*------------------------*/
+    case PARACT_INIT:
+        pio=(iolist*)iopar;
+        (pa)->Iopar_members = IF_Parlist_GetCntMembers();
+        (pa)->Iopar_Index = 0;
+        (pa)->EE_Chk_act = 0;
         (pa)->u8NumberOfUpdatedBanks = cNumberOfBanks;
-		mSetActiveBank1(EE_pio);
+        mSetActiveBank1(EE_pio);
 
-		if(read_all_params)
+        if(read_all_params)
             ee_state = PARACT_PARAMS_READ_ALL;
-		else
-            ee_state = PARACT_CHECKSUM_POOL;	
-	break;
-	/*------------------------*/
-	case PARACT_CHECKSUM_POOL:
-		if(pio->type[1] == 'n')
-		{
-			if( sizeof(U32) == pio->size )
-			{
-				(pa)->EE_Chk_act += (U16)Hiu(*(U32*)pio->read_adress); 
-				(pa)->EE_Chk_act += (U16)Lou(*(U32*)pio->read_adress);
-			}
-			else if(sizeof(U16) == pio->size)
-    		{
-        		(pa)->EE_Chk_act += *(U16*)pio->read_adress;
-    		}
-			else if( sizeof(U8) == pio->size )
-			{
-				(pa)->EE_Chk_act += *(U8*)pio->read_adress;
-			}
-		}
-		
-		(pa)->Iopar_Index++;
-		
-		if((pa)->Iopar_Index >= (pa)->Iopar_members)
-		{
-			(pa)->Iopar_Index = 0;
-			pio=(iolist*)iopar;
-			
-			if((pa)->EE_Chk_act != EE_CHKS) ee_state = PARACT_PARAMS_UPDATE;
-			
-			(pa)->EE_Chk_act = 0;
-		}
-		else pio++;	
-	break;
-	/*------------------------*/
-	case PARACT_PARAMS_UPDATE:
+        else
+            ee_state = PARACT_CHECKSUM_POOL;    
+    break;
+    /*------------------------*/
+    case PARACT_CHECKSUM_POOL:
+        if(pio->type[1] == 'n')
+        {
+            if( sizeof(U32) == pio->size )
+            {
+                (pa)->EE_Chk_act += (U16)Hiu(*(U32*)pio->read_adress); 
+                (pa)->EE_Chk_act += (U16)Lou(*(U32*)pio->read_adress);
+            }
+            else if(sizeof(U16) == pio->size)
+            {
+                (pa)->EE_Chk_act += *(U16*)pio->read_adress;
+            }
+            else if( sizeof(U8) == pio->size )
+            {
+                (pa)->EE_Chk_act += *(U8*)pio->read_adress;
+            }
+        }
+        
+        (pa)->Iopar_Index++;
+        
+        if((pa)->Iopar_Index >= (pa)->Iopar_members)
+        {
+            (pa)->Iopar_Index = 0;
+            pio=(iolist*)iopar;
+            
+            if((pa)->EE_Chk_act != EE_CHKS) ee_state = PARACT_PARAMS_UPDATE;
+            
+            (pa)->EE_Chk_act = 0;
+        }
+        else pio++;    
+    break;
+    /*------------------------*/
+    case PARACT_PARAMS_UPDATE:
 
-		if((pio->type[1] == 'n') && (!_ee_write_error()))
-		{
-		/**********************************************************************************************************/
-			if( sizeof(U32) == pio->size )	// U32 size
-			{
-    			U32ParamTemp = EE_ReadU32(EE_pio);
-				
-				/* Write U32 param to EEPROM - Little Endian - LOW FIRST */
-				if(U32ParamTemp != *(U32*)pio->read_adress)	// If parameter in EEPROM is different from parameter in parlist
-				{
+        if((pio->type[1] == 'n') && (!_ee_write_error()))
+        {
+        /**********************************************************************************************************/
+            if( sizeof(U32) == pio->size )    // U32 size
+            {
+                U32ParamTemp = EE_ReadU32(EE_pio);
+                
+                /* Write U32 param to EEPROM - Little Endian - LOW FIRST */
+                if(U32ParamTemp != *(U32*)pio->read_adress)    // If parameter in EEPROM is different from parameter in parlist
+                {
                     EE_WriteU32(EE_pio, pio);
-				}
-				
-				EE_pio += sizeof(U32);				
-				
-				/* Actualize checksum */
-			(pa)->EE_Chk_act += (U16)Hiu(*(U32*)pio->read_adress);
-			(pa)->EE_Chk_act += (U16)Lou(*(U32*)pio->read_adress);
-					
-			}
-			else if(sizeof(U16) == pio->size)	// U16 size
-    		{
-	    		/**********************************************************************************************************/
+                }
+                
+                EE_pio += sizeof(U32);                
+                
+                /* Actualize checksum */
+            (pa)->EE_Chk_act += (U16)Hiu(*(U32*)pio->read_adress);
+            (pa)->EE_Chk_act += (U16)Lou(*(U32*)pio->read_adress);
+                    
+            }
+            else if(sizeof(U16) == pio->size)    // U16 size
+            {
+                /**********************************************************************************************************/
                 mReadU16ValueEE(EE_pio, U16ParamTemp);
-	    		
-	    		if(U16ParamTemp != *(U16*)pio->read_adress)
-	    		{
-		    		EE_WriteU16(EE_pio, pio, cU16ValueType);
-	    		}
-	    		
-	    		EE_pio += sizeof(U16);
-	    		
-        		(pa)->EE_Chk_act += *(U16*)pio->read_adress;	
-    		}
-    		else if(sizeof(U8) == pio->size)	// U8 size
-    		{
-	    		/**********************************************************************************************************/
-	    		mReadU16ValueEE(EE_pio, U16ParamTemp);
-	    		
-	    		if((U8)U16ParamTemp != *(U8*)pio->read_adress)
-	    		{
-    	    		 EE_WriteU16(EE_pio, pio, cU8ValueType);
-	    		}
+                
+                if(U16ParamTemp != *(U16*)pio->read_adress)
+                {
+                    EE_WriteU16(EE_pio, pio, cU16ValueType);
+                }
                 
                 EE_pio += sizeof(U16);
                 
-        		(pa)->EE_Chk_act += *(U8*)pio->read_adress;	
-    		}
-    					
-		}	// END if(pio->type[1] == 'n')
-		
-		(pa)->Iopar_Index++;
-		
-		if((pa)->Iopar_Index >= (pa)->Iopar_members)
-		{
-			(pa)->Iopar_Index = 0;
-			pio=(iolist*)iopar;
-			
-			EE_CHKS = (pa)->EE_Chk_act;
+                (pa)->EE_Chk_act += *(U16*)pio->read_adress;    
+            }
+            else if(sizeof(U8) == pio->size)    // U8 size
+            {
+                /**********************************************************************************************************/
+                mReadU16ValueEE(EE_pio, U16ParamTemp);
+                
+                if((U8)U16ParamTemp != *(U8*)pio->read_adress)
+                {
+                     EE_WriteU16(EE_pio, pio, cU8ValueType);
+                }
+                
+                EE_pio += sizeof(U16);
+                
+                (pa)->EE_Chk_act += *(U8*)pio->read_adress;    
+            }
+                        
+        }    // END if(pio->type[1] == 'n')
+        
+        (pa)->Iopar_Index++;
+        
+        if((pa)->Iopar_Index >= (pa)->Iopar_members)
+        {
+            (pa)->Iopar_Index = 0;
+            pio=(iolist*)iopar;
+            
+            EE_CHKS = (pa)->EE_Chk_act;
             (pa)->EE_Chk_act = 0;
-			
-			EE_WriteChecksum(EE_CHKS, (pa)->bActiveBank);
+            
+            EE_WriteChecksum(EE_CHKS, (pa)->bActiveBank);
 
-			if(EE_VerifyChecksum(EE_CHKS,(pa)->bActiveBank) == S_FALSE) _set_ee_checksum_read_error(1);
-			
+            if(EE_VerifyChecksum(EE_CHKS,(pa)->bActiveBank) == S_FALSE) _set_ee_checksum_read_error(1);
+            
             // switch between banks
             mSwapBanks();
 
@@ -565,52 +565,52 @@ void ee_param_act(BOOL init,BOOL read_all_params)
                 ee_state = PARACT_INIT;
             }
         }
-		else
-		{
-    		pio++;
-        }  	
-	break;
-	/*------------------------*/
-	case PARACT_PARAMS_READ_ALL:
-		_set_eeprom_busy(1);
+        else
+        {
+            pio++;
+        }      
+    break;
+    /*------------------------*/
+    case PARACT_PARAMS_READ_ALL:
+        _set_eeprom_busy(1);
         
         do
         {
-		    for((pa)->Iopar_Index = 0; ((pa)->Iopar_Index < (pa)->Iopar_members); (pa)->Iopar_Index++)
-		    {
-			    if(pio->type[1] == 'n')
-			    {
-				    if( sizeof(U32) == pio->size )
-				    {
-					    U32ParamTemp = EE_ReadU32(EE_pio);
-					    EE_pio += sizeof(U32);	    // increment eeprom pointer
-    					
-					    *(U32*)pio->write_adress = U32ParamTemp;
+            for((pa)->Iopar_Index = 0; ((pa)->Iopar_Index < (pa)->Iopar_members); (pa)->Iopar_Index++)
+            {
+                if(pio->type[1] == 'n')
+                {
+                    if( sizeof(U32) == pio->size )
+                    {
+                        U32ParamTemp = EE_ReadU32(EE_pio);
+                        EE_pio += sizeof(U32);        // increment eeprom pointer
+                        
+                        *(U32*)pio->write_adress = U32ParamTemp;
 
                         (pa)->EE_Chk_act += (U16)Hiu(U32ParamTemp); 
                         (pa)->EE_Chk_act += (U16)Lou(U32ParamTemp);
-				    }
-				    else if( sizeof(U16) == pio->size )
-				    {
-					    mReadU16ValueEE(EE_pio, U16ParamTemp);
-					    EE_pio += sizeof(U16);	    // increment eeprom pointer
-    			
-					    *(U16*)pio->write_adress = U16ParamTemp;
-    			
-					    (pa)->EE_Chk_act += U16ParamTemp;
-				    }
-				    else if( sizeof(U8) == pio->size )
-				    {
-					    mReadU16ValueEE(EE_pio, U16ParamTemp);
-					    EE_pio += sizeof(U16);	    // increment eeprom pointer
-    				
-					    *(U8*)pio->write_adress = (U8)U16ParamTemp;
-    				
-					    (pa)->EE_Chk_act += (U8)U16ParamTemp;
-				    }
-			    }//end if(pio->type[1] == 'n')
-			    pio++;
-		    }//end for
+                    }
+                    else if( sizeof(U16) == pio->size )
+                    {
+                        mReadU16ValueEE(EE_pio, U16ParamTemp);
+                        EE_pio += sizeof(U16);        // increment eeprom pointer
+                
+                        *(U16*)pio->write_adress = U16ParamTemp;
+                
+                        (pa)->EE_Chk_act += U16ParamTemp;
+                    }
+                    else if( sizeof(U8) == pio->size )
+                    {
+                        mReadU16ValueEE(EE_pio, U16ParamTemp);
+                        EE_pio += sizeof(U16);        // increment eeprom pointer
+                    
+                        *(U8*)pio->write_adress = (U8)U16ParamTemp;
+                    
+                        (pa)->EE_Chk_act += (U8)U16ParamTemp;
+                    }
+                }//end if(pio->type[1] == 'n')
+                pio++;
+            }//end for
     
             /* Checksum Verify */
             if(EE_VerifyChecksum((pa)->EE_Chk_act, (pa)->bActiveBank) == S_OK)
@@ -630,21 +630,21 @@ void ee_param_act(BOOL init,BOOL read_all_params)
         } while( (--(pa)->u8NumberOfUpdatedBanks != 0) && (bBreak == cFalse) );
 
         // Check that eeprom is valid (Value 1000)
-		if(EE_Valid != 1000) 
+        if(EE_Valid != 1000) 
         {
-            _set_ee_valid_error(1);	
+            _set_ee_valid_error(1);    
         }
 
-		ee_state = PARACT_INIT;
-		_set_eeprom_busy(0);
+        ee_state = PARACT_INIT;
+        _set_eeprom_busy(0);
 
-	break;
-	/*------------------------*/
-		default:
-		    mAssert(cFalse);
-		break;
-	
-	}
+    break;
+    /*------------------------*/
+        default:
+            mAssert(cFalse);
+        break;
+    
+    }
 }
 //==========================================================================================================
 // Function Name: EE_CheckEEprom

@@ -62,7 +62,7 @@ void __attribute__((__interrupt__)) _MathError(void);
 
 /******************************************************************************/
 /*                                                                            */
-/*                  		 T R A P    H A N D L E R S         	          */
+/*                           T R A P    H A N D L E R S                       */
 /*                                                                            */
 /******************************************************************************/
 /******************************************************************************/
@@ -76,7 +76,7 @@ void __attribute__((interrupt, no_auto_psv)) _OscillatorFail(void)
 {
         INTCON1bits.OSCFAIL = 0;        //Clear the trap flag
         IF_LCDPutc('\f');
-		IF_LCDPuts("OSCILLATOR FAIL");
+        IF_LCDPuts("OSCILLATOR FAIL");
         while (1);
 }
 /******************************************************************************/
@@ -90,7 +90,7 @@ void __attribute__((interrupt, no_auto_psv)) _AddressError(void)
 {
         INTCON1bits.ADDRERR = 0;        //Clear the trap flag
         IF_LCDPutc('\f');
-		IF_LCDPuts("ADDRESS ERROR");
+        IF_LCDPuts("ADDRESS ERROR");
         while (1);
 }
 
@@ -106,7 +106,7 @@ void __attribute__((interrupt, no_auto_psv)) _StackError(void)
 
         INTCON1bits.STKERR = 0;         //Clear the trap flag
         IF_LCDPutc('\f');
-		IF_LCDPuts("STACK ERROR");
+        IF_LCDPuts("STACK ERROR");
         while (1);
 }
 /******************************************************************************/
@@ -120,7 +120,7 @@ void __attribute__((interrupt, no_auto_psv)) _MathError(void)
 {
         INTCON1bits.MATHERR = 0;        //Clear the trap flag
         IF_LCDPutc('\f');
-		IF_LCDPuts("MATH ERROR");
+        IF_LCDPuts("MATH ERROR");
         while(1);
 }
 
