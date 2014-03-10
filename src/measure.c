@@ -35,7 +35,7 @@
 #define cZC_TIMER_START         1
 #define cZC_TIMER_COUNT         2
 
-// zero cross trip thresholds
+// zero cross trip thresholds in TASK1 perios
 #define cZC_TRIP_MAX            120 // 11.7ms
 #define zZC_TRIP_MIN            80  // 7.7ms
 
@@ -104,17 +104,16 @@ void zero_cross_II(void)
 {
     volatile struct Mes1 *m1;
     volatile struct Mes2 *m2;
-    volatile struct mes_par *mp;
     
     m1 = _get_mes1();
     m2 = _get_mes2();
-    mp = _get_mespar();
-
 
     switch(ZeroCrosDetectionState)
     {
         //--------------------------------------------------------------------------------------------------------------
         case eZeroCrossOpenWindow:
+
+            (m1)->Line_period_zc++;  /* Update line period (Zero Cross)*/
 
             if(_INT0IF) 
             {
@@ -140,9 +139,9 @@ void zero_cross_II(void)
         //--------------------------------------------------------------------------------------------------------------
         case eZeroCrossClosedWindow:
 
-            ZeroCrossTimerT1(cZC_TIMER_COUNT, NULL);
+            ZeroCrossTimerT1(cZC_TIMER_COUNT, (U16)NULL);
 
-            if(0 != ZeroCrossTimerT1(cZC_TIMER_READ, NULL))
+            if(0 != ZeroCrossTimerT1(cZC_TIMER_READ, (U16)NULL))
             {
                 ZeroCrosDetectionState = eZeroCrossOpenWindow;
                 // we do not want false zero crosses -> clear interrupt flag
@@ -152,14 +151,10 @@ void zero_cross_II(void)
         break;
         //--------------------------------------------------------------------------------------------------------------
         default:
-        
+            mAssert(cFalse);
+            _set_global_system_fault(1);
         break;
     }
-
-    
-    (m1)->Line_period_zc++;  /* Update line period (Zero Cross)*/
-    
-    
 }
 /******************************************************************************/
 /*

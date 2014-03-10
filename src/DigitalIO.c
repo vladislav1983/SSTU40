@@ -119,7 +119,7 @@ void IF_DigitalIO_Init(void)
     
     /* Setup Interrupt at INT0 */
     _INT0IP = cISR_PRIORITY_INT0; 
-    _INT0EP = INT0_RISING_EDGE;     //Rising edge interrupt
+    _INT0EP = INT0_FALLING_EDGE;
     _INT0IE = 1;                    //Interrupt Enable
     _INT0IF = 0;                    //Clear INT flag
     
@@ -312,7 +312,7 @@ void cart_stat_det(void)
     /*------------------------*/
     
     default:
-        Nop();
+        _set_global_system_fault(1);
         break;
     }
 }

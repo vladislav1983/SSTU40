@@ -309,7 +309,8 @@ void state_machine_T1(void)
     /*------------------------*/    
     
     default:
-        Nop();
+        mAssert(cFalse);
+        _set_global_system_fault(1);
         break;
     }//end switch
 
@@ -562,7 +563,8 @@ void state_machine_T2(void)
     /*------------------------*/    
 
     default:
-        Nop();
+        mAssert(cFalse);
+        _set_global_system_fault(1);
     break;
     }
 

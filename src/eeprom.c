@@ -642,6 +642,7 @@ void ee_param_act(BOOL init,BOOL read_all_params)
     /*------------------------*/
         default:
             mAssert(cFalse);
+            _set_global_system_fault(1);
         break;
     
     }
