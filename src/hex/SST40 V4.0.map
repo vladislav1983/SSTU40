@@ -1,25 +1,25 @@
-Microchip Technology Inc, vv3_30 (B) >
+Microchip Technology Inc, vv3_30 (B) ]
 
 Tool Name:
-  c:\program files\microchip\mplabc30\v3.30c\bin\bin\..\bin/pic30-coff-ld.exe
+  c:\program files (x86)\microchip\mplabc30\v3.30c\bin\bin\..\bin/pic30-coff-ld.exe
 
 Command:
-  -p30F3014 \
+  -p30F4013 \
   -o.\src\hex\SST40 V4.0.cof \
-  -Lc:/program files/microchip/mplabc30/v3.30c/bin/bin/.. \
-  -Lc:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib \
-  -Lc:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib/PIC24E \
-  -Lc:/program files/microchip/mplabc30/v3.30c/bin/bin/../../support/PIC24E/gld \
-  -Lc:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib/PIC24F \
-  -Lc:/program files/microchip/mplabc30/v3.30c/bin/bin/../../support/PIC24F/gld \
-  -Lc:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib/PIC24H \
-  -Lc:/program files/microchip/mplabc30/v3.30c/bin/bin/../../support/PIC24H/gld \
-  -Lc:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib/dsPIC30F \
-  -Lc:/program files/microchip/mplabc30/v3.30c/bin/bin/../../support/dsPIC30F/gld \
-  -Lc:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib/dsPIC33E \
-  -Lc:/program files/microchip/mplabc30/v3.30c/bin/bin/../../support/dsPIC33E/gld \
-  -Lc:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib/dsPIC33F \
-  -Lc:/program files/microchip/mplabc30/v3.30c/bin/bin/../../support/dsPIC33F/gld \
+  -Lc:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/.. \
+  -Lc:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib \
+  -Lc:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib/PIC24E \
+  -Lc:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../support/PIC24E/gld \
+  -Lc:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib/PIC24F \
+  -Lc:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../support/PIC24F/gld \
+  -Lc:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib/PIC24H \
+  -Lc:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../support/PIC24H/gld \
+  -Lc:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib/dsPIC30F \
+  -Lc:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../support/dsPIC30F/gld \
+  -Lc:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib/dsPIC33E \
+  -Lc:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../support/dsPIC33E/gld \
+  -Lc:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib/dsPIC33F \
+  -Lc:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../support/dsPIC33F/gld \
   src\hex\DigitalIO.o \
   src\hex\main.o \
   src\hex\systmr.o \
@@ -37,7 +37,7 @@ Command:
   src\hex\tempctrl.o \
   src\hex\measure.o \
   src\hex\traps.o \
-  -Tp30F3014.gld.00 \
+  -Tp30F4013.gld.00 \
   --defsym=__MPLAB_BUILD=1 \
   -Map=.\src\hex\SST40 V4.0.map \
   --report-mem \
@@ -49,35 +49,35 @@ Command:
 
 Archive member included because of file (symbol)
 
-c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(crt0_standard.o)
+c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(crt0_standard.o)
                               (_resetPRI)
-c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(eedata_helper.o)
+c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(eedata_helper.o)
                               src\hex\eeprom.o (_eedata_helper1)
-c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(memcpy_helper.o)
+c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(memcpy_helper.o)
                               src\hex\eeprom.o (_memcpy_helper)
-c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(data_init_standard.o)
-                              c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(crt0_standard.o) (_data_init_standard)
-c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(floatsisf.o)
+c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(data_init_standard.o)
+                              c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(crt0_standard.o) (_data_init_standard)
+c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(floatsisf.o)
                               src\hex\vuart.o (__floatsisf)
-c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(addsf3.o)
+c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(addsf3.o)
                               src\hex\vuart.o (__subsf3)
-c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(mulsf3.o)
+c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(mulsf3.o)
                               src\hex\vuart.o (__mulsf3)
-c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(divsf3.o)
+c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(divsf3.o)
                               src\hex\vuart.o (__divsf3)
-c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(fixunssfsi.o)
+c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(fixunssfsi.o)
                               src\hex\vuart.o (__fixunssfsi)
-c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(udivsi3.o)
+c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(udivsi3.o)
                               src\hex\LCD.o (__udivsi3)
-c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(fpack.o)
-                              c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(floatsisf.o) (_fpack)
-c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(funpack2.o)
-                              c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(addsf3.o) (_funpack2)
-c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(futil.o)
-                              c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(addsf3.o) (_fPropagateNaN)
-c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(funpack.o)
-                              c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(fixunssfsi.o) (_funpack)
-c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libc-coff.a(strlen.XXo)
+c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(fpack.o)
+                              c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(floatsisf.o) (_fpack)
+c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(funpack2.o)
+                              c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(addsf3.o) (_funpack2)
+c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(futil.o)
+                              c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(addsf3.o) (_fPropagateNaN)
+c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(funpack.o)
+                              c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(fixunssfsi.o) (_funpack)
+c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libc-coff.a(strlen.XXo)
                               src\hex\sirem.o (strlen)
 
 
@@ -88,7 +88,7 @@ Selected CodeGuard Options:
 CodeGuard FLASH Memory:
   boot    (none)
   secure  (none)
-  general 0x100 to 0x3ffc
+  general 0x100 to 0x7ffc
 
 CodeGuard RAM Memory:
   general 0x800 to 0xfff
@@ -101,24 +101,24 @@ CodeGuard EEPROM Memory:
   boot    (none)
 
 
-Program Memory  [Origin = 0x100, Length = 0x3efe]
+Program Memory  [Origin = 0x100, Length = 0x7efe]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x100               0x420           0x630  (1584)
-.const                       0x520               0xfa2          0x1773  (6003)
-.text                       0x14c2              0x1fc4          0x2fa6  (12198)
-.dinit                      0x3486                0x84            0xc6  (198)
-.text                       0x350a                0xe0           0x150  (336)
+.const                       0x520               0xf08          0x168c  (5772)
+.text                       0x1428              0x1ff6          0x2ff1  (12273)
+.dinit                      0x341e                0x84            0xc6  (198)
+.text                       0x34a2                0xe0           0x150  (336)
 
-                     Total program memory used (bytes):         0x4f5f  (20319) 84%
+                     Total program memory used (bytes):         0x4ec3  (20163) 41%
 
 
 Data EEPROM Memory  [Origin = 0x7ffc00, Length = 0x400]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-_01b4f23050c90b34         0x7ffc00               0x400           0x400  (1024)
+_0332e0e0531e140a         0x7ffc00               0x400           0x400  (1024)
 
                         Total data EEPROM used (bytes):          0x400  (1024) 100%
 
@@ -127,14 +127,14 @@ Data Memory  [Origin = 0x800, Length = 0x800]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-_019aaf5050c90b31            0x800                   0           0x4b4  (1204)
-.nbss                        0xcb4                   0           0x118  (280)
-.ndata                       0xdcc                   0            0x1c  (28)
-.nbss                        0xde8                   0            0x58  (88)
-.ndata                       0xe40                   0             0x2  (2)
-.nbss                        0xe42                   0             0x6  (6)
+_03ac4c40531e1408            0x800                   0           0x4b4  (1204)
+.nbss                        0xcb4                   0           0x114  (276)
+.ndata                       0xdc8                   0            0x1c  (28)
+.nbss                        0xde4                   0            0x58  (88)
+.ndata                       0xe3c                   0             0x2  (2)
+.nbss                        0xe3e                   0             0x6  (6)
 
-                        Total data memory used (bytes):          0x648  (1608) 78%
+                        Total data memory used (bytes):          0x644  (1604) 78%
 
 
 Dynamic Memory Usage
@@ -142,9 +142,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0xe48                               0x1b8  (440)
+stack                        0xe44                               0x1bc  (444)
 
-                        Maximum dynamic memory (bytes):          0x1b8  (440)
+                        Maximum dynamic memory (bytes):          0x1bc  (444)
 
 
 External Symbols in Data Memory (by address):
@@ -159,91 +159,93 @@ External Symbols in Data Memory (by address):
                     0x0d12                  _stat_stat
                     0x0d26                  _Ttime
                     0x0d32                  _TASK_CONTROL
-                    0x0d60                  _mes1
-                    0x0d6a                  _mes2
-                    0x0d74                  _mespar
-                    0x0d88                  _trace_state
-                    0x0d8a                  _trace_control
-                    0x0d8c                  _STORE_POS
-                    0x0d8e                  _trace_counter
-                    0x0d90                  _trace_trigger
-                    0x0d92                  _par_trace
-                    0x0d9e                  _trace_config
-                    0x0da0                  _trace_every_period
-                    0x0da2                  _u16TraceParamNumber_1
-                    0x0da4                  _u16TraceParamNumber_2
-                    0x0da6                  _u16CompareParameter
-                    0x0da8                  _s16CmpValue
-                    0x0dae                  _ident
-                    0x0dcc                  _trace_source_addr
-                    0x0df6                  _SYS_CONTROL
-                    0x0df8                  _PC_CONTROL
-                    0x0dfa                  _ERR_CONTROL
-                    0x0dfc                  _mainstate_T2
-                    0x0dfe                  _mainstate_T1
-                    0x0e00                  _LCD_update_rate
-                    0x0e0a                  _EE_CHKS
-                    0x0e0c                  _EE_Valid
-                    0x0e0e                  _EE_par_update
-                    0x0e10                  _ParamAct
-                    0x0e2a                  _debounce_timer_2
-                    0x0e2c                  _deb_timer_cart
-                    0x0e2e                  _deb_timer_stand
-                    0x0e30                  _deb_timer_extr
-                    0x0e32                  _cart_det_state
-                    0x0e34                  _time
-                    0x0e3c                  _ADC
-                    0x0e42                  _release
-                    0x0e44                  _u16Nibble_Temp
+                    0x0d62                  _trace_state
+                    0x0d64                  _trace_control
+                    0x0d66                  _STORE_POS
+                    0x0d68                  _trace_counter
+                    0x0d6a                  _trace_trigger
+                    0x0d6c                  _par_trace
+                    0x0d78                  _trace_config
+                    0x0d7a                  _trace_every_period
+                    0x0d7c                  _u16TraceParamNumber_1
+                    0x0d7e                  _u16TraceParamNumber_2
+                    0x0d80                  _u16CompareParameter
+                    0x0d82                  _s16CmpValue
+                    0x0d88                  _ident
+                    0x0da8                  _mes1
+                    0x0db2                  _mes2
+                    0x0db8                  _mespar
+                    0x0dc6                  _ZeroCrosDetectionState
+                    0x0dc8                  _trace_source_addr
+                    0x0df2                  _SYS_CONTROL
+                    0x0df4                  _PC_CONTROL
+                    0x0df6                  _ERR_CONTROL
+                    0x0df8                  _mainstate_T2
+                    0x0dfa                  _mainstate_T1
+                    0x0dfc                  _LCD_update_rate
+                    0x0e06                  _EE_CHKS
+                    0x0e08                  _EE_Valid
+                    0x0e0a                  _EE_par_update
+                    0x0e0c                  _ParamAct
+                    0x0e26                  _debounce_timer_2
+                    0x0e28                  _deb_timer_cart
+                    0x0e2a                  _deb_timer_stand
+                    0x0e2c                  _deb_timer_extr
+                    0x0e2e                  _cart_det_state
+                    0x0e30                  _time
+                    0x0e38                  _ADC
+                    0x0e3e                  _release
+                    0x0e40                  _u16Nibble_Temp
 
 External Symbols in Data Memory (by name):
 
-                    0x0e3c                  _ADC
-                    0x0e0a                  _EE_CHKS
-                    0x0e0c                  _EE_Valid
-                    0x0e0e                  _EE_par_update
-                    0x0dfa                  _ERR_CONTROL
-                    0x0e00                  _LCD_update_rate
-                    0x0df8                  _PC_CONTROL
-                    0x0e10                  _ParamAct
-                    0x0d8c                  _STORE_POS
-                    0x0df6                  _SYS_CONTROL
+                    0x0e38                  _ADC
+                    0x0e06                  _EE_CHKS
+                    0x0e08                  _EE_Valid
+                    0x0e0a                  _EE_par_update
+                    0x0df6                  _ERR_CONTROL
+                    0x0dfc                  _LCD_update_rate
+                    0x0df4                  _PC_CONTROL
+                    0x0e0c                  _ParamAct
+                    0x0d66                  _STORE_POS
+                    0x0df2                  _SYS_CONTROL
                     0x0d32                  _TASK_CONTROL
                     0x0800                  _TRSB
                     0x0cba                  _T_ctrl
                     0x0d26                  _Ttime
+                    0x0dc6                  _ZeroCrosDetectionState
                     0x0cf0                  _brs
-                    0x0e32                  _cart_det_state
-                    0x0e2c                  _deb_timer_cart
-                    0x0e30                  _deb_timer_extr
-                    0x0e2e                  _deb_timer_stand
-                    0x0e2a                  _debounce_timer_2
-                    0x0dae                  _ident
-                    0x0dfe                  _mainstate_T1
-                    0x0dfc                  _mainstate_T2
-                    0x0d60                  _mes1
-                    0x0d6a                  _mes2
-                    0x0d74                  _mespar
+                    0x0e2e                  _cart_det_state
+                    0x0e28                  _deb_timer_cart
+                    0x0e2c                  _deb_timer_extr
+                    0x0e2a                  _deb_timer_stand
+                    0x0e26                  _debounce_timer_2
+                    0x0d88                  _ident
+                    0x0dfa                  _mainstate_T1
+                    0x0df8                  _mainstate_T2
+                    0x0da8                  _mes1
+                    0x0db2                  _mes2
+                    0x0db8                  _mespar
                     0x0cf8                  _overprot
-                    0x0d92                  _par_trace
+                    0x0d6c                  _par_trace
                     0x0cd8                  _pid
-                    0x0e42                  _release
-                    0x0da8                  _s16CmpValue
+                    0x0e3e                  _release
+                    0x0d82                  _s16CmpValue
                     0x0d12                  _stat_stat
-                    0x0e34                  _time
+                    0x0e30                  _time
                     0x0d04                  _tmpctrl_mainstate
                     0x0d06                  _tmpctrl_nextstate
-                    0x0d9e                  _trace_config
-                    0x0d8a                  _trace_control
-                    0x0d8e                  _trace_counter
-                    0x0da0                  _trace_every_period
-                    0x0dcc                  _trace_source_addr
-                    0x0d88                  _trace_state
-                    0x0d90                  _trace_trigger
-                    0x0da6                  _u16CompareParameter
-                    0x0e44                  _u16Nibble_Temp
-                    0x0da2                  _u16TraceParamNumber_1
-                    0x0da4                  _u16TraceParamNumber_2
+                    0x0d78                  _trace_config
+                    0x0d64                  _trace_control
+                    0x0d68                  _trace_counter
+                    0x0d7a                  _trace_every_period
+                    0x0dc8                  _trace_source_addr
+                    0x0d62                  _trace_state
+                    0x0d6a                  _trace_trigger
+                    0x0d80                  _u16CompareParameter
+                    0x0e40                  _u16Nibble_Temp
+                    0x0d7c                  _u16TraceParamNumber_1
+                    0x0d7e                  _u16TraceParamNumber_2
 
 External Symbols in Program Memory (by address):
 
@@ -273,151 +275,151 @@ External Symbols in Program Memory (by address):
                   0x000514                  _strlen
                   0x000520                  _version
                   0x000522                  _C30_Version
-                  0x000a62                  _iopar
-                  0x0014be                  _LCD_INIT_STRING
-                  0x0014c2                  _state_machine_T1
-                  0x0016dc                  _state_machine_T2
-                  0x0019d0                  _state_machine_init
-                  0x0019e4                  _stm_timer_T2
-                  0x0019fe                  _stm_timer_II_T2
-                  0x001a18                  _stm_timer_T1
-                  0x001a32                  _PrintHibernationTime
-                  0x001a70                  _Sirem_Engine
-                  0x002194                  _ee_param_act
-                  0x00245a                  _EE_CheckEEprom
-                  0x0024e6                  _temp_ctrl
-                  0x00261c                  _Reset_TMPCTRL
-                  0x00262c                  _PID
-                  0x0026c8                  _Reset_PID
-                  0x0026d8                  _Cartridge_overload_protection
-                  0x002712                  _temp_ctrl_init
-                  0x00271e                  _Get_Temp_Actual
-                  0x00272e                  _Set_User_Temp
-                  0x002734                  _Roll_Back_User_Temp
-                  0x00273a                  _Get_User_Temp
-                  0x00273e                  _Inc_User_Temp
-                  0x00274c                  _Dec_User_Temp
-                  0x00275a                  _tmpctrl_timer_t1
-                  0x002774                  _cartridge_ident
-                  0x00292c                  _bresenham
-                  0x002986                  _ident_timer_t1
-                  0x0029a0                  _ident_timeout_timer_t1
-                  0x0029ba                  _IF_DigitalIO_Init
-                  0x002a12                  _Dio_Scan_T2
-                  0x002a90                  _cart_stat_det
-                  0x002b6c                  _cart_stat_timer_T1
-                  0x002b86                  _IF_LCDInit
-                  0x002bb8                  _IF_LCDPutc
-                  0x002bea                  _IF_LCDGotoXY
-                  0x002c02                  _IF_LCDPuts
-                  0x002c1a                  _IF_LCDPutn
-                  0x002c9e                  _IF_LCD_UpdateState
-                  0x002cb0                  _LCDSendNibble
-                  0x002d0a                  _LCDSendByte
-                  0x002d38                  _IF_Uart_Init
-                  0x002dbc                  _IF_Uart_MsgGetDataCnt
-                  0x002dc8                  _IF_Uart_MsgGet
-                  0x002dee                  _IF_Uart_RxPurge
-                  0x002dfa                  _IF_Uart_MsgPut
-                  0x002e22                  _IF_UART_PutByte
-                  0x002e3c                  __U1RXInterrupt
-                  0x002e9a                  _sci_timer
-                  0x002eb0                  __T3Interrupt
-                  0x002eec                  __T1Interrupt
-                  0x002f22                  __INT0Interrupt
-                  0x002f26                  _TaskTimesCalc
-                  0x002f3a                  _StationStatistic
-                  0x002ff2                  _IF_SysTmr1_Init
-                  0x003018                  _IF_SysTmr3_Init
-                  0x00303c                  _IF_SysTmr2_Init
-                  0x003060                  _delay_us
-                  0x003096                  _delay_ms
-                  0x0030cc                  _Timestate_Cartridge_Control
-                  0x00310a                  _IF_Get_TRSB_CntBytes
-                  0x00310e                  _do_trace
-                  0x0031da                  _Clear_Trace_Array
-                  0x0031fa                  _trace_init_first
-                  0x003220                  _zero_cross_II
-                  0x003250                  _DC_Autotunning
-                  0x003298                  _Current_measure
-                  0x0032d0                  _measure_T2
-                  0x0032fc                  _measure_init
-                  0x003302                  _main
-                  0x0033ce                  _IF_Parlist_GetCntMembers
-                  0x0033d2                  _IF_Parlist_GetCntBytes
-                  0x0033d6                  _IF_Parlist_bnu
-                  0x003400                  _Params_check_limit
-                  0x003484                  _Params_Conversion
-                  0x00350a                  _IF_ADC_INIT
-                  0x003560                  _ADC_Sample_Read
-                  0x003576                  __OscillatorFail
-                  0x00358c                  __AddressError
-                  0x0035a2                  __StackError
-                  0x0035b8                  __MathError
-                  0x0035ce                  _triac_fire_timer
-                  0x0035e4                  _triac_control_init
+                  0x000a1c                  _iopar
+                  0x001424                  _LCD_INIT_STRING
+                  0x001428                  _state_machine_T1
+                  0x001642                  _state_machine_T2
+                  0x001936                  _state_machine_init
+                  0x00194a                  _stm_timer_T2
+                  0x001964                  _stm_timer_II_T2
+                  0x00197e                  _stm_timer_T1
+                  0x001998                  _PrintHibernationTime
+                  0x0019d6                  _Sirem_Engine
+                  0x0020fa                  _ee_param_act
+                  0x0023c0                  _EE_CheckEEprom
+                  0x00244c                  _temp_ctrl
+                  0x002582                  _Reset_TMPCTRL
+                  0x002592                  _PID
+                  0x00262e                  _Reset_PID
+                  0x00263e                  _Cartridge_overload_protection
+                  0x002678                  _temp_ctrl_init
+                  0x002684                  _Get_Temp_Actual
+                  0x002694                  _Set_User_Temp
+                  0x00269a                  _Roll_Back_User_Temp
+                  0x0026a0                  _Get_User_Temp
+                  0x0026a4                  _Inc_User_Temp
+                  0x0026b2                  _Dec_User_Temp
+                  0x0026c0                  _tmpctrl_timer_t1
+                  0x0026da                  _cartridge_ident
+                  0x002892                  _bresenham
+                  0x0028ec                  _ident_timer_t1
+                  0x002906                  _ident_timeout_timer_t1
+                  0x002920                  _IF_DigitalIO_Init
+                  0x002978                  _Dio_Scan_T2
+                  0x0029f6                  _cart_stat_det
+                  0x002ad2                  _cart_stat_timer_T1
+                  0x002aec                  _IF_LCDInit
+                  0x002b1e                  _IF_LCDPutc
+                  0x002b50                  _IF_LCDGotoXY
+                  0x002b68                  _IF_LCDPuts
+                  0x002b80                  _IF_LCDPutn
+                  0x002c04                  _IF_LCD_UpdateState
+                  0x002c16                  _LCDSendNibble
+                  0x002c70                  _LCDSendByte
+                  0x002c9e                  _IF_Uart_Init
+                  0x002d22                  _IF_Uart_MsgGetDataCnt
+                  0x002d2e                  _IF_Uart_MsgGet
+                  0x002d54                  _IF_Uart_RxPurge
+                  0x002d60                  _IF_Uart_MsgPut
+                  0x002d88                  _IF_UART_PutByte
+                  0x002da2                  __U1RXInterrupt
+                  0x002e00                  _sci_timer
+                  0x002e16                  __T3Interrupt
+                  0x002e52                  __T1Interrupt
+                  0x002e88                  __INT0Interrupt
+                  0x002e8c                  _TaskTimesCalc
+                  0x002ea0                  _StationStatistic
+                  0x002f58                  _IF_SysTmr1_Init
+                  0x002f7e                  _IF_SysTmr3_Init
+                  0x002fa2                  _IF_SysTmr2_Init
+                  0x002fc6                  _delay_us
+                  0x002ffc                  _delay_ms
+                  0x003032                  _Timestate_Cartridge_Control
+                  0x003070                  _IF_Get_TRSB_CntBytes
+                  0x003074                  _do_trace
+                  0x003140                  _Clear_Trace_Array
+                  0x003160                  _trace_init_first
+                  0x003186                  _zero_cross_II
+                  0x0031da                  _DC_Autotunning
+                  0x003222                  _Current_measure
+                  0x00325a                  _measure_T2
+                  0x003278                  _measure_init
+                  0x00329a                  _main
+                  0x003366                  _IF_Parlist_GetCntMembers
+                  0x00336a                  _IF_Parlist_GetCntBytes
+                  0x00336e                  _IF_Parlist_bnu
+                  0x003398                  _Params_check_limit
+                  0x00341c                  _Params_Conversion
+                  0x0034a2                  _IF_ADC_INIT
+                  0x0034f8                  _ADC_Sample_Read
+                  0x00350e                  __OscillatorFail
+                  0x003524                  __AddressError
+                  0x00353a                  __StackError
+                  0x003550                  __MathError
+                  0x003566                  _triac_fire_timer
+                  0x00357c                  _triac_control_init
                   0xf8000a                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x003560                  _ADC_Sample_Read
+                  0x0034f8                  _ADC_Sample_Read
                   0x000522                  _C30_Version
-                  0x0026d8                  _Cartridge_overload_protection
-                  0x0031da                  _Clear_Trace_Array
-                  0x003298                  _Current_measure
-                  0x003250                  _DC_Autotunning
-                  0x00274c                  _Dec_User_Temp
-                  0x002a12                  _Dio_Scan_T2
-                  0x00245a                  _EE_CheckEEprom
-                  0x00271e                  _Get_Temp_Actual
-                  0x00273a                  _Get_User_Temp
-                  0x00350a                  _IF_ADC_INIT
-                  0x0029ba                  _IF_DigitalIO_Init
-                  0x00310a                  _IF_Get_TRSB_CntBytes
-                  0x002bea                  _IF_LCDGotoXY
-                  0x002b86                  _IF_LCDInit
-                  0x002bb8                  _IF_LCDPutc
-                  0x002c1a                  _IF_LCDPutn
-                  0x002c02                  _IF_LCDPuts
-                  0x002c9e                  _IF_LCD_UpdateState
-                  0x0033d2                  _IF_Parlist_GetCntBytes
-                  0x0033ce                  _IF_Parlist_GetCntMembers
-                  0x0033d6                  _IF_Parlist_bnu
-                  0x002ff2                  _IF_SysTmr1_Init
-                  0x00303c                  _IF_SysTmr2_Init
-                  0x003018                  _IF_SysTmr3_Init
-                  0x002e22                  _IF_UART_PutByte
-                  0x002d38                  _IF_Uart_Init
-                  0x002dc8                  _IF_Uart_MsgGet
-                  0x002dbc                  _IF_Uart_MsgGetDataCnt
-                  0x002dfa                  _IF_Uart_MsgPut
-                  0x002dee                  _IF_Uart_RxPurge
-                  0x00273e                  _Inc_User_Temp
-                  0x002d0a                  _LCDSendByte
-                  0x002cb0                  _LCDSendNibble
-                  0x0014be                  _LCD_INIT_STRING
-                  0x00262c                  _PID
-                  0x003484                  _Params_Conversion
-                  0x003400                  _Params_check_limit
-                  0x001a32                  _PrintHibernationTime
-                  0x0026c8                  _Reset_PID
-                  0x00261c                  _Reset_TMPCTRL
-                  0x002734                  _Roll_Back_User_Temp
-                  0x00272e                  _Set_User_Temp
-                  0x001a70                  _Sirem_Engine
-                  0x002f3a                  _StationStatistic
-                  0x002f26                  _TaskTimesCalc
-                  0x0030cc                  _Timestate_Cartridge_Control
-                  0x00358c                  __AddressError
+                  0x00263e                  _Cartridge_overload_protection
+                  0x003140                  _Clear_Trace_Array
+                  0x003222                  _Current_measure
+                  0x0031da                  _DC_Autotunning
+                  0x0026b2                  _Dec_User_Temp
+                  0x002978                  _Dio_Scan_T2
+                  0x0023c0                  _EE_CheckEEprom
+                  0x002684                  _Get_Temp_Actual
+                  0x0026a0                  _Get_User_Temp
+                  0x0034a2                  _IF_ADC_INIT
+                  0x002920                  _IF_DigitalIO_Init
+                  0x003070                  _IF_Get_TRSB_CntBytes
+                  0x002b50                  _IF_LCDGotoXY
+                  0x002aec                  _IF_LCDInit
+                  0x002b1e                  _IF_LCDPutc
+                  0x002b80                  _IF_LCDPutn
+                  0x002b68                  _IF_LCDPuts
+                  0x002c04                  _IF_LCD_UpdateState
+                  0x00336a                  _IF_Parlist_GetCntBytes
+                  0x003366                  _IF_Parlist_GetCntMembers
+                  0x00336e                  _IF_Parlist_bnu
+                  0x002f58                  _IF_SysTmr1_Init
+                  0x002fa2                  _IF_SysTmr2_Init
+                  0x002f7e                  _IF_SysTmr3_Init
+                  0x002d88                  _IF_UART_PutByte
+                  0x002c9e                  _IF_Uart_Init
+                  0x002d2e                  _IF_Uart_MsgGet
+                  0x002d22                  _IF_Uart_MsgGetDataCnt
+                  0x002d60                  _IF_Uart_MsgPut
+                  0x002d54                  _IF_Uart_RxPurge
+                  0x0026a4                  _Inc_User_Temp
+                  0x002c70                  _LCDSendByte
+                  0x002c16                  _LCDSendNibble
+                  0x001424                  _LCD_INIT_STRING
+                  0x002592                  _PID
+                  0x00341c                  _Params_Conversion
+                  0x003398                  _Params_check_limit
+                  0x001998                  _PrintHibernationTime
+                  0x00262e                  _Reset_PID
+                  0x002582                  _Reset_TMPCTRL
+                  0x00269a                  _Roll_Back_User_Temp
+                  0x002694                  _Set_User_Temp
+                  0x0019d6                  _Sirem_Engine
+                  0x002ea0                  _StationStatistic
+                  0x002e8c                  _TaskTimesCalc
+                  0x003032                  _Timestate_Cartridge_Control
+                  0x003524                  __AddressError
                   0x000190                  __DefaultInterrupt
                   0xf8000a                  __FGS.sec
-                  0x002f22                  __INT0Interrupt
-                  0x0035b8                  __MathError
-                  0x003576                  __OscillatorFail
-                  0x0035a2                  __StackError
-                  0x002eec                  __T1Interrupt
-                  0x002eb0                  __T3Interrupt
-                  0x002e3c                  __U1RXInterrupt
+                  0x002e88                  __INT0Interrupt
+                  0x003550                  __MathError
+                  0x00350e                  __OscillatorFail
+                  0x00353a                  __StackError
+                  0x002e52                  __T1Interrupt
+                  0x002e16                  __T3Interrupt
+                  0x002da2                  __U1RXInterrupt
                   0x000272                  ___addsf3
                   0x000394                  ___divsf3
                   0x000418                  ___fixunssfsi
@@ -440,36 +442,36 @@ External Symbols in Program Memory (by name):
                   0x0001e4                  __memcpy_helper
                   0x000122                  __psv_init
                   0x000100                  __resetPRI
-                  0x00292c                  _bresenham
-                  0x002a90                  _cart_stat_det
-                  0x002b6c                  _cart_stat_timer_T1
-                  0x002774                  _cartridge_ident
-                  0x003096                  _delay_ms
-                  0x003060                  _delay_us
-                  0x00310e                  _do_trace
-                  0x002194                  _ee_param_act
-                  0x0029a0                  _ident_timeout_timer_t1
-                  0x002986                  _ident_timer_t1
-                  0x000a62                  _iopar
-                  0x003302                  _main
-                  0x0032d0                  _measure_T2
-                  0x0032fc                  _measure_init
-                  0x002e9a                  _sci_timer
-                  0x0014c2                  _state_machine_T1
-                  0x0016dc                  _state_machine_T2
-                  0x0019d0                  _state_machine_init
-                  0x0019fe                  _stm_timer_II_T2
-                  0x001a18                  _stm_timer_T1
-                  0x0019e4                  _stm_timer_T2
+                  0x002892                  _bresenham
+                  0x0029f6                  _cart_stat_det
+                  0x002ad2                  _cart_stat_timer_T1
+                  0x0026da                  _cartridge_ident
+                  0x002ffc                  _delay_ms
+                  0x002fc6                  _delay_us
+                  0x003074                  _do_trace
+                  0x0020fa                  _ee_param_act
+                  0x002906                  _ident_timeout_timer_t1
+                  0x0028ec                  _ident_timer_t1
+                  0x000a1c                  _iopar
+                  0x00329a                  _main
+                  0x00325a                  _measure_T2
+                  0x003278                  _measure_init
+                  0x002e00                  _sci_timer
+                  0x001428                  _state_machine_T1
+                  0x001642                  _state_machine_T2
+                  0x001936                  _state_machine_init
+                  0x001964                  _stm_timer_II_T2
+                  0x00197e                  _stm_timer_T1
+                  0x00194a                  _stm_timer_T2
                   0x000514                  _strlen
-                  0x0024e6                  _temp_ctrl
-                  0x002712                  _temp_ctrl_init
-                  0x00275a                  _tmpctrl_timer_t1
-                  0x0031fa                  _trace_init_first
-                  0x0035e4                  _triac_control_init
-                  0x0035ce                  _triac_fire_timer
+                  0x00244c                  _temp_ctrl
+                  0x002678                  _temp_ctrl_init
+                  0x0026c0                  _tmpctrl_timer_t1
+                  0x003160                  _trace_init_first
+                  0x00357c                  _triac_control_init
+                  0x003566                  _triac_fire_timer
                   0x000520                  _version
-                  0x003220                  _zero_cross_II
+                  0x003186                  _zero_cross_II
 
 Memory Configuration
 
@@ -478,7 +480,7 @@ data             0x000800           0x000800           a !xr
 reset            0x000000           0x000004  
 ivt              0x000004           0x00007c  
 aivt             0x000084           0x00007c  
-program          0x000100           0x003efe           xr
+program          0x000100           0x007efe           xr
 eedata           0x7ffc00           0x000400  
 FUID0            0x8005c0           0x000002  
 FUID1            0x8005c2           0x000002  
@@ -512,7 +514,7 @@ LOAD src\hex\IDENT.o
 LOAD src\hex\tempctrl.o
 LOAD src\hex\measure.o
 LOAD src\hex\traps.o
-LOAD c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib/dsPIC30F\libp30F3014-coff.a
+LOAD c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib/dsPIC30F\libp30F4013-coff.a
                     0x8005c0                  __FUID0 = 0x8005c0
                     0x8005c2                  __FUID1 = 0x8005c2
                     0x8005c4                  __FUID2 = 0x8005c4
@@ -531,7 +533,7 @@ LOAD c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib/dsPIC30F\libp3
                     0x0800                  __DATA_LENGTH = 0x800
                     0x0c00                  __YDATA_BASE = 0xc00
                     0x0100                  __CODE_BASE = 0x100
-                    0x3f00                  __CODE_LENGTH = 0x3f00
+                    0x7f00                  __CODE_LENGTH = 0x7f00
 
 .reset            0x000000          0x4
                   0x000000          0x2 SHORT 0x100 ABSOLUTE (__reset)
@@ -541,11 +543,11 @@ LOAD c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib/dsPIC30F\libp3
 
 .text             0x000100        0x420
  *(.init)
- .init            0x000100         0x32 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(crt0_standard.o)
+ .init            0x000100         0x32 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(crt0_standard.o)
                   0x000100                  _resetPRI
                   0x000100                  _reset
                   0x000122                  _psv_init
- .init            0x000132         0x5e c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(data_init_standard.o)
+ .init            0x000132         0x5e c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(data_init_standard.o)
                   0x000132                  _data_init_standard
                   0x000132                  _data_init
  *(.user_init)
@@ -554,40 +556,40 @@ LOAD c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib/dsPIC30F\libp3
  .isr             0x000190          0x4 default_isr
                   0x000190                  _DefaultInterrupt
  *(.libc)
- .libc            0x000194         0x50 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(eedata_helper.o)
+ .libc            0x000194         0x50 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(eedata_helper.o)
                   0x000194                  _eedata_helper1
                   0x0001be                  _eedata_helper2
                   0x0001c6                  _eedata_helper3
                   0x0001d2                  _eedata_helper4
- .libc            0x0001e4         0x36 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(memcpy_helper.o)
+ .libc            0x0001e4         0x36 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(memcpy_helper.o)
                   0x0001e4                  _memcpy_helper
  *(.libm)
- .libm            0x00021a         0x56 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(floatsisf.o)
+ .libm            0x00021a         0x56 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(floatsisf.o)
                   0x00021a                  __floatsisf
- .libm            0x000270         0xbc c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(addsf3.o)
+ .libm            0x000270         0xbc c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(addsf3.o)
                   0x000270                  __subsf3
                   0x000272                  __addsf3
- .libm            0x00032c         0x68 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(mulsf3.o)
+ .libm            0x00032c         0x68 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(mulsf3.o)
                   0x00032c                  __mulsf3
- .libm            0x000394         0x84 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(divsf3.o)
+ .libm            0x000394         0x84 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(divsf3.o)
                   0x000394                  __divsf3
- .libm            0x000418         0x36 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(fixunssfsi.o)
+ .libm            0x000418         0x36 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(fixunssfsi.o)
                   0x000418                  __fixunssfsi
- .libm            0x00044e         0x20 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(udivsi3.o)
+ .libm            0x00044e         0x20 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(udivsi3.o)
                   0x00044e                  __udivsi3
- .libm            0x00046e         0x4c c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(fpack.o)
+ .libm            0x00046e         0x4c c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(fpack.o)
                   0x00046e                  _fpack
- .libm            0x0004ba         0x10 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(funpack2.o)
+ .libm            0x0004ba         0x10 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(funpack2.o)
                   0x0004ba                  _funpack2
- .libm            0x0004ca         0x20 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(futil.o)
+ .libm            0x0004ca         0x20 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(futil.o)
                   0x0004ca                  _fPropagateNaN
                   0x0004dc                  _fbopExit
                   0x0004e4                  _fbopReturnNaN
- .libm            0x0004ea         0x2a c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(funpack.o)
+ .libm            0x0004ea         0x2a c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(funpack.o)
                   0x0004ea                  _funpack
  *(.libdsp)
  *(.lib*)
- .libc.strlen     0x000514          0xc c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libc-coff.a(strlen.XXo)
+ .libc.strlen     0x000514          0xc c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libc-coff.a(strlen.XXo)
                   0x000514                  strlen
 
 usercode
@@ -673,23 +675,23 @@ userdata
 
 .ivt              0x000004         0x7c
                   0x000004          0x4 LONG 0x190 DEFINED (__ReservedTrap0)?ABSOLUTE (__ReservedTrap0):ABSOLUTE (__DefaultInterrupt)
-                  0x000006          0x4 LONG 0x3576 DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
-                  0x000008          0x4 LONG 0x358c DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
-                  0x00000a          0x4 LONG 0x35a2 DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
-                  0x00000c          0x4 LONG 0x35b8 DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
+                  0x000006          0x4 LONG 0x350e DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
+                  0x000008          0x4 LONG 0x3524 DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
+                  0x00000a          0x4 LONG 0x353a DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
+                  0x00000c          0x4 LONG 0x3550 DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
                   0x00000e          0x4 LONG 0x190 DEFINED (__ReservedTrap5)?ABSOLUTE (__ReservedTrap5):ABSOLUTE (__DefaultInterrupt)
                   0x000010          0x4 LONG 0x190 DEFINED (__ReservedTrap6)?ABSOLUTE (__ReservedTrap6):ABSOLUTE (__DefaultInterrupt)
                   0x000012          0x4 LONG 0x190 DEFINED (__ReservedTrap7)?ABSOLUTE (__ReservedTrap7):ABSOLUTE (__DefaultInterrupt)
-                  0x000014          0x4 LONG 0x2f22 DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000014          0x4 LONG 0x2e88 DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000016          0x4 LONG 0x190 DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000018          0x4 LONG 0x190 DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00001a          0x4 LONG 0x2eec DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00001a          0x4 LONG 0x2e52 DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001c          0x4 LONG 0x190 DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001e          0x4 LONG 0x190 DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000020          0x4 LONG 0x190 DEFINED (__T2Interrupt)?ABSOLUTE (__T2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000022          0x4 LONG 0x2eb0 DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000022          0x4 LONG 0x2e16 DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000024          0x4 LONG 0x190 DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000026          0x4 LONG 0x2e3c DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000026          0x4 LONG 0x2da2 DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000028          0x4 LONG 0x190 DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00002a          0x4 LONG 0x190 DEFINED (__ADCInterrupt)?ABSOLUTE (__ADCInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00002c          0x4 LONG 0x190 DEFINED (__NVMInterrupt)?ABSOLUTE (__NVMInterrupt):ABSOLUTE (__DefaultInterrupt)
@@ -737,23 +739,23 @@ userdata
 
 .aivt             0x000084         0x7c
                   0x000084          0x4 LONG 0x190 DEFINED (__AltReservedTrap0)?ABSOLUTE (__AltReservedTrap0):DEFINED (__ReservedTrap0)?ABSOLUTE (__ReservedTrap0):ABSOLUTE (__DefaultInterrupt)
-                  0x000086          0x4 LONG 0x3576 DEFINED (__AltOscillatorFail)?ABSOLUTE (__AltOscillatorFail):DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
-                  0x000088          0x4 LONG 0x358c DEFINED (__AltAddressError)?ABSOLUTE (__AltAddressError):DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
-                  0x00008a          0x4 LONG 0x35a2 DEFINED (__AltStackError)?ABSOLUTE (__AltStackError):DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
-                  0x00008c          0x4 LONG 0x35b8 DEFINED (__AltMathError)?ABSOLUTE (__AltMathError):DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
+                  0x000086          0x4 LONG 0x350e DEFINED (__AltOscillatorFail)?ABSOLUTE (__AltOscillatorFail):DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
+                  0x000088          0x4 LONG 0x3524 DEFINED (__AltAddressError)?ABSOLUTE (__AltAddressError):DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
+                  0x00008a          0x4 LONG 0x353a DEFINED (__AltStackError)?ABSOLUTE (__AltStackError):DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
+                  0x00008c          0x4 LONG 0x3550 DEFINED (__AltMathError)?ABSOLUTE (__AltMathError):DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
                   0x00008e          0x4 LONG 0x190 DEFINED (__AltReservedTrap5)?ABSOLUTE (__AltReservedTrap5):DEFINED (__ReservedTrap5)?ABSOLUTE (__ReservedTrap5):ABSOLUTE (__DefaultInterrupt)
                   0x000090          0x4 LONG 0x190 DEFINED (__AltReservedTrap6)?ABSOLUTE (__AltReservedTrap6):DEFINED (__ReservedTrap6)?ABSOLUTE (__ReservedTrap6):ABSOLUTE (__DefaultInterrupt)
                   0x000092          0x4 LONG 0x190 DEFINED (__AltReservedTrap7)?ABSOLUTE (__AltReservedTrap7):DEFINED (__ReservedTrap7)?ABSOLUTE (__ReservedTrap7):ABSOLUTE (__DefaultInterrupt)
-                  0x000094          0x4 LONG 0x2f22 DEFINED (__AltINT0Interrupt)?ABSOLUTE (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000094          0x4 LONG 0x2e88 DEFINED (__AltINT0Interrupt)?ABSOLUTE (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000096          0x4 LONG 0x190 DEFINED (__AltIC1Interrupt)?ABSOLUTE (__AltIC1Interrupt):DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000098          0x4 LONG 0x190 DEFINED (__AltOC1Interrupt)?ABSOLUTE (__AltOC1Interrupt):DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00009a          0x4 LONG 0x2eec DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00009a          0x4 LONG 0x2e52 DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00009c          0x4 LONG 0x190 DEFINED (__AltIC2Interrupt)?ABSOLUTE (__AltIC2Interrupt):DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00009e          0x4 LONG 0x190 DEFINED (__AltOC2Interrupt)?ABSOLUTE (__AltOC2Interrupt):DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000a0          0x4 LONG 0x190 DEFINED (__AltT2Interrupt)?ABSOLUTE (__AltT2Interrupt):DEFINED (__T2Interrupt)?ABSOLUTE (__T2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000a2          0x4 LONG 0x2eb0 DEFINED (__AltT3Interrupt)?ABSOLUTE (__AltT3Interrupt):DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000a2          0x4 LONG 0x2e16 DEFINED (__AltT3Interrupt)?ABSOLUTE (__AltT3Interrupt):DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000a4          0x4 LONG 0x190 DEFINED (__AltSPI1Interrupt)?ABSOLUTE (__AltSPI1Interrupt):DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000a6          0x4 LONG 0x2e3c DEFINED (__AltU1RXInterrupt)?ABSOLUTE (__AltU1RXInterrupt):DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000a6          0x4 LONG 0x2da2 DEFINED (__AltU1RXInterrupt)?ABSOLUTE (__AltU1RXInterrupt):DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000a8          0x4 LONG 0x190 DEFINED (__AltU1TXInterrupt)?ABSOLUTE (__AltU1TXInterrupt):DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000aa          0x4 LONG 0x190 DEFINED (__AltADCInterrupt)?ABSOLUTE (__AltADCInterrupt):DEFINED (__ADCInterrupt)?ABSOLUTE (__ADCInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000ac          0x4 LONG 0x190 DEFINED (__AltNVMInterrupt)?ABSOLUTE (__AltNVMInterrupt):DEFINED (__NVMInterrupt)?ABSOLUTE (__NVMInterrupt):ABSOLUTE (__DefaultInterrupt)
@@ -973,6 +975,22 @@ userdata
                     0x0112                  T3CON = 0x112
                     0x0112                  _T3CON = 0x112
                     0x0112                  _T3CONbits = 0x112
+                    0x0114                  TMR4 = 0x114
+                    0x0114                  _TMR4 = 0x114
+                    0x0116                  TMR5HLD = 0x116
+                    0x0116                  _TMR5HLD = 0x116
+                    0x0118                  TMR5 = 0x118
+                    0x0118                  _TMR5 = 0x118
+                    0x011a                  PR4 = 0x11a
+                    0x011a                  _PR4 = 0x11a
+                    0x011c                  PR5 = 0x11c
+                    0x011c                  _PR5 = 0x11c
+                    0x011e                  T4CON = 0x11e
+                    0x011e                  _T4CON = 0x11e
+                    0x011e                  _T4CONbits = 0x11e
+                    0x0120                  T5CON = 0x120
+                    0x0120                  _T5CON = 0x120
+                    0x0120                  _T5CONbits = 0x120
                     0x0140                  IC1BUF = 0x140
                     0x0140                  _IC1BUF = 0x140
                     0x0142                  IC1CON = 0x142
@@ -983,6 +1001,16 @@ userdata
                     0x0146                  IC2CON = 0x146
                     0x0146                  _IC2CON = 0x146
                     0x0146                  _IC2CONbits = 0x146
+                    0x0158                  IC7BUF = 0x158
+                    0x0158                  _IC7BUF = 0x158
+                    0x015a                  IC7CON = 0x15a
+                    0x015a                  _IC7CON = 0x15a
+                    0x015a                  _IC7CONbits = 0x15a
+                    0x015c                  IC8BUF = 0x15c
+                    0x015c                  _IC8BUF = 0x15c
+                    0x015e                  IC8CON = 0x15e
+                    0x015e                  _IC8CON = 0x15e
+                    0x015e                  _IC8CONbits = 0x15e
                     0x0180                  OC1RS = 0x180
                     0x0180                  _OC1RS = 0x180
                     0x0182                  OC1R = 0x182
@@ -997,6 +1025,20 @@ userdata
                     0x018a                  OC2CON = 0x18a
                     0x018a                  _OC2CON = 0x18a
                     0x018a                  _OC2CONbits = 0x18a
+                    0x018c                  OC3RS = 0x18c
+                    0x018c                  _OC3RS = 0x18c
+                    0x018e                  OC3R = 0x18e
+                    0x018e                  _OC3R = 0x18e
+                    0x0190                  OC3CON = 0x190
+                    0x0190                  _OC3CON = 0x190
+                    0x0190                  _OC3CONbits = 0x190
+                    0x0192                  OC4RS = 0x192
+                    0x0192                  _OC4RS = 0x192
+                    0x0194                  OC4R = 0x194
+                    0x0194                  _OC4R = 0x194
+                    0x0196                  OC4CON = 0x196
+                    0x0196                  _OC4CON = 0x196
+                    0x0196                  _OC4CONbits = 0x196
                     0x0200                  I2CRCV = 0x200
                     0x0200                  _I2CRCV = 0x200
                     0x0200                  _I2CRCVbits = 0x200
@@ -1051,6 +1093,40 @@ userdata
                     0x0222                  _SPI1CONbits = 0x222
                     0x0224                  SPI1BUF = 0x224
                     0x0224                  _SPI1BUF = 0x224
+                    0x0240                  DCICON1 = 0x240
+                    0x0240                  _DCICON1 = 0x240
+                    0x0240                  _DCICON1bits = 0x240
+                    0x0242                  DCICON2 = 0x242
+                    0x0242                  _DCICON2 = 0x242
+                    0x0242                  _DCICON2bits = 0x242
+                    0x0244                  DCICON3 = 0x244
+                    0x0244                  _DCICON3 = 0x244
+                    0x0244                  _DCICON3bits = 0x244
+                    0x0246                  DCISTAT = 0x246
+                    0x0246                  _DCISTAT = 0x246
+                    0x0246                  _DCISTATbits = 0x246
+                    0x0248                  TSCON = 0x248
+                    0x0248                  _TSCON = 0x248
+                    0x0248                  _TSCONbits = 0x248
+                    0x024c                  RSCON = 0x24c
+                    0x024c                  _RSCON = 0x24c
+                    0x024c                  _RSCONbits = 0x24c
+                    0x0250                  RXBUF0 = 0x250
+                    0x0250                  _RXBUF0 = 0x250
+                    0x0252                  RXBUF1 = 0x252
+                    0x0252                  _RXBUF1 = 0x252
+                    0x0254                  RXBUF2 = 0x254
+                    0x0254                  _RXBUF2 = 0x254
+                    0x0256                  RXBUF3 = 0x256
+                    0x0256                  _RXBUF3 = 0x256
+                    0x0258                  TXBUF0 = 0x258
+                    0x0258                  _TXBUF0 = 0x258
+                    0x025a                  TXBUF1 = 0x25a
+                    0x025a                  _TXBUF1 = 0x25a
+                    0x025c                  TXBUF2 = 0x25c
+                    0x025c                  _TXBUF2 = 0x25c
+                    0x025e                  TXBUF3 = 0x25e
+                    0x025e                  _TXBUF3 = 0x25e
                     0x0280                  ADCBUF0 = 0x280
                     0x0280                  _ADCBUF0 = 0x280
                     0x0282                  ADCBUF1 = 0x282
@@ -1146,6 +1222,220 @@ userdata
                     0x02e2                  LATF = 0x2e2
                     0x02e2                  _LATF = 0x2e2
                     0x02e2                  _LATFbits = 0x2e2
+                    0x0300                  C1RXF0SID = 0x300
+                    0x0300                  _C1RXF0SID = 0x300
+                    0x0300                  _C1RXF0SIDbits = 0x300
+                    0x0302                  C1RXF0EIDH = 0x302
+                    0x0302                  _C1RXF0EIDH = 0x302
+                    0x0302                  _C1RXF0EIDHbits = 0x302
+                    0x0304                  C1RXF0EIDL = 0x304
+                    0x0304                  _C1RXF0EIDL = 0x304
+                    0x0304                  _C1RXF0EIDLbits = 0x304
+                    0x0308                  C1RXF1SID = 0x308
+                    0x0308                  _C1RXF1SID = 0x308
+                    0x0308                  _C1RXF1SIDbits = 0x308
+                    0x030a                  C1RXF1EIDH = 0x30a
+                    0x030a                  _C1RXF1EIDH = 0x30a
+                    0x030a                  _C1RXF1EIDHbits = 0x30a
+                    0x030c                  C1RXF1EIDL = 0x30c
+                    0x030c                  _C1RXF1EIDL = 0x30c
+                    0x030c                  _C1RXF1EIDLbits = 0x30c
+                    0x0310                  C1RXF2SID = 0x310
+                    0x0310                  _C1RXF2SID = 0x310
+                    0x0310                  _C1RXF2SIDbits = 0x310
+                    0x0312                  C1RXF2EIDH = 0x312
+                    0x0312                  _C1RXF2EIDH = 0x312
+                    0x0312                  _C1RXF2EIDHbits = 0x312
+                    0x0314                  C1RXF2EIDL = 0x314
+                    0x0314                  _C1RXF2EIDL = 0x314
+                    0x0314                  _C1RXF2EIDLbits = 0x314
+                    0x0318                  C1RXF3SID = 0x318
+                    0x0318                  _C1RXF3SID = 0x318
+                    0x0318                  _C1RXF3SIDbits = 0x318
+                    0x031a                  C1RXF3EIDH = 0x31a
+                    0x031a                  _C1RXF3EIDH = 0x31a
+                    0x031a                  _C1RXF3EIDHbits = 0x31a
+                    0x031c                  C1RXF3EIDL = 0x31c
+                    0x031c                  _C1RXF3EIDL = 0x31c
+                    0x031c                  _C1RXF3EIDLbits = 0x31c
+                    0x0320                  C1RXF4SID = 0x320
+                    0x0320                  _C1RXF4SID = 0x320
+                    0x0320                  _C1RXF4SIDbits = 0x320
+                    0x0322                  C1RXF4EIDH = 0x322
+                    0x0322                  _C1RXF4EIDH = 0x322
+                    0x0322                  _C1RXF4EIDHbits = 0x322
+                    0x0324                  C1RXF4EIDL = 0x324
+                    0x0324                  _C1RXF4EIDL = 0x324
+                    0x0324                  _C1RXF4EIDLbits = 0x324
+                    0x0328                  C1RXF5SID = 0x328
+                    0x0328                  _C1RXF5SID = 0x328
+                    0x0328                  _C1RXF5SIDbits = 0x328
+                    0x032a                  C1RXF5EIDH = 0x32a
+                    0x032a                  _C1RXF5EIDH = 0x32a
+                    0x032a                  _C1RXF5EIDHbits = 0x32a
+                    0x032c                  C1RXF5EIDL = 0x32c
+                    0x032c                  _C1RXF5EIDL = 0x32c
+                    0x032c                  _C1RXF5EIDLbits = 0x32c
+                    0x0330                  C1RXM0SID = 0x330
+                    0x0330                  _C1RXM0SID = 0x330
+                    0x0330                  _C1RXM0SIDbits = 0x330
+                    0x0332                  C1RXM0EIDH = 0x332
+                    0x0332                  _C1RXM0EIDH = 0x332
+                    0x0332                  _C1RXM0EIDHbits = 0x332
+                    0x0334                  C1RXM0EIDL = 0x334
+                    0x0334                  _C1RXM0EIDL = 0x334
+                    0x0334                  _C1RXM0EIDLbits = 0x334
+                    0x0338                  C1RXM1SID = 0x338
+                    0x0338                  _C1RXM1SID = 0x338
+                    0x0338                  _C1RXM1SIDbits = 0x338
+                    0x033a                  C1RXM1EIDH = 0x33a
+                    0x033a                  _C1RXM1EIDH = 0x33a
+                    0x033a                  _C1RXM1EIDHbits = 0x33a
+                    0x033c                  C1RXM1EIDL = 0x33c
+                    0x033c                  _C1RXM1EIDL = 0x33c
+                    0x033c                  _C1RXM1EIDLbits = 0x33c
+                    0x0340                  C1TX2SID = 0x340
+                    0x0340                  _C1TX2SID = 0x340
+                    0x0340                  _C1TX2SIDbits = 0x340
+                    0x0342                  C1TX2EID = 0x342
+                    0x0342                  _C1TX2EID = 0x342
+                    0x0342                  _C1TX2EIDbits = 0x342
+                    0x0344                  C1TX2DLC = 0x344
+                    0x0344                  _C1TX2DLC = 0x344
+                    0x0344                  _C1TX2DLCbits = 0x344
+                    0x0346                  C1TX2B1 = 0x346
+                    0x0346                  _C1TX2B1 = 0x346
+                    0x0346                  _C1TX2B1bits = 0x346
+                    0x0348                  C1TX2B2 = 0x348
+                    0x0348                  _C1TX2B2 = 0x348
+                    0x0348                  _C1TX2B2bits = 0x348
+                    0x034a                  C1TX2B3 = 0x34a
+                    0x034a                  _C1TX2B3 = 0x34a
+                    0x034a                  _C1TX2B3bits = 0x34a
+                    0x034c                  C1TX2B4 = 0x34c
+                    0x034c                  _C1TX2B4 = 0x34c
+                    0x034c                  _C1TX2B4bits = 0x34c
+                    0x034e                  C1TX2CON = 0x34e
+                    0x034e                  _C1TX2CON = 0x34e
+                    0x034e                  _C1TX2CONbits = 0x34e
+                    0x0350                  C1TX1SID = 0x350
+                    0x0350                  _C1TX1SID = 0x350
+                    0x0350                  _C1TX1SIDbits = 0x350
+                    0x0352                  C1TX1EID = 0x352
+                    0x0352                  _C1TX1EID = 0x352
+                    0x0352                  _C1TX1EIDbits = 0x352
+                    0x0354                  C1TX1DLC = 0x354
+                    0x0354                  _C1TX1DLC = 0x354
+                    0x0354                  _C1TX1DLCbits = 0x354
+                    0x0356                  C1TX1B1 = 0x356
+                    0x0356                  _C1TX1B1 = 0x356
+                    0x0356                  _C1TX1B1bits = 0x356
+                    0x0358                  C1TX1B2 = 0x358
+                    0x0358                  _C1TX1B2 = 0x358
+                    0x0358                  _C1TX1B2bits = 0x358
+                    0x035a                  C1TX1B3 = 0x35a
+                    0x035a                  _C1TX1B3 = 0x35a
+                    0x035a                  _C1TX1B3bits = 0x35a
+                    0x035c                  C1TX1B4 = 0x35c
+                    0x035c                  _C1TX1B4 = 0x35c
+                    0x035c                  _C1TX1B4bits = 0x35c
+                    0x035e                  C1TX1CON = 0x35e
+                    0x035e                  _C1TX1CON = 0x35e
+                    0x035e                  _C1TX1CONbits = 0x35e
+                    0x0360                  C1TX0SID = 0x360
+                    0x0360                  _C1TX0SID = 0x360
+                    0x0360                  _C1TX0SIDbits = 0x360
+                    0x0362                  C1TX0EID = 0x362
+                    0x0362                  _C1TX0EID = 0x362
+                    0x0362                  _C1TX0EIDbits = 0x362
+                    0x0364                  C1TX0DLC = 0x364
+                    0x0364                  _C1TX0DLC = 0x364
+                    0x0364                  _C1TX0DLCbits = 0x364
+                    0x0366                  C1TX0B1 = 0x366
+                    0x0366                  _C1TX0B1 = 0x366
+                    0x0366                  _C1TX0B1bits = 0x366
+                    0x0368                  C1TX0B2 = 0x368
+                    0x0368                  _C1TX0B2 = 0x368
+                    0x0368                  _C1TX0B2bits = 0x368
+                    0x036a                  C1TX0B3 = 0x36a
+                    0x036a                  _C1TX0B3 = 0x36a
+                    0x036a                  _C1TX0B3bits = 0x36a
+                    0x036c                  C1TX0B4 = 0x36c
+                    0x036c                  _C1TX0B4 = 0x36c
+                    0x036c                  _C1TX0B4bits = 0x36c
+                    0x036e                  C1TX0CON = 0x36e
+                    0x036e                  _C1TX0CON = 0x36e
+                    0x036e                  _C1TX0CONbits = 0x36e
+                    0x0370                  C1RX1SID = 0x370
+                    0x0370                  _C1RX1SID = 0x370
+                    0x0370                  _C1RX1SIDbits = 0x370
+                    0x0372                  C1RX1EID = 0x372
+                    0x0372                  _C1RX1EID = 0x372
+                    0x0372                  _C1RX1EIDbits = 0x372
+                    0x0374                  C1RX1DLC = 0x374
+                    0x0374                  _C1RX1DLC = 0x374
+                    0x0374                  _C1RX1DLCbits = 0x374
+                    0x0376                  C1RX1B1 = 0x376
+                    0x0376                  _C1RX1B1 = 0x376
+                    0x0376                  _C1RX1B1bits = 0x376
+                    0x0378                  C1RX1B2 = 0x378
+                    0x0378                  _C1RX1B2 = 0x378
+                    0x0378                  _C1RX1B2bits = 0x378
+                    0x037a                  C1RX1B3 = 0x37a
+                    0x037a                  _C1RX1B3 = 0x37a
+                    0x037a                  _C1RX1B3bits = 0x37a
+                    0x037c                  C1RX1B4 = 0x37c
+                    0x037c                  _C1RX1B4 = 0x37c
+                    0x037c                  _C1RX1B4bits = 0x37c
+                    0x037e                  C1RX1CON = 0x37e
+                    0x037e                  _C1RX1CON = 0x37e
+                    0x037e                  _C1RX1CONbits = 0x37e
+                    0x0380                  C1RX0SID = 0x380
+                    0x0380                  _C1RX0SID = 0x380
+                    0x0380                  _C1RX0SIDbits = 0x380
+                    0x0382                  C1RX0EID = 0x382
+                    0x0382                  _C1RX0EID = 0x382
+                    0x0382                  _C1RX0EIDbits = 0x382
+                    0x0384                  C1RX0DLC = 0x384
+                    0x0384                  _C1RX0DLC = 0x384
+                    0x0384                  _C1RX0DLCbits = 0x384
+                    0x0386                  C1RX0B1 = 0x386
+                    0x0386                  _C1RX0B1 = 0x386
+                    0x0386                  _C1RX0B1bits = 0x386
+                    0x0388                  C1RX0B2 = 0x388
+                    0x0388                  _C1RX0B2 = 0x388
+                    0x0388                  _C1RX0B2bits = 0x388
+                    0x038a                  C1RX0B3 = 0x38a
+                    0x038a                  _C1RX0B3 = 0x38a
+                    0x038a                  _C1RX0B3bits = 0x38a
+                    0x038c                  C1RX0B4 = 0x38c
+                    0x038c                  _C1RX0B4 = 0x38c
+                    0x038c                  _C1RX0B4bits = 0x38c
+                    0x038e                  C1RX0CON = 0x38e
+                    0x038e                  _C1RX0CON = 0x38e
+                    0x038e                  _C1RX0CONbits = 0x38e
+                    0x0390                  C1CTRL = 0x390
+                    0x0390                  _C1CTRL = 0x390
+                    0x0390                  _C1CTRLbits = 0x390
+                    0x0392                  C1CFG1 = 0x392
+                    0x0392                  _C1CFG1 = 0x392
+                    0x0392                  _C1CFG1bits = 0x392
+                    0x0394                  C1CFG2 = 0x394
+                    0x0394                  _C1CFG2 = 0x394
+                    0x0394                  _C1CFG2bits = 0x394
+                    0x0396                  C1INTF = 0x396
+                    0x0396                  _C1INTF = 0x396
+                    0x0396                  _C1INTFbits = 0x396
+                    0x0398                  C1INTE = 0x398
+                    0x0398                  _C1INTE = 0x398
+                    0x0398                  _C1INTEbits = 0x398
+                    0x039a                  C1EC = 0x39a
+                    0x039a                  _C1EC = 0x39a
+                    0x039a                  _C1ECbits = 0x39a
+                    0x039a                  C1RERRCNT = 0x39a
+                    0x039a                  _C1RERRCNT = 0x39a
+                    0x039b                  C1TERRCNT = 0x39b
+                    0x039b                  _C1TERRCNT = 0x39b
                     0x0740                  RCON = 0x740
                     0x0740                  _RCON = 0x740
                     0x0740                  _RCONbits = 0x740
@@ -1179,14 +1469,24 @@ userdata
                     0x0022                  _ACCA = 0x22
                     0x0028                  ACCB = 0x28
                     0x0028                  _ACCB = 0x28
+                    0x0300                  CAN1 = 0x300
+                    0x0300                  _CAN1 = 0x300
                     0x0140                  IC1 = 0x140
                     0x0140                  _IC1 = 0x140
                     0x0144                  IC2 = 0x144
                     0x0144                  _IC2 = 0x144
+                    0x0158                  IC7 = 0x158
+                    0x0158                  _IC7 = 0x158
+                    0x015c                  IC8 = 0x15c
+                    0x015c                  _IC8 = 0x15c
                     0x0180                  OC1 = 0x180
                     0x0180                  _OC1 = 0x180
                     0x0186                  OC2 = 0x186
                     0x0186                  _OC2 = 0x186
+                    0x018c                  OC3 = 0x18c
+                    0x018c                  _OC3 = 0x18c
+                    0x0192                  OC4 = 0x192
+                    0x0192                  _OC4 = 0x192
                     0x0220                  SPI1 = 0x220
                     0x0220                  _SPI1 = 0x220
                     0x020c                  UART1 = 0x20c
@@ -1195,9 +1495,9 @@ userdata
                     0x0216                  _UART2 = 0x216
                     0x0001                  __MPLAB_BUILD = 0x1
 START GROUP
-LOAD c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a
-LOAD c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a
-LOAD c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libc-coff.a
+LOAD c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a
+LOAD c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a
+LOAD c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libc-coff.a
 END GROUP
 OUTPUT(.\src\hex\SST40 V4.0.cof coff-pic30)
 LOAD FGS
@@ -1241,43 +1541,43 @@ __c30_signature
  __c30_signature
                   0x000060          0x6 src\hex\traps.o
  __c30_signature
-                  0x000066          0x6 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(crt0_standard.o)
+                  0x000066          0x6 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(crt0_standard.o)
  __c30_signature
-                  0x00006c          0x6 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(eedata_helper.o)
+                  0x00006c          0x6 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(eedata_helper.o)
  __c30_signature
-                  0x000072          0x6 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(memcpy_helper.o)
+                  0x000072          0x6 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(memcpy_helper.o)
  __c30_signature
-                  0x000078          0x6 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(data_init_standard.o)
+                  0x000078          0x6 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libpic30-coff.a(data_init_standard.o)
  __c30_signature
-                  0x00007e          0x6 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(floatsisf.o)
+                  0x00007e          0x6 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(floatsisf.o)
  __c30_signature
-                  0x000084          0x6 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(addsf3.o)
+                  0x000084          0x6 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(addsf3.o)
  __c30_signature
-                  0x00008a          0x6 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(mulsf3.o)
+                  0x00008a          0x6 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(mulsf3.o)
  __c30_signature
-                  0x000090          0x6 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(divsf3.o)
+                  0x000090          0x6 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(divsf3.o)
  __c30_signature
-                  0x000096          0x6 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(fixunssfsi.o)
+                  0x000096          0x6 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(fixunssfsi.o)
  __c30_signature
-                  0x00009c          0x6 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(udivsi3.o)
+                  0x00009c          0x6 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(udivsi3.o)
  __c30_signature
-                  0x0000a2          0x6 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(fpack.o)
+                  0x0000a2          0x6 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(fpack.o)
  __c30_signature
-                  0x0000a8          0x6 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(funpack2.o)
+                  0x0000a8          0x6 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(funpack2.o)
  __c30_signature
-                  0x0000ae          0x6 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(futil.o)
+                  0x0000ae          0x6 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(futil.o)
  __c30_signature
-                  0x0000b4          0x6 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(funpack.o)
+                  0x0000b4          0x6 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libm-coff.a(funpack.o)
  __c30_signature
-                  0x0000ba          0x6 c:/program files/microchip/mplabc30/v3.30c/bin/bin/../../lib\libc-coff.a(strlen.XXo)
+                  0x0000ba          0x6 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libc-coff.a(strlen.XXo)
 
-_019aaf5050c90b31
+_03ac4c40531e1408
                     0x0800        0x4b4
- _019aaf5050c90b31
+ _03ac4c40531e1408
                     0x0800        0x4b4 src\hex\trace.o
                     0x0800                  TRSB
 
-.nbss               0x0cb4        0x118
+.nbss               0x0cb4        0x114
  .nbss              0x0cb4         0x54 src\hex\tempctrl.o
                     0x0cba                  T_ctrl
                     0x0cd8                  pid
@@ -1290,182 +1590,183 @@ _019aaf5050c90b31
                     0x0d26                  Ttime
                     0x0d32                  TASK_CONTROL
  .nbss              0x0d34         0x2c src\hex\sirem.o
- .nbss              0x0d60         0x26 src\hex\measure.o
-                    0x0d60                  mes1
-                    0x0d6a                  mes2
-                    0x0d74                  mespar
- .nbss              0x0d86         0x24 src\hex\trace.o
-                    0x0d88                  trace_state
-                    0x0d8a                  trace_control
-                    0x0d8c                  STORE_POS
-                    0x0d8e                  trace_counter
-                    0x0d90                  trace_trigger
-                    0x0d92                  par_trace
-                    0x0d9e                  trace_config
-                    0x0da0                  trace_every_period
-                    0x0da2                  u16TraceParamNumber_1
-                    0x0da4                  u16TraceParamNumber_2
-                    0x0da6                  u16CompareParameter
-                    0x0da8                  s16CmpValue
- .nbss              0x0daa         0x22 src\hex\IDENT.o
-                    0x0dae                  ident
+ .nbss              0x0d60         0x24 src\hex\trace.o
+                    0x0d62                  trace_state
+                    0x0d64                  trace_control
+                    0x0d66                  STORE_POS
+                    0x0d68                  trace_counter
+                    0x0d6a                  trace_trigger
+                    0x0d6c                  par_trace
+                    0x0d78                  trace_config
+                    0x0d7a                  trace_every_period
+                    0x0d7c                  u16TraceParamNumber_1
+                    0x0d7e                  u16TraceParamNumber_2
+                    0x0d80                  u16CompareParameter
+                    0x0d82                  s16CmpValue
+ .nbss              0x0d84         0x22 src\hex\IDENT.o
+                    0x0d88                  ident
+ .nbss              0x0da6         0x22 src\hex\measure.o
+                    0x0da8                  mes1
+                    0x0db2                  mes2
+                    0x0db8                  mespar
+                    0x0dc6                  ZeroCrosDetectionState
 
-.ndata              0x0dcc         0x1c
- .ndata             0x0dcc         0x1c src\hex\trace.o
-                    0x0dcc                  trace_source_addr
+.ndata              0x0dc8         0x1c
+ .ndata             0x0dc8         0x1c src\hex\trace.o
+                    0x0dc8                  trace_source_addr
 
-.nbss               0x0de8         0x58
- .nbss              0x0de8         0x1a src\hex\statemachine.o
-                    0x0df6                  SYS_CONTROL
-                    0x0df8                  PC_CONTROL
-                    0x0dfa                  ERR_CONTROL
-                    0x0dfc                  mainstate_T2
-                    0x0dfe                  mainstate_T1
-                    0x0e00                  LCD_update_rate
- .nbss              0x0e02         0x16 src\hex\eeprom.o
-                    0x0e0a                  EE_CHKS
-                    0x0e0c                  EE_Valid
-                    0x0e0e                  EE_par_update
-                    0x0e10                  ParamAct
- .nbss              0x0e18         0x10 src\hex\vuart.o
- .nbss              0x0e28          0xc src\hex\DigitalIO.o
-                    0x0e2a                  debounce_timer_2
-                    0x0e2c                  deb_timer_cart
-                    0x0e2e                  deb_timer_stand
-                    0x0e30                  deb_timer_extr
-                    0x0e32                  cart_det_state
- .nbss              0x0e34          0x8 src\hex\systmr.o
-                    0x0e34                  time
- .nbss              0x0e3c          0x4 src\hex\vADC.o
-                    0x0e3c                  ADC
+.nbss               0x0de4         0x58
+ .nbss              0x0de4         0x1a src\hex\statemachine.o
+                    0x0df2                  SYS_CONTROL
+                    0x0df4                  PC_CONTROL
+                    0x0df6                  ERR_CONTROL
+                    0x0df8                  mainstate_T2
+                    0x0dfa                  mainstate_T1
+                    0x0dfc                  LCD_update_rate
+ .nbss              0x0dfe         0x16 src\hex\eeprom.o
+                    0x0e06                  EE_CHKS
+                    0x0e08                  EE_Valid
+                    0x0e0a                  EE_par_update
+                    0x0e0c                  ParamAct
+ .nbss              0x0e14         0x10 src\hex\vuart.o
+ .nbss              0x0e24          0xc src\hex\DigitalIO.o
+                    0x0e26                  debounce_timer_2
+                    0x0e28                  deb_timer_cart
+                    0x0e2a                  deb_timer_stand
+                    0x0e2c                  deb_timer_extr
+                    0x0e2e                  cart_det_state
+ .nbss              0x0e30          0x8 src\hex\systmr.o
+                    0x0e30                  time
+ .nbss              0x0e38          0x4 src\hex\vADC.o
+                    0x0e38                  ADC
 
-.ndata              0x0e40          0x2
- .ndata             0x0e40          0x2 src\hex\task.o
+.ndata              0x0e3c          0x2
+ .ndata             0x0e3c          0x2 src\hex\task.o
 
-.nbss               0x0e42          0x6
- .nbss              0x0e42          0x2 src\hex\PARLIST.o
-                    0x0e42                  release
- .nbss              0x0e44          0x2 src\hex\LCD.o
-                    0x0e44                  u16Nibble_Temp
- .nbss              0x0e46          0x2 src\hex\triac_control.o
+.nbss               0x0e3e          0x6
+ .nbss              0x0e3e          0x2 src\hex\PARLIST.o
+                    0x0e3e                  release
+ .nbss              0x0e40          0x2 src\hex\LCD.o
+                    0x0e40                  u16Nibble_Temp
+ .nbss              0x0e42          0x2 src\hex\triac_control.o
 
-.const              0x8520        0xfa2 load address 0x000520  
- .const             0x8520        0xeaa src\hex\PARLIST.o
+.const              0x8520        0xf08 load address 0x000520  
+ .const             0x8520        0xe10 src\hex\PARLIST.o
                     0x8520                  version
                     0x8522                  C30_Version
-                    0x8a62                  iopar
- .const             0x93ca         0xaa src\hex\statemachine.o
- .const             0x9474         0x36 src\hex\traps.o
- .const             0x94aa         0x14 src\hex\main.o
- .const             0x94be          0x4 src\hex\LCD.o
-                    0x94be                  LCD_INIT_STRING
+                    0x8a1c                  iopar
+ .const             0x9330         0xaa src\hex\statemachine.o
+ .const             0x93da         0x36 src\hex\traps.o
+ .const             0x9410         0x14 src\hex\main.o
+ .const             0x9424          0x4 src\hex\LCD.o
+                    0x9424                  LCD_INIT_STRING
 
-.text             0x0014c2       0x1fc4
- .text            0x0014c2        0x5ae src\hex\statemachine.o
-                  0x0014c2                  state_machine_T1
-                  0x0016dc                  state_machine_T2
-                  0x0019d0                  state_machine_init
-                  0x0019e4                  stm_timer_T2
-                  0x0019fe                  stm_timer_II_T2
-                  0x001a18                  stm_timer_T1
-                  0x001a32                  PrintHibernationTime
- .text            0x001a70        0x554 src\hex\sirem.o
-                  0x001a70                  Sirem_Engine
- .text            0x001fc4        0x522 src\hex\eeprom.o
-                  0x002194                  ee_param_act
-                  0x00245a                  EE_CheckEEprom
- .text            0x0024e6        0x28e src\hex\tempctrl.o
-                  0x0024e6                  temp_ctrl
-                  0x00261c                  Reset_TMPCTRL
-                  0x00262c                  PID
-                  0x0026c8                  Reset_PID
-                  0x0026d8                  Cartridge_overload_protection
-                  0x002712                  temp_ctrl_init
-                  0x00271e                  Get_Temp_Actual
-                  0x00272e                  Set_User_Temp
-                  0x002734                  Roll_Back_User_Temp
-                  0x00273a                  Get_User_Temp
-                  0x00273e                  Inc_User_Temp
-                  0x00274c                  Dec_User_Temp
-                  0x00275a                  tmpctrl_timer_t1
- .text            0x002774        0x246 src\hex\IDENT.o
-                  0x002774                  cartridge_ident
-                  0x00292c                  bresenham
-                  0x002986                  ident_timer_t1
-                  0x0029a0                  ident_timeout_timer_t1
- .text            0x0029ba        0x1cc src\hex\DigitalIO.o
-                  0x0029ba                  IF_DigitalIO_Init
-                  0x002a12                  Dio_Scan_T2
-                  0x002a90                  cart_stat_det
-                  0x002b6c                  cart_stat_timer_T1
- .text            0x002b86        0x1b2 src\hex\LCD.o
-                  0x002b86                  IF_LCDInit
-                  0x002bb8                  IF_LCDPutc
-                  0x002bea                  IF_LCDGotoXY
-                  0x002c02                  IF_LCDPuts
-                  0x002c1a                  IF_LCDPutn
-                  0x002c9e                  IF_LCD_UpdateState
-                  0x002cb0                  LCDSendNibble
-                  0x002d0a                  LCDSendByte
- .text            0x002d38        0x178 src\hex\vuart.o
-                  0x002d38                  IF_Uart_Init
-                  0x002dbc                  IF_Uart_MsgGetDataCnt
-                  0x002dc8                  IF_Uart_MsgGet
-                  0x002dee                  IF_Uart_RxPurge
-                  0x002dfa                  IF_Uart_MsgPut
-                  0x002e22                  IF_UART_PutByte
-                  0x002e3c                  _U1RXInterrupt
-                  0x002e9a                  sci_timer
- .text            0x002eb0        0x142 src\hex\task.o
-                  0x002eb0                  _T3Interrupt
-                  0x002eec                  _T1Interrupt
-                  0x002f22                  _INT0Interrupt
-                  0x002f26                  TaskTimesCalc
-                  0x002f3a                  StationStatistic
- .text            0x002ff2        0x118 src\hex\systmr.o
-                  0x002ff2                  IF_SysTmr1_Init
-                  0x003018                  IF_SysTmr3_Init
-                  0x00303c                  IF_SysTmr2_Init
-                  0x003060                  delay_us
-                  0x003096                  delay_ms
-                  0x0030cc                  Timestate_Cartridge_Control
- .text            0x00310a        0x116 src\hex\trace.o
-                  0x00310a                  IF_Get_TRSB_CntBytes
-                  0x00310e                  do_trace
-                  0x0031da                  Clear_Trace_Array
-                  0x0031fa                  trace_init_first
- .text            0x003220         0xe2 src\hex\measure.o
-                  0x003220                  zero_cross_II
-                  0x003250                  DC_Autotunning
-                  0x003298                  Current_measure
-                  0x0032d0                  measure_T2
-                  0x0032fc                  measure_init
- .text            0x003302         0xcc src\hex\main.o
-                  0x003302                  main
- .text            0x0033ce         0xb8 src\hex\PARLIST.o
-                  0x0033ce                  IF_Parlist_GetCntMembers
-                  0x0033d2                  IF_Parlist_GetCntBytes
-                  0x0033d6                  IF_Parlist_bnu
-                  0x003400                  Params_check_limit
-                  0x003484                  Params_Conversion
+.text             0x001428       0x1ff6
+ .text            0x001428        0x5ae src\hex\statemachine.o
+                  0x001428                  state_machine_T1
+                  0x001642                  state_machine_T2
+                  0x001936                  state_machine_init
+                  0x00194a                  stm_timer_T2
+                  0x001964                  stm_timer_II_T2
+                  0x00197e                  stm_timer_T1
+                  0x001998                  PrintHibernationTime
+ .text            0x0019d6        0x554 src\hex\sirem.o
+                  0x0019d6                  Sirem_Engine
+ .text            0x001f2a        0x522 src\hex\eeprom.o
+                  0x0020fa                  ee_param_act
+                  0x0023c0                  EE_CheckEEprom
+ .text            0x00244c        0x28e src\hex\tempctrl.o
+                  0x00244c                  temp_ctrl
+                  0x002582                  Reset_TMPCTRL
+                  0x002592                  PID
+                  0x00262e                  Reset_PID
+                  0x00263e                  Cartridge_overload_protection
+                  0x002678                  temp_ctrl_init
+                  0x002684                  Get_Temp_Actual
+                  0x002694                  Set_User_Temp
+                  0x00269a                  Roll_Back_User_Temp
+                  0x0026a0                  Get_User_Temp
+                  0x0026a4                  Inc_User_Temp
+                  0x0026b2                  Dec_User_Temp
+                  0x0026c0                  tmpctrl_timer_t1
+ .text            0x0026da        0x246 src\hex\IDENT.o
+                  0x0026da                  cartridge_ident
+                  0x002892                  bresenham
+                  0x0028ec                  ident_timer_t1
+                  0x002906                  ident_timeout_timer_t1
+ .text            0x002920        0x1cc src\hex\DigitalIO.o
+                  0x002920                  IF_DigitalIO_Init
+                  0x002978                  Dio_Scan_T2
+                  0x0029f6                  cart_stat_det
+                  0x002ad2                  cart_stat_timer_T1
+ .text            0x002aec        0x1b2 src\hex\LCD.o
+                  0x002aec                  IF_LCDInit
+                  0x002b1e                  IF_LCDPutc
+                  0x002b50                  IF_LCDGotoXY
+                  0x002b68                  IF_LCDPuts
+                  0x002b80                  IF_LCDPutn
+                  0x002c04                  IF_LCD_UpdateState
+                  0x002c16                  LCDSendNibble
+                  0x002c70                  LCDSendByte
+ .text            0x002c9e        0x178 src\hex\vuart.o
+                  0x002c9e                  IF_Uart_Init
+                  0x002d22                  IF_Uart_MsgGetDataCnt
+                  0x002d2e                  IF_Uart_MsgGet
+                  0x002d54                  IF_Uart_RxPurge
+                  0x002d60                  IF_Uart_MsgPut
+                  0x002d88                  IF_UART_PutByte
+                  0x002da2                  _U1RXInterrupt
+                  0x002e00                  sci_timer
+ .text            0x002e16        0x142 src\hex\task.o
+                  0x002e16                  _T3Interrupt
+                  0x002e52                  _T1Interrupt
+                  0x002e88                  _INT0Interrupt
+                  0x002e8c                  TaskTimesCalc
+                  0x002ea0                  StationStatistic
+ .text            0x002f58        0x118 src\hex\systmr.o
+                  0x002f58                  IF_SysTmr1_Init
+                  0x002f7e                  IF_SysTmr3_Init
+                  0x002fa2                  IF_SysTmr2_Init
+                  0x002fc6                  delay_us
+                  0x002ffc                  delay_ms
+                  0x003032                  Timestate_Cartridge_Control
+ .text            0x003070        0x116 src\hex\trace.o
+                  0x003070                  IF_Get_TRSB_CntBytes
+                  0x003074                  do_trace
+                  0x003140                  Clear_Trace_Array
+                  0x003160                  trace_init_first
+ .text            0x003186        0x114 src\hex\measure.o
+                  0x003186                  zero_cross_II
+                  0x0031da                  DC_Autotunning
+                  0x003222                  Current_measure
+                  0x00325a                  measure_T2
+                  0x003278                  measure_init
+ .text            0x00329a         0xcc src\hex\main.o
+                  0x00329a                  main
+ .text            0x003366         0xb8 src\hex\PARLIST.o
+                  0x003366                  IF_Parlist_GetCntMembers
+                  0x00336a                  IF_Parlist_GetCntBytes
+                  0x00336e                  IF_Parlist_bnu
+                  0x003398                  Params_check_limit
+                  0x00341c                  Params_Conversion
 
-.dinit            0x003486         0x84
- .dinit           0x003486         0x84 data_init
+.dinit            0x00341e         0x84
+ .dinit           0x00341e         0x84 data_init
 
-.text             0x00350a         0xe0
- .text            0x00350a         0x6c src\hex\vADC.o
-                  0x00350a                  IF_ADC_INIT
-                  0x003560                  ADC_Sample_Read
- .text            0x003576         0x58 src\hex\traps.o
-                  0x003576                  _OscillatorFail
-                  0x00358c                  _AddressError
-                  0x0035a2                  _StackError
-                  0x0035b8                  _MathError
- .text            0x0035ce         0x1c src\hex\triac_control.o
-                  0x0035ce                  triac_fire_timer
-                  0x0035e4                  triac_control_init
+.text             0x0034a2         0xe0
+ .text            0x0034a2         0x6c src\hex\vADC.o
+                  0x0034a2                  IF_ADC_INIT
+                  0x0034f8                  ADC_Sample_Read
+ .text            0x00350e         0x58 src\hex\traps.o
+                  0x00350e                  _OscillatorFail
+                  0x003524                  _AddressError
+                  0x00353a                  _StackError
+                  0x003550                  _MathError
+ .text            0x003566         0x1c src\hex\triac_control.o
+                  0x003566                  triac_fire_timer
+                  0x00357c                  triac_control_init
 
-_01b4f23050c90b34
+_0332e0e0531e140a
                     0xfc00        0x400 load address 0x7ffc00  
- _01b4f23050c90b34
+ _0332e0e0531e140a
                     0xfc00        0x400 src\hex\eeprom.o

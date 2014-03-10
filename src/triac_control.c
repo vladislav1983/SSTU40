@@ -75,14 +75,14 @@ static U16 triac_fire_counter;
 /******************************************************************************/
 void triac_fire_timer(void)
 {
-	if(_TRIAC())	//if triack fired
-	{
-	    if(!--triac_fire_counter) 
+    if(_TRIAC())    //if triack fired
+    {
+        if(!--triac_fire_counter) 
         {
-		    _TRIAC_OFF();
-		    triac_fire_counter = TRIAC_FIRE_TIME;
+            _TRIAC_OFF();
+            triac_fire_counter = TRIAC_FIRE_TIME;
         }
-	}
+    }
 
 }
 /******************************************************************************/
@@ -95,7 +95,7 @@ void triac_fire_timer(void)
 void triac_control_init(void)
 {
 
-	triac_fire_counter = TRIAC_FIRE_TIME;
+    triac_fire_counter = TRIAC_FIRE_TIME;
 
 }
 /******************************************************************************/

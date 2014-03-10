@@ -438,11 +438,11 @@ extern volatile unsigned int INTTREG __attribute__((__sfr__));
 typedef struct tagINTTREGBITS {
         unsigned VECNUM :6;
         unsigned        :2;
-	unsigned ILR    :4;
-	unsigned        :1;
-	unsigned VHOLD  :1;
-	unsigned TMODE  :1;
-	unsigned IRQTOCPU:1;
+    unsigned ILR    :4;
+    unsigned        :1;
+    unsigned VHOLD  :1;
+    unsigned TMODE  :1;
+    unsigned IRQTOCPU:1;
 } INTTREGBITS;
 extern volatile INTTREGBITS INTTREGbits __attribute__((__sfr__));
 
