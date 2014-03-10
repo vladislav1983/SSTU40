@@ -273,7 +273,8 @@ void Sirem_Engine(void)
     break;
     
     default:
-        Nop();
+        mAssert(cFalse);
+        _set_global_system_fault(1);
     break;
     /*-----------------------------------------------------------------------*/
     
@@ -414,7 +415,8 @@ static HRESULT CmdExe_ReadPrmInfo(U8* pFrame)
          */
         /**********************************************************************/
         default:
-            Nop();
+            mAssert(cFalse);
+            _set_global_system_fault(1);
         break;
     } // end switch
     
@@ -592,7 +594,8 @@ static HRESULT CmdExe_ReadPrmList(U8* pFrame)
          */
         /**********************************************************************/
         default:
-            Nop();
+            mAssert(cFalse);
+            _set_global_system_fault(1);
         break;
     } // end switch
     
@@ -686,7 +689,8 @@ static HRESULT CmdExe_ReadPrm(U8* pFrame)
          */
         /**********************************************************************/
         default:
-            Nop();
+            mAssert(cFalse);
+           _set_global_system_fault(1);
         break;        
     } // end switch
     
@@ -785,7 +789,8 @@ static HRESULT CmdExe_WritePrm(U8* pFrame)
          */
         /**********************************************************************/
         default:
-            Nop();
+            mAssert(cFalse);
+            _set_global_system_fault(1);
         break;        
     } // end switch
 
@@ -933,7 +938,8 @@ static HRESULT CmdExe_ReadTraceData(U8* pFrame)
          */
         /**********************************************************************/
         default:
-            Nop();
+            mAssert(cFalse);
+            _set_global_system_fault(1);
         break;    
         
     }// end switch
@@ -1009,7 +1015,8 @@ static void CmdExe_Reset(U8* pFrame)
          */
         /**********************************************************************/
         default:
-            Nop();
+            mAssert(cFalse);
+            _set_global_system_fault(1);
         break;        
     } // end switch
 }

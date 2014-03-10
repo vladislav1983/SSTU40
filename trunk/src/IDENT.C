@@ -124,7 +124,7 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
                 (id)->U_Temp_sum = 0;
                 (id)->ident_mes_temp = 0; // Measure flag used for debug
                 
-                if((id)->U_Temp_in > MAX_TEMP_TRIP_RAW) _set_overtemperature_error(1); /* if overtemperature --> trip error */
+                //if((id)->U_Temp_in > MAX_TEMP_TRIP_RAW) _set_overtemperature_error(1); /* if overtemperature --> trip error */
                 
                 bresenham((id)->ident_periods); // Load bresenham distribution routine for periods distribution
                 
@@ -200,7 +200,7 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
                 
                 ident_timer_t1(1, IDENT_AVERAGE_TIME);    //load timer for averaging
                 
-                if((id)->U_Temp_max > MAX_TEMP_TRIP_RAW) _set_overtemperature_error(1); /* if overtemperature --> trip error */
+                //if((id)->U_Temp_max > MAX_TEMP_TRIP_RAW) _set_overtemperature_error(1); /* if overtemperature --> trip error */
                 
                 if(((id)->U_Temp_max)> ((id)->U_Temp_out))
                 {
@@ -231,7 +231,8 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
     /*---------------------------------------------------*/    
 
         default :   // Undefined state
-            Nop();
+            mAssert(cFalse);
+            _set_global_system_fault(1);
         break;
 
     }//end switch

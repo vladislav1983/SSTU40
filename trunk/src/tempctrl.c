@@ -212,7 +212,8 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
     /*---------------------------------------------------*/
 
         default :   // Undefined state 
-            Nop();
+            mAssert(cFalse);
+            _set_global_system_fault(1);
             break;
     }//end switch   
 
