@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Include", "Include", "{B61D9F21-54EE-4CFD-9B3A-46C78D33EA61}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\Common\basedef.h = ..\src\Common\basedef.h
+		..\src\include\DigitalIO.h = ..\src\include\DigitalIO.h
+		..\src\Common\DigitalIoCfg.h = ..\src\Common\DigitalIoCfg.h
+		..\src\include\eeprom.h = ..\src\include\eeprom.h
+		..\src\include\IDENT.H = ..\src\include\IDENT.H
+		..\src\include\LCD.h = ..\src\include\LCD.h
+		..\src\include\measure.h = ..\src\include\measure.h
+		..\src\Common\p30f3014.h = ..\src\Common\p30f3014.h
+		..\src\Common\p30F4013.h = ..\src\Common\p30F4013.h
+		..\src\include\PARLIST.h = ..\src\include\PARLIST.h
+		..\src\include\sirem.h = ..\src\include\sirem.h
+		..\src\include\statemachine.h = ..\src\include\statemachine.h
+		..\src\include\systmr.h = ..\src\include\systmr.h
+		..\src\include\task.h = ..\src\include\task.h
+		..\src\include\tempctrl.h = ..\src\include\tempctrl.h
+		..\src\include\trace.h = ..\src\include\trace.h
+		..\src\include\triac_control.h = ..\src\include\triac_control.h
+		..\src\include\vADC.h = ..\src\include\vADC.h
+		..\src\include\vuart.h = ..\src\include\vuart.h
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AF609F40-9F02-40FE-99E4-9C980085E290}"
+	ProjectSection(SolutionItems) = preProject
+		..\src\DigitalIO.c = ..\src\DigitalIO.c
+		..\src\eeprom.c = ..\src\eeprom.c
+		..\src\IDENT.C = ..\src\IDENT.C
+		..\src\LCD.c = ..\src\LCD.c
+		..\src\main.c = ..\src\main.c
+		..\src\measure.c = ..\src\measure.c
+		..\src\PARLIST.c = ..\src\PARLIST.c
+		..\src\sirem.c = ..\src\sirem.c
+		..\src\statemachine.c = ..\src\statemachine.c
+		..\src\systmr.c = ..\src\systmr.c
+		..\src\task.c = ..\src\task.c
+		..\src\tempctrl.c = ..\src\tempctrl.c
+		..\src\trace.c = ..\src\trace.c
+		..\src\traps.c = ..\src\traps.c
+		..\src\triac_control.c = ..\src\triac_control.c
+		..\src\vADC.c = ..\src\vADC.c
+		..\src\vuart.c = ..\src\vuart.c
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
