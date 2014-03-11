@@ -1,10 +1,10 @@
-Microchip Technology Inc, vv3_30 (B) 4
+Microchip Technology Inc, vv3_30 (B) .
 
 Tool Name:
   c:\program files (x86)\microchip\mplabc30\v3.30c\bin\bin\..\bin/pic30-coff-ld.exe
 
 Command:
-  -p30F4013 \
+  -p30F3014 \
   -o.\src\hex\SST40 V4.0.cof \
   -Lc:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/.. \
   -Lc:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib \
@@ -37,7 +37,7 @@ Command:
   src\hex\tempctrl.o \
   src\hex\measure.o \
   src\hex\traps.o \
-  -Tp30F4013.gld.00 \
+  -Tp30F3014.gld.00 \
   --defsym=__MPLAB_BUILD=1 \
   -Map=.\src\hex\SST40 V4.0.map \
   --report-mem \
@@ -88,7 +88,7 @@ Selected CodeGuard Options:
 CodeGuard FLASH Memory:
   boot    (none)
   secure  (none)
-  general 0x100 to 0x7ffc
+  general 0x100 to 0x3ffc
 
 CodeGuard RAM Memory:
   general 0x800 to 0xfff
@@ -101,7 +101,7 @@ CodeGuard EEPROM Memory:
   boot    (none)
 
 
-Program Memory  [Origin = 0x100, Length = 0x7efe]
+Program Memory  [Origin = 0x100, Length = 0x3efe]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
@@ -111,14 +111,14 @@ section                    address   length (PC units)   length (bytes) (dec)
 .dinit                      0x3416                0x84            0xc6  (198)
 .text                       0x349a                0xe0           0x150  (336)
 
-                     Total program memory used (bytes):         0x4eb7  (20151) 41%
+                     Total program memory used (bytes):         0x4eb7  (20151) 83%
 
 
 Data EEPROM Memory  [Origin = 0x7ffc00, Length = 0x400]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-_0327e0e0531f6a1e         0x7ffc00               0x400           0x400  (1024)
+_03488230531e2025         0x7ffc00               0x400           0x400  (1024)
 
                         Total data EEPROM used (bytes):          0x400  (1024) 100%
 
@@ -127,7 +127,7 @@ Data Memory  [Origin = 0x800, Length = 0x800]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-_038d4c40531f6a1c            0x800                   0           0x4b4  (1204)
+_0329ad90531e2023            0x800                   0           0x4b4  (1204)
 .nbss                        0xcb4                   0           0x114  (276)
 .ndata                       0xdc8                   0            0x1c  (28)
 .nbss                        0xde4                   0            0x58  (88)
@@ -480,7 +480,7 @@ data             0x000800           0x000800           a !xr
 reset            0x000000           0x000004  
 ivt              0x000004           0x00007c  
 aivt             0x000084           0x00007c  
-program          0x000100           0x007efe           xr
+program          0x000100           0x003efe           xr
 eedata           0x7ffc00           0x000400  
 FUID0            0x8005c0           0x000002  
 FUID1            0x8005c2           0x000002  
@@ -514,7 +514,7 @@ LOAD src\hex\IDENT.o
 LOAD src\hex\tempctrl.o
 LOAD src\hex\measure.o
 LOAD src\hex\traps.o
-LOAD c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib/dsPIC30F\libp30F4013-coff.a
+LOAD c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib/dsPIC30F\libp30F3014-coff.a
                     0x8005c0                  __FUID0 = 0x8005c0
                     0x8005c2                  __FUID1 = 0x8005c2
                     0x8005c4                  __FUID2 = 0x8005c4
@@ -533,7 +533,7 @@ LOAD c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib/dsPIC30F
                     0x0800                  __DATA_LENGTH = 0x800
                     0x0c00                  __YDATA_BASE = 0xc00
                     0x0100                  __CODE_BASE = 0x100
-                    0x7f00                  __CODE_LENGTH = 0x7f00
+                    0x3f00                  __CODE_LENGTH = 0x3f00
 
 .reset            0x000000          0x4
                   0x000000          0x2 SHORT 0x100 ABSOLUTE (__reset)
@@ -975,22 +975,6 @@ userdata
                     0x0112                  T3CON = 0x112
                     0x0112                  _T3CON = 0x112
                     0x0112                  _T3CONbits = 0x112
-                    0x0114                  TMR4 = 0x114
-                    0x0114                  _TMR4 = 0x114
-                    0x0116                  TMR5HLD = 0x116
-                    0x0116                  _TMR5HLD = 0x116
-                    0x0118                  TMR5 = 0x118
-                    0x0118                  _TMR5 = 0x118
-                    0x011a                  PR4 = 0x11a
-                    0x011a                  _PR4 = 0x11a
-                    0x011c                  PR5 = 0x11c
-                    0x011c                  _PR5 = 0x11c
-                    0x011e                  T4CON = 0x11e
-                    0x011e                  _T4CON = 0x11e
-                    0x011e                  _T4CONbits = 0x11e
-                    0x0120                  T5CON = 0x120
-                    0x0120                  _T5CON = 0x120
-                    0x0120                  _T5CONbits = 0x120
                     0x0140                  IC1BUF = 0x140
                     0x0140                  _IC1BUF = 0x140
                     0x0142                  IC1CON = 0x142
@@ -1001,16 +985,6 @@ userdata
                     0x0146                  IC2CON = 0x146
                     0x0146                  _IC2CON = 0x146
                     0x0146                  _IC2CONbits = 0x146
-                    0x0158                  IC7BUF = 0x158
-                    0x0158                  _IC7BUF = 0x158
-                    0x015a                  IC7CON = 0x15a
-                    0x015a                  _IC7CON = 0x15a
-                    0x015a                  _IC7CONbits = 0x15a
-                    0x015c                  IC8BUF = 0x15c
-                    0x015c                  _IC8BUF = 0x15c
-                    0x015e                  IC8CON = 0x15e
-                    0x015e                  _IC8CON = 0x15e
-                    0x015e                  _IC8CONbits = 0x15e
                     0x0180                  OC1RS = 0x180
                     0x0180                  _OC1RS = 0x180
                     0x0182                  OC1R = 0x182
@@ -1025,20 +999,6 @@ userdata
                     0x018a                  OC2CON = 0x18a
                     0x018a                  _OC2CON = 0x18a
                     0x018a                  _OC2CONbits = 0x18a
-                    0x018c                  OC3RS = 0x18c
-                    0x018c                  _OC3RS = 0x18c
-                    0x018e                  OC3R = 0x18e
-                    0x018e                  _OC3R = 0x18e
-                    0x0190                  OC3CON = 0x190
-                    0x0190                  _OC3CON = 0x190
-                    0x0190                  _OC3CONbits = 0x190
-                    0x0192                  OC4RS = 0x192
-                    0x0192                  _OC4RS = 0x192
-                    0x0194                  OC4R = 0x194
-                    0x0194                  _OC4R = 0x194
-                    0x0196                  OC4CON = 0x196
-                    0x0196                  _OC4CON = 0x196
-                    0x0196                  _OC4CONbits = 0x196
                     0x0200                  I2CRCV = 0x200
                     0x0200                  _I2CRCV = 0x200
                     0x0200                  _I2CRCVbits = 0x200
@@ -1093,40 +1053,6 @@ userdata
                     0x0222                  _SPI1CONbits = 0x222
                     0x0224                  SPI1BUF = 0x224
                     0x0224                  _SPI1BUF = 0x224
-                    0x0240                  DCICON1 = 0x240
-                    0x0240                  _DCICON1 = 0x240
-                    0x0240                  _DCICON1bits = 0x240
-                    0x0242                  DCICON2 = 0x242
-                    0x0242                  _DCICON2 = 0x242
-                    0x0242                  _DCICON2bits = 0x242
-                    0x0244                  DCICON3 = 0x244
-                    0x0244                  _DCICON3 = 0x244
-                    0x0244                  _DCICON3bits = 0x244
-                    0x0246                  DCISTAT = 0x246
-                    0x0246                  _DCISTAT = 0x246
-                    0x0246                  _DCISTATbits = 0x246
-                    0x0248                  TSCON = 0x248
-                    0x0248                  _TSCON = 0x248
-                    0x0248                  _TSCONbits = 0x248
-                    0x024c                  RSCON = 0x24c
-                    0x024c                  _RSCON = 0x24c
-                    0x024c                  _RSCONbits = 0x24c
-                    0x0250                  RXBUF0 = 0x250
-                    0x0250                  _RXBUF0 = 0x250
-                    0x0252                  RXBUF1 = 0x252
-                    0x0252                  _RXBUF1 = 0x252
-                    0x0254                  RXBUF2 = 0x254
-                    0x0254                  _RXBUF2 = 0x254
-                    0x0256                  RXBUF3 = 0x256
-                    0x0256                  _RXBUF3 = 0x256
-                    0x0258                  TXBUF0 = 0x258
-                    0x0258                  _TXBUF0 = 0x258
-                    0x025a                  TXBUF1 = 0x25a
-                    0x025a                  _TXBUF1 = 0x25a
-                    0x025c                  TXBUF2 = 0x25c
-                    0x025c                  _TXBUF2 = 0x25c
-                    0x025e                  TXBUF3 = 0x25e
-                    0x025e                  _TXBUF3 = 0x25e
                     0x0280                  ADCBUF0 = 0x280
                     0x0280                  _ADCBUF0 = 0x280
                     0x0282                  ADCBUF1 = 0x282
@@ -1222,220 +1148,6 @@ userdata
                     0x02e2                  LATF = 0x2e2
                     0x02e2                  _LATF = 0x2e2
                     0x02e2                  _LATFbits = 0x2e2
-                    0x0300                  C1RXF0SID = 0x300
-                    0x0300                  _C1RXF0SID = 0x300
-                    0x0300                  _C1RXF0SIDbits = 0x300
-                    0x0302                  C1RXF0EIDH = 0x302
-                    0x0302                  _C1RXF0EIDH = 0x302
-                    0x0302                  _C1RXF0EIDHbits = 0x302
-                    0x0304                  C1RXF0EIDL = 0x304
-                    0x0304                  _C1RXF0EIDL = 0x304
-                    0x0304                  _C1RXF0EIDLbits = 0x304
-                    0x0308                  C1RXF1SID = 0x308
-                    0x0308                  _C1RXF1SID = 0x308
-                    0x0308                  _C1RXF1SIDbits = 0x308
-                    0x030a                  C1RXF1EIDH = 0x30a
-                    0x030a                  _C1RXF1EIDH = 0x30a
-                    0x030a                  _C1RXF1EIDHbits = 0x30a
-                    0x030c                  C1RXF1EIDL = 0x30c
-                    0x030c                  _C1RXF1EIDL = 0x30c
-                    0x030c                  _C1RXF1EIDLbits = 0x30c
-                    0x0310                  C1RXF2SID = 0x310
-                    0x0310                  _C1RXF2SID = 0x310
-                    0x0310                  _C1RXF2SIDbits = 0x310
-                    0x0312                  C1RXF2EIDH = 0x312
-                    0x0312                  _C1RXF2EIDH = 0x312
-                    0x0312                  _C1RXF2EIDHbits = 0x312
-                    0x0314                  C1RXF2EIDL = 0x314
-                    0x0314                  _C1RXF2EIDL = 0x314
-                    0x0314                  _C1RXF2EIDLbits = 0x314
-                    0x0318                  C1RXF3SID = 0x318
-                    0x0318                  _C1RXF3SID = 0x318
-                    0x0318                  _C1RXF3SIDbits = 0x318
-                    0x031a                  C1RXF3EIDH = 0x31a
-                    0x031a                  _C1RXF3EIDH = 0x31a
-                    0x031a                  _C1RXF3EIDHbits = 0x31a
-                    0x031c                  C1RXF3EIDL = 0x31c
-                    0x031c                  _C1RXF3EIDL = 0x31c
-                    0x031c                  _C1RXF3EIDLbits = 0x31c
-                    0x0320                  C1RXF4SID = 0x320
-                    0x0320                  _C1RXF4SID = 0x320
-                    0x0320                  _C1RXF4SIDbits = 0x320
-                    0x0322                  C1RXF4EIDH = 0x322
-                    0x0322                  _C1RXF4EIDH = 0x322
-                    0x0322                  _C1RXF4EIDHbits = 0x322
-                    0x0324                  C1RXF4EIDL = 0x324
-                    0x0324                  _C1RXF4EIDL = 0x324
-                    0x0324                  _C1RXF4EIDLbits = 0x324
-                    0x0328                  C1RXF5SID = 0x328
-                    0x0328                  _C1RXF5SID = 0x328
-                    0x0328                  _C1RXF5SIDbits = 0x328
-                    0x032a                  C1RXF5EIDH = 0x32a
-                    0x032a                  _C1RXF5EIDH = 0x32a
-                    0x032a                  _C1RXF5EIDHbits = 0x32a
-                    0x032c                  C1RXF5EIDL = 0x32c
-                    0x032c                  _C1RXF5EIDL = 0x32c
-                    0x032c                  _C1RXF5EIDLbits = 0x32c
-                    0x0330                  C1RXM0SID = 0x330
-                    0x0330                  _C1RXM0SID = 0x330
-                    0x0330                  _C1RXM0SIDbits = 0x330
-                    0x0332                  C1RXM0EIDH = 0x332
-                    0x0332                  _C1RXM0EIDH = 0x332
-                    0x0332                  _C1RXM0EIDHbits = 0x332
-                    0x0334                  C1RXM0EIDL = 0x334
-                    0x0334                  _C1RXM0EIDL = 0x334
-                    0x0334                  _C1RXM0EIDLbits = 0x334
-                    0x0338                  C1RXM1SID = 0x338
-                    0x0338                  _C1RXM1SID = 0x338
-                    0x0338                  _C1RXM1SIDbits = 0x338
-                    0x033a                  C1RXM1EIDH = 0x33a
-                    0x033a                  _C1RXM1EIDH = 0x33a
-                    0x033a                  _C1RXM1EIDHbits = 0x33a
-                    0x033c                  C1RXM1EIDL = 0x33c
-                    0x033c                  _C1RXM1EIDL = 0x33c
-                    0x033c                  _C1RXM1EIDLbits = 0x33c
-                    0x0340                  C1TX2SID = 0x340
-                    0x0340                  _C1TX2SID = 0x340
-                    0x0340                  _C1TX2SIDbits = 0x340
-                    0x0342                  C1TX2EID = 0x342
-                    0x0342                  _C1TX2EID = 0x342
-                    0x0342                  _C1TX2EIDbits = 0x342
-                    0x0344                  C1TX2DLC = 0x344
-                    0x0344                  _C1TX2DLC = 0x344
-                    0x0344                  _C1TX2DLCbits = 0x344
-                    0x0346                  C1TX2B1 = 0x346
-                    0x0346                  _C1TX2B1 = 0x346
-                    0x0346                  _C1TX2B1bits = 0x346
-                    0x0348                  C1TX2B2 = 0x348
-                    0x0348                  _C1TX2B2 = 0x348
-                    0x0348                  _C1TX2B2bits = 0x348
-                    0x034a                  C1TX2B3 = 0x34a
-                    0x034a                  _C1TX2B3 = 0x34a
-                    0x034a                  _C1TX2B3bits = 0x34a
-                    0x034c                  C1TX2B4 = 0x34c
-                    0x034c                  _C1TX2B4 = 0x34c
-                    0x034c                  _C1TX2B4bits = 0x34c
-                    0x034e                  C1TX2CON = 0x34e
-                    0x034e                  _C1TX2CON = 0x34e
-                    0x034e                  _C1TX2CONbits = 0x34e
-                    0x0350                  C1TX1SID = 0x350
-                    0x0350                  _C1TX1SID = 0x350
-                    0x0350                  _C1TX1SIDbits = 0x350
-                    0x0352                  C1TX1EID = 0x352
-                    0x0352                  _C1TX1EID = 0x352
-                    0x0352                  _C1TX1EIDbits = 0x352
-                    0x0354                  C1TX1DLC = 0x354
-                    0x0354                  _C1TX1DLC = 0x354
-                    0x0354                  _C1TX1DLCbits = 0x354
-                    0x0356                  C1TX1B1 = 0x356
-                    0x0356                  _C1TX1B1 = 0x356
-                    0x0356                  _C1TX1B1bits = 0x356
-                    0x0358                  C1TX1B2 = 0x358
-                    0x0358                  _C1TX1B2 = 0x358
-                    0x0358                  _C1TX1B2bits = 0x358
-                    0x035a                  C1TX1B3 = 0x35a
-                    0x035a                  _C1TX1B3 = 0x35a
-                    0x035a                  _C1TX1B3bits = 0x35a
-                    0x035c                  C1TX1B4 = 0x35c
-                    0x035c                  _C1TX1B4 = 0x35c
-                    0x035c                  _C1TX1B4bits = 0x35c
-                    0x035e                  C1TX1CON = 0x35e
-                    0x035e                  _C1TX1CON = 0x35e
-                    0x035e                  _C1TX1CONbits = 0x35e
-                    0x0360                  C1TX0SID = 0x360
-                    0x0360                  _C1TX0SID = 0x360
-                    0x0360                  _C1TX0SIDbits = 0x360
-                    0x0362                  C1TX0EID = 0x362
-                    0x0362                  _C1TX0EID = 0x362
-                    0x0362                  _C1TX0EIDbits = 0x362
-                    0x0364                  C1TX0DLC = 0x364
-                    0x0364                  _C1TX0DLC = 0x364
-                    0x0364                  _C1TX0DLCbits = 0x364
-                    0x0366                  C1TX0B1 = 0x366
-                    0x0366                  _C1TX0B1 = 0x366
-                    0x0366                  _C1TX0B1bits = 0x366
-                    0x0368                  C1TX0B2 = 0x368
-                    0x0368                  _C1TX0B2 = 0x368
-                    0x0368                  _C1TX0B2bits = 0x368
-                    0x036a                  C1TX0B3 = 0x36a
-                    0x036a                  _C1TX0B3 = 0x36a
-                    0x036a                  _C1TX0B3bits = 0x36a
-                    0x036c                  C1TX0B4 = 0x36c
-                    0x036c                  _C1TX0B4 = 0x36c
-                    0x036c                  _C1TX0B4bits = 0x36c
-                    0x036e                  C1TX0CON = 0x36e
-                    0x036e                  _C1TX0CON = 0x36e
-                    0x036e                  _C1TX0CONbits = 0x36e
-                    0x0370                  C1RX1SID = 0x370
-                    0x0370                  _C1RX1SID = 0x370
-                    0x0370                  _C1RX1SIDbits = 0x370
-                    0x0372                  C1RX1EID = 0x372
-                    0x0372                  _C1RX1EID = 0x372
-                    0x0372                  _C1RX1EIDbits = 0x372
-                    0x0374                  C1RX1DLC = 0x374
-                    0x0374                  _C1RX1DLC = 0x374
-                    0x0374                  _C1RX1DLCbits = 0x374
-                    0x0376                  C1RX1B1 = 0x376
-                    0x0376                  _C1RX1B1 = 0x376
-                    0x0376                  _C1RX1B1bits = 0x376
-                    0x0378                  C1RX1B2 = 0x378
-                    0x0378                  _C1RX1B2 = 0x378
-                    0x0378                  _C1RX1B2bits = 0x378
-                    0x037a                  C1RX1B3 = 0x37a
-                    0x037a                  _C1RX1B3 = 0x37a
-                    0x037a                  _C1RX1B3bits = 0x37a
-                    0x037c                  C1RX1B4 = 0x37c
-                    0x037c                  _C1RX1B4 = 0x37c
-                    0x037c                  _C1RX1B4bits = 0x37c
-                    0x037e                  C1RX1CON = 0x37e
-                    0x037e                  _C1RX1CON = 0x37e
-                    0x037e                  _C1RX1CONbits = 0x37e
-                    0x0380                  C1RX0SID = 0x380
-                    0x0380                  _C1RX0SID = 0x380
-                    0x0380                  _C1RX0SIDbits = 0x380
-                    0x0382                  C1RX0EID = 0x382
-                    0x0382                  _C1RX0EID = 0x382
-                    0x0382                  _C1RX0EIDbits = 0x382
-                    0x0384                  C1RX0DLC = 0x384
-                    0x0384                  _C1RX0DLC = 0x384
-                    0x0384                  _C1RX0DLCbits = 0x384
-                    0x0386                  C1RX0B1 = 0x386
-                    0x0386                  _C1RX0B1 = 0x386
-                    0x0386                  _C1RX0B1bits = 0x386
-                    0x0388                  C1RX0B2 = 0x388
-                    0x0388                  _C1RX0B2 = 0x388
-                    0x0388                  _C1RX0B2bits = 0x388
-                    0x038a                  C1RX0B3 = 0x38a
-                    0x038a                  _C1RX0B3 = 0x38a
-                    0x038a                  _C1RX0B3bits = 0x38a
-                    0x038c                  C1RX0B4 = 0x38c
-                    0x038c                  _C1RX0B4 = 0x38c
-                    0x038c                  _C1RX0B4bits = 0x38c
-                    0x038e                  C1RX0CON = 0x38e
-                    0x038e                  _C1RX0CON = 0x38e
-                    0x038e                  _C1RX0CONbits = 0x38e
-                    0x0390                  C1CTRL = 0x390
-                    0x0390                  _C1CTRL = 0x390
-                    0x0390                  _C1CTRLbits = 0x390
-                    0x0392                  C1CFG1 = 0x392
-                    0x0392                  _C1CFG1 = 0x392
-                    0x0392                  _C1CFG1bits = 0x392
-                    0x0394                  C1CFG2 = 0x394
-                    0x0394                  _C1CFG2 = 0x394
-                    0x0394                  _C1CFG2bits = 0x394
-                    0x0396                  C1INTF = 0x396
-                    0x0396                  _C1INTF = 0x396
-                    0x0396                  _C1INTFbits = 0x396
-                    0x0398                  C1INTE = 0x398
-                    0x0398                  _C1INTE = 0x398
-                    0x0398                  _C1INTEbits = 0x398
-                    0x039a                  C1EC = 0x39a
-                    0x039a                  _C1EC = 0x39a
-                    0x039a                  _C1ECbits = 0x39a
-                    0x039a                  C1RERRCNT = 0x39a
-                    0x039a                  _C1RERRCNT = 0x39a
-                    0x039b                  C1TERRCNT = 0x39b
-                    0x039b                  _C1TERRCNT = 0x39b
                     0x0740                  RCON = 0x740
                     0x0740                  _RCON = 0x740
                     0x0740                  _RCONbits = 0x740
@@ -1469,24 +1181,14 @@ userdata
                     0x0022                  _ACCA = 0x22
                     0x0028                  ACCB = 0x28
                     0x0028                  _ACCB = 0x28
-                    0x0300                  CAN1 = 0x300
-                    0x0300                  _CAN1 = 0x300
                     0x0140                  IC1 = 0x140
                     0x0140                  _IC1 = 0x140
                     0x0144                  IC2 = 0x144
                     0x0144                  _IC2 = 0x144
-                    0x0158                  IC7 = 0x158
-                    0x0158                  _IC7 = 0x158
-                    0x015c                  IC8 = 0x15c
-                    0x015c                  _IC8 = 0x15c
                     0x0180                  OC1 = 0x180
                     0x0180                  _OC1 = 0x180
                     0x0186                  OC2 = 0x186
                     0x0186                  _OC2 = 0x186
-                    0x018c                  OC3 = 0x18c
-                    0x018c                  _OC3 = 0x18c
-                    0x0192                  OC4 = 0x192
-                    0x0192                  _OC4 = 0x192
                     0x0220                  SPI1 = 0x220
                     0x0220                  _SPI1 = 0x220
                     0x020c                  UART1 = 0x20c
@@ -1571,9 +1273,9 @@ __c30_signature
  __c30_signature
                   0x0000ba          0x6 c:/program files (x86)/microchip/mplabc30/v3.30c/bin/bin/../../lib\libc-coff.a(strlen.XXo)
 
-_038d4c40531f6a1c
+_0329ad90531e2023
                     0x0800        0x4b4
- _038d4c40531f6a1c
+ _0329ad90531e2023
                     0x0800        0x4b4 src\hex\trace.o
                     0x0800                  TRSB
 
@@ -1766,7 +1468,7 @@ _038d4c40531f6a1c
                   0x00355e                  triac_fire_timer
                   0x003574                  triac_control_init
 
-_0327e0e0531f6a1e
+_03488230531e2025
                     0xfc00        0x400 load address 0x7ffc00  
- _0327e0e0531f6a1e
+ _03488230531e2025
                     0xfc00        0x400 src\hex\eeprom.o
