@@ -1,0 +1,5 @@
+	//m_aPassword.SetAtGrow(0,_T(""));
+	//m_aPassword.SetAtGrow(1,_T("Florida"));
+	//m_aPassword.SetAtGrow(2,_T("Talkshow"));
+	//m_aPassword.SetAtGrow(3,_T("Blueprint"));
+	//m_aPassword.SetAtGrow(4,_T("Moltres"));
