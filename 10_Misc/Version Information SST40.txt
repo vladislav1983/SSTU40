@@ -1,0 +1,123 @@
+30.10
+
+  - Initial Release. V30.XX is used for development board with dsPIC30F4011
+
+/*----------------------------------------------------------------------------*/
+30.11
+
+  - New EEPROM WRITE handler in statemachine 1
+
+/*----------------------------------------------------------------------------*/
+30.13
+
+  - Added parameter 951 (EE_VALID) = 1000 for EEPROM validation
+
+
+/*----------------------------------------------------------------------------*/
+30.14
+
+  - Added Serial Communication timer sci_timer() with period 15ms for serial communication handshaking.
+
+/*----------------------------------------------------------------------------*/
+30.15
+
+  - Enable WDT with period 2ms, cleared in task1 (100us)
+  - Serial Communication run in Background loop.
+
+
+/*----------------------------------------------------------------------------*/
+30.16
+
+  - Added online parameters actualization in background loop (void ee_param_act(bool init,bool read_all_params))
+  - No more save parameters manually in ID. Changed parameters are handled via checksum and written in eeprom.
+
+
+/*----------------------------------------------------------------------------*/
+
+30.17
+09.04.2010
+
+Changes in eeprom actuslization routines:
++ ee_param_act() optimization:
+  - added mode for all parameters read in beginning of controller init
+  - separate functions for all parameters read, write and sigle parameter write removed
+  - ee_param_act() still run in background
+
+Changes in statemachine module
++ Removed states:
+  - ST1_EE_WRITE and ST1_CHANGE_REF_TEMP
+
+  - Removed _ee_save_single() and _ee_save_all() from SYS_CONTROL REGISTER
+
+  - Removed _ee_save() from PC_CONTROL REGISTER
+  
+  - Removed _ee_attempt_write_long() and _ee_write_error_single() from ERR_CONTROL REGISTER
+
+  - Removed eeprom save handshaking
+
+Changes in parameter files:
+  - Used New def file -> SST40 3001.def
+  - Actual parameters -> SST40 V3.0 3001.prm
+
+
+/*----------------------------------------------------------------------------*/
+30.18
+10.04.2010
+
+  - Bugfix in eeprom checsum calculation in ee_param_act() - PARACT_CHECKSUM_POOL state.
+  - Added parameter Nr:952 -> EEPROM Update (Debug) - display nimber of EEROM writes.
+
+/*----------------------------------------------------------------------------*/
+30.19
+10.04.2010
+
+  - Removed transformer ring at fine temperature tunning. When periods applyed to heater are less than "3" one halfperiod wait state is added.
+  - Added parameter Nr:263 Ring_reduction_per witch define threshold period for reducing transformer rings.
+  - Added parameters limit check run in background.
+  - Added parameters for param limit faulr ERR_CONTROL:3
+  - Bugfix - Line frequency calculation in task 2
+  - sci communication rx interrupt level (cISR_PRIORITY_U1RX) increased to level '5'
+  - Task2 interrupt priority level (cISR_PRIORITY_TMR1) decreased to level '4'
+
+
+
+/*----------------------------------------------------------------------------*/
+30.20
+11.02.2010
+
+  + Optimization in cartridge detection routine(void cart_stat_det(void)):
+  - Cartridge detection ONLY when zero cross occured AND triac NOT fired
+  - When triac is not fired MES_EN pin is low - input analog switch is turned off, measure of temp is disabled.
+  - Built in zero cross and triac state check
+
+  + Other changes:
+  - Added SYS_CONTROL:12 bit - _triac_state(). This bit is set or cleared by macros in triac_control.h
+  - Changed macros for triac turn on and turn off -> triac_control.h
+  - SYS_CONTROL:13  bit (_over_prot_triac_state()) alredy set in _FIRE_TRIAC() macros in triac_control.h and cleared in overload protection routine
+ 
+  + Version control added. Firmware base and sub versions defined in basedef.h
+	
+  + Added sci_watchdog timer to prevent deadlock in RX Interrupt
+
+
+
+/*----------------------------------------------------------------------------*/
+
+30.31
+23.10.2010
+
+ - Sirem zero wait state engine implemented
+ - statistic implemented
+
+
+
+
+
+
+
+
+
+
+
+
+
