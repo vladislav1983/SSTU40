@@ -1,0 +1,283 @@
+What is new in 3.4.2.0
+1. SIREM Telegram Header adjustable;
+2. Added Parity Control setting for Serial Communication;
+3. Trace viewer - Normalisation fix for all-negative data;
+4. Trace viewer - Scale factor fix;
+5. Trace Viewer - Max "Sampling Rate" increased to 1000 ms;
+
+What is new in 3.4.1.1
+1. The "Save File as" dialog shows SAT extension option;
+2. Legend on the Chart Viewer - "Scaled value" resolution increased;
+3. Inverter / TCP/IP dialog - initialy display the default port number instead of :0;
+
+What is new in 3.4.1.0
+1. Fixed problem on missing Slave Controller folder in DriveData directory;
+2. The time in the legend block is shown with 0.1 resolution;
+3. The "TCP connection always uses COM-Server" checkbox in Settings/Options/TCPIP is deactivated by default;
+4. Additional fix for chart drawing after loading a template on a unformatted plot;
+5. The customer number supports 32 bit values;
+6. Implemented RTC Time reading (when MEX board available) and a timestamp for the Trace to use RTC time (if available) or PC clock time if not;
+7. The template file extension changed to .SAT. If a template file is present in the current directory (where the .sad comes from), it is automatically loaded as default. New Option in Setting/Options/Others added to enable this functionality;
+8. System Name reading improved to accept longer telnet delays (when using ISDN connection);
+9. Fixed Settings/Options/TCPIP/COM Server check Timeout value-out-of-limits issue;
+10. The loading a template or trace data file, the folder where it is loaded from is now shown as default when another trace file load dialog is opened. Currently it is always using the connected inverter (or first in the list if no connection) folder;
+
+
+What is new in 3.4.0.2
+1. Fixed bug that causes displaying message about missing session handle;
+2. Fixed bug in "Max" value on context menu in trace viewer;
+
+What is new in 3.4.0.1
+1. Fixed bug on missing Connect.com file when parsing DriveData structure;
+
+What is new in 3.4.0.0
+1. IDSCom.DLL - Read E-Log functionality implemented;
+2. Vertical Zoom in Trace Chart fixed (stall if minimised);
+3. Connect Menu->Configure Inverter - "Comserver" checkbox fixed to be active when TCP/IP is selected;
+4. Offline Parameter list mode: trace read fix;
+5. Detection of bad file format on loading .SAD files;
+6. Chart viewer - Normalisation fixed;
+7. Chart viewer - Scale fixed;
+8. Chart viewer - Horisontal cursor functionality fix when resizing the trace window;
+9. Legend window & cursor on/off fix when switching multiple char windows;
+10. Settings window in trace chart - added "All On/Off" button;
+11. Added additional keyboard shortcuts in Chart viewer;
+12. Fixed "ESC" key bug (applying changes instead of canceling);
+13. Connect & Disconnect Dialog windows - added "Only Masters" button and made resizable;
+14. Comserver connect window made optional from Options -> TCP/IP;
+15. Removed “Full Zoom” Button;
+16. Added "Apply Zoom" Button;
+17. Added new column in Legend window with “scaled” values;
+18. Fixed bug in trace viewer displaying delayed 1 sample trace;
+19. Updated cursor on legend window when the cursor is continuously moved with the arrows;
+19. Fixed crash on opening template as chart;
+20. Chart viewer displaying filename, download time, customer version;
+
+What is in 3.3.0.0
+1. Trace Viewer: The zoomer is changed to be able to zoom exactly the selected window, and is able to zoom less than 100 samples;
+2. Trace Viewer: Cursor and Zoom pointers in Trace Viewer can be moved with the keyboard;
+3. Trace Viewer: Implemented snap-in-data-points cursor and drawing improved;
+4. Trace Viewer: Mouse Cursor fix in Trace window;
+5. Trace Viewer: Double-Buffer painting implemented;
+6. New Dialog added - Trace-Comments;
+7. Implemented functionality to read out the System Name of connected Comserver;
+8. Bugfix - bad Trace read behaviour;
+9. Fixes regarding working with multiple Trace documents and templates;
+10. Connection type shown in the converter name;
+11. Possibility to save parameters from connected converters in one folder with name of the file the date and the name of the converter;
+12. Possibility to enable/disable reading of parameter list during initial connecting (speeds up connection);
+
+What is in 3.2.0.7Vista
+1. Enabled support for Windows Vista. 
+
+What is in 3.2.0.7
+1. Bugfix ComServer connection test blocks messages of existing connections.
+2. Enabled pure TCP connection retries. Disabling not needed and caused problems with DCB100.
+3. Bugfix text2numbers delition.
+4. Bugfix trace save as itself
+5. TraceViewer Grid enable compatible with DS88 fileformat
+6. TraceViewer colors set as in DS88
+7. Trace settings parameters name added "Param_#"
+
+What is in 3.2.0.6
+1. Added enable/disable checkboxes in Trace Settings Dlg.
+2. ToolTip with error msg OnErrorDisconent dialog.
+3. Fixed incorrect text in Status Bar whe connected to Slave only.
+4. Fixed Calibration tools (regress from previous versions)
+5. Fixed connect to single converter (No Slave) (regress from previous versions)
+6. Added limit to LogView number of lines displayed (Option Dlg)
+7. Added connection test in Comserver and optional for TCP mode.
+8. Detection of cable unplugged (Serial and TCP).
+9. Added Comserver port reset Dialog (autoreset when own IP match)
+10. Fixed detection of read timeout
+11. Fixed Continue of established connection on Error
+12. Fix Save on Options Dlg not working on entire tree.
+13. Fixe crash when PWD file is readonly
+14. IDSCom code cleanup
+15. Fixed crash when canceling connect.
+16. Updated Help files (better pictures & TCP connection)
+17. Fixed CCB test crash (caused by trace comments)
+18. Fixed Trace Viewer not updating Y-axis scale when no trace
+
+
+What is in 3.2.0.5
+1. Adding parameters to groups bug fix.
+2. Com server connect aborts if a connection already exists.
+3. Bug fix DC not released on dynamic status bar pane resize.
+
+What is in 3.2.0.4
+1. BOM header added to unicode files.
+2. Fixed on slave disconnect master thread sometimes is blocked.
+
+
+What is in 3.2.0.3
+1. Fixed "another op" completely (hopefully).
+2. Fixed many variables in IDSCom were not initialized on construction.
+3. Fixed bug in Trace Diagram - regional zoom when no region specified crash.
+
+
+What is in 3.2.0.2
+1. Fixed another op when loading parameter file with invalid values
+
+What is in 3.2.0.1
+1. Fixed old format of connect file compatibility
+
+What is in 3.2.0.0
+1. Internal Trace Viewer restored
+2. Drawing Code cleaned and refactored
+3. Copy to clipboard
+4. Save as Bitmap
+5. Print
+6. Fixed data values calculation for graph drawing
+7. Fixed many zoom issues
+8. Fixed scroll issues
+9. Fixed several GDI leaks
+10. Template of Trace settings can be loaded
+11. Can load ASCII and UNICODE def, prm, and pch files // connect.con is unicode only (new fomat as requested)
+12. Multiple traces can be viewed inside ID32
+13. Deploy Connect.con files utility in Options
+14. IDSCom handle leaks fixed
+15. Change access level from status bar
+
+
+
+What is in 3.1.9.0
+1. Fixed inverter dlg load time.
+2. Fixed slow parameter update.
+3. Fixed error stack "Var.xx" numbering (caused incomplete decoding).
+
+What is in 3.1.8.0
+1. Fixed text "Can not write to EEPROM...".
+2. Fixed installer text to show version on welcome dialog.
+
+What is in 3.1.7.1
+1. Floating point precision fix for Inverter version.
+
+
+What is in 3.1.7
+1. ErrStackDSecoder for Ozonia Long time fix
+2. ErrStackDSecoder for Ozonia Float time custom precision fix
+3. Comserver default port 8000
+
+
+What is in 3.1.6
+1. ErrStackDecoder doulble click activate
+2. ErrStackDecoder check for mexpresent when online connected.
+3. About text fix
+4. ErrStackDSecoder for Ozonia Float time fix
+5. Default group and configuration access level changed to Service
+
+
+What is in 3.1.5
+1. Progress Dialog for Appending Trace conditions added
+2. Bug Fix do not open DEFAULT group when set to open on connect.
+3. No more "!!!!".
+4. Error stack decoder minor bug fix
+
+What is in 3.1.4
+1. Bug fix Trace Viewer name updated  in Read trace Dialog.
+2. Bug Fix RTC error stack decoder now works for slave when master is connected.
+
+
+What is in 3.1.3
+1. Bug fix Patch ignores drive sw version but distinguishes master from slave.
+
+2. New access option in Options Dialog - Minimum access level to modify group definitions
+
+3.Disable modification of groups and parameters for Acces level < Access level from 2
+   Deny Access to DEFAULT group for Acces level < Access level from 2
+4. Enhanced MEX downloader on cancel wait until current operation is finished - fixes bug when
+	trace is trigered due to StartRestore is set.
+
+What is in 3.1.2
+1. Minor Bug fixes
+	Bug Fix Decode Error Stack menu.
+	Bug Fix Decode error stack RTC wrong time.
+	Bug fix Patch ignores drive sw version.
+	Bug Fix Another Operation...
+	Bug Fix Connection thread INFINITE wait on exit.
+	Bug Fix memory leak in IDSCom.dll.
+	Bug fix country, generator and version are now property of the inverter not the App.
+	Bug fix old_Checksum and New_checksum simultaneous connections.
+	
+
+What is in 3.1.1
+1. Minor Bug fixes
+	Create/Apply parameter patch open browse dialog in the correct selected inverter folder.
+	DataTime adds 2000 to Year only if value is less than 2000.
+	Disconnect dialog is spawned only once - not on every OnIDSError message
+	Country codes US and Canada are combined in one as they have the same country code.
+
+What is in 3.1.0
+1. Added Echo Enable for RS485 support
+
+What is in 3.0.2
+1. Bug fix Date time
+2. Warnings on level 4 fixed
+3. Bug fixes in base classes trhat could cause and exeption in release
+
+
+What is in 3.0.1
+1. Apply Parameter patch opens in inverter folder
+
+What is in 3.0
+1. Minor Bugfixes
+	Status bar text order.
+	Another Operation is already running
+	64 bit compatibility warnings fixed.
+	Options Dialog combobox incorrect size fix.
+
+What is in 3.0b
+
+1. Assign text to numbers
+2. Trace restore fix
+3. Log view (status) - select/copy
+4. Bug fix drag/drop
+5. windowsplacement .plc file read only -> Cancel all on read only error
+6. Country Codes /status bar + groups
+
+
+
+What is in 2.13
+
+1. Connect/Disconnect multiple inverters. Disconect All.
+2. Connect/disconnect slave when indirect connected.
+3. Connect/disconnect verison (master and slave) + work offline.
+4. Connect/disconnect InverterGroup(all versions) + work offline.
+5. Connect/disconnect Plant(all InverterGroups) + work offline.
+6. Adding trace configuration parameters to trace files.
+7. Store Position bad value crash - fixed.
+8. Com-Server TCPIP connection + ComServer Cofiguration + try to reset non responding com-server (only for Com-server connections).
+9. Parameter patch functionality implemented.
+10. Date Time parameter format.
+11. Changed password encription/decription.
+12. New Checksum to prevent connections with old software to converters with newer software versions.
+13. Trace Restore automation (for MEX enabled boards).
+14. Multiple Errorstacks /Traces download selection.
+15. ErrorStack decoder bug fixes and improvements.
+16. Minor bugfixes.
+
+
+
+
+What is in 2.12
+
+1. CCB testing functionality added.
+2. Loading parameters in Service and Engineering mode fixed.
+
+What is in 2.11
+
+1. Add parameters in Win98 - fixed.
+2. Program crash when connected to existing, but not real RS232 port - fixed.
+3. Decode ErrorStack in offline mode.
+4. Some changes in the format of the decoded ErrorStack
+5. Improved parsing in ErrorStack decoder.
+
+What is in 2.10
+
+1. Internal Trace viewer removed, since a lot of bugs in it.
+2. ErrorStack decoding bug fix. How to decode the stack is explained in the help
+3. New button for SaveAs added in the Read TraceData and Read ErrorStack menus. 
+		This button allow selection of file for saving the errorstack and the trace. 
+		The Read button do not check if a file with that name already exist.
+4. Communication improved
