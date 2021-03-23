@@ -1,0 +1,47 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+!_TAG_REVISION_NAME	MCHPTags	//
+!_TAG_REVISION_VERSION	6.0.1	//
+CommExit	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\uart.inc	225;"	l	line:225
+CommInit	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\uart.inc	120;"	l	line:120
+Main	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	167;"	l	line:167
+ReceiveInit	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\uart.inc	240;"	l	line:240
+Send	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\uart.inc	264;"	l	line:264
+WaitIC	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\uart.inc	294;"	l	line:294
+Write	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	452;"	l	line:452
+abaudok	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\uart.inc	166;"	l	line:166
+anotrcv	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\uart.inc	159;"	l	line:159
+arpt1	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\uart.inc	154;"	l	line:154
+arptc	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\uart.inc	155;"	l	line:155
+blprot	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	304;"	l	line:304
+blprotok	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	324;"	l	line:324
+chksumok	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	222;"	l	line:222
+compl	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	461;"	l	line:461
+config	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	423;"	l	line:423
+config	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	435;"	l	line:435
+edgeloop	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\uart.inc	187;"	l	line:187
+eeprom	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	393;"	l	line:393
+eraseact	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	296;"	l	line:296
+exit	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	469;"	l	line:469
+latlo	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	356;"	l	line:356
+main1	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	168;"	l	line:168
+notrcv	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\uart.inc	252;"	l	line:252
+program	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	346;"	l	line:346
+protgotook	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	255;"	l	line:255
+rcvdata	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	208;"	l	line:208
+rhello	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	145;"	l	line:145
+rhellofinished	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	153;"	l	line:153
+rpt1	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\uart.inc	241;"	l	line:241
+rptc	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\uart.inc	242;"	l	line:242
+txe_del_lo	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\uart.inc	268;"	l	line:268
+txwait	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\uart.inc	272;"	l	line:272
+txwait	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\uart.inc	281;"	l	line:281
+usrapp	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	122;"	l	line:122
+verrow	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	370;"	l	line:370
+vfail	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\ds30loader.s	414;"	l	line:414
+wicil	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\uart.inc	296;"	l	line:296
+wicol	D:\Projects\SSTU\09_Bootloader\ds30_Loader\firmware_16-bit\src\uart.inc	295;"	l	line:295
