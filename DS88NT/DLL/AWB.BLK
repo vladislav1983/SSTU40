@@ -1,0 +1,15 @@
+AW0 0 1 
+2 Tv V
+0 0 0 1 0 1 
+#Step function
+
+AW1 1 1 
+2 T D
+1 1 1 0 0 1 
+#Oscillator element
+
+AW2 1 1 
+9 VR A1 A2 A3 B1 B2 B3 Ym To
+1 0 0 1 0 1 
+#Digital filter
+

@@ -1,0 +1,11 @@
+J	= 0.5	; moment of inertia [kgm²]
+Kw	= 4.1666667	; factor for speed proportional load torque
+La	= 0.06	; armature inductance [H]
+Ra	= 1.50	; armature resistance [Ohm]
+Tsr	= 0.0033	; equivalent time constant rectifier [s]
+Vsr	= 50.0	; medium amplification factor of rectifier
+kPhi	= 2.5	; k*(excitation flux) [1/Vs]
+T0n_BO	= [(2*kPhi*2*Tsr)/Kw]	; parameter speed controller 
+T1n_BO	= [J/Kw]	; parameter speed controller
+T0i_BO	= [(2*Vsr*Tsr)/Ra]	; parameter current controller
+T1i_BO	= [La/Ra]	; parameter current controller

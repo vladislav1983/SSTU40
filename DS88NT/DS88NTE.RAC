@@ -1,0 +1,130 @@
+; continuous  blocks
+PRO = Proportional element
+INT = Integrating element
+PT1 = First order time-delay element
+VH1 = First order capacitive lead
+PTS = Oscillator element
+DIF = Derivative element
+VDG = Decelerated derivative element
+PID = PID controller I
+PIO = PID controller II
+PIR = PI controller
+INA = Gen. integrating element
+VH2 = Second order capacitive lead
+VER = Connection block
+UE1 = Rational function (1st)
+UE2 = Rational function (2nd)
+UE3 = Rational function (3rd)
+UE4 = Rational function (4th)
+UE5 = Rational function (5th)
+TO1 = Torsion block (1st)
+TO2 = Torsion block (2nd)
+TO3 = Torsion block (3rd)
+TO4 = Torsion block (4th)
+; discontinuous blocks
+AHG = Sample & Hold element
+ABT = Sampling switch
+LZG = Delay element
+FI6 = Digital filter (6th ord.)
+FIL = Digital filter (3rd ord.)
+FLT = Digital filter (To var.)
+REG = Digital controller
+REY = Digital controller (Ym var.)
+REV = Digital controller (P. var.)
+IMG = Integrat. measur. element
+TZG = Dead element for decoupling
+IND = Digital integrator
+; non linear blocks
+UEM = Insensitivity
+UEV = Insensitivity (var.)
+DPG = Three-step element
+ZPG = Two-step element (hysteresis)
+BEG = Glare limitation
+BEV = Glare limitation (var.)
+LOS = Backlash
+FKT = Valuator-function device
+REI = Friction characteristics
+; logic blocks
+CTC = Conter/Timing element
+RAM = Memory block
+UND = AND function
+ODR = OR function
+NOD = NOR function
+KMP = Comparator function
+RST = RS flip-flop
+SCH = Switching function
+MIN = Minimum of inputs
+MAX = Maximum of inputs
+NEG = Logic negation
+STP = Stop unit
+; signal generat./sources
+SPR = Step function
+KON = Constant
+SPF = Pulse gener.
+ZEI = Time source
+FRG = Frequency generator
+STG = Noise generator
+PRB = PRBS generator
+DAT = Data file
+SWG = Function generator
+; arithmetic blocks
+ADD = Addition
+SUB = Subtraction
+MUL = Multiplication
+DIV = Division
+SGN = Signum function
+ABS = Absolute value
+WUR = Square-root function
+QUA = Square function
+SIN = Sinus
+COS = Kosinus
+ARC = Arcustangt
+EXP = Exponential function
+LGN = Natural logarithm
+POT = Power function
+LOG = Logarithm function
+RDG = Rounding element
+DSK = Discretisation element
+MST = Summing element
+; informative   blocks
+LRF = Linear control area
+QRF = Quadratic control area
+BRF = Absolute control area
+QRZ = Q.time-weighted contr.area
+BRZ = L.time-weighted abs.contr.area
+; machines
+AS1 = Asynchronous maschine 1
+AS2 = Asynchronous maschine 2
+AS3 = Asynchronous maschine 3
+AS4 = Asynchronous maschine 4
+GM1 = D.C. maschine
+SM1 = Synchronous maschine 1
+SM2 = Synchronous maschine 2
+SM3 = Synchronous maschine 3
+SM4 = Synchronous maschine 4
+; converter
+BXC = Contr. Rectifier
+DUR = Cyclo-converter
+PWR = Pulse-inverter
+PWV = Pulse-inverter (VeCon)
+; common blocks
+VDA = Vector rotator alpha
+VDB = Vector rotator beta
+KWB = Coord. transf. b
+KWC = Coord. transf. c
+KBE = Coord. transf. 3->2 beta
+KOW = Coord. transf. a,b,c
+KWA = Coord. transf. alpha,beta,0
+VDR = Vector rotator alpha,beta
+UKP = cart. coord.->polar c.
+UPK = Polar c.->cart. coord.
+DFT = Discr. Fourier transf.
+DRE = 3~ system
+DAS = Data to file
+FUZ = Fuzzy block
+; linear systems
+L_I = Input block
+L_O = Output block
+L_P = Parameter block
+ZRE = State feedback
+

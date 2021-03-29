@@ -1,0 +1,32 @@
+Beispiel Digitaler Regler REG
+
+Der digitale Regler 3. Ordnung ist gekennzeichnet durch die
+
+                        y      1 + B1z^-1 + B2z^-2 + B3z^-3
+z-Übertragungsfunktion  - = Vr ----------------------------
+                        x      1 + A1z^-1 + A2z^-2 + A3z^-3
+mit z=e^pTo
+
+Aus der z-Übertragungsfunktion erhält man die Differenzengleichung
+
+y(n)=Vr*(x(n)+B1*x(n-1)+B2*x(n-2)+B3*x(n-3))-(A1*y(n-1)+A2*y(n-2)
+     +A3*(y-3)
+
+Überschreitet y(n) den Wert der maximalen Stellgröße Ym, wird das 
+Ausgangssignal auf |Ym| begrenzt und der Vergangenheitswert des 
+Eingangssignals korrigiert:
+
+    x:=x + 1/Vr * (Ym-y)
+
+Unter "Optionen/Anwenderblöcke/Blockeigenschaften" wurde folgendes 
+vereinbart:
+1 Eingangssignal (ein[1])
+1 Ausgangssignal (aus[1])
+9 Parameter (ep[1]='Vr', ep[2]:='A1', ep[3]='A2', ep[4]='A3', 
+  ep[5]='B1', ep[6]='B2', ep[7]='B3', ep[8]='Ym', ep[9]='To')
+1 Anfangswert (anf[1])
+0 entkoppelnde Blockausgänge (da Eingangssignal über P-Anteil ("Vr") direkt auf das Ausgangssignal gelangt)
+0 kein analoger Integrator
+  Schaltblock
+
+Quelltext in DS88H\DLL\AW2.PAS

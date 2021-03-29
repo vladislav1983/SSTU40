@@ -1,0 +1,211 @@
+##Simulation ASCII Graphic FILE
+#COMMENTSTART
+Hochlauf Asynchronmaschine mit U/f-Steuerung
+#COMMENTSTOP
+
+#HEADSTART
+SimIntegrationMethod = RKM4
+SimTimeUnit = s
+SimStartTime = 0
+SimStepTime = 0.005
+SimEndTime = 8
+MinIntegrationStep = 1E-12
+MaxIntegrationStep = 0.01
+SimMaxError = 0.001
+SimPrecision = 100
+TransformationSampleTime = 1
+Transformation_Gz = 0
+LinSimStartTime = 0
+LinSimDeltaTime = 0.01
+LinSimStopTime = 10
+LinSimStartFreq = 1
+LinSimStopFreq = 10000
+LinSimDeltaFreq = 1
+LinSimParamStart = 0.5
+LinSimParamStop = 1
+LinSimParamIndex = 1
+#HEADSTOP
+
+#MACRONUM 0
+#MACROSTART
+#
+SWG: 1
+64,192,0
+5
+   0.00000000000000E+00
+   0.00000000000000E+00
+   1.00000000000000E+00
+   6.00000000000000E+00
+   0.00000000000000E+00
+0
+#
+PRO: 2
+144,192,0
+1: 1
+ 128,208
+1
+  2*50*Pi
+0
+#
+PRO: 3
+144,304,0
+1: 2
+ 128,208
+ 128,320
+1
+   5.37401150000282E+02
+0
+#
+INT: 4
+224,192,0
+2: 0
+1
+   1.00000000000000E+00
+1
+   0.00000000000000E+00
+#
+COS: 5
+304,192,0
+4: 0
+0
+0
+#
+SIN: 6
+304,256,0
+4: 1
+ 272,272
+0
+0
+#
+MUL: 7
+352,192,0
+5: 0
+3: 2
+ 368,320
+ 368,256
+0
+0
+#
+MUL: 8
+400,224,0
+3: 3
+ 368,320
+ 368,256
+ 400,256
+6: 0
+0
+0
+#
+AS3: 9
+464,192,0
+7: 0
+8: 1
+ 448,224
+17: 1
+ 464,368
+7
+   7.60000000000218E-02
+   7.61999999999716E-02
+   7.55000000000337E-02
+   1.04000000000042E-01
+   7.89999999999509E-02
+   1.00000000000000E+00
+   6.00000000000000E+00
+7
+   0.00000000000000E+00
+   0.00000000000000E+00
+   0.00000000000000E+00
+   0.00000000000000E+00
+   0.00000000000000E+00
+   0.00000000000000E+00
+   0.00000000000000E+00
+#
+SPR: 17
+400,352,0
+2
+   7.00000000000000E+00
+   1.78129999999888E+02
+0
+#
+OZI: 0
+544,192,0
+9: 0
+Omeg #NORM=0.00000E+00
+#
+OZI: 0
+544,112,0
+7: 1
+ 400,128
+U_al #NORM=0.00000E+00
+#
+OZI: 0
+544,144,0
+8: 2
+ 448,224
+ 448,160
+U_be #NORM=0.00000E+00
+#
+OZI: 0
+544,256,0
+14: 2
+ 528,288
+ 528,272
+I_sa #NORM=0.00000E+00
+#
+OZI: 0
+544,288,0
+15: 0
+I_sb #NORM=0.00000E+00
+#
+TXT: 0
+80,32
+ramp-up of an asynchronous machine with voltage/frequency control 
+#
+TXT: 0
+144,336
+U^(nom. val.)
+#
+TXT: 0
+19,176
+ramp-up time
+#
+TXT: 0
+140,176
+Omega_n
+#
+TXT: 0
+360,335
+load torque
+#
+TXT: 0
+592,192
+Omega
+#
+TXT: 0
+592,112
+Us_alpha
+#
+TXT: 0
+592,144
+Us_beta
+#
+TXT: 0
+592,256
+Is_alpha
+#
+TXT: 0
+592,288
+Is_beta
+#
+TXT: 0
+400,85
+asynchronous machine: Pn=55kW
+#
+TXT: 0
+358,384
+(nom. val.)
+#
+TXT: 0
+80,54
+loading with nominal load torque
+#MACROSTOP

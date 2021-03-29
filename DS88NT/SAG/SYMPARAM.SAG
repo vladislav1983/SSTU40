@@ -1,0 +1,261 @@
+##Simulation ASCII Graphic FILE
+#COMMENTSTART
+Anwendung symbolischer Parameter
+#COMMENTSTOP
+
+#HEADSTART
+SimIntegrationMethod = RKM4
+SimTimeUnit = s
+SimStartTime = 0
+SimStepTime = 0.001
+SimEndTime = 0.1
+MinIntegrationStep = 1E-12
+MaxIntegrationStep = 0.01
+SimMaxError = 0.001
+SimPrecision = 100
+TransformationSampleTime = 1
+Transformation_Gz = 0
+LinSimStartTime = 0
+LinSimDeltaTime = 0.01
+LinSimStopTime = 10
+LinSimStartFreq = 1
+LinSimStopFreq = 10000
+LinSimDeltaFreq = 1
+LinSimParamStart = 0.5
+LinSimParamStop = 1
+LinSimParamIndex = 1
+SimParameterFile = SYMPARAM.PRM
+#HEADSTOP
+
+#MACRONUM 0
+#MACROSTART
+#
+SPR: 1
+48,240,0
+2
+  0.0
+  1.0
+0
+#
+SUB: 2
+192,160,0
+1: 1
+ 96,176
+10: 4
+ 544,176
+ 544,176
+ 544,240
+ 208,240
+0
+0
+#
+PIO: 3
+240,160,0
+2: 0
+3
+  T1n_BO
+  0.0
+  T0n_BO
+1
+  0.0
+#
+SUB: 4
+288,160,0
+3: 0
+11: 3
+ 528,192
+ 528,224
+ 304,224
+0
+0
+#
+PIO: 5
+336,160,0
+4: 0
+3
+  T1i_BO
+  0.0
+  T0i_BO
+1
+  0.0
+#
+PT1: 6
+384,160,0
+5: 0
+2
+  Vsr
+  Tsr
+1
+  0.0
+#
+SUB: 14
+192,336,0
+1: 1
+ 96,352
+22: 4
+ 544,352
+ 544,352
+ 544,416
+ 208,416
+0
+0
+#
+PIO: 15
+240,336,0
+14: 0
+3
+  4*2*Tsr
+  0.0
+  (32*kPhi*SQR(Tsr))/J
+1
+  0.0
+#
+SUB: 16
+288,336,0
+15: 0
+23: 3
+ 528,368
+ 528,400
+ 304,400
+0
+0
+#
+PIO: 17
+336,336,0
+16: 0
+3
+  La/Ra
+  0.0
+  (2*Vsr*Tsr)/Ra
+1
+  0.0
+#
+PT1: 18
+384,336,0
+17: 0
+2
+  Vsr
+  Tsr
+1
+  0.0
+#
+TXT: 0
+73,121
+optimization for reference value
+#
+TXT: 0
+106,295
+optimization for disturbance value
+#
+TXT: 0
+48,32
+parameterization of blocks with symbolic parameters
+#
+TXT: 0
+48,64
+for display and editing of parameter table call
+#
+TXT: 0
+48,80
+"Simulation/Settings..." and double-click on symparam.prm
+#
+TXT: 0
+231,192
+speed c.
+#
+TXT: 0
+315,193
+current c.
+#
+PRO: 9
+464,112,1
+10: 0
+1
+  Kw
+0
+#
+OZI: 0
+560,160,0
+10: 1
+ 544,176
+BO #NORM=1.4
+#
+PRO: 21
+464,288,1
+22: 0
+1
+  Kw
+0
+#
+OZI: 0
+560,336,0
+22: 1
+ 544,352
+SO #NORM=1.4
+#
+TXT: 0
+230,368
+speed c.
+#
+TXT: 0
+315,369
+current c.
+#
+TXT: 0
+48,16
+speed control of a d.c.-drive
+#
+GM1: 10
+464,160,0
+6: 0
+9: 2
+ 448,128
+ 448,192
+4
+  1.5
+  0.06
+  2.5
+  0.5
+2
+  0.0
+  0.0
+#
+GM1: 22
+464,336,0
+18: 0
+21: 2
+ 448,304
+ 448,368
+4
+  1.5
+  0.06
+  2.5
+  0.5
+2
+  0.0
+  0.0
+#
+TXT: 0
+558,199
+use of dependent parameters
+#
+TXT: 0
+557,221
+in the parameter table
+#
+TXT: 0
+561,378
+direct calculation of parameters
+#
+TXT: 0
+562,396
+in the blocks
+#
+TXT: 0
+363,141
+rectifier
+#
+TXT: 0
+362,318
+rectifier
+#MACROSTOP

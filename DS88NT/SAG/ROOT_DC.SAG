@@ -1,0 +1,132 @@
+##Simulation ASCII Graphic FILE
+#COMMENTSTART
+WOK, diskontinuierlich
+#COMMENTSTOP
+
+#HEADSTART
+SimIntegrationMethod = RKM4
+SimTimeUnit = ms
+SimStartTime = 0
+SimStepTime = 0.1
+SimEndTime = 20
+MinIntegrationStep = 1E-12
+MaxIntegrationStep = 0.01
+SimMaxError = 0.001
+SimPrecision = 100
+TransformationSampleTime = 1
+Transformation_Gz = 0
+LinSimStartTime = 0
+LinSimDeltaTime = 0.01
+LinSimStopTime = 10
+LinSimStartFreq = 1
+LinSimStopFreq = 10000
+LinSimDeltaFreq = 1
+LinSimParamStart = 0
+LinSimParamStop = 2
+LinSimParamIndex = 1
+#HEADSTOP
+
+#MACRONUM 0
+#MACROSTART
+#
+SPR: 1
+208,288,0
+2
+   0.00000000000000E+00
+   1.00000000000000E+00
+0
+#
+SUB: 2
+288,288,0
+1: 0
+4: 3
+ 512,304
+ 512,368
+ 304,368
+0
+0
+#
+PRO: 3
+352,288,0
+2: 0
+1
+   1.00000000000000E+00
+0
+#
+FIL: 4
+432,288,0
+3: 0
+8
+  -1.00000000000000E+00
+   0.00000000000000E+00
+   0.00000000000000E+00
+   0.00000000000000E+00
+   0.00000000000000E+00
+   0.00000000000000E+00
+   1.00000000000000E+00
+   1.00000000000000E+00
+1
+   0.00000000000000E+00
+#
+L_I: 0
+256,224,0
+1: 0
+0
+0
+#
+L_P: 0
+400,224,0
+3: 0
+0
+0
+#
+L_O: 0
+480,224,0
+4: 0
+0
+0
+#
+TXT: 0
+272,128
+range of parameter: 0.0<=v<=2.0
+#
+TXT: 0
+95,45
+root locus of a discontinuous system
+#
+TXT: 0
+96,64
+-> select "Lin. Systems/Root Locus Curve/Linear Simulation" in the menu bar
+#
+TXT: 0
+97,82
+-> Press "OK"
+#
+TXT: 0
+176,192
+marking of
+#
+TXT: 0
+176,208
+system input
+#
+TXT: 0
+512,192
+marking of
+#
+TXT: 0
+510,209
+system output
+#
+TXT: 0
+335,172
+marking of block
+#
+TXT: 0
+334,189
+with change-
+#
+TXT: 0
+333,205
+able parameter
+#MACROSTOP

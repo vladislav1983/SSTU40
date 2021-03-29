@@ -1,0 +1,158 @@
+##Simulation ASCII Graphic FILE
+#COMMENTSTART
+d.c. motor
+#COMMENTSTOP
+
+#HEADSTART
+SimIntegrationMethod = RKM4
+SimTimeUnit = s
+SimStartTime = 0
+SimStepTime = 0.01
+SimEndTime = 2
+MinIntegrationStep = 1E-12
+MaxIntegrationStep = 0.05
+SimMaxError = 0.001
+SimPrecision = 100
+TransformationSampleTime = 1
+Transformation_Gz = 0
+LinSimStartTime = 0
+LinSimDeltaTime = 0.01
+LinSimStopTime = 10
+LinSimStartFreq = 1
+LinSimStopFreq = 10000
+LinSimDeltaFreq = 1
+LinSimParamStart = 0.5
+LinSimParamStop = 1
+LinSimParamIndex = 1
+#HEADSTOP
+
+#MACRONUM 0
+#MACROSTART
+#
+SPR: 1
+112,160,0
+2
+   0.00000000000000E+00
+   1.00000000000000E+00
+0
+#
+PT1: 2
+176,160,0
+1: 0
+2
+   1.00000000000000E+00
+   5.00000000000256E-03
+1
+   0.00000000000000E+00
+#
+SUB: 3
+224,160,0
+2: 0
+6: 3
+ 432,176
+ 432,224
+ 240,224
+0
+0
+#
+PT1: 4
+272,160,0
+3: 0
+2
+   1.00000000000000E+00
+   3.00000000000011E-02
+1
+   0.00000000000000E+00
+#
+SUB: 5
+320,160,0
+4: 0
+7: 1
+ 336,256
+0
+0
+#
+INT: 6
+368,160,0
+5: 0
+1
+   1.50000000000091E-01
+1
+   0.00000000000000E+00
+#
+SPR: 7
+256,240,0
+2
+   4.00000000000091E-01
+   1.00000000000000E+00
+0
+#
+TXT: 0
+32,160
+V_control
+#
+TXT: 0
+160,128
+rectifier
+#
+TXT: 0
+259,129
+armature
+#
+TXT: 0
+361,128
+mechanics
+#
+TXT: 0
+224,272
+load torque
+#
+TXT: 0
+31,31
+step response of a d.c. drive
+#
+OZI: 0
+528,160,0
+6: 1
+ 432,176
+Dreh #NORM=0.00000E+00
+#
+L_I: 0
+160,240,0
+1: 0
+0
+0
+#
+L_O: 0
+432,240,0
+6: 3
+ 432,176
+ 432,224
+ 432,224
+0
+0
+#
+TXT: 0
+96,272
+marking of
+#
+TXT: 0
+96,288
+system input
+#
+TXT: 0
+432,272
+marking of
+#
+TXT: 0
+432,288
+system output
+#
+TXT: 0
+31,57
+-> select "Lin. Systems/Step response/Linear Simulation" in the menu bar
+#
+TXT: 0
+30,75
+-> Press "OK"
+#MACROSTOP

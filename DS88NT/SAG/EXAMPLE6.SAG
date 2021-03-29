@@ -1,0 +1,146 @@
+##Simulation ASCII Graphic FILE
+#COMMENTSTART
+Van der Pol oscillator
+#COMMENTSTOP
+
+#HEADSTART
+SimIntegrationMethod = RKM4
+SimTimeUnit = s
+SimStartTime = 0
+SimStepTime = 0.05
+SimEndTime = 25
+MinIntegrationStep = 1E-12
+MaxIntegrationStep = 0.001
+SimMaxError = 0.001
+SimPrecision = 100
+TransformationSampleTime = 1
+Transformation_Gz = 0
+LinSimStartTime = 0
+LinSimDeltaTime = 0.01
+LinSimStopTime = 10
+LinSimStartFreq = 1
+LinSimStopFreq = 10000
+LinSimDeltaFreq = 1
+LinSimParamStart = 0.5
+LinSimParamStop = 1
+LinSimParamIndex = 1
+#HEADSTOP
+
+#MACRONUM 0
+#MACROSTART
+#
+ADD: 1
+256,224,0
+6: 0
+4: 1
+ 272,304
+0
+0
+#
+INT: 2
+320,224,0
+1: 0
+1
+   1.00000000000000E+00
+1
+   0.00000000000000E+00
+#
+INT: 3
+384,224,0
+2: 0
+1
+   1.00000000000000E+00
+1
+   5.00000000000114E-02
+#
+PRO: 4
+320,288,1
+3: 1
+ 432,304
+1
+  -1.00000000000000E+00
+0
+#
+QUA: 5
+320,336,1
+3: 2
+ 432,304
+ 432,352
+0
+0
+#
+MUL: 6
+208,224,0
+2: 3
+ 368,192
+ 192,192
+ 192,240
+7: 0
+0
+0
+#
+SUB: 7
+144,256,0
+8: 0
+5: 1
+ 160,352
+0
+0
+#
+TXT: 0
+304,272
+cx
+#
+TXT: 0
+384,304
+x=x1
+#
+TXT: 0
+304,160
+x'=x2
+#
+TXT: 0
+192,320
+x²
+#
+TXT: 0
+304,208
+x''
+#
+TXT: 0
+80,16
+Van der Pol oscillator
+#
+OZI: 0
+448,176,0
+2: 1
+ 368,192
+x2 #NORM=2.70000E+00
+#
+OZI: 0
+448,224,0
+3: 0
+x1 #NORM=2.70000E+00
+#
+KON: 8
+96,256,0
+1
+   1.00000000000000E+00
+0
+#
+TXT: 0
+80,32
+x"-(1-x²)*x'-x=0
+#
+TXT: 0
+79,53
+example for the simulation of a
+#
+TXT: 0
+77,71
+2nd order differential equation
+#
+TXT: 0
+77,92
+-> select "Simulation/Start" in the menu bar
+#MACROSTOP

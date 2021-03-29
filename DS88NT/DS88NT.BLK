@@ -1,0 +1,508 @@
+ADD 2 1
+0 
+0 0 0 0 0 0
+
+DIV 2 1
+0 
+0 0 0 0 0 0
+
+INT 1 1
+1 T1 
+1 1 1 0 1 1
+
+VDA 3 1
+0 
+0 0 0 0 0 0
+
+FKT 1 1
+14 x1 y1 x2 y2 x3 y3 x4 y4 x5 y5 x6 y6 x7 y7 
+0 0 0 0 0 1
+
+VER 1 1
+0 
+0 0 0 0 0 0
+
+INA 4 1
+1 T1 
+1 1 1 0 1 1
+
+PID 1 1
+3 Tn Tv V_pro
+1 0 0 0 1 1
+
+VDG 1 1
+1 T1 
+1 0 0 0 1 1
+
+DPG 1 1
+2 A B  
+0 0 0 1 0 1
+
+BEV 3 1
+0 
+0 0 0 0 0 1
+
+TZO 1 1
+1 A  
+0 0 0 0 0 1
+
+UEV 2 1
+0 
+0 0 0 0 0 1
+
+VH1 1 1
+1 T1 
+0 0 0 0 1 1
+
+SIN 1 1
+0 
+0 0 0 0 0 0
+
+SGN 1 1
+0 
+0 0 0 0 0 0
+
+RDG 1 1
+0 
+0 0 0 0 0 0
+
+DIF 1 1
+1 T1 
+0 0 0 0 1 1
+
+QRF 1 1
+1 No 
+1 1 0 0 1 1
+
+ARC 1 1
+0 
+0 0 0 0 0 0
+
+KBE 2 1
+0 
+0 0 0 0 0 0
+
+KWB 2 1
+0 
+0 0 0 0 0 0
+
+SUB 2 1
+0 
+0 0 0 0 0 0
+
+PRO 1 1
+1 V  
+0 0 0 0 0 0
+
+MUL 2 1
+0 
+0 0 0 0 0 0
+
+PT1 1 1
+2 V T1 
+1 1 1 0 1 1
+
+VDB 3 1
+0 
+0 0 0 0 0 0
+
+MST 4 1
+4 V1 V2 V3 V4 
+0 0 0 0 0 0
+
+ZEI 0 1
+0 
+0 0 0 0 0 0
+
+PTS 1 1
+2 T1 D  
+1 1 1 0 1 1
+
+PIO 1 1
+3 T1 T2 T0 
+1 0 0 0 1 1
+
+BEG 1 1
+2 O U  
+0 0 0 0 0 1
+
+UEM 1 1
+1 A  
+0 0 0 0 0 1
+
+ZPG 1 1
+2 A B  
+0 0 0 1 0 1
+
+LOS 1 1
+1 B  
+1 0 0 1 0 1
+
+WUR 1 1
+0 
+0 0 0 0 0 0
+
+COS 1 1
+0 
+0 0 0 0 0 0
+
+ABS 1 1
+0 
+0 0 0 0 0 0
+
+DSK 1 1
+1 A  
+0 0 0 0 0 0
+
+LRF 1 1
+1 No 
+1 1 0 0 1 1
+
+BRF 1 1
+1 No 
+1 1 0 0 1 1
+
+EXP 1 1
+0 
+0 0 0 0 0 0
+
+VH2 1 1
+2 T1 D  
+0 0 0 0 1 1
+
+LGN 1 1
+0 
+0 0 0 0 0 0
+
+KWC 2 1
+0 
+0 0 0 0 0 0
+
+FRG 0 1
+3 AM f Ph 
+0 0 0 0 0 1
+
+SPR 0 1
+2 Tv V  
+0 0 0 1 0 1
+
+SPF 0 1
+5 Tv V TA TP N
+0 0 0 1 0 1
+
+CTC 2 1
+2 Ma Mo 
+1 0 0 1 0 1
+
+FIL 1 1
+8 A1 A2 A3 B0 B1 B2 B3 To 
+1 0 0 1 0 1
+
+SCH 3 1
+0 
+0 0 0 0 0 0
+
+LZG 1 1
+2 To TL
+1 1 0 1 0 1
+
+REG 1 1
+9 VR A1 A2 A3 B1 B2 B3 Ym To 
+1 0 0 1 0 1
+
+RAM 3 1
+11 Ad A0 A1 A2 A3 A4 A5 A6 A7 A8 A9 
+0 0 0 1 0 0
+
+AHG 1 1
+1 To 
+0 0 0 1 0 1
+
+ABT 1 1
+1 To 
+0 0 0 1 0 1
+
+IMG 1 1
+1 To 
+0 0 0 1 0 1
+
+TZG 1 1
+1 To 
+1 1 0 1 0 1
+
+MGT 1 1
+1 To 
+1 1 0 1 0 1
+
+UND 3 1
+0 
+0 0 0 1 0 0
+
+ODR 3 1
+0 
+0 0 0 1 0 0
+
+KMP 2 1
+0 
+0 0 0 1 0 1
+
+NOD 3 1
+0 
+0 0 0 1 0 0
+
+RST 2 1
+0 
+1 0 0 1 0 0
+
+STG 0 1
+3 Tv V NG 
+0 0 0 1 0 1
+
+PRB 0 1
+3 Tv V K  
+0 0 0 1 0 1
+
+FLT 2 1
+7 A1 A2 A3 B0 B1 B2 B3 
+1 0 0 1 0 1
+
+REY 2 1
+8 VR A1 A2 A3 B1 B2 B3 To 
+1 0 0 1 0 1
+
+REV 3 1
+2 YM To 
+1 0 0 1 0 1
+
+KON 0 1
+1 k  
+0 0 0 0 0 0
+
+DAT 0 1
+4 To Na Mo Sp
+0 0 0 1 0 1
+
+QUA 1 1
+0 
+0 0 0 0 0 0
+
+POT 2 1
+0 
+0 0 0 0 0 0
+
+LOG 2 1
+0 
+0 0 0 0 0 0
+
+BRZ 1 1
+1 No 
+1 1 0 0 1 1
+
+QRZ 1 1
+1 No 
+1 1 0 0 1 1
+
+PIR 1 1
+2 Tn V_pro
+1 0 0 0 1 1
+
+UPK 2 2
+0 
+0 0 0 0 0 0
+
+UE1 1 1
+12 B0 B1 B2 B3 B4 B5 A0 A1 A2 A3 A4 A5 
+1 1 1 0 1 1
+
+UE2 1 1
+10 Z1 Z2 Z3 Z4 Z5 N1 N2 N3 N4 N5 
+1 1 1 0 1 1
+
+UE3 1 1
+11 Z0 Z1 Z2 Z3 Z4 Z5 N1 N2 N3 N4 N5 
+1 1 1 0 1 1
+
+UE4 1 1
+11 Z1 Z2 Z3 Z4 Z5 N0 N1 N2 N3 N4 N5 
+1 1 1 0 1 1
+
+VDR 3 2
+0 
+0 0 0 0 0 0
+
+KOW 3 3
+0 
+0 0 0 0 0 0
+
+KWA 3 3
+0 
+0 0 0 0 0 0
+
+MIN 4 1
+0 
+0 0 0 0 0 0
+
+MAX 4 1
+0 
+0 0 0 0 0 0
+
+UE5 1 1
+11 Z1 Z2 Z3 Z4 Z5 N0 N1 N2 N3 N4 N5 
+1 1 1 0 1 1
+
+AS1 3 4
+5 Rr Lr Lm zp J
+3 3 1 0 1 1
+
+AS2 3 4
+5 Rr Lr Lm zp J
+3 3 1 0 1 1
+
+AS3 3 8
+7 Rr Lr Lm Rs Ls zp J
+7 7 1 0 1 1
+
+AS4 3 6
+7 Rr Lr Lm Rs Ls zp J
+5 5 1 0 1 1
+
+DRE 0 2
+8 Ef fo 5 7 11 13 ph Ri 
+0 0 0 0 0 1
+
+DFT 3 2
+2 fo To 
+0 0 0 1 0 1
+
+UKP 2 2
+0
+0 0 0 0 0 0
+
+NEG 1 1
+0 
+0 0 0 1 0 0
+
+REI 1 1
+4 Hr Cr Dr dy 
+0 0 0 0 0 0
+
+STP 1 1
+2 Gr Mo 
+0 0 0 0 0 0
+
+SWG 0 1
+5 Tv Oa Oe Th Mo 
+0 0 0 0 0 1
+
+PWR 3 2
+3 fp Tf Mo
+0 0 0 1 0 1
+
+DAS 1 1
+2 Mo Na 
+0 0 0 0 0 1
+
+TO1 1 1
+4 df Tf de Te 
+1 0 1 0 0 1
+
+TO2 1 1
+2 df Tf
+1 1 1 0 0 1
+
+TO3 1 1
+6 df Tf de Te Tm w
+1 0 1 0 0 1
+
+TO4 1 1
+3 df Tf dw
+1 1 1 0 0 1
+
+IND 1 1
+2 Ti To
+1 0 0 1 0 1
+
+TXT 0 1
+0
+0 0 0 0 0 0
+
+MAK 1 1
+6 x x x x x x
+0 0 0 0 0 0
+
+OZI 1 1
+1 x
+0 0 0 0 0 0
+
+IN_ 0 1
+0
+0 0 0 0 0 0
+
+OUT 1 1
+0
+0 0 0 0 0 0
+
+SM1 4 8
+15 Rs Xd Xd' Xd" Xq Xq" Td' Td" Tq" Te Un In Nn zp J
+4 4 1 0 1 1
+
+SM2 4 8
+15 Rs Xd Xd' Xd" Xq Xq" Td' Td" Tq" Te Un In Nn zp J
+4 4 1 0 1 1
+
+SM3 4 8
+15 rs xd xd' xd" xq xq" Td' Td" Tq" Te Un In Nn zp J
+4 4 1 0 0 1
+
+DUM 0 1
+0
+1 0 0 0 0 1
+
+FUZ 5 2
+2 To Na
+0 0 0 0 0 1
+
+L_I 1 1
+0
+0 0 0 0 0 0
+
+L_O 1 1
+0
+0 0 0 0 0 0
+
+L_P 1 1
+0
+0 0 0 0 0 0
+
+ZRE 1 1
+3 Mode Param ZuVekt
+0 0 0 0 0 0
+
+DUR 4 6
+6 Un fn Phi Zv Tk Tp
+0 0 0 1 1 1
+
+GM1 2 3
+4 Ra La c*Phi J
+2 2 1 0 1 1
+
+DLL 6 6
+2 To Na
+0 0 0 1 0 1
+
+FI6 1 1
+14 A1 A2 A3 A4 A5 A6 B0 B1 B2 B3 B4 B5 B6 To
+1 0 0 1 0 1
+
+SM4 6 5
+15 Rs Xd Xd' Xd" Xq Xq" Td' Td" Tq" Te Un In Nn zp J
+4 4 1 0 1 1
+
+BXC 2 4
+5 Un fn Phi Zv Tk
+0 0 0 1 1 1
+
+PWV 4 2
+0
+0 0 0 1 0 0
+

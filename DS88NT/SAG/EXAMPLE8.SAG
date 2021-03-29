@@ -1,0 +1,242 @@
+##Simulation ASCII Graphic FILE
+#COMMENTSTART
+field-oriented control of an asynchronous machine with inverter model
+#COMMENTSTOP
+
+#HEADSTART
+SimIntegrationMethod = RK2
+SimTimeUnit = s
+SimStartTime = 0
+SimStepTime = 0.001
+SimEndTime = 0.22
+MinIntegrationStep = 1E-12
+MaxIntegrationStep = 0.001
+SimMaxError = 0.001
+SimPrecision = 100
+TransformationSampleTime = 1
+Transformation_Gz = 0
+LinSimStartTime = 0
+LinSimDeltaTime = 0.01
+LinSimStopTime = 10
+LinSimStartFreq = 1
+LinSimStopFreq = 10000
+LinSimDeltaFreq = 1
+LinSimParamStart = 0.5
+LinSimParamStop = 1
+LinSimParamIndex = 1
+#HEADSTOP
+
+#MACRONUM 0
+#MACROSTART
+#
+SPF: 1
+16,208,0
+5
+   6.00000000000023E-03
+   5.00000000000000E+01
+   1.00000000000023E-01
+   1.00000000000023E-01
+   2.00000000000000E+00
+0
+#
+SPR: 2
+16,272,0
+2
+   1.05999999999995E-01
+   5.00000000000000E+01
+0
+#
+SUB: 3
+80,208,0
+1: 0
+2: 1
+ 96,288
+0
+0
+#
+SUB: 4
+128,208,0
+3: 0
+21: 4
+ 576,144
+ 576,304
+ 272,304
+ 144,304
+0
+0
+#
+PIR: 5
+176,208,0
+4: 0
+2
+   8.00000000000000E+00
+   2.50000000000000E-01
+1
+   0.00000000000000E+00
+#
+SPR: 6
+176,128,0
+2
+   0.00000000000000E+00
+   5.90000000000146E+00
+0
+#
+MUL: 7
+240,160,0
+6: 1
+ 240,144
+5: 1
+ 256,224
+0
+0
+#
+PRO: 8
+288,160,0
+7: 0
+1
+   5.78947300000436E-01
+0
+#
+VH1: 9
+288,128,0
+6: 1
+ 240,144
+1
+   5.78947300000436E-01
+0
+#
+VDR: 10
+368,128,0
+9: 0
+8: 2
+ 352,176
+ 352,160
+19: 1
+ 368,256
+0
+0
+#
+KON: 17
+464,256,0
+1
+   0.00000000000000E+00
+0
+#
+ADD: 18
+256,240,0
+5: 1
+ 256,224
+21: 3
+ 576,144
+ 576,304
+ 272,304
+0
+0
+#
+INT: 19
+304,240,0
+18: 0
+1
+   1.00000000000000E+00
+1
+   0.00000000000000E+00
+#
+OZI: 0
+288,208,0
+5: 1
+ 256,224
+y(n) #NORM=0.00000E+00
+#
+OZI: 0
+592,128,0
+21: 1
+ 576,144
+nist #NORM=0.00000E+00
+#
+OZI: 0
+128,160,0
+3: 0
+Soll #DISKRET #NORM=0.00000E+00
+#
+SPR: 20
+384,224,0
+2
+   0.00000000000000E+00
+   3.80000000000000E+02
+0
+#
+AS1: 21
+512,128,0
+12: 0
+13: 0
+17: 0
+5
+   5.00000000000000E-01
+   2.89473700000144E-01
+   2.75000000000091E-01
+   1.00000000000000E+00
+   6.66669999999669E-03
+3
+   0.00000000000000E+00
+   1.62249999999949E+00
+   0.00000000000000E+00
+#
+PWR: 12
+432,128,0
+10: 0
+11: 0
+20: 0
+3
+   2.00000000000000E+03
+   9.99999999999612E-06
+   0.00000000000000E+00
+0
+#
+TXT: 0
+14,153
+reference
+#
+TXT: 0
+14,169
+value
+#
+TXT: 0
+13,184
+of speed
+#
+TXT: 0
+343,311
+Omega
+#
+TXT: 0
+175,108
+Phi_rd
+#
+TXT: 0
+328,108
+I_sd+
+#
+TXT: 0
+325,191
+I_sq+
+#
+TXT: 0
+323,270
+Theta_s+
+#
+TXT: 0
+451,286
+load torque
+#
+TXT: 0
+16,32
+simple field-oriented control of an asynchonous machine
+#
+TXT: 0
+16,48
+fed by current source with pulse-controlled inverter
+#
+TXT: 0
+15,67
+-> select "Simulation/Start" in the menu bar
+#MACROSTOP

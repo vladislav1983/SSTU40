@@ -1,0 +1,282 @@
+##Simulation ASCII Graphic FILE
+#COMMENTSTART
+Frequenzganganalyse eines Gleichstromantriebs
+#COMMENTSTOP
+
+#HEADSTART
+SimIntegrationMethod = RKM4
+SimTimeUnit = s
+SimStartTime = 0
+SimStepTime = 0.1
+SimEndTime = 20
+MinIntegrationStep = 1E-12
+MaxIntegrationStep = 0.01
+SimMaxError = 0.001
+SimPrecision = 100
+TransformationSampleTime = 1
+Transformation_Gz = 0
+LinSimStartTime = 0
+LinSimDeltaTime = 0.01
+LinSimStopTime = 10
+LinSimStartFreq = 1
+LinSimStopFreq = 1000
+LinSimDeltaFreq = 0.1
+LinSimParamStart = 0.5
+LinSimParamStop = 1
+LinSimParamIndex = 1
+#HEADSTOP
+
+#MACRONUM 0
+#MACROSTART
+#
+SPR: 1
+32,240,0
+2
+   0.00000000000000E+00
+   0.00000000000000E+00
+0
+#
+PT1: 2
+96,240,0
+1: 0
+2
+   1.00000000000000E+00
+   2.63999999999953E-02
+1
+   0.00000000000000E+00
+#
+MST: 3
+176,272,0
+2: 1
+ 176,256
+14: 0
+12: 5
+ 704,288
+ 704,368
+ 704,400
+ 160,400
+ 160,320
+0: 0
+4
+   1.00000000000000E+00
+   1.00000000000000E+00
+  -1.00000000000000E+00
+   0.00000000000000E+00
+0
+#
+PIO: 4
+224,272,0
+3: 0
+3
+   2.63999999999953E-02
+   0.00000000000000E+00
+   1.74239999999948E-03
+1
+   0.00000000000000E+00
+#
+SUB: 5
+272,272,0
+4: 0
+10: 2
+ 560,336
+ 288,336
+0
+0
+#
+PIO: 6
+320,272,0
+5: 0
+3
+   4.00000000000205E-02
+   0.00000000000000E+00
+   2.20000000000027E-01
+1
+   0.00000000000000E+00
+#
+PT1: 7
+368,272,0
+6: 0
+2
+   5.00000000000000E+01
+   3.29999999999941E-03
+1
+   0.00000000000000E+00
+#
+SUB: 8
+416,272,0
+7: 0
+13: 1
+ 432,368
+0
+0
+#
+PT1: 9
+464,272,0
+8: 0
+2
+   6.66666699999951E-01
+   4.00000000000205E-02
+1
+   0.00000000000000E+00
+#
+PRO: 10
+512,272,0
+9: 0
+1
+   2.50000000000000E+00
+0
+#
+SUB: 11
+592,272,0
+10: 1
+ 576,288
+15: 2
+ 576,256
+ 576,320
+0
+0
+#
+PT1: 12
+640,272,0
+11: 0
+2
+   2.40000000000009E-01
+   1.20000000000005E-01
+1
+   0.00000000000000E+00
+#
+PRO: 13
+496,352,1
+12: 2
+ 704,288
+ 704,368
+1
+   2.50000000000000E+00
+0
+#
+SPR: 14
+96,288,0
+2
+   0.00000000000000E+00
+   1.00000000000000E+00
+0
+#
+SPR: 15
+512,240,0
+2
+   2.00000000000045E-01
+   1.00000000000000E+00
+0
+#
+L_I: 0
+144,144,0
+14: 0
+0
+0
+#
+L_O: 0
+784,128,0
+12: 0
+0
+0
+#
+TXT: 0
+32,16
+frequency response of the speed control of a d.c. drive
+#
+TXT: 0
+32,32
+-> select "Lin. Systems/Frequency Response/Linear Simulation" in the menu bar
+#
+TXT: 0
+768,96
+marking of
+#
+TXT: 0
+766,113
+system output
+#
+TXT: 0
+48,112
+marking of
+#
+TXT: 0
+48,128
+system input
+#
+TXT: 0
+192,128
+for analysis of disturbance responce connect with disturbance
+#
+TXT: 0
+192,144
+for analysis of controlled system connect with speed controller
+#
+TXT: 0
+192,160
+for analysis of open loop connect with summing element
+#
+TXT: 0
+301,309
+current contr.
+#
+TXT: 0
+352,254
+rectifier
+#
+TXT: 0
+208,240
+speed
+#
+TXT: 0
+208,256
+controller
+#
+TXT: 0
+440,255
+armature
+#
+TXT: 0
+512,304
+k*Phi
+#
+TXT: 0
+624,304
+mechanics
+#
+TXT: 0
+496,384
+k*Phi
+#
+TXT: 0
+512,224
+disturbance
+#
+TXT: 0
+710,283
+speed
+#
+TXT: 0
+80,208
+pre-
+#
+TXT: 0
+80,224
+filter
+#
+TXT: 0
+16,288
+reference
+#
+TXT: 0
+160,320
+-
+#
+TXT: 0
+33,50
+-> Press "OK"
+#
+TXT: 0
+21,303
+value
+#MACROSTOP

@@ -1,0 +1,187 @@
+##Simulation ASCII Graphic FILE
+#COMMENTSTART
+digital regulation with CTC-control
+#COMMENTSTOP
+
+#HEADSTART
+SimIntegrationMethod = RK4
+SimTimeUnit = ms
+SimStartTime = 0
+SimStepTime = 0.05
+SimEndTime = 200
+MinIntegrationStep = 1E-12
+MaxIntegrationStep = 0.05
+SimMaxError = 0.001
+SimPrecision = 100
+TransformationSampleTime = 1
+Transformation_Gz = 0
+LinSimStartTime = 0
+LinSimDeltaTime = 0.01
+LinSimStopTime = 10
+LinSimStartFreq = 1
+LinSimStopFreq = 10000
+LinSimDeltaFreq = 1
+LinSimParamStart = 0.5
+LinSimParamStop = 1
+LinSimParamIndex = 1
+#HEADSTOP
+
+#MACRONUM 0
+#MACROSTART
+#
+TXT: 0
+160,48
+digital control using a CTC-controlled macro block
+#
+PT1: 4
+336,144,0
+9: 0
+2
+   1.00000000000000E+00
+   2.00000000000000E+02
+1
+   0.00000000000000E+00
+#
+IMG: 5
+304,224,1
+4: 2
+ 416,160
+ 416,240
+1
+   1.00000000000000E+01
+0
+#
+OZI: 0
+448,112,0
+8: 2
+ 320,144
+ 320,128
+Reg #DISKRET #NORM=0.00000E+00
+#
+OZI: 0
+448,144,0
+4: 1
+ 416,160
+Dreh #NORM=0.00000E+00
+#
+OZI: 0
+448,256,0
+5: 2
+ 288,240
+ 288,272
+IMG #DISKRET #NORM=0.00000E+00
+#
+CTC: 1
+144,288,0
+6: 0
+7: 2
+ 128,368
+ 128,320
+2
+   1.00000000000000E+00
+   0.00000000000000E+00
+1
+   0.00000000000000E+00
+#
+KON: 6
+48,288,0
+1
+   1.00000000000000E+00
+0
+#
+KON: 7
+48,352,0
+1
+   1.00000000000000E+01
+0
+#
+MAK: 8
+256,128,0
+M1,2,2
+DKR
+2: 0
+5: 3
+ 288,240
+ 240,240
+ 240,160
+0
+0
+#
+SPR: 2
+160,128,0
+2
+   2.00000000000000E+01
+   1.00000000000000E+02
+0
+#
+TXT: 0
+16,384
+time constant=10 ms
+#
+TXT: 0
+16,240
+mode: timer mode
+#
+TXT: 0
+16,256
+cyclic mode
+#
+TXT: 0
+208,304
+CTC controls macro block M1 
+#
+TXT: 0
+158,69
+-> select "Simulation/Start" in the menu bar
+#MACROSTOP
+
+#MACRONUM 1
+#MACROSTART
+#
+SUB: 2
+224,144,0
+1: 0
+4: 1
+ 240,224
+0
+0
+#
+REG: 3
+272,144,0
+2: 0
+9
+   1.20000000000000E+01
+  -1.00000000000000E+00
+   0.00000000000000E+00
+   0.00000000000000E+00
+  -8.00000000000182E-01
+   0.00000000000000E+00
+   0.00000000000000E+00
+   5.00000000000000E+02
+   0.00000000000000E+00
+1
+   0.00000000000000E+00
+#
+IN_: 4
+144,208,0
+N 2
+#
+OUT: 0
+352,144,0
+3: 0
+N 2
+#
+OUT: 0
+352,96,0
+3: 1
+ 320,112
+N 1
+#
+IN_: 1
+144,144,0
+N 1
+#
+TXT: 0
+160,48
+macro block digital controller
+#MACROSTOP

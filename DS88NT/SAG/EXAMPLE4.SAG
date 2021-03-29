@@ -1,0 +1,129 @@
+##Simulation ASCII Graphic FILE
+#COMMENTSTART
+generation of a time function
+#COMMENTSTOP
+
+#HEADSTART
+SimIntegrationMethod = RK2
+SimTimeUnit = ms
+SimStartTime = 0
+SimStepTime = 0.1
+SimEndTime = 40
+MinIntegrationStep = 1E-12
+MaxIntegrationStep = 0.1
+SimMaxError = 0.001
+SimPrecision = 100
+TransformationSampleTime = 1
+Transformation_Gz = 0
+LinSimStartTime = 0
+LinSimDeltaTime = 0.01
+LinSimStopTime = 10
+LinSimStartFreq = 1
+LinSimStopFreq = 10000
+LinSimDeltaFreq = 1
+LinSimParamStart = 0.5
+LinSimParamStop = 1
+LinSimParamIndex = 1
+#HEADSTOP
+
+#MACRONUM 0
+#MACROSTART
+#
+TXT: 0
+63,68
+Generation of a time function - output voltage of an inverter
+#
+KON: 1
+160,272,0
+1
+   1.00000000000000E+00
+0
+#
+FIL: 2
+224,272,0
+1: 0
+8
+  -1.00000000000000E+00
+   0.00000000000000E+00
+   0.00000000000000E+00
+   1.00000000000000E+00
+   0.00000000000000E+00
+   0.00000000000000E+00
+   0.00000000000000E+00
+   3.29999999999927E+00
+1
+   0.00000000000000E+00
+#
+DSK: 3
+304,272,0
+2: 1
+ 288,288
+1
+   6.00000000000000E+00
+0
+#
+SUB: 4
+368,240,0
+2: 2
+ 288,288
+ 288,256
+3: 0
+0
+0
+#
+KON: 5
+224,176,0
+1
+   0.00000000000000E+00
+0
+#
+RAM: 6
+304,160,0
+4: 3
+ 416,144
+ 288,144
+ 288,176
+5: 1
+ 288,192
+5: 2
+ 288,192
+ 288,208
+11
+   0.00000000000000E+00
+   1.00000000000000E+00
+   2.00000000000000E+00
+   1.00000000000000E+00
+  -1.00000000000000E+00
+  -2.00000000000000E+00
+  -1.00000000000000E+00
+   0.00000000000000E+00
+   0.00000000000000E+00
+   0.00000000000000E+00
+   0.00000000000000E+00
+0
+#
+OZI: 0
+464,160,0
+6: 0
+Gene #DISKRET #NORM=0.00000E+00
+#
+OZI: 0
+464,240,0
+4: 0
+Addr #DISKRET #NORM=0.00000E+00
+#
+OZI: 0
+464,320,0
+2: 2
+ 288,288
+ 288,336
+Fil #DISKRET #NORM=0.00000E+00
+#
+TXT: 0
+63,111
+-> select "Simulation/Start" in the menu bar
+#
+TXT: 0
+64,88
+(red curve in the diagram)
+#MACROSTOP

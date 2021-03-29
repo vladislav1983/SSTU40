@@ -1,0 +1,255 @@
+##Simulation ASCII Graphic FILE
+#COMMENTSTART
+two-step control
+#COMMENTSTOP
+
+#HEADSTART
+SimIntegrationMethod = RK4
+SimTimeUnit = s
+SimStartTime = 0
+SimStepTime = 0.001
+SimEndTime = 0.1
+MinIntegrationStep = 1E-12
+MaxIntegrationStep = 0.001
+SimMaxError = 0.001
+SimPrecision = 100
+TransformationSampleTime = 1
+Transformation_Gz = 0
+LinSimStartTime = 0
+LinSimDeltaTime = 0.01
+LinSimStopTime = 10
+LinSimStartFreq = 1
+LinSimStopFreq = 10000
+LinSimDeltaFreq = 1
+LinSimParamStart = 0.5
+LinSimParamStop = 1
+LinSimParamIndex = 1
+#HEADSTOP
+
+#MACRONUM 0
+#MACROSTART
+#
+MAK: 2
+384,224,0
+M1,2,2
+ANT
+1: 1
+ 368,240
+6: 2
+ 368,336
+ 368,256
+0
+0
+#
+ZPG: 1
+256,224,0
+4: 0
+2
+   5.00000000000114E-02
+   1.00000000000000E+00
+0
+#
+SUB: 4
+208,224,0
+5: 0
+3: 4
+ 448,256
+ 448,272
+ 448,288
+ 224,288
+0
+0
+#
+SPR: 5
+144,224,0
+2
+   9.99999999999446E-04
+   2.00000000000045E-01
+0
+#
+SPR: 6
+144,320,0
+2
+   0.00000000000000E+00
+   0.00000000000000E+00
+0
+#
+OZI: 0
+480,224,0
+2: 0
+Dreh #NORM=0.00000E+00
+#
+TXT: 0
+528,272
+current
+#
+OZI: 0
+480,256,0
+3: 2
+ 448,256
+ 448,272
+Stro #NORM=0.00000E+00
+#
+OZI: 0
+480,192,0
+1: 2
+ 368,240
+ 368,208
+Regl #DISKRET #NORM=0.00000E+00
+#
+TXT: 0
+528,240
+speed
+#
+TXT: 0
+528,208
+manipulated variable
+#
+TXT: 0
+244,186
+two-state
+#
+TXT: 0
+112,304
+load torque
+#
+TXT: 0
+117,207
+of current
+#
+TXT: 0
+380,183
+dc-drive
+#
+TXT: 0
+376,167
+macro block
+#
+TXT: 0
+64,47
+two-step control of the armature current of a d.c. drive
+#
+TXT: 0
+243,203
+controller
+#
+TXT: 0
+76,189
+reference value
+#
+TXT: 0
+65,73
+-> select "Simulation/Start" in the menu bar
+#
+TXT: 0
+382,301
+with right mouse click
+#
+TXT: 0
+379,320
+on the block symbol enter
+#
+TXT: 0
+379,338
+the macro block
+#MACROSTOP
+
+#MACRONUM 1
+#MACROSTART
+#
+PT1: 2
+192,144,0
+1: 0
+2
+   1.00000000000000E+00
+   5.00000000000256E-03
+1
+   0.00000000000000E+00
+#
+SUB: 3
+240,144,0
+2: 0
+6: 3
+ 448,160
+ 448,208
+ 256,208
+0
+0
+#
+PT1: 4
+288,144,0
+3: 0
+2
+   1.00000000000000E+00
+   3.00000000000011E-02
+1
+   0.00000000000000E+00
+#
+SUB: 5
+336,144,0
+4: 0
+7: 1
+ 352,224
+0
+0
+#
+INT: 6
+384,144,0
+5: 0
+1
+   1.50000000000091E-01
+1
+   0.00000000000000E+00
+#
+TXT: 0
+80,128
+V_control
+#
+TXT: 0
+176,112
+rectifier
+#
+TXT: 0
+288,112
+armature
+#
+TXT: 0
+387,112
+mechanics
+#
+TXT: 0
+80,192
+load torque
+#
+TXT: 0
+224,48
+macro block dc-drive
+#
+IN_: 1
+80,144,0
+N 1
+#
+IN_: 7
+80,208,0
+N 2
+#
+OUT: 0
+512,144,0
+6: 1
+ 448,160
+N 1
+#
+OUT: 0
+512,224,0
+4: 1
+ 336,240
+N 2
+#
+TXT: 0
+512,128
+speed
+#
+TXT: 0
+512,208
+current
+#MACROSTOP

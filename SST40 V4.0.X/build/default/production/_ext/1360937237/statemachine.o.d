@@ -1,0 +1,24 @@
+build/default/production/_ext/1360937237/statemachine.o:  \
+ ../src/statemachine.c  \
+../src/include/statemachine.h  \
+../src/Common/basedef.h  \
+../src/Common/p30f3014.h  \
+../src/Common/DigitalIoCfg.h  \
+../src/Common/basedef.h  \
+../src/Common/basedef.h  \
+../src/include/DigitalIO.h  \
+../src/include/LCD.h  \
+../src/include/systmr.h  \
+../src/include/sirem.h  \
+../src/include/PARLIST.h  \
+../src/include/vuart.h  \
+../src/include/vADC.h  \
+../src/include/task.h  \
+../src/include/systmr.h  \
+../src/include/trace.h  \
+../src/include/eeprom.h  \
+../src/include/PARLIST.h  \
+../src/include/measure.h  \
+../src/include/ident.h  \
+../src/include/tempctrl.h  \
+../src/include/triac_control.h 

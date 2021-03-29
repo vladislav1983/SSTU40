@@ -1,0 +1,20 @@
+build/default/production/_ext/1360937237/PARLIST.o:  \
+../src/PARLIST.c  \
+../src/Common/basedef.h  \
+../src/Common/p30f3014.h  \
+../src/Common/DigitalIoCfg.h  \
+../src/Common/basedef.h  \
+../src/include/PARLIST.h  \
+../src/Common/basedef.h  \
+../src/include/systmr.h  \
+../src/include/vADC.h  \
+../src/include/task.h  \
+../src/include/systmr.h  \
+../src/include/trace.h  \
+../src/include/task.h  \
+../src/include/measure.h  \
+../src/include/statemachine.h  \
+../src/include/tempctrl.h  \
+../src/include/ident.h  \
+../src/include/eeprom.h  \
+../src/include/PARLIST.h 

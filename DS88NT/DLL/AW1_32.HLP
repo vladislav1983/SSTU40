@@ -1,0 +1,16 @@
+Beispiel Sprungglied SPR
+
+       / 0 für t < Tv
+  y = {
+       \ V für t >= Tv
+
+Unter "Optionen/Anwenderblöcke/Blockeigenschaften" wurde folgendes 
+vereinbart:
+0 Eingangssignale
+1 Ausgangssignal (aus[1])
+2 Parameter (ep[1]='Tv', ep[2]:='V')
+0 Anfangswerte
+0 entkoppelnde Blockausgänge
+  Schaltblock
+
+Quelltext in DS88H\DLL\AW0.PAS
