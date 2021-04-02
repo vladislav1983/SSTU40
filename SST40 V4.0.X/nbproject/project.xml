@@ -15,6 +15,7 @@
             <sourceRootList>
                 <sourceRootElem>..</sourceRootElem>
                 <sourceRootElem>..\src</sourceRootElem>
+                <sourceRootElem>..\src\RotaryEncoder</sourceRootElem>
                 <sourceRootElem>..\src\Common</sourceRootElem>
                 <sourceRootElem>..\src\include</sourceRootElem>
             </sourceRootList>

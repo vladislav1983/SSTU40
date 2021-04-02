@@ -22,7 +22,9 @@
 #include "basedef.h"
 #include "DigitalIO.h"
 #include "statemachine.h"
-
+#if defined(ROTARY_ENCODER_USED) 
+#include "RotaryEncoder.h"
+#endif
 
 /*----------------------------------------------------------------------------*/
 /* Local constants                                                            */
@@ -99,10 +101,11 @@ void IF_DigitalIO_Init(void)
     pinLED = 1;            pinLED_dir = 0;            //output,1 //Light User Led
     
     pinSTAT_DET    = 0;    pinSTAT_DET_dir    =0;        //output,0
-    
+#if !defined(ROTARY_ENCODER_USED)    
     pinBUT_SEL_dir = 1;    //input
     pinBUT_UP_dir = 1;    //input
     pinBUT_DOWN_dir = 1;//input
+#endif
     pinEXTR_dir = 1;    //input
     pinSTAND_dir = 1;    //input
     pinCART_STAT = 1;    //input
@@ -126,6 +129,8 @@ void IF_DigitalIO_Init(void)
     
     
 }
+
+U16 counter = 0;
 /******************************************************************************/
 /*
  * Name:    User Button scan in task 2.  5ms 
@@ -143,6 +148,28 @@ void IF_DigitalIO_Init(void)
 /******************************************************************************/
 void Dio_Scan_T2(void)
 {
+#if defined(ROTARY_ENCODER_USED)
+	teRotaryEncoderState state;
+	
+	state = RotaryEncoder_ConsumeStateEvent(eROTARY_CLIENT_0);
+	
+	if(state == eRoratyCW)
+	{
+		//_set_up_button(1);
+		counter++;
+	}
+	else if(state == eRoratyCCW)
+	{
+		//_set_down_button(1);
+		counter--;
+	}
+	else if(state == eRotaryPush)
+	{
+		//_set_select_button(1);
+		counter = 0;
+	}
+	
+#else
  /* Scan select button */
     if(!pinBUT_SEL && pinBUT_UP && pinBUT_DOWN) //if SELECT button is pushed AND no others
      {
@@ -193,7 +220,9 @@ void Dio_Scan_T2(void)
     {
         debounce_timer_2 = DEBOUNCE_TIME_T2;
     }
+#endif
 }
+
 
 /******************************************************************************/
 /*

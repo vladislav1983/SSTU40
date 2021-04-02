@@ -1,18 +1,21 @@
-/*=====================================================================================================================
- * 
- * Repository path:     $HeadURL$
- * Last committed:      $Revision$
- * Last changed by:     $Author$
- * Last changed date:   $Date$
- * ID:                  $Id$
+/* 
+ * File:   RotaryEncoder.h
+ * Author: GYV1SF4
  *
- *===================================================================================================================*/
-#ifndef __XXX_H
-#define __XXX_H
+ * Created on March 30, 2021, 10:20 AM
+ */
+
+#ifndef ROTARYENCODER_H
+#define	ROTARYENCODER_H
+
+#ifdef	__cplusplus
+extern "C" {
+#endif
 
 /*----------------------------------------------------------------------------*/
 /* Included files to resolve specific definitions in this file                */
 /*----------------------------------------------------------------------------*/
+#include "RotaryEncoder_cfg.h"
 
 /*----------------------------------------------------------------------------*/
 /* Constant data                                                              */
@@ -37,6 +40,13 @@
 /*----------------------------------------------------------------------------*/
 /* Exported functions                                                         */
 /*----------------------------------------------------------------------------*/
+extern void RotaryEncoder_Init(void);    
+extern void RotaryEncoder_Scan_T1(void);
+extern teRotaryEncoderState RotaryEncoder_ConsumeStateEvent(teRotaryEncoderClientCfg client);
 
+#ifdef	__cplusplus
+}
+#endif
 
-#endif /* XXX */
+#endif	/* ROTARYENCODER_H */
+

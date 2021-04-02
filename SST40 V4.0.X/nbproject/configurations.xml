@@ -22,6 +22,9 @@
       <itemPath>../src/include/IDENT.H</itemPath>
       <itemPath>../src/include/tempctrl.h</itemPath>
       <itemPath>../src/include/measure.h</itemPath>
+      <itemPath>../src/RotaryEncoder/RotaryEncoder.h</itemPath>
+      <itemPath>../src/RotaryEncoder/RotaryEncoder_cfg.h</itemPath>
+      <itemPath>../src/RotaryEncoder/RotaryEncoderTypes.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -47,6 +50,8 @@
       <itemPath>../src/tempctrl.c</itemPath>
       <itemPath>../src/measure.c</itemPath>
       <itemPath>../src/traps.c</itemPath>
+      <itemPath>../src/RotaryEncoder/RotaryEncoder.c</itemPath>
+      <itemPath>../src/RotaryEncoder/RotaryEncoder_cfg.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -57,6 +62,7 @@
   <sourceRootList>
     <Elem>..</Elem>
     <Elem>..\src</Elem>
+    <Elem>..\src\RotaryEncoder</Elem>
     <Elem>..\src\Common</Elem>
     <Elem>..\src\include</Elem>
   </sourceRootList>
@@ -68,7 +74,7 @@
         <targetDevice>dsPIC30F3014</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>PICkit3PlatformTool</platformTool>
+        <platformTool>noID</platformTool>
         <languageToolchain>C30</languageToolchain>
         <languageToolchainVersion>3_31</languageToolchainVersion>
         <platform>3</platform>
@@ -118,12 +124,12 @@
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="extra-include-directories"
-                  value="..\src\Common;..\src\include;."/>
+                  value="..\src\Common;..\src\include;.;..\src\RotaryEncoder"/>
         <property key="isolate-each-function" value="false"/>
         <property key="optimization-level" value="1"/>
         <property key="post-instruction-scheduling" value="default"/>
         <property key="pre-instruction-scheduling" value="default"/>
-        <property key="preprocessor-macros" value=""/>
+        <property key="preprocessor-macros" value="ROTARY_ENCODER_USED"/>
         <property key="scalar-model" value="default"/>
       </C30>
       <C30-AS>

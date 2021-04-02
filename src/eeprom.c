@@ -555,7 +555,7 @@ void ee_param_act(BOOL init,BOOL read_all_params)
             
             EE_WriteChecksum(EE_CHKS, (pa)->bActiveBank);
 
-            if(EE_VerifyChecksum(EE_CHKS,(pa)->bActiveBank) == S_FALSE) _set_ee_checksum_read_error(1);
+            //if(EE_VerifyChecksum(EE_CHKS,(pa)->bActiveBank) == S_FALSE) _set_ee_checksum_read_error(1);
             
             // switch between banks
             mSwapBanks();

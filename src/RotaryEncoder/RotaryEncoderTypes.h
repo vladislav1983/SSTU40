@@ -1,19 +1,24 @@
-/*=====================================================================================================================
- * 
- * Repository path:     $HeadURL$
- * Last committed:      $Revision$
- * Last changed by:     $Author$
- * Last changed date:   $Date$
- * ID:                  $Id$
+/* 
+ * File:   RotaryEncoderTypes.h
+ * Author: GYV1SF4
  *
- *===================================================================================================================*/
-#ifndef __XXX_H
-#define __XXX_H
+ * Created on April 1, 2021, 10:41 PM
+ */
 
+#ifndef ROTARYENCODERTYPES_H
+#define	ROTARYENCODERTYPES_H
+
+#ifdef	__cplusplus
+extern "C"
+{
+#endif
 /*----------------------------------------------------------------------------*/
 /* Included files to resolve specific definitions in this file                */
 /*----------------------------------------------------------------------------*/
-
+#include "stddef.h"
+#include "stdint.h"
+#include "stdbool.h"
+ 
 /*----------------------------------------------------------------------------*/
 /* Constant data                                                              */
 /*----------------------------------------------------------------------------*/
@@ -21,6 +26,21 @@
 /*----------------------------------------------------------------------------*/
 /* Exported type                                                              */
 /*----------------------------------------------------------------------------*/
+typedef enum
+{
+  eRoratyStopIdle = 1u,
+  eRotaryPush     = 2u,
+  eRoratyCW       = 4u,
+  eRoratyCCW      = 8u,
+  eRoratyInvalid = 255u,
+}teRotaryEncoderState;
+
+typedef struct
+{
+	bool input_a;
+	bool input_b;
+	bool input_push;
+}tRotaryInputs;
 
 /*----------------------------------------------------------------------------*/
 /* Exported data                                                              */
@@ -37,6 +57,10 @@
 /*----------------------------------------------------------------------------*/
 /* Exported functions                                                         */
 /*----------------------------------------------------------------------------*/
+ 
+#ifdef	__cplusplus
+}
+#endif
 
+#endif	/* ROTARYENCODERTYPES_H */
 
-#endif /* XXX */

@@ -49,23 +49,34 @@
 #define pinLCD_E            _LATF1
 #define pinLCD_E_dir        _TRISF1
 
+#if defined(ROTARY_ENCODER_USED)
+/* ROTARY ENCODER PIN DEFINE */
+#define pinROTARY_PUSH        _RF3
+#define pinROTARY_PUSH_dir    _TRISF3
+
+#define pinROTARY_A           _RF4
+#define pinROTARY_A_dir       _TRISF4
+
+#define pinROTARY_B           _RF5
+#define pinROTARY_B_dir       _TRISF5
+#else
 /* BUTTON PIN DEFINE */
-#define pinBUT_SEL            _RF3
-#define pinBUT_SEL_dir        _TRISF3
+#define pinBUT_SEL          _RF3
+#define pinBUT_SEL_dir      _TRISF3
 
-#define pinBUT_UP            _RF4
-#define pinBUT_UP_dir        _TRISF4
+#define pinBUT_UP           _RF4
+#define pinBUT_UP_dir       _TRISF4
 
-#define pinBUT_DOWN            _RF5
-#define pinBUT_DOWN_dir        _TRISF5
-
+#define pinBUT_DOWN         _RF5
+#define pinBUT_DOWN_dir     _TRISF5
+#endif
 /* LED PIN DEFINE */
-#define pinLED                 _LATF6
-#define pinLED_dir            _TRISF6
+#define pinLED              _LATF6
+#define pinLED_dir          _TRISF6
 
 /* Solder state digital inputs */
-#define pinEXTR                _RD3
-#define pinEXTR_dir            _TRISD3
+#define pinEXTR             _RD3
+#define pinEXTR_dir         _TRISD3
 
 #define pinSTAND            _RD8
 #define pinSTAND_dir        _TRISD8

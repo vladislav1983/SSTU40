@@ -31,6 +31,9 @@
 #include "vADC.h"
 #include "tempctrl.h"
 #include "vuart.h"
+#if defined(ROTARY_ENCODER_USED) 
+#include "RotaryEncoder.h"
+#endif
 
 /*----------------------------------------------------------------------------*/
 /* Local constants                                                            */
@@ -113,7 +116,9 @@ void __attribute__((__interrupt__,no_auto_psv)) _T3Interrupt(void)
     sci_timer();
     
     StationStatistic();
-    
+#if defined(ROTARY_ENCODER_USED) 
+    RotaryEncoder_Scan_T1();
+#endif    
     _set_zero_cross(0); //<----- Zero cross cleared at end of interrupt
     
     _Task1_GetTime(pT1time);
@@ -140,9 +145,7 @@ void __attribute__((__interrupt__,no_auto_psv)) _T1Interrupt(void)
     _set_task2_execute(1); //task2 is executing
     
     measure_T2();
-    
     Dio_Scan_T2();
-    
     state_machine_T2();
 
     _RESET_ERROR_PC_HANDLER(); /* Check for reset errors from PC_CONTROL:3 */

@@ -44,7 +44,9 @@
 #include "tempctrl.h"
 #include "trace.h"
 #include "sirem.h"
-
+#if defined(ROTARY_ENCODER_USED)
+#include "RotaryEncoder.h"
+#endif
 
 /*----------------------------------------------------------------------------*/
 /* Constant data                                                              */
@@ -105,6 +107,9 @@ int main()
     }
     
     IF_DigitalIO_Init();
+#if defined(ROTARY_ENCODER_USED)
+		RotaryEncoder_Init();
+#endif
     IF_LCDInit();
     trace_init_first();
     IF_SysTmr1_Init();
@@ -139,24 +144,15 @@ int main()
     while(1)
     {
     /* BACKGROUND LOOP. */
-        
-        if(!_is_task1_execute() && !_is_task2_execute()) Sirem_Engine(); // Serial Communication run in background loop    
-        
-        Idle();
-    
-        if(!_is_task1_execute() && !_is_task2_execute()) TaskTimesCalc(pTtime_pointer);
-        
-        Idle();
-        
-        if(!_is_task1_execute() && !_is_task2_execute()) ee_param_act(0,0); // Online parameters actualization in background
-        
-        Idle();
-        
-        if(!_is_task1_execute() && !_is_task2_execute()) Params_check_limit();
-
-        ClrWdt();    //<------ Clear Watchdog timer
-
-        Idle();
+			if(!_is_task1_execute() && !_is_task2_execute()) Sirem_Engine(); // Serial Communication run in background loop    
+			Idle();
+			if(!_is_task1_execute() && !_is_task2_execute()) TaskTimesCalc(pTtime_pointer);
+			Idle();
+			if(!_is_task1_execute() && !_is_task2_execute()) ee_param_act(0,0); // Online parameters actualization in background
+			Idle();
+			if(!_is_task1_execute() && !_is_task2_execute()) Params_check_limit();
+			ClrWdt();    //<------ Clear Watchdog timer
+			Idle();
     }
 
     return(0);
