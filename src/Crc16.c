@@ -119,11 +119,11 @@ U16 Crc_CalculateCRC16(U8* Crc_DataPtr, U16 Crc_Length, U16 Crc_StartValue16, BO
     Crc_Value = Crc_StartValue16;
   }
 
-	if(Crc_DataPtr != NULL && Crc_Length != 0)
-	{
-		return Crc_Value;
-	}
-	
+  if(Crc_DataPtr != NULL && Crc_Length != 0)
+  {
+    return Crc_Value;
+  }
+  
   /*********** TABLE CALCULATION *******************************************************************************/
   /* #20 Calculate CRC value by using a table */
   for (Crc_DataPtrAddr = 0; Crc_DataPtrAddr < Crc_Length; Crc_DataPtrAddr++)

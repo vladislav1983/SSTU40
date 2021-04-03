@@ -43,21 +43,21 @@ static const teRotaryEncoderState RotaryEncoderStates[] =
 /*----------------------------------------------------------------------------*/
 /* Local macros                                                               */
 /*----------------------------------------------------------------------------*/
-#define ROTARY_ENCODER_STATES_SIZE			( sizeof(RotaryEncoderStates)/sizeof(teRotaryEncoderState) )
-#define ROTARY_ENCODER_DEBOUNCE_TIME		(ROTARY_ENCODER_DEBOUNCE_TIME_us/ROTARY_ENCODER_POLLING_TIME_us)	
+#define ROTARY_ENCODER_STATES_SIZE      ( sizeof(RotaryEncoderStates)/sizeof(teRotaryEncoderState) )
+#define ROTARY_ENCODER_DEBOUNCE_TIME    (ROTARY_ENCODER_DEBOUNCE_TIME_us/ROTARY_ENCODER_POLLING_TIME_us)  
 
 /*----------------------------------------------------------------------------*/
 /* Local types                                                                */
 /*----------------------------------------------------------------------------*/
 typedef struct 
 {
-	tRotaryInputs Inputs;
-	tRotaryInputs InputsDebounced;
-	tRotaryInputs InputsDebouncedOld;
-	teRotaryEncoderState State;
+  tRotaryInputs Inputs;
+  tRotaryInputs InputsDebounced;
+  tRotaryInputs InputsDebouncedOld;
+  teRotaryEncoderState State;
   uint16_t debounce_timer_a;
-	uint16_t debounce_timer_b;
-	uint16_t debounce_timer_push;
+  uint16_t debounce_timer_b;
+  uint16_t debounce_timer_push;
 }tRotaryEncoder;
 
 /*----------------------------------------------------------------------------*/
@@ -66,18 +66,18 @@ typedef struct
 static bool RotaryEncoder_InitState = false;
 static tRotaryEncoder RotaryEncoder[eROTARY_ENCODERS_NUM] = 
 {
-	{
-		.Inputs.input_a							= false,
-		.Inputs.input_b							= false,
-		.Inputs.input_push					= false,
-		.InputsDebounced.input_a		= false,
-		.InputsDebounced.input_b		= false,
-		.InputsDebounced.input_push = false,
-		.State											= eRoratyStopIdle,
-		.debounce_timer_a						= ROTARY_ENCODER_DEBOUNCE_TIME,
-		.debounce_timer_b						= ROTARY_ENCODER_DEBOUNCE_TIME,
-		.debounce_timer_push				= ROTARY_ENCODER_DEBOUNCE_TIME,	
-	}
+  {
+    .Inputs.input_a              = false,
+    .Inputs.input_b              = false,
+    .Inputs.input_push          = false,
+    .InputsDebounced.input_a    = false,
+    .InputsDebounced.input_b    = false,
+    .InputsDebounced.input_push = false,
+    .State                      = eRoratyStopIdle,
+    .debounce_timer_a            = ROTARY_ENCODER_DEBOUNCE_TIME,
+    .debounce_timer_b            = ROTARY_ENCODER_DEBOUNCE_TIME,
+    .debounce_timer_push        = ROTARY_ENCODER_DEBOUNCE_TIME,  
+  }
 };
 
 /*----------------------------------------------------------------------------*/
@@ -107,12 +107,12 @@ static tRotaryEncoder RotaryEncoder[eROTARY_ENCODERS_NUM] =
  ******************************************************************************/
 static void RotaryEncoder_ReadPins(void)
 {
-	uint16_t i;
-	
-	for (i = 0; i < eROTARY_ENCODERS_NUM; i++)
-	{
-		RotaryEncoder_cfg_ReadPins(i, &RotaryEncoder[i].Inputs);
-	}
+  uint16_t i;
+  
+  for (i = 0; i < eROTARY_ENCODERS_NUM; i++)
+  {
+    RotaryEncoder_cfg_ReadPins(i, &RotaryEncoder[i].Inputs);
+  }
 }
 
 /******************************************************************************
@@ -122,54 +122,54 @@ static void RotaryEncoder_ReadPins(void)
  ******************************************************************************/
 static void RotaryEncoder_DebouncePins(void)
 {
-	tRotaryEncoder * re = NULL;
-	uint16_t i;
-	
-	for(i = 0; i < eROTARY_ENCODERS_NUM; i++)
-	{
-		re = &RotaryEncoder[i];
-		// rotary encoder input a
-		if(re->InputsDebounced.input_a != re->Inputs.input_a)
-		{
-			if((re->debounce_timer_a--) == 0u)
-			{
-				re->InputsDebounced.input_a = re->Inputs.input_a;
-				re->debounce_timer_a = ROTARY_ENCODER_DEBOUNCE_TIME;
-			}
-		}
-		else
-		{
-			re->debounce_timer_a = ROTARY_ENCODER_DEBOUNCE_TIME;
-		}
-		
-		// rotary encoder input b
-		if(re->InputsDebounced.input_b != re->Inputs.input_b)
-		{
-			if((re->debounce_timer_b--) == 0u)
-			{
-				re->InputsDebounced.input_b = re->Inputs.input_b;
-				re->debounce_timer_b = ROTARY_ENCODER_DEBOUNCE_TIME;
-			}
-		}
-		else
-		{
-			re->debounce_timer_b = ROTARY_ENCODER_DEBOUNCE_TIME;
-		}
-		
-		// rotary encoder input push
-		if(re->InputsDebounced.input_push != re->Inputs.input_push)
-		{
-			if((re->debounce_timer_push--) == 0u)
-			{
-				re->InputsDebounced.input_push = re->Inputs.input_push;
-				re->debounce_timer_push = ROTARY_ENCODER_DEBOUNCE_TIME;
-			}
-		}
-		else
-		{
-			re->debounce_timer_push = ROTARY_ENCODER_DEBOUNCE_TIME;
-		}
-	}
+  tRotaryEncoder * re = NULL;
+  uint16_t i;
+  
+  for(i = 0; i < eROTARY_ENCODERS_NUM; i++)
+  {
+    re = &RotaryEncoder[i];
+    // rotary encoder input a
+    if(re->InputsDebounced.input_a != re->Inputs.input_a)
+    {
+      if((re->debounce_timer_a--) == 0u)
+      {
+        re->InputsDebounced.input_a = re->Inputs.input_a;
+        re->debounce_timer_a = ROTARY_ENCODER_DEBOUNCE_TIME;
+      }
+    }
+    else
+    {
+      re->debounce_timer_a = ROTARY_ENCODER_DEBOUNCE_TIME;
+    }
+    
+    // rotary encoder input b
+    if(re->InputsDebounced.input_b != re->Inputs.input_b)
+    {
+      if((re->debounce_timer_b--) == 0u)
+      {
+        re->InputsDebounced.input_b = re->Inputs.input_b;
+        re->debounce_timer_b = ROTARY_ENCODER_DEBOUNCE_TIME;
+      }
+    }
+    else
+    {
+      re->debounce_timer_b = ROTARY_ENCODER_DEBOUNCE_TIME;
+    }
+    
+    // rotary encoder input push
+    if(re->InputsDebounced.input_push != re->Inputs.input_push)
+    {
+      if((re->debounce_timer_push--) == 0u)
+      {
+        re->InputsDebounced.input_push = re->Inputs.input_push;
+        re->debounce_timer_push = ROTARY_ENCODER_DEBOUNCE_TIME;
+      }
+    }
+    else
+    {
+      re->debounce_timer_push = ROTARY_ENCODER_DEBOUNCE_TIME;
+    }
+  }
 }
 
 /******************************************************************************/
@@ -183,8 +183,8 @@ static void RotaryEncoder_DebouncePins(void)
  ******************************************************************************/
 void RotaryEncoder_Init(void)
 {
-	RotaryEncoder_InitState = true;
-	RotaryEncoder_cfg_InitPins();
+  RotaryEncoder_InitState = true;
+  RotaryEncoder_cfg_InitPins();
 }
 
 /******************************************************************************
@@ -194,51 +194,51 @@ void RotaryEncoder_Init(void)
  ******************************************************************************/
 void RotaryEncoder_Scan_T1(void)
 {
-	uint16_t i;
-	uint8_t RotaryInput_AB = 0;
-	uint8_t RotaryInput_AB_old = 0;
-	teRotaryEncoderState currentDirection;
-	tRotaryEncoder * re = NULL;
-	
-	for (i = 0; i < eROTARY_ENCODERS_NUM && RotaryEncoder_InitState == 1; i++)
-	{
-		RotaryEncoder_ReadPins();
-		RotaryEncoder_DebouncePins ();
-		
-		re = &RotaryEncoder[i];
-		
-		if(re->InputsDebounced.input_push)
-		{
-			re->State = eRotaryPush;
-		}
-		else 
-		{
-			// check that state is consumed, so it can be updated
-			if(re->State == eRoratyStopIdle)
-			{
-				RotaryInput_AB = (re->InputsDebounced.input_a << 1u) 
-												| re->InputsDebounced.input_b;
+  uint16_t i;
+  uint8_t RotaryInput_AB = 0;
+  uint8_t RotaryInput_AB_old = 0;
+  teRotaryEncoderState currentDirection;
+  tRotaryEncoder * re = NULL;
+  
+  for (i = 0; i < eROTARY_ENCODERS_NUM && RotaryEncoder_InitState == 1; i++)
+  {
+    RotaryEncoder_ReadPins();
+    RotaryEncoder_DebouncePins ();
+    
+    re = &RotaryEncoder[i];
+    
+    if(re->InputsDebounced.input_push)
+    {
+      re->State = eRotaryPush;
+    }
+    else 
+    {
+      // check that state is consumed, so it can be updated
+      if(re->State == eRoratyStopIdle)
+      {
+        RotaryInput_AB = (re->InputsDebounced.input_a << 1u) 
+                        | re->InputsDebounced.input_b;
 
-				RotaryInput_AB_old = (re->InputsDebouncedOld.input_a << 1u) 
-														| re->InputsDebouncedOld.input_b;
+        RotaryInput_AB_old = (re->InputsDebouncedOld.input_a << 1u) 
+                            | re->InputsDebouncedOld.input_b;
 
-				currentDirection = RotaryEncoderStates[((RotaryInput_AB_old << 2u) | RotaryInput_AB) % ROTARY_ENCODER_STATES_SIZE];
+        currentDirection = RotaryEncoderStates[((RotaryInput_AB_old << 2u) | RotaryInput_AB) % ROTARY_ENCODER_STATES_SIZE];
 
-				if(eRoratyInvalid != currentDirection)
-				{
-					re->State = currentDirection;
-				}
-				else
-				{
-					re->State = eRoratyStopIdle;
-				}
-			}
-		}
-		
-		re->InputsDebouncedOld.input_a	   = re->InputsDebounced.input_a;
-		re->InputsDebouncedOld.input_b		 = re->InputsDebounced.input_b;
-		re->InputsDebouncedOld.input_push = re->InputsDebounced.input_push;
-	}
+        if(eRoratyInvalid != currentDirection)
+        {
+          re->State = currentDirection;
+        }
+        else
+        {
+          re->State = eRoratyStopIdle;
+        }
+      }
+    }
+    
+    re->InputsDebouncedOld.input_a     = re->InputsDebounced.input_a;
+    re->InputsDebouncedOld.input_b     = re->InputsDebounced.input_b;
+    re->InputsDebouncedOld.input_push = re->InputsDebounced.input_push;
+  }
 }
 
 /******************************************************************************
@@ -248,15 +248,15 @@ void RotaryEncoder_Scan_T1(void)
  ******************************************************************************/
 teRotaryEncoderState RotaryEncoder_ConsumeStateEvent(teRotaryEncoderClientCfg client)
 {
-	teRotaryEncoderState state = eRoratyInvalid;
-	
-	if(client < EncoderClient_cfg[eROTARY_CLIENTS_NUM])
-	{
-		state = RotaryEncoder[EncoderClient_cfg[client]].State;
-		// set state to idle, so it can be updated
-		RotaryEncoder[EncoderClient_cfg[client]].State = eRoratyStopIdle;
-	}
-	
-	return state;
+  teRotaryEncoderState state = eRoratyInvalid;
+  
+  if(client < EncoderClient_cfg[eROTARY_CLIENTS_NUM])
+  {
+    state = RotaryEncoder[EncoderClient_cfg[client]].State;
+    // set state to idle, so it can be updated
+    RotaryEncoder[EncoderClient_cfg[client]].State = eRoratyStopIdle;
+  }
+  
+  return state;
 }
 

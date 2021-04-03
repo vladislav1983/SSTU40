@@ -25,7 +25,7 @@
 /*----------------------------------------------------------------------------*/
 const teRotaryEncoderCfg EncoderClient_cfg[eROTARY_CLIENTS_NUM] = 
 {
-	eROTARY_ENCODERS_0
+  eROTARY_ENCODERS_0
 };
 
 /*----------------------------------------------------------------------------*/
@@ -61,10 +61,10 @@ const teRotaryEncoderCfg EncoderClient_cfg[eROTARY_CLIENTS_NUM] =
  ******************************************************************************/
 void RotaryEncoder_cfg_InitPins(void)
 {
-	// rotary encoder 1 pins init
-	pinROTARY_PUSH_dir = 1; //input
-	pinROTARY_A_dir = 1;
-	pinROTARY_B_dir = 1;
+  // rotary encoder 1 pins init
+  pinROTARY_PUSH_dir = 1; //input
+  pinROTARY_A_dir = 1;
+  pinROTARY_B_dir = 1;
 }
 
 /******************************************************************************
@@ -74,10 +74,10 @@ void RotaryEncoder_cfg_InitPins(void)
  ******************************************************************************/
 void RotaryEncoder_cfg_ReadPins(uint8_t EncoderIndex, tRotaryInputs * inputs)
 {
-	if(EncoderIndex < eROTARY_ENCODERS_NUM)
-	{
-		inputs->input_a		 = pinROTARY_A;
-		inputs->input_b		 = pinROTARY_B;
-		inputs->input_push = pinROTARY_PUSH;
-	}
+  if(EncoderIndex < eROTARY_ENCODERS_NUM)
+  {
+    inputs->input_a     = pinROTARY_A;
+    inputs->input_b     = pinROTARY_B;
+    inputs->input_push = pinROTARY_PUSH;
+  }
 }

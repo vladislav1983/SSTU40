@@ -29,7 +29,7 @@ typedef struct tIOlist
     void* write_adress __attribute__ ((packed));
     void* read_adress __attribute__ ((packed));
     U16   size __attribute__ ((packed));        // number of bytes
-    U8    type[4] __attribute__ ((packed));        // type[0]: 's'=signed
+    U8    type[4] __attribute__ ((packed));     // type[0]: 's'=signed
                                                 //          'u'=unsigned
                                                 //          'p'=pointer
                                                 //          'f'=float

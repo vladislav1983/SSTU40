@@ -6,9 +6,9 @@
  */
 
 #ifndef ROTARYENCODERTYPES_H
-#define	ROTARYENCODERTYPES_H
+#define  ROTARYENCODERTYPES_H
 
-#ifdef	__cplusplus
+#ifdef  __cplusplus
 extern "C"
 {
 #endif
@@ -37,9 +37,9 @@ typedef enum
 
 typedef struct
 {
-	bool input_a;
-	bool input_b;
-	bool input_push;
+  bool input_a;
+  bool input_b;
+  bool input_push;
 }tRotaryInputs;
 
 /*----------------------------------------------------------------------------*/
@@ -58,9 +58,9 @@ typedef struct
 /* Exported functions                                                         */
 /*----------------------------------------------------------------------------*/
  
-#ifdef	__cplusplus
+#ifdef  __cplusplus
 }
 #endif
 
-#endif	/* ROTARYENCODERTYPES_H */
+#endif  /* ROTARYENCODERTYPES_H */
 

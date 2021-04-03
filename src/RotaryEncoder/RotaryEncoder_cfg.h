@@ -6,9 +6,9 @@
  */
 
 #ifndef ROTARYENCODER_CFG_H
-#define	ROTARYENCODER_CFG_H
+#define  ROTARYENCODER_CFG_H
 
-#ifdef	__cplusplus
+#ifdef  __cplusplus
 extern "C"
 {
 #endif
@@ -61,9 +61,9 @@ extern const teRotaryEncoderCfg EncoderClient_cfg[eROTARY_CLIENTS_NUM];
  extern void RotaryEncoder_cfg_InitPins(void);
  extern void RotaryEncoder_cfg_ReadPins(uint8_t EncoderIndex, tRotaryInputs * inputs);
  
-#ifdef	__cplusplus
+#ifdef  __cplusplus
 }
 #endif
 
-#endif	/* ROTARYENCODER_CFG_H */
+#endif  /* ROTARYENCODER_CFG_H */
 

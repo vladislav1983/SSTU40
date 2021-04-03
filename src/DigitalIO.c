@@ -149,26 +149,26 @@ U16 counter = 0;
 void Dio_Scan_T2(void)
 {
 #if defined(ROTARY_ENCODER_USED)
-	teRotaryEncoderState state;
-	
-	state = RotaryEncoder_ConsumeStateEvent(eROTARY_CLIENT_0);
-	
-	if(state == eRoratyCW)
-	{
-		//_set_up_button(1);
-		counter++;
-	}
-	else if(state == eRoratyCCW)
-	{
-		//_set_down_button(1);
-		counter--;
-	}
-	else if(state == eRotaryPush)
-	{
-		//_set_select_button(1);
-		counter = 0;
-	}
-	
+  teRotaryEncoderState state;
+  
+  state = RotaryEncoder_ConsumeStateEvent(eROTARY_CLIENT_0);
+  
+  if(state == eRoratyCW)
+  {
+    //_set_up_button(1);
+    counter++;
+  }
+  else if(state == eRoratyCCW)
+  {
+    //_set_down_button(1);
+    counter--;
+  }
+  else if(state == eRotaryPush)
+  {
+    //_set_select_button(1);
+    counter = 0;
+  }
+  
 #else
  /* Scan select button */
     if(!pinBUT_SEL && pinBUT_UP && pinBUT_DOWN) //if SELECT button is pushed AND no others

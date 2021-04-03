@@ -6,9 +6,9 @@
  */
 
 #ifndef ROTARYENCODER_H
-#define	ROTARYENCODER_H
+#define  ROTARYENCODER_H
 
-#ifdef	__cplusplus
+#ifdef  __cplusplus
 extern "C" {
 #endif
 
@@ -44,9 +44,9 @@ extern void RotaryEncoder_Init(void);
 extern void RotaryEncoder_Scan_T1(void);
 extern teRotaryEncoderState RotaryEncoder_ConsumeStateEvent(teRotaryEncoderClientCfg client);
 
-#ifdef	__cplusplus
+#ifdef  __cplusplus
 }
 #endif
 
-#endif	/* ROTARYENCODER_H */
+#endif  /* ROTARYENCODER_H */
 
