@@ -25,6 +25,7 @@
       <itemPath>../src/RotaryEncoder/RotaryEncoder.h</itemPath>
       <itemPath>../src/RotaryEncoder/RotaryEncoder_cfg.h</itemPath>
       <itemPath>../src/RotaryEncoder/RotaryEncoderTypes.h</itemPath>
+      <itemPath>../src/include/Crc16.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -52,6 +53,7 @@
       <itemPath>../src/traps.c</itemPath>
       <itemPath>../src/RotaryEncoder/RotaryEncoder.c</itemPath>
       <itemPath>../src/RotaryEncoder/RotaryEncoder_cfg.c</itemPath>
+      <itemPath>../src/Crc16.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -71,7 +73,7 @@
     <conf name="default" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
-        <targetDevice>dsPIC30F3014</targetDevice>
+        <targetDevice>dsPIC30F4013</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
         <platformTool>noID</platformTool>

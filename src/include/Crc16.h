@@ -18,9 +18,6 @@
 /*----------------------------------------------------------------------------*/
 /* Exported type                                                              */
 /*----------------------------------------------------------------------------*/
-// Define if Lookup table or calculation based Crc16 routine should be used
-#define LOOKUP_CRC
-/*#define CALCULATE_CRC*/
 
 /*----------------------------------------------------------------------------*/
 /* Exported data                                                              */
@@ -37,7 +34,7 @@
 /*----------------------------------------------------------------------------*/
 /* Exported functions                                                         */
 /*----------------------------------------------------------------------------*/
-U16 IF_Crc16_Generate( U8* pBuff, U16 u16BuffSize );
+U16 Crc_CalculateCRC16(U8* Crc_DataPtr, U16 Crc_Length, U16 Crc_StartValue16, BOOL Crc_IsFirstCall);
 
 #ifdef __cplusplus
     }

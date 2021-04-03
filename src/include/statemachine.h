@@ -38,38 +38,38 @@ extern volatile U16 ERR_CONTROL;
 #define ST1_INIT                    20
 #define ST1_RESET_ERRORS            21
 #define ST1_CHECK_ERRORS            22
-#define ST1_DC_AUTOTUNNING            23
-#define ST1_IDENT_FIRST                24
-#define ST1_IDENT                    25
-#define ST1_TMPCTRL                    26
-#define ST1_STAND                    27
-#define ST1_EXTRACTOR                28
+#define ST1_DC_AUTOTUNNING          23
+#define ST1_IDENT_FIRST             24
+#define ST1_IDENT                   25
+#define ST1_TMPCTRL                 26
+#define ST1_STAND                   27
+#define ST1_EXTRACTOR               28
 #define ST1_NO_CARTRIDGE            29
-#define ST1_HIBERNATE                30
+#define ST1_HIBERNATE               30
 //Free                              //31    
-#define ST1_ERROR_STATE                32
+#define ST1_ERROR_STATE             32
 //Free                              //33
-#define ST1_WAIT_STATE                34
-#define ST1_TEST_MODE_IDENT            35
-#define ST1_LEARNING_MODE            36
+#define ST1_WAIT_STATE              34
+#define ST1_TEST_MODE_IDENT         35
+#define ST1_LEARNING_MODE           36
 
 /* ST2 STATES - Statemachine in task2. User management. */
 #define ST2_INIT                    100
-#define ST2_WAIT_POWER_UP            101
-#define ST2_POWER_UP_OK                102
-#define ST2_CHECKING_CARTRIDGE        103
-#define ST2_TMPCTRL                    104
-#define ST2_STAND                    105
-#define ST2_EXTRACTOR                106
+#define ST2_WAIT_POWER_UP           101
+#define ST2_POWER_UP_OK             102
+#define ST2_CHECKING_CARTRIDGE      103
+#define ST2_TMPCTRL                 104
+#define ST2_STAND                   105
+#define ST2_EXTRACTOR               106
 #define ST2_NO_CARTRIDGE            107
-#define ST2_HIBERNATE                108
-#define ST2_CHANGE_USER_REF            109
-#define ST2_TEMP_UP                    110
-#define ST2_TEMP_DOWN                111
-#define ST2_TEMP_SELECT                112
-#define ST2_ERROR_STATE                113
-#define ST2_WAIT_STATE                114
-#define ST2_WAIT_STATE_II            115
+#define ST2_HIBERNATE               108
+#define ST2_CHANGE_USER_REF         109
+#define ST2_TEMP_UP                 110
+#define ST2_TEMP_DOWN               111
+#define ST2_TEMP_SELECT             112
+#define ST2_ERROR_STATE             113
+#define ST2_WAIT_STATE              114
+#define ST2_WAIT_STATE_II           115
 
 
 /*----------------------------------------------------------------------------*/
@@ -189,11 +189,11 @@ extern volatile U16 ERR_CONTROL;
 /* Reset error register macro */
 #define _RESET_ERROR_PC_HANDLER()(      \
 {                                       \
-    if(_reset_error_reg())              \
-    {                                   \
+  if(_reset_error_reg())                \
+  {                                     \
     ERR_CONTROL = 0;                    \
     _set_reset_error_reg(0);            \
-    }                                   \
+  }                                     \
 })
                                     
 #define _grid_freq_error()                  (_getbit(ERR_CONTROL,0))        /* bit 0 */
