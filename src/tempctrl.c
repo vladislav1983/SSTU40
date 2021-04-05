@@ -35,7 +35,7 @@
 /*----------------------------------------------------------------------------*/
 /* Local macros                                                               */
 /*----------------------------------------------------------------------------*/
-#define BRESENHAM_DISTRIBUTION      1
+#define BRESENHAM_DISTRIBUTION      0
 
 /*----------------------------------------------------------------------------*/
 /* Local types                                                                */
@@ -158,7 +158,7 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
           {
             // wait for sample time
             tmpctrl_nextstate = TMPCTRL_WAIT_X_PERIODS_STATE;  
-            (tc)->per_counter = (tc)->tmpctrl_samp_time - (tc)->heat_periods;
+            (tc)->per_counter = (tc)->heat_periods;
           }
         }
       }
@@ -297,13 +297,13 @@ S16 PID(U16 Ref, U16 Fbk)
   (tp)->Out = (tp)->P_term + (tp)->I_term - (tp)->D_term;
   
   // output saturation
-  if((tp)->Out > (tc)->tmpctrl_samp_time) 
+  if((tp)->Out > (S16)(tc)->tmpctrl_samp_time) 
   {
-    (tp)->Out = (tc)->tmpctrl_samp_time;
+    (tp)->Out = (S16)(tc)->tmpctrl_samp_time;
   }
-  else if((tp)->Out < -((tc)->tmpctrl_samp_time)) 
+  else if((tp)->Out < -(S16)((tc)->tmpctrl_samp_time)) 
   {
-    (tp)->Out = -((tc)->tmpctrl_samp_time);
+    (tp)->Out = -(S16)((tc)->tmpctrl_samp_time);
   }
   
   return((tp)->Out);
@@ -529,7 +529,7 @@ static S16 bresenham_distribution(tDistributionCmd cmd, U16 distribution_periods
   
   if(cmd == eLoadDustibutionPeriods)
   {
-    if(   distribution_periods_y < max_periods_x 
+    if(   distribution_periods_y <= max_periods_x 
        && distribution_periods_y > 0 
        && max_periods_x > 0)
     {
