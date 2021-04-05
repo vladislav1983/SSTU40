@@ -20,6 +20,14 @@ extern "C" {
 /*----------------------------------------------------------------------------*/
 /* Constant data                                                              */
 /*----------------------------------------------------------------------------*/
+#define ROTARY_ENCODER_PIN_A_SHIFT        0u
+#define ROTARY_ENCODER_PIN_B_SHIFT        1u
+#define ROTARY_ENCODER_PIN_PUSH_SHIFT     2u
+
+#define ROTARY_ENCODER_PIN_A_MASK         (1u << ROTARY_ENCODER_PIN_A_SHIFT)
+#define ROTARY_ENCODER_PIN_B_MASK         (1u << ROTARY_ENCODER_PIN_B_SHIFT)
+#define ROTARY_ENCODER_PIN_PUSH_MASK      (1u << ROTARY_ENCODER_PIN_PUSH_SHIFT)
+ 
  
 /*----------------------------------------------------------------------------*/
 /* Exported type                                                              */
@@ -36,7 +44,9 @@ extern "C" {
 /*----------------------------------------------------------------------------*/
 /* Exported Macros                                                            */
 /*----------------------------------------------------------------------------*/
-
+#define ENCODER_GET_VALUE(bitmap, mask, shift)       ((bitmap & mask) >> shift)
+#define ENCODER_SET_VALUE(bitmap, val, mask, shift)  (bitmap = (bitmap & ~mask) | ((val << shift) & mask))
+ 
 /*----------------------------------------------------------------------------*/
 /* Exported functions                                                         */
 /*----------------------------------------------------------------------------*/

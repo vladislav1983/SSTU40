@@ -28,19 +28,17 @@ extern "C"
 /*----------------------------------------------------------------------------*/
 typedef enum
 {
-  eRoratyStopIdle = 1u,
-  eRotaryPush     = 2u,
-  eRoratyCW       = 4u,
-  eRoratyCCW      = 8u,
-  eRoratyInvalid = 255u,
+  eRoratyStopIdle = 0x00u,
+  eRoratyCW       = 0x10u,
+  eRoratyCCW      = 0x20u,
+  eRotaryPush     = 0x30u,
 }teRotaryEncoderState;
 
-typedef struct
+typedef enum
 {
-  bool input_a;
-  bool input_b;
-  bool input_push;
-}tRotaryInputs;
+ eRotaryPolarityNormal   = 0, 
+ eRotaryPolarityInverted = 1,   
+}teRotaryEncoderPinsPolarity;
 
 /*----------------------------------------------------------------------------*/
 /* Exported data                                                              */

@@ -25,7 +25,7 @@ extern "C"
 /* Constant data                                                              */
 /*----------------------------------------------------------------------------*/
 #define ROTARY_ENCODER_POLLING_TIME_us    100u
-#define ROTARY_ENCODER_DEBOUNCE_TIME_us   2000u 
+#define ROTARY_ENCODER_DEBOUNCE_TIME_us   1000u 
  
 /*----------------------------------------------------------------------------*/
 /* Exported type                                                              */
@@ -59,7 +59,7 @@ extern const teRotaryEncoderCfg EncoderClient_cfg[eROTARY_CLIENTS_NUM];
 /* Exported functions                                                         */
 /*----------------------------------------------------------------------------*/
  extern void RotaryEncoder_cfg_InitPins(void);
- extern void RotaryEncoder_cfg_ReadPins(uint8_t EncoderIndex, tRotaryInputs * inputs);
+ extern uint8_t RotaryEncoder_cfg_ReadPins(uint8_t EncoderIndex);
  
 #ifdef  __cplusplus
 }

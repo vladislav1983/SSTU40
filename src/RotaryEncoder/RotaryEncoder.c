@@ -16,29 +16,11 @@
 //                  PinA _______|       |_______|       |______ PinA
 //          CW  -->          _______         _______         __
 //                  PinB ___|       |_______|       |_______|   PinB
-//          - CW  states 0b0001, 0b0111, 0b1000, 0b1110
-//          - CCW states 0b0010, 0b0100, 0b1011, 0b1101
-static const teRotaryEncoderState RotaryEncoderStates[] = 
-{
-/*prev.A+B   cur.A+B   (prev.AB+cur.AB)  Array   Encoder State */ 
-/*-------   ---------   --------------   -----   ------------- */
-/*  00         00            0000          0     stop/idle     */ eRoratyStopIdle,
-/*  00         01            0001          1     CW,  0x01     */ eRoratyCW,
-/*  00         10            0010         -1     CCW, 0x02     */ eRoratyCCW,
-/*  00         11            0011          0     invalid state */ eRoratyInvalid,
-/*  01         00            0100         -1     CCW, 0x04     */ eRoratyCCW,
-/*  01         01            0101          0     stop/idle     */ eRoratyStopIdle,
-/*  01         10            0110          0     invalid state */ eRoratyInvalid,
-/*  01         11            0111          1     CW, 0x07      */ eRoratyCW,
-/*  10         00            1000          1     CW, 0x08      */ eRoratyCW,
-/*  10         01            1001          0     invalid state */ eRoratyInvalid,
-/*  10         10            1010          0     stop/idle     */ eRoratyStopIdle,
-/*  10         11            1011         -1     CCW, 0x0B     */ eRoratyCCW,
-/*  11         00            1100          0     invalid state */ eRoratyInvalid,
-/*  11         01            1101         -1     CCW, 0x0D     */ eRoratyCCW,
-/*  11         10            1110          1     CW,  0x0E     */ eRoratyCW,
-/*  11         11            1111          0     stop/idle     */ eRoratyStopIdle,
-};
+//                           ^   ^   ^   ^    
+//                           |   |   |   |
+//                           +---+---+---+---> sampling pints for one detent / 4 edges
+
+#define R_TRANSITION_MASK       0x0F 
 
 /*----------------------------------------------------------------------------*/
 /* Local macros                                                               */
@@ -51,38 +33,59 @@ static const teRotaryEncoderState RotaryEncoderStates[] =
 /*----------------------------------------------------------------------------*/
 typedef struct 
 {
-  tRotaryInputs Inputs;
-  tRotaryInputs InputsDebounced;
-  tRotaryInputs InputsDebouncedOld;
+  uint8_t Inputs;
+  uint8_t InputsDebounced;
   teRotaryEncoderState State;
+  uint8_t  CurrentState;
   uint16_t debounce_timer_a;
   uint16_t debounce_timer_b;
   uint16_t debounce_timer_push;
 }tRotaryEncoder;
 
+typedef enum
+{
+  R_START         = 0x00,
+  R_CW_FINAL      = 0x01,
+  R_CW_BEGIN      = 0x02,
+  R_CW_NEXT       = 0x03,
+  R_CCW_BEGIN     = 0x04,
+  R_CCW_FINAL     = 0x05,
+  R_CCW_NEXT      = 0x06,
+  R_SUB_STATES_NR = 0x07
+}reRotaryEncoderSubStates;
+
 /*----------------------------------------------------------------------------*/
 /* Local data                                                                 */
 /*----------------------------------------------------------------------------*/
 static bool RotaryEncoder_InitState = false;
-static tRotaryEncoder RotaryEncoder[eROTARY_ENCODERS_NUM] = 
+
+tRotaryEncoder RotaryEncoder[eROTARY_ENCODERS_NUM] = 
 {
   {
-    .Inputs.input_a              = false,
-    .Inputs.input_b              = false,
-    .Inputs.input_push          = false,
-    .InputsDebounced.input_a    = false,
-    .InputsDebounced.input_b    = false,
-    .InputsDebounced.input_push = false,
-    .State                      = eRoratyStopIdle,
-    .debounce_timer_a            = ROTARY_ENCODER_DEBOUNCE_TIME,
-    .debounce_timer_b            = ROTARY_ENCODER_DEBOUNCE_TIME,
-    .debounce_timer_push        = ROTARY_ENCODER_DEBOUNCE_TIME,  
+    .Inputs              = 0,
+    .InputsDebounced     = 0,
+    .State               = eRoratyStopIdle,
+    .CurrentState        = 0,
+    .debounce_timer_a    = ROTARY_ENCODER_DEBOUNCE_TIME,
+    .debounce_timer_b    = ROTARY_ENCODER_DEBOUNCE_TIME,
+    .debounce_timer_push = ROTARY_ENCODER_DEBOUNCE_TIME,  
   }
 };
 
 /*----------------------------------------------------------------------------*/
 /* Constant local data                                                        */
 /*----------------------------------------------------------------------------*/
+static const uint8_t EncoderTruthTable[R_SUB_STATES_NR][4] = 
+{
+  // 00        01           10           11
+  {R_START,    R_CW_BEGIN,  R_CCW_BEGIN, R_START              },  // R_START
+  {R_CW_NEXT,  R_START,     R_CW_FINAL,  R_START | eRoratyCW  },  // R_CW_FINAL
+  {R_CW_NEXT,  R_CW_BEGIN,  R_START,     R_START              },  // R_CW_BEGIN
+  {R_CW_NEXT,  R_CW_BEGIN,  R_CW_FINAL,  R_START              },  // R_CW_NEXT
+  {R_CCW_NEXT, R_START,     R_CCW_BEGIN, R_START              },  // R_CCW_BEGIN
+  {R_CCW_NEXT, R_CCW_FINAL, R_START,     R_START | eRoratyCCW },  // R_CCW_FINAL
+  {R_CCW_NEXT, R_CCW_FINAL, R_CCW_BEGIN, R_START              }   // R_CCW_NEXT
+};
 
 /*----------------------------------------------------------------------------*/
 /* Exported data                                                              */
@@ -111,7 +114,7 @@ static void RotaryEncoder_ReadPins(void)
   
   for (i = 0; i < eROTARY_ENCODERS_NUM; i++)
   {
-    RotaryEncoder_cfg_ReadPins(i, &RotaryEncoder[i].Inputs);
+    RotaryEncoder[i].Inputs = RotaryEncoder_cfg_ReadPins(i);
   }
 }
 
@@ -124,16 +127,22 @@ static void RotaryEncoder_DebouncePins(void)
 {
   tRotaryEncoder * re = NULL;
   uint16_t i;
+  uint8_t input;
+  uint8_t input_deb;
   
   for(i = 0; i < eROTARY_ENCODERS_NUM; i++)
   {
     re = &RotaryEncoder[i];
+    
     // rotary encoder input a
-    if(re->InputsDebounced.input_a != re->Inputs.input_a)
+    input     = ENCODER_GET_VALUE(re->Inputs,          ROTARY_ENCODER_PIN_A_MASK, ROTARY_ENCODER_PIN_A_SHIFT);
+    input_deb = ENCODER_GET_VALUE(re->InputsDebounced, ROTARY_ENCODER_PIN_A_MASK, ROTARY_ENCODER_PIN_A_SHIFT);
+    
+    if(input != input_deb)
     {
       if((re->debounce_timer_a--) == 0u)
       {
-        re->InputsDebounced.input_a = re->Inputs.input_a;
+        ENCODER_SET_VALUE(re->InputsDebounced, input, ROTARY_ENCODER_PIN_A_MASK, ROTARY_ENCODER_PIN_A_SHIFT);
         re->debounce_timer_a = ROTARY_ENCODER_DEBOUNCE_TIME;
       }
     }
@@ -143,11 +152,14 @@ static void RotaryEncoder_DebouncePins(void)
     }
     
     // rotary encoder input b
-    if(re->InputsDebounced.input_b != re->Inputs.input_b)
+    input     = ENCODER_GET_VALUE(re->Inputs,          ROTARY_ENCODER_PIN_B_MASK, ROTARY_ENCODER_PIN_B_SHIFT);
+    input_deb = ENCODER_GET_VALUE(re->InputsDebounced, ROTARY_ENCODER_PIN_B_MASK, ROTARY_ENCODER_PIN_B_SHIFT);
+    
+    if(input != input_deb)
     {
       if((re->debounce_timer_b--) == 0u)
       {
-        re->InputsDebounced.input_b = re->Inputs.input_b;
+        ENCODER_SET_VALUE(re->InputsDebounced, input, ROTARY_ENCODER_PIN_B_MASK, ROTARY_ENCODER_PIN_B_SHIFT);
         re->debounce_timer_b = ROTARY_ENCODER_DEBOUNCE_TIME;
       }
     }
@@ -157,11 +169,14 @@ static void RotaryEncoder_DebouncePins(void)
     }
     
     // rotary encoder input push
-    if(re->InputsDebounced.input_push != re->Inputs.input_push)
+    input     = ENCODER_GET_VALUE(re->Inputs,          ROTARY_ENCODER_PIN_PUSH_MASK, ROTARY_ENCODER_PIN_PUSH_SHIFT);
+    input_deb = ENCODER_GET_VALUE(re->InputsDebounced, ROTARY_ENCODER_PIN_PUSH_MASK, ROTARY_ENCODER_PIN_PUSH_SHIFT);
+    
+    if(input != input_deb)
     {
       if((re->debounce_timer_push--) == 0u)
       {
-        re->InputsDebounced.input_push = re->Inputs.input_push;
+        ENCODER_SET_VALUE(re->InputsDebounced, input, ROTARY_ENCODER_PIN_PUSH_MASK, ROTARY_ENCODER_PIN_PUSH_SHIFT);
         re->debounce_timer_push = ROTARY_ENCODER_DEBOUNCE_TIME;
       }
     }
@@ -195,11 +210,8 @@ void RotaryEncoder_Init(void)
 void RotaryEncoder_Scan_T1(void)
 {
   uint16_t i;
-  uint8_t RotaryInput_AB = 0;
-  uint8_t RotaryInput_AB_old = 0;
-  teRotaryEncoderState currentDirection;
   tRotaryEncoder * re = NULL;
-  
+
   for (i = 0; i < eROTARY_ENCODERS_NUM && RotaryEncoder_InitState == 1; i++)
   {
     RotaryEncoder_ReadPins();
@@ -207,37 +219,22 @@ void RotaryEncoder_Scan_T1(void)
     
     re = &RotaryEncoder[i];
     
-    if(re->InputsDebounced.input_push)
+    if(ENCODER_GET_VALUE(re->InputsDebounced, ROTARY_ENCODER_PIN_PUSH_MASK, ROTARY_ENCODER_PIN_PUSH_SHIFT))
     {
       re->State = eRotaryPush;
+      re->CurrentState = 0;
     }
     else 
     {
       // check that state is consumed, so it can be updated
       if(re->State == eRoratyStopIdle)
       {
-        RotaryInput_AB = (re->InputsDebounced.input_a << 1u) 
-                        | re->InputsDebounced.input_b;
-
-        RotaryInput_AB_old = (re->InputsDebouncedOld.input_a << 1u) 
-                            | re->InputsDebouncedOld.input_b;
-
-        currentDirection = RotaryEncoderStates[((RotaryInput_AB_old << 2u) | RotaryInput_AB) % ROTARY_ENCODER_STATES_SIZE];
-
-        if(eRoratyInvalid != currentDirection)
-        {
-          re->State = currentDirection;
-        }
-        else
-        {
-          re->State = eRoratyStopIdle;
-        }
+        uint8_t index     = re->CurrentState & R_TRANSITION_MASK;
+        uint8_t pin_index = re->InputsDebounced & (ROTARY_ENCODER_PIN_B_MASK | ROTARY_ENCODER_PIN_A_MASK);
+        re->CurrentState = EncoderTruthTable[index][pin_index];
+        re->State        = re->CurrentState & (eRoratyCW | eRoratyCCW);
       }
     }
-    
-    re->InputsDebouncedOld.input_a     = re->InputsDebounced.input_a;
-    re->InputsDebouncedOld.input_b     = re->InputsDebounced.input_b;
-    re->InputsDebouncedOld.input_push = re->InputsDebounced.input_push;
   }
 }
 
@@ -248,7 +245,7 @@ void RotaryEncoder_Scan_T1(void)
  ******************************************************************************/
 teRotaryEncoderState RotaryEncoder_ConsumeStateEvent(teRotaryEncoderClientCfg client)
 {
-  teRotaryEncoderState state = eRoratyInvalid;
+  teRotaryEncoderState state = eRoratyStopIdle;
   
   if(client < EncoderClient_cfg[eROTARY_CLIENTS_NUM])
   {

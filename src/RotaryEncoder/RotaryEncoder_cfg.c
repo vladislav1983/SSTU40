@@ -3,6 +3,7 @@
 /*----------------------------------------------------------------------------*/
 #include "basedef.h"
 #include "RotaryEncoder_cfg.h"
+#include "RotaryEncoder.h"
 
 /*----------------------------------------------------------------------------*/
 /* Local constants                                                            */
@@ -26,6 +27,11 @@
 const teRotaryEncoderCfg EncoderClient_cfg[eROTARY_CLIENTS_NUM] = 
 {
   eROTARY_ENCODERS_0
+};
+
+const teRotaryEncoderPinsPolarity RotaryEncoderPinsPolarity_cfg[eROTARY_ENCODERS_NUM] = 
+{
+  eRotaryPolarityInverted
 };
 
 /*----------------------------------------------------------------------------*/
@@ -72,12 +78,22 @@ void RotaryEncoder_cfg_InitPins(void)
  * Params: 
  * Purpose:
  ******************************************************************************/
-void RotaryEncoder_cfg_ReadPins(uint8_t EncoderIndex, tRotaryInputs * inputs)
+uint8_t RotaryEncoder_cfg_ReadPins(uint8_t EncoderIndex)
 {
+  uint8_t inputs = 0;
+  uint8_t pin = 0;
+  
   if(EncoderIndex < eROTARY_ENCODERS_NUM)
   {
-    inputs->input_a     = pinROTARY_A;
-    inputs->input_b     = pinROTARY_B;
-    inputs->input_push = pinROTARY_PUSH;
+    pin = !pinROTARY_A ^ RotaryEncoderPinsPolarity_cfg[EncoderIndex];
+    ENCODER_SET_VALUE(inputs, pin,    ROTARY_ENCODER_PIN_A_MASK,    ROTARY_ENCODER_PIN_A_SHIFT);
+    
+    pin = !pinROTARY_B ^ RotaryEncoderPinsPolarity_cfg[EncoderIndex];
+    ENCODER_SET_VALUE(inputs, pin,    ROTARY_ENCODER_PIN_B_MASK,    ROTARY_ENCODER_PIN_B_SHIFT);
+    
+    pin = !pinROTARY_PUSH ^ RotaryEncoderPinsPolarity_cfg[EncoderIndex];
+    ENCODER_SET_VALUE(inputs, pin, ROTARY_ENCODER_PIN_PUSH_MASK, ROTARY_ENCODER_PIN_PUSH_SHIFT);
   }
+  
+  return inputs;
 }
