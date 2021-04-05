@@ -35,19 +35,19 @@
 /*----------------------------------------------------------------------------*/
 /* EXPORTED from other modules                                                */
 /*----------------------------------------------------------------------------*/
-extern volatile U16 U16Adc[AdcCh_Cnt];
+extern U16 U16Adc[AdcCh_Cnt];
 extern const iolist iopar[];
 
 /* MEASURE.C */
-extern volatile struct Mes1 mes1;
-extern volatile struct Mes2 mes2;
+extern struct Mes1 mes1;
+extern struct Mes2 mes2;
 
 /* TempCtrl.C */
-extern volatile struct temperature_control T_ctrl;
-extern volatile struct bresenham_struct brs;
+extern struct temperature_control T_ctrl;
+extern struct bresenham_struct brs;
 
 /* IDENT.C */
-extern volatile struct cartridge_ident ident;
+extern struct cartridge_ident ident;
 
 extern volatile U16 ERR_CONTROL;
 /*----------------------------------------------------------------------------*/
@@ -71,16 +71,16 @@ extern volatile U16 ERR_CONTROL;
 /*----------------------------------------------------------------------------*/
 S16 TRSB[TRACE_LEN][NB_TRACE_VARS] __attribute__ ((aligned));
 
-volatile U16 trace_state;
-volatile U16 trace_control;
-volatile U16 STORE_POS;
+U16 trace_state;
+U16 trace_control;
+U16 STORE_POS;
 U16 trace_counter;
 S16 trace_trigger;
 struct parlist_trace par_trace;
 
 /* PARAMS STORED IN EEPROM */
-volatile U16 trace_config;
-volatile U16 trace_every_period;
+U16 trace_config;
+U16 trace_every_period;
 U16 u16TraceParamNumber_1;
 U16 u16TraceParamNumber_2;
 U16 u16CompareParameter;

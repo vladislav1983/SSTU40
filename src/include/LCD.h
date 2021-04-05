@@ -46,5 +46,6 @@ void IF_LCDPuts(const char *u8StrToLcd);
 void IF_LCDPutn(U32 t);
 void LCDSendByte(U8 u8ByteToLcd,U8 u8Adress);
 void IF_LCD_UpdateState(U16 u16CurrentState);
+void LCD_printf(char *format, ...);
 
 #endif /* LCD_H */

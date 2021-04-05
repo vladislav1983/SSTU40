@@ -67,10 +67,10 @@ typedef struct sMessage
 /*----------------------------------------------------------------------------*/
 /* Local data                                                                 */
 /*----------------------------------------------------------------------------*/
-static volatile tsRxMessage gRxMsg; // Receiver object. Fill from IRQ.  Emptied from Appl.
+static tsRxMessage gRxMsg; // Receiver object. Fill from IRQ.  Emptied from Appl.
                                     // NOTE! - gRxMsg IS NOT fully protected during access.
-static volatile U16 sci_ticks_T1;
-static volatile U16 sci_tick_counter_T1;
+static U16 sci_ticks_T1;
+static U16 sci_tick_counter_T1;
 
 /*----------------------------------------------------------------------------*/
 /* Constant local data                                                        */

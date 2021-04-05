@@ -51,12 +51,12 @@
 /*----------------------------------------------------------------------------*/
 /* Exported data                                                              */
 /*----------------------------------------------------------------------------*/
-volatile struct cartridge_ident ident;
+struct cartridge_ident ident;
 
 /* TRACE.C */
 extern S16 TRSB[TRACE_LEN][NB_TRACE_VARS];
-extern volatile U16 trace_state;
-extern volatile U16 trace_control;
+extern U16 trace_state;
+extern U16 trace_control;
 /*----------------------------------------------------------------------------*/
 /* Constant exported data                                                     */
 /*----------------------------------------------------------------------------*/
@@ -81,7 +81,7 @@ BOOL bresenham(U16 periods);
 /******************************************************************************/
 BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
 {
-  volatile struct cartridge_ident *id;
+  struct cartridge_ident *id;
   U16 ident_current;
   BOOL result = 0;
   
@@ -255,7 +255,7 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
 /******************************************************************************/
 BOOL bresenham(U16 periods)
 {
-  volatile struct bresenham_struct *bs;
+  struct bresenham_struct *bs;
   
   bs = _get_bresenham_struct();
   

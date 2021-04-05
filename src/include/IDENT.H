@@ -81,7 +81,7 @@ struct cartridge_ident
 
 
 /* IDENT structures pointer initialization */
-extern volatile struct cartridge_ident ident;
+extern struct cartridge_ident ident;
 #define _get_ident()    (&ident)
 
 /*----------------------------------------------------------------------------*/

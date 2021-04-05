@@ -53,7 +53,7 @@ U16 deb_timer_cart;
 U16 deb_timer_stand;
 U16 deb_timer_extr;
 
-volatile U16 cart_det_state;
+U16 cart_det_state;
 
 /*----------------------------------------------------------------------------*/
 /* Constant local data                                                        */

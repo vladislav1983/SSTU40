@@ -66,8 +66,8 @@ struct sStationStatistic stat_stat;
 /*----------------------------------------------------------------------------*/
 /* Exported data from other modules                                           */
 /*----------------------------------------------------------------------------*/
-extern volatile U16 trace_config;
-extern volatile U16 trace_state;
+extern U16 trace_config;
+extern U16 trace_state;
 
 /*----------------------------------------------------------------------------*/
 /* Local function prototypes                                                  */

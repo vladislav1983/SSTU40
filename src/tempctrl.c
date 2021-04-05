@@ -35,7 +35,7 @@
 /*----------------------------------------------------------------------------*/
 /* Local macros                                                               */
 /*----------------------------------------------------------------------------*/
-#define BRESENHAM_DISTRIBUTION      0
+#define BRESENHAM_DISTRIBUTION      1
 
 /*----------------------------------------------------------------------------*/
 /* Local types                                                                */
@@ -49,8 +49,8 @@ typedef enum
 /*----------------------------------------------------------------------------*/
 /* Local data                                                                 */
 /*----------------------------------------------------------------------------*/
-volatile U16 tmpctrl_mainstate;
-volatile U16 tmpctrl_nextstate;
+U16 tmpctrl_mainstate;
+U16 tmpctrl_nextstate;
 /*----------------------------------------------------------------------------*/
 /* Constant local data                                                        */
 /*----------------------------------------------------------------------------*/
@@ -58,13 +58,13 @@ volatile U16 tmpctrl_nextstate;
 /*----------------------------------------------------------------------------*/
 /* Exported data                                                              */
 /*----------------------------------------------------------------------------*/
-volatile struct temperature_control T_ctrl;
-volatile struct bresenham_struct brs;
-volatile struct pid_struct pid;
-volatile struct overload_protection overprot;
+struct temperature_control T_ctrl;
+struct bresenham_struct brs;
+struct pid_struct pid;
+struct overload_protection overprot;
 
 /* Exported from MEASURE.C */
-extern volatile struct Mes1 mes1;
+extern struct Mes1 mes1;
 
 /* Exported from STATEMACHINE.C */
 extern volatile U16 SYS_CONTROL;
@@ -97,11 +97,8 @@ static S16 bresenham_distribution(tDistributionCmd cmd, U16 distribution_periods
 /******************************************************************************/
 void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
 {
-  volatile struct temperature_control *tc;
+  struct temperature_control *tc = _get_T_ctrl();
   U16 T_Ref_local;
-  S16 PID_Out;
-  
-  tc = _get_T_ctrl();
   
   switch(tmpctrl_mainstate)
   {
@@ -138,42 +135,30 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
       
       (tc)->T_delta = T_Ref_local - (tc)->T_fbk;
       
-      PID_Out = PID(T_Ref_local, (tc)->T_fbk);
+      (tc)->heat_periods = PID(T_Ref_local, (tc)->T_fbk);
+      (tc)->heat_periods_debug = (tc)->heat_periods;
       
-      
-      if(PID_Out > 0)
+      if((tc)->heat_periods > 0)
       {
-        (tc)->heat_periods = ((U32)(tc)->PID_Out_cal * PID_Out) >> 10;
-        
-        if((tc)->heat_periods > (tc)->tmpctrl_samp_time)
-        {
-          (tc)->heat_periods = (tc)->tmpctrl_samp_time - 1;
-          (tc)->heat_periods_debug = (tc)->heat_periods;
-        }
-        
-        if((tc)->heat_periods > (tc)->Ring_reduction_per)
-        {
 #if BRESENHAM_DISTRIBUTION == 1
-          if(-1 != bresenham_distribution(eLoadDustibutionPeriods, (tc)->heat_periods , (tc)->tmpctrl_samp_time))
+        if(-1 != bresenham_distribution(eLoadDustibutionPeriods, (tc)->heat_periods , (tc)->tmpctrl_samp_time))
 #endif
+        {
+          tmpctrl_mainstate = TMPCTRL_TRIAC_FIRE;
+          pinLED = 1;    
+          
+          if((tc)->heat_periods >= (tc)->tmpctrl_samp_time)
           {
-            (tc)->per_counter = (tc)->tmpctrl_samp_time - (tc)->heat_periods;
-            tmpctrl_nextstate = TMPCTRL_WAIT_AFTER_ZC_STATE;
-            tmpctrl_mainstate = TMPCTRL_TRIAC_FIRE;
+            // immediately measure temp
             tmpctrl_timer_t1(TMPCTRL_TIMER_LOAD, TMPCTRL_WAIT_AFTER_ZC_TIME);
-            pinLED = 1;    
+            tmpctrl_nextstate = TMPCTRL_WAIT_AFTER_ZC_STATE;
+            (tc)->per_counter = 0;
           }
-        }
-        else
-        {
-#if BRESENHAM_DISTRIBUTION == 1
-          if(-1 != bresenham_distribution(eLoadDustibutionPeriods, (tc)->heat_periods , (tc)->Ring_reduction_per))
-#endif
+          else
           {
-            (tc)->per_counter =  (tc)->tmpctrl_samp_time - 1; //<------ Add here one halfperiod (10ms) wait state
-            tmpctrl_nextstate = TMPCTRL_WAIT_X_PERIODS_STATE;
-            tmpctrl_mainstate = TMPCTRL_TRIAC_FIRE;
-            pinLED = 1;
+            // wait for sample time
+            tmpctrl_nextstate = TMPCTRL_WAIT_X_PERIODS_STATE;  
+            (tc)->per_counter = (tc)->tmpctrl_samp_time - (tc)->heat_periods;
           }
         }
       }
@@ -193,7 +178,13 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
         if(1 == output && _drive_enabled())
         {
           _FIRE_TRIAC();
+          pinLED = 1; 
           (tc)->tmpctrl_triac_state = 1;
+        }
+        else if(0 == output)
+        {
+          (tc)->tmpctrl_triac_state = 0;
+          pinLED = 0; 
         }
         else if(-1 == output)
         {
@@ -242,7 +233,7 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
       {
         (tc)->per_counter++;
         
-        if((tc)->per_counter >= (tc)->tmpctrl_samp_time) 
+        if((tc)->per_counter >= (tc)->tmpctrl_samp_time)
         {
           (tc)->per_counter = 0;
           tmpctrl_timer_t1(TMPCTRL_TIMER_LOAD, TMPCTRL_WAIT_AFTER_ZC_TIME);
@@ -269,9 +260,7 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
 /*************************************************************************************************/
 void Reset_TMPCTRL(void)
 {
-  volatile struct temperature_control *tc;
-  
-  tc = _get_T_ctrl();
+  struct temperature_control *tc = _get_T_ctrl();
   
   tmpctrl_mainstate = TMPCTRL_WAIT_X_PERIODS_STATE;
   (tc)->per_counter = (tc)->tmpctrl_samp_time;
@@ -290,9 +279,8 @@ void Reset_TMPCTRL(void)
 
 S16 PID(U16 Ref, U16 Fbk)
 {
-  static volatile struct pid_struct *tp;
-  
-  tp = _get_pid();
+  struct pid_struct *tp =_get_pid();
+  struct temperature_control *tc = _get_T_ctrl();
   
   (tp)->err = Ref - Fbk;
   
@@ -303,13 +291,20 @@ S16 PID(U16 Ref, U16 Fbk)
   (tp)->err_prev = (tp)->err;
   (tp)->Sum += (tp)->err;
   
-  if((tp)->Sum > (tp)->Ki_Limit) (tp)->Sum = (tp)->Ki_Limit;
+  if(     (tp)->Sum > (tp)->Ki_Limit)  (tp)->Sum = (tp)->Ki_Limit;
   else if((tp)->Sum < -(tp)->Ki_Limit) (tp)->Sum = -(tp)->Ki_Limit;
   
   (tp)->Out = (tp)->P_term + (tp)->I_term - (tp)->D_term;
   
-  if((tp)->Out > (tp)->Out_Limit) (tp)->Out = (tp)->Out_Limit;
-  else if((tp)->Out < -(tp)->Out_Limit) (tp)->Out = -(tp)->Out_Limit;
+  // output saturation
+  if((tp)->Out > (tc)->tmpctrl_samp_time) 
+  {
+    (tp)->Out = (tc)->tmpctrl_samp_time;
+  }
+  else if((tp)->Out < -((tc)->tmpctrl_samp_time)) 
+  {
+    (tp)->Out = -((tc)->tmpctrl_samp_time);
+  }
   
   return((tp)->Out);
 }
@@ -323,9 +318,7 @@ S16 PID(U16 Ref, U16 Fbk)
 /*************************************************************************************************/
 void Reset_PID(void)
 {
-  volatile struct pid_struct *tp;
-  
-  tp = _get_pid();
+  struct pid_struct *tp = _get_pid();
   
   (tp)->P_term = 0;
   (tp)->I_term = 0;
@@ -336,8 +329,6 @@ void Reset_PID(void)
   (tp)->Out = 0;
 }
 
-
-
 /******************************************************************************/
 /*
  * Purpose: Cartridge Overload Protection. Protect Cartridge too many heat periods. Function run in EVERY TASK1
@@ -347,10 +338,8 @@ void Reset_PID(void)
 /******************************************************************************/
 void Cartridge_overload_protection(void)
 {
-  volatile struct overload_protection *cop;
+  struct overload_protection *cop = _get_overload_protection();
   static U16 heat_periods;
-  
-  cop = _get_overload_protection();
   
   (cop)->cop_timer++;
   

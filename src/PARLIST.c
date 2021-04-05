@@ -61,11 +61,11 @@ const U16 C30_Version = __C30_VERSION__;
 /* Exported data                                                              */
 /*----------------------------------------------------------------------------*/
 /* ADC.C */
-extern volatile U16 ADC[AdcCh_Cnt];
+extern U16 ADC[AdcCh_Cnt];
 
 /* TRACE.C */
 extern U16 trace_config;
-extern volatile U16 trace_control;
+extern U16 trace_control;
 extern U16 STORE_POS;
 extern U16 u16TraceParamNumber_1;
 extern U16 u16TraceParamNumber_2;
@@ -73,14 +73,14 @@ extern S16 s16CmpValue;
 extern U16 trace_state;
 extern U16 u16CompareParameter;
 extern struct parlist_trace par_trace;
-extern volatile U16 trace_every_period;
+extern U16 trace_every_period;
 
 /* STATEMACHINE.C */
 extern volatile U16 SYS_CONTROL;
 extern volatile U16 PC_CONTROL;
 extern volatile U16 ERR_CONTROL;
-extern volatile U16 mainstate_T1;
-extern volatile U16 mainstate_T2;
+extern U16 mainstate_T1;
+extern U16 mainstate_T2;
 //extern U16 prevstate_T2;
 extern U16 LCD_update_rate;
 
@@ -88,17 +88,17 @@ extern U16 LCD_update_rate;
 extern struct sTaskTimesStruct Ttime;
 
 /* MEASURE.C */
-extern volatile struct Mes1 mes1;
-extern volatile struct Mes2 mes2;
+extern struct Mes1 mes1;
+extern struct Mes2 mes2;
 
 /* TEMPCTRL_C */
-extern volatile struct temperature_control T_ctrl;
-extern volatile U16 tmpctrl_mainstate;
-extern volatile struct pid_struct pid;
-extern volatile struct overload_protection overprot;
+extern struct temperature_control T_ctrl;
+extern U16 tmpctrl_mainstate;
+extern struct pid_struct pid;
+extern struct overload_protection overprot;
 
 /* IDENT.C */
-extern volatile struct cartridge_ident ident;
+extern struct cartridge_ident ident;
 
 /* SYSTMR.C */
 extern struct Times time;
@@ -178,11 +178,9 @@ const iolist iopar[] =
   {256,"Temp Feedback",               (U16 *)&T_ctrl.T_fbk,                   (U16 *)&T_ctrl.T_fbk,                     2,"urr",    0xFFFFul,      0, 5,0,    1 },
   {257,"Temp Delta",                  (S16 *)&T_ctrl.T_delta,                 (S16 *)&T_ctrl.T_delta,                   2,"srr",    32767ul,  -32768, 5,0,    1 },
   {258,"Heat Periods",                (S16 *)&T_ctrl.heat_periods,            (S16 *)&T_ctrl.heat_periods,              2,"srr",    32767ul,  -32768, 5,0,    1 },
-  {259,"PID_Out_cal",                 (U16 *)&T_ctrl.PID_Out_cal,             (U16 *)&T_ctrl.PID_Out_cal,               2,"unr",    0xFFFFul,      0, 0,0, 1024 },
   {260,"heat_periods_debug",          (U16 *)&T_ctrl.heat_periods_debug,      (U16 *)&T_ctrl.heat_periods_debug,        2,"urr",    0xFFFFul,      0, 5,0,    1 },
   {261,"Triac State",                 (U16 *)&T_ctrl.tmpctrl_triac_state,     (U16 *)&T_ctrl.tmpctrl_triac_state,       2,"urr",    0xFFFFul,      0, 5,0,    1 },
   {262,"TMPCTRL State",               (U16 *)&tmpctrl_mainstate,              (U16 *)&tmpctrl_mainstate,                2,"urr",    0xFFFFul,      0, 5,0,    1 },
-  {263,"Ring Reduction Periods",      (U16 *)&T_ctrl.Ring_reduction_per,      (U16 *)&T_ctrl.Ring_reduction_per,        2,"unr",    50ul,          0, 0,0,    1 },
   {264,"Temp Calibration Offset",     (S16 *)&T_ctrl.T_cal_offset,            (S16 *)&T_ctrl.T_cal_offset,              2,"snr",    50ul,        -50, 0,0,    1 },
   //PI Controller
   {270,"Kp",                          (U16 *)&pid.Kp,                         (U16 *)&pid.Kp,                           2,"unr",    0xFFFFul,      0, 0,0, 1024 },
@@ -193,7 +191,6 @@ const iolist iopar[] =
   {275,"P_term",                      (S16 *)&pid.P_term,                     (S16 *)&pid.P_term,                       2,"srr",    32767ul,  -32768, 5,0,    1 },
   {276,"I_term",                      (S16 *)&pid.I_term,                     (S16 *)&pid.I_term,                       2,"srr",    32767ul,  -32768, 5,0,    1 },
   {277,"D_term",                      (S16 *)&pid.D_term,                     (S16 *)&pid.D_term,                       2,"srr",    32767ul,  -32768, 5,0,    1 },
-  {278,"Out_Limit",                   (S16 *)&pid.Out_Limit,                  (S16 *)&pid.Out_Limit,                    2,"snr",    32767ul,  -32768, 0,0,    1 },
   /* TASK */  
   {900,"Task1 Time",                  (U16 *)&Ttime.Task1Time_us,             (U16 *)&Ttime.Task1Time_us,               2,"urr",    0xFFFFul,      0, 5,0, 1000 },
   {901,"Task2 Time",                  (U16 *)&Ttime.Task2Time_us,             (U16 *)&Ttime.Task2Time_us,               2,"urr",    0xFFFFul,      0, 5,0, 1000 },
@@ -291,15 +288,10 @@ void Params_check_limit(void)
     if(T_ctrl.T_Ref_User > TEMP_USER_MAX) _set_param_limit_error(1);
     if((T_ctrl.tmpctrl_samp_time < 0) || (T_ctrl.tmpctrl_samp_time > 50)) _set_param_limit_error(1);
     if(T_ctrl.T_cal_gain < 10) _set_param_limit_error(1);
-    if(T_ctrl.PID_Out_cal > 10000) _set_param_limit_error(1);
-    if(T_ctrl.heat_periods_debug > 50) _set_param_limit_error(1);
     
     if((pid.Kp < 0) || (pid.Kp == 0xFFFFu)) _set_param_limit_error(1);
     if((pid.Ki < 0) || (pid.Ki == 0xFFFFu)) _set_param_limit_error(1);
     if((pid.Kd < 0) || (pid.Kd == 0xFFFFu)) _set_param_limit_error(1);
-    
-    if((pid.Out > pid.Out_Limit) || (pid.Out > 100)) _set_param_limit_error(1);
-    if((T_ctrl.Ring_reduction_per < 0) || (T_ctrl.Ring_reduction_per > 5)) _set_param_limit_error(1);
 }
 /******************************************************************************/
 /*

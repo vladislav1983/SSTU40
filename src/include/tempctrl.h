@@ -91,8 +91,6 @@ struct temperature_control
     U16 tmpctrl_samp_time;    // Temperature control sample time in line halfperiods.
     U16 T_cal_gain;        // Scaled by 1024
     S16 T_cal_offset;
-    U16 PID_Out_cal;        // Scaled by 1024
-    U16 Ring_reduction_per;
     
     U16 T_Ref_User;            // User Temperature.
     U16 T_Ref_User_Sleep;    // User Temperature in Sleep Mode.
@@ -117,7 +115,6 @@ struct pid_struct
     S16 Kd;
     
     S16 Ki_Limit;
-    S16 Out_Limit;
     };
 
 struct bresenham_struct
@@ -147,16 +144,16 @@ struct overload_protection
 /* Exported Macros                                                            */
 /*----------------------------------------------------------------------------*/
 /* Macros and extern struct definitions */
-extern volatile struct temperature_control T_ctrl;
+extern struct temperature_control T_ctrl;
 #define _get_T_ctrl()    (&T_ctrl)
 
-extern volatile struct pid_struct pid;
+extern struct pid_struct pid;
 #define _get_pid()    (&pid)
 
-extern volatile struct bresenham_struct brs;
+extern struct bresenham_struct brs;
 #define _get_bresenham_struct()    (&brs)
 
-extern volatile struct overload_protection overprot;
+extern struct overload_protection overprot;
 #define _get_overload_protection()    (&overprot)
 
 /*----------------------------------------------------------------------------*/

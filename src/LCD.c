@@ -33,6 +33,7 @@
 #include "stdarg.h"
 #include "stdio.h"
 #include "systmr.h"
+#include "stdio.h"
 
 /*----------------------------------------------------------------------------*/
 /* Local constants                                                            */
@@ -99,6 +100,8 @@
 #define LINE3    0x54
 #endif
 
+#define LCD_COL_COUNT 16
+
 /*----------------------------------------------------------------------------*/
 /* Local macros                                                               */
 /*----------------------------------------------------------------------------*/
@@ -122,6 +125,7 @@ const U8 LCD_INIT_STRING[4] =
      };
 
 U16 u16Nibble_Temp;
+static char lcd_buffer[LCD_COL_COUNT + 1];
 
 /*----------------------------------------------------------------------------*/
 /* Constant local data                                                        */
@@ -344,5 +348,16 @@ void LCDSendByte(U8 u8ByteToLcd,U8 u8Adress)
     pinLCD_E = 0;
     LCDSendNibble(u8ByteToLcd >> 4);
     LCDSendNibble(u8ByteToLcd & 0xF);
+}
+
+void LCD_printf(char *format, ...) 
+{
+//  va_list args;
+//
+//  va_start(args, format);
+//  vsnprintf(lcd_buffer, LCD_COL_COUNT + 1, format, args);
+//  va_end(args);
+
+  IF_LCDPuts(lcd_buffer);
 }
 

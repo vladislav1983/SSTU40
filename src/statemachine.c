@@ -70,13 +70,13 @@
 /*----------------------------------------------------------------------------*/
 /* Local data                                                                 */
 /*----------------------------------------------------------------------------*/
-volatile U16 mainstate_T2;
-static volatile U16 prevstate_T2;
-static volatile U16 nextstate_T2;
+U16 mainstate_T2;
+static U16 prevstate_T2;
+static U16 nextstate_T2;
 
-volatile U16 mainstate_T1;
-static volatile U16 nextstate_T1;
-static volatile U16 prevstate_T1;
+U16 mainstate_T1;
+static U16 nextstate_T1;
+static U16 prevstate_T1;
 /*----------------------------------------------------------------------------*/
 /* Constant local data                                                        */
 /*----------------------------------------------------------------------------*/

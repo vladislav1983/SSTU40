@@ -12,9 +12,9 @@
 /* Body Identification                                                        */
 /*----------------------------------------------------------------------------*/
 #ifdef MEASURE_C
-    #error "!!! FileName ID. It should be Unique !!!"
+#error "!!! FileName ID. It should be Unique !!!"
 #else
-    #define MEASURE_C
+#define MEASURE_C
 #endif
 /*----------------------------------------------------------------------------*/
 /* Included files to resolve specific definitions in this file                */
@@ -52,7 +52,7 @@
 /*----------------------------------------------------------------------------*/
 typedef enum teZeroCrosDetectionState
 {
-    eZeroCrossOpenWindow,
+  eZeroCrossOpenWindow,
     eZeroCrossClosedWindow
 }eZeroCrosDetectionState;
 /*----------------------------------------------------------------------------*/
@@ -68,9 +68,9 @@ eZeroCrosDetectionState ZeroCrosDetectionState;
 /* Exported data                                                              */
 /*----------------------------------------------------------------------------*/
 /* Data structures declaration */
-volatile struct Mes1 mes1;
-volatile struct Mes2 mes2;
-volatile struct mes_par mespar;
+struct Mes1 mes1;
+struct Mes2 mes2;
+struct mes_par mespar;
 
 /*----------------------------------------------------------------------------*/
 /* Exported data from other modules                                           */
@@ -93,185 +93,170 @@ static U16 ZeroCrossTimerT1(U16 u16Command, U16 u16Cons);
 /******************************************************************************/
 /******************************************************************************/
 /*
-* Purpose: Zero Cross detection II. This function is run BEFORE temperature control.
-* Input:   none
-* Output:  none
-* Affected System Flags
-* - _zero_cross()
-*/
+ * Purpose: Zero Cross detection II. This function is run BEFORE temperature control.
+ * Input:   none
+ * Output:  none
+ * Affected System Flags
+ * - _zero_cross()
+ */
 /******************************************************************************/
 void zero_cross_II(void)
 {
-    volatile struct Mes1 *m1;
-    volatile struct Mes2 *m2;
-    
-    m1 = _get_mes1();
-    m2 = _get_mes2();
-
-    switch(ZeroCrosDetectionState)
-    {
-        //--------------------------------------------------------------------------------------------------------------
-        case eZeroCrossOpenWindow:
-
-            (m1)->Line_period_zc++;  /* Update line period (Zero Cross)*/
-
-            if(_INT0IF) 
-            {
-                _set_zero_cross(1);
-                (m2)->Line_period_zc_T2 = (m1)->Line_period_zc;
-                (m1)->Line_period_zc = 0;
-
-                if(_power_up_ok()) 
-                {
-                    if(    ((m2)->Line_period_zc_T2 >= cZC_TRIP_MAX) 
-                        || ((m2)->Line_period_zc_T2 <= zZC_TRIP_MIN)) 
-                    {
-                        _set_grid_freq_error(1); //Trip Grid Frequency Error
-                    }
-                }
-                
-                // start closed window timer
-                ZeroCrossTimerT1(cZC_TIMER_START, cZC_CLOSED_WINDOW_TIMER);
-                ZeroCrosDetectionState = eZeroCrossClosedWindow;
-                _INT0IF = 0;
-            }
-        break;
-        //--------------------------------------------------------------------------------------------------------------
-        case eZeroCrossClosedWindow:
-
-            ZeroCrossTimerT1(cZC_TIMER_COUNT, (U16)NULL);
-
-            if(0 != ZeroCrossTimerT1(cZC_TIMER_READ, (U16)NULL))
-            {
-                ZeroCrosDetectionState = eZeroCrossOpenWindow;
-                // we do not want false zero crosses -> clear interrupt flag
-                _INT0IF = 0;
-            }
-
-        break;
-        //--------------------------------------------------------------------------------------------------------------
-        default:
-            mAssert(cFalse);
-            _set_global_system_fault(1);
-        break;
-    }
+  struct Mes1 *m1 = _get_mes1();
+  struct Mes2 *m2 = _get_mes2();
+  
+  switch(ZeroCrosDetectionState)
+  {
+    //--------------------------------------------------------------------------------------------------------------
+    case eZeroCrossOpenWindow:
+      
+      (m1)->Line_period_zc++;  /* Update line period (Zero Cross)*/
+      
+      if(_INT0IF) 
+      {
+        _set_zero_cross(1);
+        (m2)->Line_period_zc_T2 = (m1)->Line_period_zc;
+        (m1)->Line_period_zc = 0;
+        
+        if(_power_up_ok()) 
+        {
+          if(    ((m2)->Line_period_zc_T2 >= cZC_TRIP_MAX) 
+            || ((m2)->Line_period_zc_T2 <= zZC_TRIP_MIN)) 
+          {
+            _set_grid_freq_error(1); //Trip Grid Frequency Error
+          }
+        }
+        
+        // start closed window timer
+        ZeroCrossTimerT1(cZC_TIMER_START, cZC_CLOSED_WINDOW_TIMER);
+        ZeroCrosDetectionState = eZeroCrossClosedWindow;
+        _INT0IF = 0;
+      }
+      break;
+      //--------------------------------------------------------------------------------------------------------------
+    case eZeroCrossClosedWindow:
+      
+      ZeroCrossTimerT1(cZC_TIMER_COUNT, (U16)NULL);
+      
+      if(0 != ZeroCrossTimerT1(cZC_TIMER_READ, (U16)NULL))
+      {
+        ZeroCrosDetectionState = eZeroCrossOpenWindow;
+        // we do not want false zero crosses -> clear interrupt flag
+        _INT0IF = 0;
+      }
+      
+      break;
+      //--------------------------------------------------------------------------------------------------------------
+    default:
+      mAssert(cFalse);
+      _set_global_system_fault(1);
+      break;
+  }
 }
 /******************************************************************************/
 /*
-* Purpose: DC autotuninning in current measure channel.
-* Input: ADC Channel
-* Output:  1: DC autotunning complete  0: DC autotunning in progress
-*/
+ * Purpose: DC autotuninning in current measure channel.
+ * Input: ADC Channel
+ * Output:  1: DC autotunning complete  0: DC autotunning in progress
+ */
 /******************************************************************************/
 BOOL DC_Autotunning(U16 ADC_Current_Channel)
 {
-    volatile struct Mes1 *m1;
-    volatile struct mes_par *mp;
-    BOOL result;
+  struct Mes1 *m1 = _get_mes1();
+  struct mes_par *mp = _get_mespar();
+  BOOL result;
+  
+  if((mp)->dc_average_counter)
+  {
     
-    m1 = _get_mes1();
-    mp = _get_mespar();
+    (mp)->dc_sum += ADC_Current_Channel;
+    (mp)->dc_average_counter--;
+    result = 0;
+  }
+  else
+  {
+    (m1)->Curr_offset = (mp)->dc_sum >> DC_AVERAGE_DIVIDER;
     
-    if((mp)->dc_average_counter)
-    {
-        
-        (mp)->dc_sum += ADC_Current_Channel;
-        (mp)->dc_average_counter--;
-        result = 0;
-    }
-    else
-    {
-        (m1)->Curr_offset = (mp)->dc_sum >> DC_AVERAGE_DIVIDER;
-        
-        (mp)->dc_sum = 0;
-        (mp)->dc_average_counter = DC_AVERAGE_TIME;
-        if((m1)->Curr_offset < DC_OFFSET_LOWER_LIMIT || (m1)->Curr_offset > DC_OFFSET_UPPER_LIMIT) _set_current_offset_error(1);
-        result = 1;
-    }
-    
-    return(result);
+    (mp)->dc_sum = 0;
+    (mp)->dc_average_counter = DC_AVERAGE_TIME;
+    if((m1)->Curr_offset < DC_OFFSET_LOWER_LIMIT || (m1)->Curr_offset > DC_OFFSET_UPPER_LIMIT) _set_current_offset_error(1);
+    result = 1;
+  }
+  
+  return(result);
 }
 /******************************************************************************/
 /*
-* Purpose: Current measure and overcurrent trip. Run in task1
-* Input: ADC current channel
-* Output:  none
-* 
-* Current conversion calculations
-* 
-* Rsh = 0.05 Ohm - Current measure resistor
-* G = 2 - Current measure amplifier gain
-* Uoff = 2.5 V - Voltage offset
-* dADC = 5V / 1024 = 4,8828125 mV - ADC conversion coefficient
-* ADC - ADC LSB code
-*
-* Kc = (G * Rsh) / I = 100mV / A  = - Current conversion ratio
-* Digital Kc - DKc = Kc / dADC = 20,48 ADC / A
-* Curr_conv_coeff = [1(A) / DKc (ADC/mA)] = 48,828 mA / LSB - Digital current conversion ratio -> Curr_conv_coeff
-*
-*
-* Current Actual = [(ADC * (Curr_conv_coeff * 1024)) / 1024] - scaled by 1024, Current in mA
-*
-*/
+ * Purpose: Current measure and overcurrent trip. Run in task1
+ * Input: ADC current channel
+ * Output:  none
+ * 
+ * Current conversion calculations
+ * 
+ * Rsh = 0.05 Ohm - Current measure resistor
+ * G = 2 - Current measure amplifier gain
+ * Uoff = 2.5 V - Voltage offset
+ * dADC = 5V / 1024 = 4,8828125 mV - ADC conversion coefficient
+ * ADC - ADC LSB code
+ *
+ * Kc = (G * Rsh) / I = 100mV / A  = - Current conversion ratio
+ * Digital Kc - DKc = Kc / dADC = 20,48 ADC / A
+ * Curr_conv_coeff = [1(A) / DKc (ADC/mA)] = 48,828 mA / LSB - Digital current conversion ratio -> Curr_conv_coeff
+ *
+ *
+ * Current Actual = [(ADC * (Curr_conv_coeff * 1024)) / 1024] - scaled by 1024, Current in mA
+ *
+ */
 /******************************************************************************/
 void Current_measure(U16 ADC_Currnet_Raw)
 {
-    volatile struct Mes1 *m1;
-    volatile struct mes_par *mp;
-    S16 Current_limit;
-    S16 Current_tmp;
-    
-    m1 = _get_mes1();
-    mp = _get_mespar();
-    
-    Current_limit = (m1)->Curr_offset + (mp)->Overcurr_limit;
-    
-    Current_tmp = ADC_Currnet_Raw - (m1)->Curr_offset;
-    (m1)->Current = ((S32)Current_tmp * (mp)->Curr_conv_coeff) >> 10;
-    
-    
-    if(_power_up_ok()) if(((m1)->Current > Current_limit) || ((m1)->Current < -Current_limit)) _set_overcurrent_error(1);
-
+  struct Mes1 *m1 = _get_mes1();
+  struct mes_par *mp = _get_mespar();
+  S16 Current_limit;
+  S16 Current_tmp;
+  
+  Current_limit = (m1)->Curr_offset + (mp)->Overcurr_limit;
+  
+  Current_tmp = ADC_Currnet_Raw - (m1)->Curr_offset;
+  (m1)->Current = ((S32)Current_tmp * (mp)->Curr_conv_coeff) >> 10;
+  
+  
+  if(_power_up_ok()) if(((m1)->Current > Current_limit) || ((m1)->Current < -Current_limit)) _set_overcurrent_error(1);
+  
 }
 
 /******************************************************************************/
 /*
-* Purpose: Measurements and conversion in task2 
-* Input: 
-* Output:  
-*/
+ * Purpose: Measurements and conversion in task2 
+ * Input: 
+ * Output:  
+ */
 /******************************************************************************/
 void measure_T2(void)
 {
-    volatile struct Mes2 *m2;
-    volatile struct overload_protection *cop;
-    volatile struct cartridge_ident *id;
-    
-    m2 = _get_mes2();
-    cop = _get_overload_protection();
-    id = _get_ident();
-
-    if((m2)->Line_period_zc_T2)
-    {
-        (m2)->Line_frequency_zc = (60000u / (m2)->Line_period_zc_T2);
-    }
-    
-    (m2)->Actaul_Power = ((id)->IDENT_MAX_RMS_Power * (cop)->power_half_periods) / 100;
-    
+  struct Mes2 *m2 = _get_mes2();
+  struct overload_protection *cop = _get_overload_protection();
+  struct cartridge_ident *id = _get_ident();
+  
+  if((m2)->Line_period_zc_T2)
+  {
+    (m2)->Line_frequency_zc = (60000u / (m2)->Line_period_zc_T2);
+  }
+  
+  (m2)->Actaul_Power = ((id)->IDENT_MAX_RMS_Power * (cop)->power_half_periods) / 100;
+  
 }
 /******************************************************************************/
 /*
  * Name:      INIT Measure values
  * Purpose:   
  * 
-*/
+ */
 /******************************************************************************/
 void measure_init(void)
 {
-
-    mespar.dc_average_counter = DC_AVERAGE_TIME;
-    ZeroCrosDetectionState = eZeroCrossOpenWindow;
-
+  mespar.dc_average_counter = DC_AVERAGE_TIME;
+  ZeroCrosDetectionState = eZeroCrossOpenWindow;
 }
 
 /******************************************************************************/
@@ -288,20 +273,20 @@ void measure_init(void)
 /******************************************************************************/
 static U16 ZeroCrossTimerT1(U16 u16Command, U16 u16Cons)               
 {         
-    static U16 u16Count;
-
-    if(cZC_TIMER_START == u16Command)    
-    {
-        u16Count = u16Cons;    
-    }
-    else if((cZC_TIMER_READ != u16Count) && (cZC_TIMER_COUNT == u16Command)) 
-    {
-        u16Count--;
-    }
-    else
-    {
-        // command = 1 -> read timer
-    }
-
-    return(u16Count);
+  static U16 u16Count;
+  
+  if(cZC_TIMER_START == u16Command)    
+  {
+    u16Count = u16Cons;    
+  }
+  else if((cZC_TIMER_READ != u16Count) && (cZC_TIMER_COUNT == u16Command)) 
+  {
+    u16Count--;
+  }
+  else
+  {
+    // command = 1 -> read timer
+  }
+  
+  return(u16Count);
 }

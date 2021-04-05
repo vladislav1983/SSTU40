@@ -73,13 +73,13 @@ struct mes_par
     };
 
 /* Macros and extern struct definitions */
-extern volatile struct Mes1 mes1;
+extern struct Mes1 mes1;
 #define _get_mes1()    (&mes1)
 
-extern volatile struct Mes2 mes2;
+extern struct Mes2 mes2;
 #define _get_mes2()    (&mes2)
 
-extern volatile struct mes_par mespar;
+extern struct mes_par mespar;
 #define _get_mespar()    (&mespar)
 /*----------------------------------------------------------------------------*/
 /* Constant exported data                                                     */

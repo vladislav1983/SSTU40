@@ -46,8 +46,8 @@ typedef double                  f64;
 typedef U8                      BOOL;
 #define cFalse                  ((BOOL)(0))
 #define cTrue                   ((BOOL)(!cFalse))
-#define FALSE                  ((BOOL)(0))
-#define TRUE                   ((BOOL)(!cFalse))
+#define FALSE                   ((BOOL)(0))
+#define TRUE                    ((BOOL)(!cFalse))
 
 typedef U8                      HRESULT;
 #define S_OK                    ((HRESULT)0x00u)

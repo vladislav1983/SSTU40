@@ -463,18 +463,15 @@ void ee_param_act(BOOL init,BOOL read_all_params)
     case PARACT_CHECKSUM_POOL:
 			if(pio->type[1] == 'n')
 			{
-				if( sizeof(U32) == pio->size )
-				{
-					(pa)->EE_Chk_act = Crc_CalculateCRC16(pio->read_adress, sizeof(U32), (pa)->EE_Chk_act, cFalse);
-				}
-				else if(sizeof(U16) == pio->size)
-				{
-					(pa)->EE_Chk_act = Crc_CalculateCRC16(pio->read_adress, sizeof(U16), (pa)->EE_Chk_act, cFalse);
-				}
-				else if( sizeof(U8) == pio->size )
-				{
-					(pa)->EE_Chk_act = Crc_CalculateCRC16(pio->read_adress, sizeof(U8), (pa)->EE_Chk_act, cFalse);
-				}
+        if(pio->size <= sizeof(U32))
+        {
+          (pa)->EE_Chk_act = Crc_CalculateCRC16(pio->read_adress, pio->size, (pa)->EE_Chk_act, cFalse);
+        }
+        else
+        {
+          mAssert(cFalse);
+          _set_global_system_fault(1);
+        }
 			}
 			
 			(pa)->Iopar_Index++;
@@ -492,8 +489,7 @@ void ee_param_act(BOOL init,BOOL read_all_params)
 			break;
 			/*------------------------*/
     case PARACT_PARAMS_UPDATE:
-			
-			if((pio->type[1] == 'n') && (!_ee_write_error()))
+			if(pio->type[1] == 'n')
 			{
         /**********************************************************************************************************/
 				if( sizeof(U32) == pio->size )    // U32 size
@@ -701,7 +697,7 @@ HRESULT EE_CheckEEprom(void)
 	{
 		if(pio->type[1] == 'n')
 		{
-			u16EepromMembers++;
+			u16EepromMembers += pio->size;
 		}
 		pio++;
 	}

@@ -62,7 +62,7 @@ typedef enum eAdcChannel
 
 }AdcCh;
 
-extern volatile U16 ADC[AdcCh_Cnt];
+extern U16 ADC[AdcCh_Cnt];
 /*----------------------------------------------------------------------------*/
 /* Constant exported data                                                     */
 /*----------------------------------------------------------------------------*/
