@@ -70,6 +70,8 @@ struct sTaskTimesStruct
     U16 Task2Ticks;
     U32 Task1Time_us;
     U32 Task2Time_us;
+    U32 Task1MaxTime_us;
+    U32 Task2MaxTime_us;
 };
 
 extern struct sTaskTimesStruct Ttime;

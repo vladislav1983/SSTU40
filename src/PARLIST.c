@@ -195,8 +195,10 @@ const iolist iopar[] =
   {276,"I_term",                      (S16 *)&pid.I_term,                     (S16 *)&pid.I_term,                       2,"srr",    32767ul,  -32768, 5,0,    1 },
   {277,"D_term",                      (S16 *)&pid.D_term,                     (S16 *)&pid.D_term,                       2,"srr",    32767ul,  -32768, 5,0,    1 },
   /* TASK */  
-  {900,"Task1 Time",                  (U16 *)&Ttime.Task1Time_us,             (U16 *)&Ttime.Task1Time_us,               2,"urr",    0xFFFFul,      0, 5,0, 1000 },
-  {901,"Task2 Time",                  (U16 *)&Ttime.Task2Time_us,             (U16 *)&Ttime.Task2Time_us,               2,"urr",    0xFFFFul,      0, 5,0, 1000 },
+  {900,"Task1 Time",                  (U32 *)&Ttime.Task1Time_us,             (U32 *)&Ttime.Task1Time_us,               4,"urr",    0xFFFFFFFFul,  0, 5,0, 1000 },
+  {901,"Task2 Time",                  (U32 *)&Ttime.Task2Time_us,             (U32 *)&Ttime.Task2Time_us,               4,"urr",    0xFFFFFFFFul,  0, 5,0, 1000 },
+  {911,"Task1 Max Time",              (U32 *)&Ttime.Task1MaxTime_us,          (U32 *)&Ttime.Task1MaxTime_us,            4,"urr",    0xFFFFFFFFul,  0, 0,0, 1000 },
+  {912,"Task2 Max Time",              (U32 *)&Ttime.Task2MaxTime_us,          (U32 *)&Ttime.Task2MaxTime_us,            4,"urr",    0xFFFFFFFFul,  0, 0,0, 1000 },
   /* Station Statistics */
   {902,"Operation Time - Hours",      (U32 *)&stat_stat.OpTime_Hours,         (U32 *)&stat_stat.OpTime_Hours,           4,"unr",    0xFFFFFFFFul,  0, 4,0,    1 },
   {903,"Operation Time - Minutes",    (U16 *)&stat_stat.OpTime_Minutes,       (U16 *)&stat_stat.OpTime_Minutes,         2,"unr",    59ul,          0, 4,0,    1 },

@@ -59,8 +59,8 @@
 /* Exported data                                                              */
 /*----------------------------------------------------------------------------*/
 U16 TASK_CONTROL;
-struct sTaskTimesStruct Ttime;
-struct sStationStatistic stat_stat;
+struct sTaskTimesStruct Ttime = {0};
+struct sStationStatistic stat_stat = {0};
 
 
 /*----------------------------------------------------------------------------*/
@@ -181,7 +181,16 @@ void TaskTimesCalc(struct sTaskTimesStruct *p)
     
     (p)->Task1Time_us = (U32)(CPU_CYCLE_ns * (p)->Task1Ticks);
     (p)->Task2Time_us = (U32)(CPU_CYCLE_ns * (p)->Task2Ticks);
-
+    
+    if(p->Task1Time_us > p->Task1MaxTime_us)
+    {
+      p->Task1MaxTime_us = p->Task1Time_us;
+    }
+    
+    if(p->Task2Time_us > p->Task2MaxTime_us)
+    {
+      p->Task2MaxTime_us = p->Task2Time_us;
+    }
 }
 
 /******************************************************************************/
