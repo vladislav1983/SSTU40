@@ -44,8 +44,8 @@
 
 #define TEMP_USER_MAX                    450
 #define TEMP_USER_MIN                    100
-#define TEMP_USER_STEP                    5u
-#define TEMP_DISPLAY_ACCURACY            5u
+#define TEMP_USER_STEP                   5u
+#define TEMP_DISPLAY_ACCURACY            2u
 
 /* TMPCTRL Parameters */
 #define TMPCTRL_WAIT_AFTER_ZC_TIME        60u
@@ -70,6 +70,11 @@
 /*----------------------------------------------------------------------------*/
 /* Exported type                                                              */
 /*----------------------------------------------------------------------------*/
+typedef enum
+{
+ eTEMP_USER,
+ eTEMP_USER_SLEEP,
+}teTemperatureUsers;
 
 /*----------------------------------------------------------------------------*/
 /* Exported data                                                              */
@@ -161,8 +166,8 @@ extern struct overload_protection overprot;
 /*----------------------------------------------------------------------------*/
 void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag);
 U16 Get_Temp_Actual(void);
-void Set_User_Temp(void);
-void Roll_Back_User_Temp(void);
+void Set_User_Temp(teTemperatureUsers user);
+void Reset_User_Temp(teTemperatureUsers user);
 U16 Get_User_Temp(void);
 void Inc_User_Temp(void);
 void Dec_User_Temp(void);

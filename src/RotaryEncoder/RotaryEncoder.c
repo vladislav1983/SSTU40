@@ -18,7 +18,7 @@
 //                  PinB ___|       |_______|       |_______|   PinB
 //                           ^   ^   ^   ^    
 //                           |   |   |   |
-//                           +---+---+---+---> sampling pints for one detent / 4 edges
+//                           +---+---+---+---> sampling points for one detent / 4 edges
 
 #define R_TRANSITION_MASK       0x0F 
 

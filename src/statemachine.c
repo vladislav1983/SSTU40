@@ -77,6 +77,8 @@ static U16 nextstate_T2;
 U16 mainstate_T1;
 static U16 nextstate_T1;
 static U16 prevstate_T1;
+static teTemperatureUsers ActiveTempUser = eTEMP_USER;
+
 /*----------------------------------------------------------------------------*/
 /* Constant local data                                                        */
 /*----------------------------------------------------------------------------*/
@@ -325,7 +327,6 @@ void state_machine_T1(void)
 /******************************************************************************/
 void state_machine_T2(void)
 {
-  
   switch(mainstate_T2)
     /*------------------------*/
   {
@@ -376,6 +377,7 @@ void state_machine_T2(void)
         
         prevstate_T2 = ST2_TMPCTRL;
         stm_timer_T2(1, LCD_update_rate);
+        ActiveTempUser = eTEMP_USER;
       }
       stm_timer_T2(2,0);
       if(!stm_timer_T2(0,0))
@@ -389,194 +391,235 @@ void state_machine_T2(void)
       
       if(_up_button_pushed())
       {
-        mainstate_T2 = ST2_CHANGE_USER_REF; //<------ Only in this state user can change ref temperature
+        Reset_User_Temp(ActiveTempUser);
+        mainstate_T2 = ST2_CHANGE_USER_REF;
         nextstate_T2 = ST2_TEMP_UP;
       }
       else if(_down_button_pushed())
       {
-        mainstate_T2 = ST2_CHANGE_USER_REF; //<------ Only in this state user can change ref temperature
+        Reset_User_Temp(ActiveTempUser);
+        mainstate_T2 = ST2_CHANGE_USER_REF;
         nextstate_T2 = ST2_TEMP_DOWN;
       }
-        break;
-        /*------------------------*/    
-        case ST2_STAND:
-          if(mainstate_T2 != prevstate_T2)
-          {
-            IF_LCDPutc('\f');
-            IF_LCDPuts("     STAND");
-            IF_LCDPutc('\n');
-            IF_LCDPuts("SLEEP TEMP: ");
-            IF_LCDGotoXY(15,2);
-            IF_LCDPutc(0xDF);    //Degree Sign
-            IF_LCDPuts("C");
-            prevstate_T2 = ST2_STAND;
-            stm_timer_T2(1, LCD_update_rate);
-          }
-          
-          stm_timer_T2(2,0);
-          if(!stm_timer_T2(0,0))
-          {
-            IF_LCDGotoXY(12,2);
-            IF_LCDPuts("   ");
-            IF_LCDGotoXY(12,2);
-            IF_LCDPutn(Get_Temp_Actual());
-            
-            stm_timer_T2(1, LCD_update_rate);
-          }
-          break;
-          /*------------------------*/    
-          case ST2_EXTRACTOR:
-            if(prevstate_T2 != mainstate_T2)
-            {
-              IF_LCDPutc('\f');
-              IF_LCDPuts("   EXTRACTOR");
-              prevstate_T2 = ST2_EXTRACTOR;
-            }        
-            break;
-            /*------------------------*/    
-            case ST2_NO_CARTRIDGE:
-              if(prevstate_T2 != mainstate_T2)
-              {
-                IF_LCDPutc('\f');
-                IF_LCDPuts("  NO CARTRIDGE");
-                prevstate_T2 = ST2_NO_CARTRIDGE;
-              }    
-              break;
-              /*------------------------*/
-              case ST2_HIBERNATE:
-                if(prevstate_T2 != mainstate_T2)
-                {
-                  IF_LCDPutc('\f');
-                  IF_LCDPuts("  HIBERNATION");
-                  prevstate_T2 = ST2_HIBERNATE;
-                  // Clear hibernation times
-                  stat_stat.HibTimeHours = 0;
-                  stat_stat.HibTimeMinutes = 0;
-                  stat_stat.HibTimeSeconds = 0;
-                  stat_stat.HibCounter = 0;
-                  
-                  // Load timer 
-                  stm_timer_T2(1, LCD_update_rate);
-                }
-                
-                stm_timer_T2(2,0);
-                if(!stm_timer_T2(0,0))
-                {
-                  PrintHibernationTime();
-                  stm_timer_T2(1, LCD_update_rate);
-                }
-                
-                break;
-                /*------------------------*/
-                case ST2_CHANGE_USER_REF:
-                  if(prevstate_T2 != mainstate_T2)
-                  {
-                    IF_LCDPutc('\f');
-                    IF_LCDPuts("   TOOL: 2245");
-                    IF_LCDPutc('\n');
-                    IF_LCDPuts("  SET TEMP: ");
-                    IF_LCDGotoXY(15,2);
-                    IF_LCDPutc(0xDF);    //Degree Sign
-                    IF_LCDPuts("C");
-                    prevstate_T2 = ST2_CHANGE_USER_REF;
-                    stm_timer_T2(1,LOAD_T2_500mS);
-                  }
-                  
-                  if(_select_button_pushed())
-                  {
-                    mainstate_T2 = ST2_TEMP_SELECT;
-                  }
-                  else if(nextstate_T2 == ST2_TEMP_UP || _up_button_pushed())
-                  {
-                    mainstate_T2 = ST2_TEMP_UP;
-                  }
-                  else if(nextstate_T2 == ST2_TEMP_DOWN || _down_button_pushed())
-                  {
-                    mainstate_T2 = ST2_TEMP_DOWN;
-                  }
-                  else
-                  {
-                    stm_timer_T2(2,0);
-                    if(!stm_timer_T2(0,0))        // User have 2s to push SELECT button and confirm ref temp
-                    {
-                      Roll_Back_User_Temp();    //<------ If SELECT Button is not pushed do not update user reference temperature and roll - back it.
-                      mainstate_T2 = ST2_TMPCTRL;
-                    }
-                  } 
-                  break;
-                  /*------------------------*/
-                  case ST2_TEMP_UP:
-                    Inc_User_Temp(); //Increment User Temperature with 5deg
-                    
-                    IF_LCDGotoXY(12,2);
-                    IF_LCDPuts("   ");
-                    IF_LCDGotoXY(12,2);
-                    IF_LCDPutn(Get_User_Temp());
-                    
-                    stm_timer_T2(1,LOAD_T2_2SEC);        //<------ Overload 2s timer again. Used for confirm time.
-                    stm_timer_II_T2(1, LOAD_T2_250mS);     //<------ Load 250ms timer before scan buttons again.
-                    nextstate_T2 = ST2_CHANGE_USER_REF;
-                    mainstate_T2 = ST2_WAIT_STATE_II;
-                    break;
-                    /*------------------------*/    
-                    case ST2_TEMP_DOWN:
-                      Dec_User_Temp();  //Decrement User Temperature with 5deg
-                      
-                      IF_LCDGotoXY(12,2);
-                      IF_LCDPuts("   ");
-                      IF_LCDGotoXY(12,2);
-                      IF_LCDPutn(Get_User_Temp());
-                      
-                      stm_timer_T2(1,LOAD_T2_2SEC);
-                      stm_timer_II_T2(1, LOAD_T2_250mS);
-                      nextstate_T2 = ST2_CHANGE_USER_REF;
-                      mainstate_T2 = ST2_WAIT_STATE_II;         
-                      break;
-                      /*------------------------*/    
-                      case ST2_TEMP_SELECT:
-                        Set_User_Temp(); //Select User Temperature with 5deg
-                        
-                        IF_LCDGotoXY(12,2);
-                        IF_LCDPuts("   ");
-                        IF_LCDGotoXY(12,2);
-                        IF_LCDPutn(Get_User_Temp());
-                        
-                        stm_timer_T2(1,LOAD_T2_2SEC);
-                        stm_timer_II_T2(1, LOAD_T2_250mS);
-                        nextstate_T2 = ST2_TMPCTRL;
-                        mainstate_T2 = ST2_WAIT_STATE_II;
-                        break;
-                        /*------------------------*/    
-                        case ST2_ERROR_STATE:
-                          stm_timer_T2(2,0);
-                          if(!stm_timer_T2(0,0))
-                          {
-                            IF_LCDPutc('\f');
-                            IF_LCDPuts("   ERROR: ");
-                            IF_LCDPutn(ERR_CONTROL); //<------ Update LCD error register.
-                            prevstate_T2 = ST2_ERROR_STATE;
-                            stm_timer_T2(1, LCD_update_rate); 
-                          }
-                          break;
-                          /*------------------------*/        
-                          case ST2_WAIT_STATE:
-                            stm_timer_T2(2,0); //Count here stm_timer
-                            if(!stm_timer_T2(0,0)) mainstate_T2 = nextstate_T2;
-                            break;
-                            /*------------------------*/
-                            case ST2_WAIT_STATE_II:
-                              stm_timer_II_T2(2,0); //Count here stm_timer_II
-                              if(!stm_timer_II_T2(0,0)) mainstate_T2 = nextstate_T2;
-                              break;
-                              /*------------------------*/    
-                              
-                              default:
-                                mAssert(cFalse);
-                                _set_global_system_fault(1);
-                                break;
+      break;
+      /*------------------------*/    
+    case ST2_STAND:
+      if(mainstate_T2 != prevstate_T2)
+      {
+        IF_LCDPutc('\f');
+        IF_LCDPuts("     STAND");
+        IF_LCDPutc('\n');
+        IF_LCDPuts("SLEEP TEMP: ");
+        IF_LCDGotoXY(15,2);
+        IF_LCDPutc(0xDF);    //Degree Sign
+        IF_LCDPuts("C");
+        prevstate_T2 = ST2_STAND;
+        stm_timer_T2(1, LCD_update_rate);
+        ActiveTempUser = eTEMP_USER_SLEEP;
       }
       
+      stm_timer_T2(2,0);
+      if(!stm_timer_T2(0,0))
+      {
+        IF_LCDGotoXY(12,2);
+        IF_LCDPuts("   ");
+        IF_LCDGotoXY(12,2);
+        IF_LCDPutn(Get_Temp_Actual());
+        
+        stm_timer_T2(1, LCD_update_rate);
+      }
+      if(_up_button_pushed())
+      {
+        Reset_User_Temp(ActiveTempUser);
+        mainstate_T2 = ST2_CHANGE_USER_REF;
+        nextstate_T2 = ST2_TEMP_UP;
+      }
+      else if(_down_button_pushed())
+      {
+        Reset_User_Temp(ActiveTempUser);
+        mainstate_T2 = ST2_CHANGE_USER_REF;
+        nextstate_T2 = ST2_TEMP_DOWN;
+      }
+      
+      break;
+      /*------------------------*/    
+    case ST2_EXTRACTOR:
+      if(prevstate_T2 != mainstate_T2)
+      {
+        IF_LCDPutc('\f');
+        IF_LCDPuts("   EXTRACTOR");
+        prevstate_T2 = ST2_EXTRACTOR;
+      }        
+      break;
+      /*------------------------*/    
+    case ST2_NO_CARTRIDGE:
+      if(prevstate_T2 != mainstate_T2)
+      {
+        IF_LCDPutc('\f');
+        IF_LCDPuts("  NO CARTRIDGE");
+        prevstate_T2 = ST2_NO_CARTRIDGE;
+      }    
+      break;
+      /*------------------------*/
+    case ST2_HIBERNATE:
+      if(prevstate_T2 != mainstate_T2)
+      {
+        IF_LCDPutc('\f');
+        IF_LCDPuts("  HIBERNATION");
+        prevstate_T2 = ST2_HIBERNATE;
+        // Clear hibernation times
+        stat_stat.HibTimeHours = 0;
+        stat_stat.HibTimeMinutes = 0;
+        stat_stat.HibTimeSeconds = 0;
+        stat_stat.HibCounter = 0;
+        
+        // Load timer 
+        stm_timer_T2(1, LCD_update_rate);
+      }
+      
+      stm_timer_T2(2,0);
+      if(!stm_timer_T2(0,0))
+      {
+        PrintHibernationTime();
+        stm_timer_T2(1, LCD_update_rate);
+      }
+      
+      break;
+      /*------------------------*/
+    case ST2_CHANGE_USER_REF:
+      if(prevstate_T2 != mainstate_T2)
+      {
+        IF_LCDPutc('\f');
+        if(ActiveTempUser == eTEMP_USER)
+        {
+          IF_LCDPuts("   TOOL: 2245");
+          IF_LCDPutc('\n');
+          IF_LCDPuts("  SET TEMP: ");
+        }
+        else
+        {
+           IF_LCDPuts("      SET");
+          IF_LCDPutc('\n');
+          IF_LCDPuts("SLEEP TEMP: ");
+        }
+        
+        IF_LCDGotoXY(15,2);
+        IF_LCDPutc(0xDF);    //Degree Sign
+        IF_LCDPuts("C");
+        prevstate_T2 = ST2_CHANGE_USER_REF;
+        stm_timer_T2(1,LOAD_T2_500mS);
+      }
+      
+      if(_select_button_pushed())
+      {
+        mainstate_T2 = ST2_TEMP_SELECT;
+      }
+      else if(nextstate_T2 == ST2_TEMP_UP || _up_button_pushed())
+      {
+        mainstate_T2 = ST2_TEMP_UP;
+      }
+      else if(nextstate_T2 == ST2_TEMP_DOWN || _down_button_pushed())
+      {
+        mainstate_T2 = ST2_TEMP_DOWN;
+      }
+      else
+      {
+        stm_timer_T2(2,0);
+        if(!stm_timer_T2(0,0))        // User have 2s to push SELECT button and confirm ref temp
+        {
+          if(ActiveTempUser == eTEMP_USER)
+          {
+            mainstate_T2 = ST2_TMPCTRL;
+          }
+          else
+          {
+            mainstate_T2 = ST2_STAND;
+          }
+        }
+      } 
+      break;
+      /*------------------------*/
+    case ST2_TEMP_UP:
+      Inc_User_Temp(); //Increment User Temperature with 5deg
+      
+      IF_LCDGotoXY(12,2);
+      IF_LCDPuts("   ");
+      IF_LCDGotoXY(12,2);
+      IF_LCDPutn(Get_User_Temp());
+      
+      stm_timer_T2(1,LOAD_T2_2SEC);        //<------ Overload 2s timer again. Used for confirm time.
+      stm_timer_II_T2(1, LOAD_T2_250mS);     //<------ Load 250ms timer before scan buttons again.
+      nextstate_T2 = ST2_CHANGE_USER_REF;
+      mainstate_T2 = ST2_WAIT_STATE_II;
+      break;
+      /*------------------------*/    
+    case ST2_TEMP_DOWN:
+      Dec_User_Temp();  //Decrement User Temperature with 5deg
+      
+      IF_LCDGotoXY(12,2);
+      IF_LCDPuts("   ");
+      IF_LCDGotoXY(12,2);
+      IF_LCDPutn(Get_User_Temp());
+      
+      stm_timer_T2(1,LOAD_T2_2SEC);
+      stm_timer_II_T2(1, LOAD_T2_250mS);
+      nextstate_T2 = ST2_CHANGE_USER_REF;
+      mainstate_T2 = ST2_WAIT_STATE_II;         
+      break;
+      /*------------------------*/    
+    case ST2_TEMP_SELECT:
+      Set_User_Temp(ActiveTempUser); //Select User Temperature with 5deg
+      
+      IF_LCDGotoXY(12,2);
+      IF_LCDPuts("   ");
+      IF_LCDGotoXY(12,2);
+      IF_LCDPutn(Get_User_Temp());
+      
+      stm_timer_T2(1,LOAD_T2_2SEC);
+      stm_timer_II_T2(1, LOAD_T2_250mS);
+      mainstate_T2 = ST2_WAIT_STATE_II;
+      
+      if(ActiveTempUser == eTEMP_USER)
+      {
+        nextstate_T2 = ST2_TMPCTRL;
+      }
+      else
+      {
+        nextstate_T2 = ST2_STAND;
+      }
+      
+      break;
+      /*------------------------*/    
+    case ST2_ERROR_STATE:
+      stm_timer_T2(2,0);
+      if(!stm_timer_T2(0,0))
+      {
+        IF_LCDPutc('\f');
+        IF_LCDPuts("   ERROR: ");
+        IF_LCDPutn(ERR_CONTROL); //<------ Update LCD error register.
+        prevstate_T2 = ST2_ERROR_STATE;
+        stm_timer_T2(1, LCD_update_rate); 
+      }
+      break;
+      /*------------------------*/        
+    case ST2_WAIT_STATE:
+      stm_timer_T2(2,0); //Count here stm_timer
+      if(!stm_timer_T2(0,0)) mainstate_T2 = nextstate_T2;
+      break;
+      /*------------------------*/
+    case ST2_WAIT_STATE_II:
+      stm_timer_II_T2(2,0); //Count here stm_timer_II
+      if(!stm_timer_II_T2(0,0)) mainstate_T2 = nextstate_T2;
+      break;
+      /*------------------------*/    
+      
+    default:
+      mAssert(cFalse);
+      _set_global_system_fault(1);
+      break;
   }
+  
+}
   /******************************************************************************/
   /*
    * Purpose: INIT State Machines

@@ -104,7 +104,6 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
   {
     /*---------------------------------------------------*/    
     case TMPCTRL_INIT:
-      //Set_User_Temp();
       tmpctrl_mainstate = TMPCTRL_MEASURE_TEMP;
       break;
       /*---------------------------------------------------*/    
@@ -403,9 +402,21 @@ U16 Get_Temp_Actual(void)
  * Output: none
  */
 /******************************************************************************/
-void Set_User_Temp(void)
+void Set_User_Temp(teTemperatureUsers user)
 {
-  T_ctrl.T_Ref_User = T_ctrl.T_Ref_User_tmp;
+  if(eTEMP_USER == user)
+  {
+    T_ctrl.T_Ref_User = T_ctrl.T_Ref_User_tmp;
+  }
+  else if(eTEMP_USER_SLEEP == user)
+  {
+    T_ctrl.T_Ref_User_Sleep = T_ctrl.T_Ref_User_tmp;
+  }
+  else
+  {
+    mAssert(cFalse);
+    _set_global_system_fault(1);
+  }
 }
 /******************************************************************************/
 /*
@@ -414,9 +425,21 @@ void Set_User_Temp(void)
  * Output: none
  */
 /******************************************************************************/
-void Roll_Back_User_Temp(void)
+void Reset_User_Temp(teTemperatureUsers user)
 {
-  T_ctrl.T_Ref_User_tmp = T_ctrl.T_Ref_User;
+  if(eTEMP_USER == user)
+  {
+    T_ctrl.T_Ref_User_tmp = T_ctrl.T_Ref_User;
+  }
+  else if(eTEMP_USER_SLEEP == user)
+  {
+    T_ctrl.T_Ref_User_tmp = T_ctrl.T_Ref_User_Sleep;
+  }
+  else
+  {
+    mAssert(cFalse);
+    _set_global_system_fault(1);
+  }
 }
 /******************************************************************************/
 /*
