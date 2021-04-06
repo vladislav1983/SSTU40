@@ -44,14 +44,14 @@ typedef struct
 
 typedef enum
 {
-  R_START         = 0x00,
-  R_CW_FINAL      = 0x01,
-  R_CW_BEGIN      = 0x02,
-  R_CW_NEXT       = 0x03,
-  R_CCW_BEGIN     = 0x04,
-  R_CCW_FINAL     = 0x05,
-  R_CCW_NEXT      = 0x06,
-  R_SUB_STATES_NR = 0x07
+  eSTART         = 0x00,
+  eCW_FINAL      = 0x01,
+  eCW_BEGIN      = 0x02,
+  eCW_NEXT       = 0x03,
+  eCCW_BEGIN     = 0x04,
+  eCCW_FINAL     = 0x05,
+  eCCW_NEXT      = 0x06,
+  eSUB_STATES_NR = 0x07
 }reRotaryEncoderSubStates;
 
 /*----------------------------------------------------------------------------*/
@@ -65,7 +65,7 @@ tRotaryEncoder RotaryEncoder[eROTARY_ENCODERS_NUM] =
     .Inputs              = 0,
     .InputsDebounced     = 0,
     .State               = eRoratyStopIdle,
-    .CurrentState        = 0,
+    .CurrentState        = eSTART,
     .debounce_timer_a    = ROTARY_ENCODER_DEBOUNCE_TIME,
     .debounce_timer_b    = ROTARY_ENCODER_DEBOUNCE_TIME,
     .debounce_timer_push = ROTARY_ENCODER_DEBOUNCE_TIME,  
@@ -75,16 +75,16 @@ tRotaryEncoder RotaryEncoder[eROTARY_ENCODERS_NUM] =
 /*----------------------------------------------------------------------------*/
 /* Constant local data                                                        */
 /*----------------------------------------------------------------------------*/
-static const uint8_t EncoderTruthTable[R_SUB_STATES_NR][4] = 
+static const uint8_t EncoderTruthTable[eSUB_STATES_NR][4] = 
 {
   // 00        01           10           11
-  {R_START,    R_CW_BEGIN,  R_CCW_BEGIN, R_START              },  // R_START
-  {R_CW_NEXT,  R_START,     R_CW_FINAL,  R_START | eRoratyCW  },  // R_CW_FINAL
-  {R_CW_NEXT,  R_CW_BEGIN,  R_START,     R_START              },  // R_CW_BEGIN
-  {R_CW_NEXT,  R_CW_BEGIN,  R_CW_FINAL,  R_START              },  // R_CW_NEXT
-  {R_CCW_NEXT, R_START,     R_CCW_BEGIN, R_START              },  // R_CCW_BEGIN
-  {R_CCW_NEXT, R_CCW_FINAL, R_START,     R_START | eRoratyCCW },  // R_CCW_FINAL
-  {R_CCW_NEXT, R_CCW_FINAL, R_CCW_BEGIN, R_START              }   // R_CCW_NEXT
+  {eSTART,    eCW_BEGIN,  eCCW_BEGIN, eSTART              },  // R_START
+  {eCW_NEXT,  eSTART,     eCW_FINAL,  eSTART | eRoratyCW  },  // R_CW_FINAL
+  {eCW_NEXT,  eCW_BEGIN,  eSTART,     eSTART              },  // R_CW_BEGIN
+  {eCW_NEXT,  eCW_BEGIN,  eCW_FINAL,  eSTART              },  // R_CW_NEXT
+  {eCCW_NEXT, eSTART,     eCCW_BEGIN, eSTART              },  // R_CCW_BEGIN
+  {eCCW_NEXT, eCCW_FINAL, eSTART,     eSTART | eRoratyCCW },  // R_CCW_FINAL
+  {eCCW_NEXT, eCCW_FINAL, eCCW_BEGIN, eSTART              }   // R_CCW_NEXT
 };
 
 /*----------------------------------------------------------------------------*/
@@ -222,18 +222,16 @@ void RotaryEncoder_Scan_T1(void)
     if(ENCODER_GET_VALUE(re->InputsDebounced, ROTARY_ENCODER_PIN_PUSH_MASK, ROTARY_ENCODER_PIN_PUSH_SHIFT))
     {
       re->State = eRotaryPush;
-      re->CurrentState = 0;
     }
-    else 
+    
+    uint8_t state_index = re->CurrentState & R_TRANSITION_MASK;
+    uint8_t pin_index   = re->InputsDebounced & (ROTARY_ENCODER_PIN_B_MASK | ROTARY_ENCODER_PIN_A_MASK);
+    re->CurrentState    = EncoderTruthTable[state_index][pin_index];
+    
+    // check that state is consumed, so it can be updated
+    if(re->State == eRoratyStopIdle)
     {
-      // check that state is consumed, so it can be updated
-      if(re->State == eRoratyStopIdle)
-      {
-        uint8_t index     = re->CurrentState & R_TRANSITION_MASK;
-        uint8_t pin_index = re->InputsDebounced & (ROTARY_ENCODER_PIN_B_MASK | ROTARY_ENCODER_PIN_A_MASK);
-        re->CurrentState = EncoderTruthTable[index][pin_index];
-        re->State        = re->CurrentState & (eRoratyCW | eRoratyCCW);
-      }
+      re->State |= re->CurrentState & (eRoratyCW | eRoratyCCW);
     }
   }
 }
@@ -247,9 +245,9 @@ teRotaryEncoderState RotaryEncoder_ConsumeStateEvent(teRotaryEncoderClientCfg cl
 {
   teRotaryEncoderState state = eRoratyStopIdle;
   
-  if(client < EncoderClient_cfg[eROTARY_CLIENTS_NUM])
+  if(client < eROTARY_CLIENTS_NUM)
   {
-    state = RotaryEncoder[EncoderClient_cfg[client]].State;
+    state = RotaryEncoder[EncoderClient_cfg[client] % eROTARY_ENCODERS_NUM].State;
     // set state to idle, so it can be updated
     RotaryEncoder[EncoderClient_cfg[client]].State = eRoratyStopIdle;
   }

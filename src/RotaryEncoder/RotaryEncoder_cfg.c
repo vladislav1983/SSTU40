@@ -85,13 +85,10 @@ uint8_t RotaryEncoder_cfg_ReadPins(uint8_t EncoderIndex)
   
   if(EncoderIndex < eROTARY_ENCODERS_NUM)
   {
-    pin = !pinROTARY_A ^ RotaryEncoderPinsPolarity_cfg[EncoderIndex];
-    ENCODER_SET_VALUE(inputs, pin,    ROTARY_ENCODER_PIN_A_MASK,    ROTARY_ENCODER_PIN_A_SHIFT);
+    ENCODER_SET_VALUE(inputs, pinROTARY_A,    ROTARY_ENCODER_PIN_A_MASK,    ROTARY_ENCODER_PIN_A_SHIFT);
+    ENCODER_SET_VALUE(inputs, pinROTARY_B,    ROTARY_ENCODER_PIN_B_MASK,    ROTARY_ENCODER_PIN_B_SHIFT);
     
-    pin = !pinROTARY_B ^ RotaryEncoderPinsPolarity_cfg[EncoderIndex];
-    ENCODER_SET_VALUE(inputs, pin,    ROTARY_ENCODER_PIN_B_MASK,    ROTARY_ENCODER_PIN_B_SHIFT);
-    
-    pin = !pinROTARY_PUSH ^ RotaryEncoderPinsPolarity_cfg[EncoderIndex];
+    pin = pinROTARY_PUSH ^ RotaryEncoderPinsPolarity_cfg[EncoderIndex];
     ENCODER_SET_VALUE(inputs, pin, ROTARY_ENCODER_PIN_PUSH_MASK, ROTARY_ENCODER_PIN_PUSH_SHIFT);
   }
   

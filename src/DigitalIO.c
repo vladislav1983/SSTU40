@@ -129,8 +129,7 @@ void IF_DigitalIO_Init(void)
     
     
 }
-
-U16 counter = 0;
+extern S16 debug_var_1;
 /******************************************************************************/
 /*
  * Name:    User Button scan in task 2.  5ms 
@@ -155,18 +154,24 @@ void Dio_Scan_T2(void)
   
   if(state == eRoratyCW)
   {
-    //_set_up_button(1);
-    counter++;
+    _set_up_button(1);
+    debug_var_1++;
   }
   else if(state == eRoratyCCW)
   {
-    //_set_down_button(1);
-    counter--;
+    _set_down_button(1);
+    debug_var_1--;
   }
   else if(state == eRotaryPush)
   {
-    //_set_select_button(1);
-    counter = 0;
+    _set_select_button(1);
+    debug_var_1 = 0;
+  }
+  else
+  {
+    _set_up_button(0);
+    _set_down_button(0);
+    _set_select_button(0);
   }
   
 #else

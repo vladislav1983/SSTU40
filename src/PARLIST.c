@@ -109,6 +109,9 @@ extern U16 EE_Valid;
 extern U16 EE_par_update;
 extern U16 EE_Bank1Valid;
 extern U16 EE_Bank2Valid;
+
+// debug
+S16 debug_var_1 = 0;
 /*----------------------------------------------------------------------------*/
 /* Constant exported data                                                     */
 /*----------------------------------------------------------------------------*/
@@ -199,6 +202,8 @@ const iolist iopar[] =
   {903,"Operation Time - Minutes",    (U16 *)&stat_stat.OpTime_Minutes,       (U16 *)&stat_stat.OpTime_Minutes,         2,"unr",    59ul,          0, 4,0,    1 },
   {904,"Cartridge Stand Counter",     (U32 *)&stat_stat.Cart_Stand_Counter,   (U32 *)&stat_stat.Cart_Stand_Counter,     4,"unr",    0xFFFFFFFFul,  0, 4,0,    1 },
   {905,"Cartridge Change Counter",    (U32 *)&stat_stat.Cart_Change_Counter,  (U32 *)&stat_stat.Cart_Change_Counter,    4,"unr",    0xFFFFFFFFul,  0, 4,0,    1 },
+  /* debug */
+  {910,"debug_var_1",                 (S16 *)&debug_var_1,                    (S16 *)&debug_var_1,                      2,"srr",    32767ul,  -32768, 0,0,    1 },
   /* EEPROM.C */                                                                                                                                                
   {950,"EEPROM Checksum",             (U16 *)&EE_CHKS,                        (U16 *)&EE_CHKS,                          2,"urr",    0xFFFFul,      0, 5,0,    1 },
   {951,"EEPROM Valid (1000)",         (U16 *)&EE_Valid,                       (U16 *)&EE_Valid,                         2,"unr",    0xFFFFul,      0, 0,0,    1 },
