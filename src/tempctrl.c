@@ -35,7 +35,7 @@
 /*----------------------------------------------------------------------------*/
 /* Local macros                                                               */
 /*----------------------------------------------------------------------------*/
-#define BRESENHAM_DISTRIBUTION      0
+#define BRESENHAM_DISTRIBUTION      1
 
 /*----------------------------------------------------------------------------*/
 /* Local types                                                                */
@@ -523,8 +523,9 @@ static S16 bresenham_distribution(tDistributionCmd cmd, U16 distribution_periods
 {
   static S16 delta_error = 0;
   static U16 periods_counter = 0;
-  static U16 dy = 0;
-  static U16 dx = 0;
+  static S16 dy = 0;
+  static S16 dx = 0;
+  static S16 bias = 0;
   S16 output = 0;
   
   if(cmd == eLoadDustibutionPeriods)
@@ -537,7 +538,7 @@ static S16 bresenham_distribution(tDistributionCmd cmd, U16 distribution_periods
       dx = max_periods_x;
       periods_counter = max_periods_x;
       // calculate initial error
-      delta_error = ((S16)2 * (S16)dy) - (S16)dx;
+      delta_error = (2 * dy) - dx;
     }
     else
     {
@@ -549,13 +550,24 @@ static S16 bresenham_distribution(tDistributionCmd cmd, U16 distribution_periods
   {
     if((periods_counter--) > 0)
     {
-      if(delta_error > 0)
+      if(delta_error > 0 || bias != 0)
       {
+        if((periods_counter % 2) == 0)
+        {
+          // even 
+          bias++;
+        }
+        else
+        {
+          // odd
+          bias--;
+        }
+        
         output = 1;
-        delta_error -= (S16)2 * (S16)dx;
+        delta_error -= 2 * dx;
       }
       
-      delta_error += (S16)2 * (S16)dy;
+      delta_error += 2 * dy;
     }
     else
     {
