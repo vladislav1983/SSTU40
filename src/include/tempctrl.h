@@ -81,7 +81,7 @@ struct temperature_control
     U16 T_sum;
     U16 per_counter;
     S16 heat_periods;
-    U16 heat_periods_debug;
+    S16 heat_periods_debug;
     
     BOOL tmpctrl_triac_state;
     

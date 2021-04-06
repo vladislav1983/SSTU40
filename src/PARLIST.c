@@ -181,7 +181,7 @@ const iolist iopar[] =
   {256,"Temp Feedback",               (U16 *)&T_ctrl.T_fbk,                   (U16 *)&T_ctrl.T_fbk,                     2,"urr",    0xFFFFul,      0, 5,0,    1 },
   {257,"Temp Delta",                  (S16 *)&T_ctrl.T_delta,                 (S16 *)&T_ctrl.T_delta,                   2,"srr",    32767ul,  -32768, 5,0,    1 },
   {258,"Heat Periods",                (S16 *)&T_ctrl.heat_periods,            (S16 *)&T_ctrl.heat_periods,              2,"srr",    32767ul,  -32768, 5,0,    1 },
-  {260,"heat_periods_debug",          (U16 *)&T_ctrl.heat_periods_debug,      (U16 *)&T_ctrl.heat_periods_debug,        2,"urr",    0xFFFFul,      0, 5,0,    1 },
+  {260,"heat_periods_debug",          (S16 *)&T_ctrl.heat_periods_debug,      (S16 *)&T_ctrl.heat_periods_debug,        2,"srr",    32767ul,  -32768, 0,0,    1 },
   {261,"Triac State",                 (U16 *)&T_ctrl.tmpctrl_triac_state,     (U16 *)&T_ctrl.tmpctrl_triac_state,       2,"urr",    0xFFFFul,      0, 5,0,    1 },
   {262,"TMPCTRL State",               (U16 *)&tmpctrl_mainstate,              (U16 *)&tmpctrl_mainstate,                2,"urr",    0xFFFFul,      0, 5,0,    1 },
   {264,"Temp Calibration Offset",     (S16 *)&T_ctrl.T_cal_offset,            (S16 *)&T_ctrl.T_cal_offset,              2,"snr",    50ul,        -50, 0,0,    1 },

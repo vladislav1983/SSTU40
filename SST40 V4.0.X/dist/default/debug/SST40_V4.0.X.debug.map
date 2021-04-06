@@ -1,4 +1,4 @@
-Microchip Technology Inc, vv3_31 (A) chT9òlp
+Microchip Technology Inc, vv3_31 (A) s
 
 Tool Name:
   c:\program files (x86)\microchip\mplab c30\bin\bin\..\bin/pic30-elf-ld.exe
@@ -138,7 +138,7 @@ Data Memory  [Origin = 0x800, Length = 0x800]
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
 .icd                         0x800                0x50            0x50  (80)
-_02b4c700606b515f            0x850                   0           0x25c  (604)
+_02bac700606c23f8            0x850                   0           0x25c  (604)
 .bss                         0xaac                   0           0x116  (278)
 .data                        0xbc2                   0            0x1c  (28)
 .bss                         0xbde                   0            0x60  (96)
@@ -1815,9 +1815,9 @@ __c30_signature
  __c30_signature
                   0x00034c          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libc-elf.a(strlen.XXeo)
 
-_02b4c700606b515f
+_02bac700606c23f8
                     0x0850        0x25c
- _02b4c700606b515f
+ _02bac700606c23f8
                     0x0850        0x25c build/default/debug/_ext/1360937237/trace.o
                     0x0850                  _TRSB
 
