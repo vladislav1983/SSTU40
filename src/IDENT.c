@@ -225,7 +225,7 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
       
       (id)->ident_mode = IDENT_UNDEFINED_STATE;
       
-      result = 1; //quit ident    
+      result = 1; //quit ident
       
       break;
       /*---------------------------------------------------*/    
