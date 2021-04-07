@@ -106,7 +106,7 @@ do{                                                             \
 // Local data                                                                 
 //==========================================================================================================
 static U16 _EEDATA(512)     EEdata[512];
-static U16 ee_state;
+static U16 ee_state = PARACT_INIT;
 
 //==========================================================================================================
 // Constant local data                                                        
@@ -116,11 +116,17 @@ static U16 ee_state;
 //==========================================================================================================
 // Exported data                                                              
 //==========================================================================================================
-U16 EE_CHKS;
-U16 EE_Valid;
-U16 EE_par_update;
-sParamAct ParamAct;
-
+U16 EE_CHKS = 0;
+U16 EE_Valid = 0;
+U16 EE_par_update = 0;
+sParamAct ParamAct = 
+{
+  .EE_Chk_act = 0,
+  .Iopar_Index = 0,
+  .Iopar_members = 0,
+  .bActiveBank = 0,
+  .u8NumberOfUpdatedBanks = 0
+};
 
 //==========================================================================================================
 // Constant exported data                                                     
@@ -437,7 +443,7 @@ void ee_param_act(BOOL init,BOOL read_all_params)
 	static _prog_addressT EE_pio;
 	U16 U16ParamTemp;
 	U32 U32ParamTemp = 0;
-	BOOL  bBreak = cFalse;
+  BOOL checksum_ok = cFalse;
 	
 	pa = mGet_ParamAct();
 	
@@ -549,8 +555,6 @@ void ee_param_act(BOOL init,BOOL read_all_params)
 				
 				EE_WriteChecksum(EE_CHKS, (pa)->bActiveBank);
 				
-				//if(EE_VerifyChecksum(EE_CHKS,(pa)->bActiveBank) == S_FALSE) _set_ee_checksum_read_error(1);
-				
 				// switch between banks
 				mSwapBanks();
 				
@@ -608,25 +612,22 @@ void ee_param_act(BOOL init,BOOL read_all_params)
 				/* Checksum Verify */
 				if(EE_VerifyChecksum((pa)->EE_Chk_act, (pa)->bActiveBank) == S_OK)
 				{
-					bBreak = cTrue;
-					_set_ee_checksum_read_error(0);
+          checksum_ok = cTrue;
+					_set_ee_checksum_error(0);
 				}
 				else
 				{
 					mSwapBanks();
 					pio=(iolist*)iopar;
-					_set_ee_checksum_read_error(1);
 				}
 				
 				(pa)->EE_Chk_act = 0;
 				
-			} while( (--(pa)->u8NumberOfUpdatedBanks != 0) && (bBreak == cFalse) );
+			} while( (--(pa)->u8NumberOfUpdatedBanks != 0) && (checksum_ok == cFalse) );
 			
 			// Check that eeprom is valid (Value 1000)
-			if(EE_Valid != 1000) 
-			{
-				_set_ee_valid_error(1);    
-			}
+			if(EE_Valid != 1000)      _set_ee_valid_error(1);
+      if(checksum_ok == cFalse) _set_ee_checksum_error(1);
 			
 			ee_state = PARACT_INIT;
 			_set_eeprom_busy(0);

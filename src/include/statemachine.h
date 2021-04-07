@@ -199,8 +199,8 @@ extern volatile U16 ERR_CONTROL;
 #define _grid_freq_error()                  (_getbit(ERR_CONTROL,0))        /* bit 0 */
 #define _set_grid_freq_error(x)             (_putbit((x),ERR_CONTROL,0))    /* bit 0 */
 
-#define _ee_checksum_read_error()           (_getbit(ERR_CONTROL,1))        /* bit 1 */
-#define _set_ee_checksum_read_error(x)      (_putbit((x),ERR_CONTROL,1))    /* bit 1 */
+#define _ee_checksum_error()                (_getbit(ERR_CONTROL,1))        /* bit 1 */
+#define _set_ee_checksum_error(x)           (_putbit((x),ERR_CONTROL,1))    /* bit 1 */
 
 #define _param_limit_error()                (_getbit(ERR_CONTROL,2))        /* bit 2 */
 #define _set_param_limit_error(x)           (_putbit((x),ERR_CONTROL,2))    /* bit 2 */
