@@ -51,7 +51,25 @@
 /*----------------------------------------------------------------------------*/
 /* Exported data                                                              */
 /*----------------------------------------------------------------------------*/
-struct cartridge_ident ident;
+struct cartridge_ident ident = 
+{
+  .IDENT_MAX_RMS_Power = 0,
+  .IDENT_Peak_Power = 0,
+  .Ident_peak_current = 0,
+  .U_Temp_delta = 0,
+  .U_Temp_in = 0,
+  .U_Temp_max = 0,
+  .U_Temp_out = 0,
+  .U_Temp_sum = 0,
+  .ident_current_trip = 12000,  // 12A default trip
+  .ident_deltaT_trip = 300,
+  .ident_mes_temp = 0,
+  .ident_mode = IDENT_INIT,
+  .ident_periods = 0,
+  .ident_periods_load = 16,
+  .ident_trace_start = 0,
+  .triac_state = 0,
+};
 
 /* TRACE.C */
 extern S16 TRSB[TRACE_LEN][NB_TRACE_VARS];
@@ -64,9 +82,8 @@ extern U16 trace_control;
 /*----------------------------------------------------------------------------*/
 /* Local function prototypes                                                  */
 /*----------------------------------------------------------------------------*/
-inline U16 ident_timer_t1(U16 cmd, U16 cons);
-inline U16 ident_timeout_timer_t1(U16 cmd, U16 cons);
-BOOL bresenham(U16 periods);
+U16 ident_timer_t1(U16 cmd, U16 cons);
+U16 ident_timeout_timer_t1(U16 cmd, U16 cons);
 /******************************************************************************/
 /*                                                                            */
 /*                   I N T E R F A C E   F U N C T I O N S                    */
@@ -96,9 +113,9 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
       if((id)->ident_periods_load > IDENT_PERIODS_MAX) (id)->ident_periods = IDENT_PERIODS_MAX; //Load halfperiods for identification
       else (id)->ident_periods = (id)->ident_periods_load;
       
-      ident_timer_t1(1, IDENT_AVERAGE_TIME);    //load timer for averaging
+      ident_timer_t1(1, 4);    //load timer for four zc periods wait
       
-      (id)->ident_mode = IDENT_MES_TEMP;
+      (id)->ident_mode = IDENT_WAIT_MES_TEMP;
       (id)->U_Temp_out = 0;
       (id)->U_Temp_in = 0;
       (id)->U_Temp_max = 0;
@@ -107,9 +124,20 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
       (id)->IDENT_Peak_Power = 0;
       (id)->IDENT_MAX_RMS_Power = 0;
       
-      result = 0;
+    /*---------------------------------------------------*/
+    case IDENT_WAIT_MES_TEMP:
+      if(_zero_cross())
+      {
+        ident_timer_t1(2, 0); //Count timer
+        
+        if(ident_timer_t1(0, 0)) //Read timer
+        {
+          ident_timer_t1(1, IDENT_AVERAGE_TIME);
+          (id)->ident_mode = IDENT_MES_TEMP;
+        }
+      }
       break;
-      /*---------------------------------------------------*/    
+    /*---------------------------------------------------*/
     case IDENT_MES_TEMP:
       ident_timer_t1(2, 0); //Count timer
       
@@ -124,10 +152,6 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
         (id)->U_Temp_sum = 0;
         (id)->ident_mes_temp = 0; // Measure flag used for debug
         
-        //if((id)->U_Temp_in > MAX_TEMP_TRIP_RAW) _set_overtemperature_error(1); /* if overtemperature --> trip error */
-        
-        bresenham((id)->ident_periods); // Load bresenham distribution routine for periods distribution
-        
         if((id)->ident_trace_start == IDENT_TRACE_START_BEFORE_SHOT) // Start trace for debug
         {
           _set_reset_trace(1);
@@ -136,13 +160,24 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
         
         (id)->ident_mode = IDENT_TRIAC_FIRE;
       }
-      result = 0;
       break;
-      /*---------------------------------------------------*/    
+    /*---------------------------------------------------*/    
     case IDENT_TRIAC_FIRE:
       if(_zero_cross())
       {
-        if(bresenham(0)) (id)->ident_mode = IDENT_WAIT_STATE;
+        if(id->ident_periods--)
+        {
+          if(_drive_enabled()) 
+          {
+            _FIRE_TRIAC();
+            id->triac_state = TRUE;
+          }
+        }
+        else
+        {
+          (id)->ident_mode = IDENT_WAIT_STATE;
+          id->triac_state = FALSE;
+        }
       }
       
       ident_current = absi(mes1.Current);
@@ -151,25 +186,28 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
         _set_ident_error(1);
         _set_overcurrent_error(1);
       }
-      if(ident_current > (id)->Ident_peak_current) (id)->Ident_peak_current = ident_current;
-      
-      result = 0;
-      break;
-      /*---------------------------------------------------*/
-    case IDENT_WAIT_STATE: //Wait one task period for temp update 
-      
-      if((id)->ident_trace_start == IDENT_TRACE_START_AFTER_SHOT)
+      if(ident_current > (id)->Ident_peak_current)
       {
-        _set_reset_trace(1);
-        _set_manual_start_trace(1);
+        (id)->Ident_peak_current = ident_current;
       }
-      (id)->ident_mode = IDENT_WAIT_AFTER_ZC;
       
-      ident_timer_t1(1, IDENT_MEASURE_AFTER_TIME); // Load timer for measure start after zero cross
-      
-      result = 0;    
       break;
-      /*---------------------------------------------------*/    
+    /*---------------------------------------------------*/
+    case IDENT_WAIT_STATE: 
+      
+      if(_zero_cross())
+      {
+        if((id)->ident_trace_start == IDENT_TRACE_START_AFTER_SHOT)
+        {
+          _set_reset_trace(1);
+          _set_manual_start_trace(1);
+        }
+        (id)->ident_mode = IDENT_WAIT_AFTER_ZC;
+        
+        ident_timer_t1(1, IDENT_MEASURE_AFTER_TIME); // Load timer for measure start after zero cross
+      }
+      break;
+    /*---------------------------------------------------*/    
     case IDENT_WAIT_AFTER_ZC: //Wait one period for temp update 
       ident_timer_t1(2, 0); //Count timer
       
@@ -180,9 +218,8 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
         ident_timer_t1(1, IDENT_AVERAGE_TIME);    //load timer for averaging
         (id)->ident_mes_temp = 1;
       }
-      result = 0;    
       break;
-      /*---------------------------------------------------*/    
+    /*---------------------------------------------------*/    
     case IDENT_MES_TEMP_2:
       ident_timeout_timer_t1(2, 0); //count ident timer
       ident_timer_t1(2, 0); //Count timer
@@ -200,8 +237,6 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
         
         ident_timer_t1(1, IDENT_AVERAGE_TIME);    //load timer for averaging
         
-        //if((id)->U_Temp_max > MAX_TEMP_TRIP_RAW) _set_overtemperature_error(1); /* if overtemperature --> trip error */
-        
         if(((id)->U_Temp_max)> ((id)->U_Temp_out))
         {
           (id)->U_Temp_out = (id)->U_Temp_max;
@@ -210,11 +245,9 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
         {
           if(!ident_timeout_timer_t1(0, 0)) (id)->ident_mode = IDENT_EXIT;
         }
-        
-        result = 0;
       }
       break;
-      /*---------------------------------------------------*/    
+    /*---------------------------------------------------*/    
     case IDENT_EXIT:
       
       (id)->U_Temp_delta = (id)->U_Temp_out - (id)->U_Temp_in;
@@ -238,60 +271,12 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
   }//end switch
   
   return(result);
-  
 }
 /******************************************************************************/
 /*                                                                            */
 /*                       L O C A L   F U N C T I O N S                        */
 /*                                                                            */
 /******************************************************************************/
-/******************************************************************************/
-/*
- * Purpose: Bresenham periods distribution
- * Input: Periods for distribution. If periods !=0 load periods. If periods == 0 execute distrubution.
- * Output: Distribution status: 0: Operation in progress 1: Distribution finished
- * Note: Function is run in zero cross!!!
- */
-/******************************************************************************/
-BOOL bresenham(U16 periods)
-{
-  struct bresenham_struct *bs;
-  
-  bs = _get_bresenham_struct();
-  
-  if(periods)
-  {
-    (bs)->delta_err = (periods << 1) - BSM_CONTROL_PERIODS_MAX;
-    (bs)->control_periods = periods;
-    (bs)->bs_period_counter = BSM_CONTROL_PERIODS_MAX;
-    return(0);
-  }
-  else if((bs)->bs_period_counter)
-  {
-    if((bs)->delta_err > 0)
-    {
-      (bs)->delta_err += ((bs)->control_periods - BSM_CONTROL_PERIODS_MAX) << 1;
-      if(_drive_enabled()) _FIRE_TRIAC();
-      (bs)->triac_state = 1;
-    }
-    else
-    {
-      (bs)->delta_err += (bs)->control_periods << 1;
-      _TRIAC_OFF();
-      (bs)->triac_state = 0;
-    }
-    
-    (bs)->bs_period_counter--;
-    return(0);
-  }
-  else
-  {
-    (bs)->bs_period_counter = 0;
-    (bs)->triac_state = 0;
-    return(1);
-  }
-}
-
 /******************************************************************************/
 /*
  * Name: Software Timer for IDENT module  TASK1 
@@ -304,7 +289,7 @@ BOOL bresenham(U16 periods)
  *  cons: count time in task1 periods
  */
 /******************************************************************************/
-inline U16 ident_timer_t1(U16 cmd, U16 cons)               
+U16 ident_timer_t1(U16 cmd, U16 cons)               
 {         
   static U16 count;
   
@@ -324,7 +309,7 @@ inline U16 ident_timer_t1(U16 cmd, U16 cons)
  *  cons: count time in task1 periods
  */
 /******************************************************************************/
-inline U16 ident_timeout_timer_t1(U16 cmd, U16 cons)               
+U16 ident_timeout_timer_t1(U16 cmd, U16 cons)               
 {         
   static U16 count;
   

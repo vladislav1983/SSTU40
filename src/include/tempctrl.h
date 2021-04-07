@@ -155,9 +155,6 @@ extern struct temperature_control T_ctrl;
 extern struct pid_struct pid;
 #define _get_pid()    (&pid)
 
-extern struct bresenham_struct brs;
-#define _get_bresenham_struct()    (&brs)
-
 extern struct overload_protection overprot;
 #define _get_overload_protection()    (&overprot)
 

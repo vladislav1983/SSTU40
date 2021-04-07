@@ -70,13 +70,13 @@
 /*----------------------------------------------------------------------------*/
 /* Local data                                                                 */
 /*----------------------------------------------------------------------------*/
-U16 mainstate_T2;
-static U16 prevstate_T2;
-static U16 nextstate_T2;
+U16 mainstate_T2 = ST2_INIT;
+static U16 prevstate_T2 = ST2_INIT;
+static U16 nextstate_T2 = ST2_INIT;
 
-U16 mainstate_T1;
-static U16 nextstate_T1;
-static U16 prevstate_T1;
+U16 mainstate_T1 = ST1_INIT;
+static U16 nextstate_T1 = ST1_INIT;
+static U16 prevstate_T1 = ST1_INIT;
 static teTemperatureUsers ActiveTempUser = eTEMP_USER;
 
 /*----------------------------------------------------------------------------*/
@@ -87,11 +87,12 @@ static teTemperatureUsers ActiveTempUser = eTEMP_USER;
 /* Exported data                                                              */
 /*----------------------------------------------------------------------------*/
 /* STATEMACHINE transil parameters. */
-volatile U16 SYS_CONTROL;
-volatile U16 PC_CONTROL;
-volatile U16 ERR_CONTROL;
+volatile U16 SYS_CONTROL = 0;
+volatile U16 PC_CONTROL = 0;
+volatile U16 ERR_CONTROL = 0;
 
-U16 LCD_update_rate;
+U16 LCD_update_rate = TEMP_UPDATE_RATE_DEFAULT;
+
 /*----------------------------------------------------------------------------*/
 /* Constant exported data                                                     */
 /*----------------------------------------------------------------------------*/

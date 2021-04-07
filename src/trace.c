@@ -44,7 +44,6 @@ extern struct Mes2 mes2;
 
 /* TempCtrl.C */
 extern struct temperature_control T_ctrl;
-extern struct bresenham_struct brs;
 
 /* IDENT.C */
 extern struct cartridge_ident ident;
@@ -69,45 +68,51 @@ extern volatile U16 ERR_CONTROL;
 /*----------------------------------------------------------------------------*/
 /* Exported data                                                              */
 /*----------------------------------------------------------------------------*/
-S16 TRSB[TRACE_LEN][NB_TRACE_VARS] __attribute__ ((aligned));
+S16 TRSB[TRACE_LEN][NB_TRACE_VARS] = {{0},{0}};
 
-U16 trace_state;
-U16 trace_control;
-U16 STORE_POS;
-U16 trace_counter;
-S16 trace_trigger;
-struct parlist_trace par_trace;
+U16 trace_state = 0;
+U16 trace_control = 0;
+U16 STORE_POS = 0;
+U16 trace_counter = 0;
+S16 trace_trigger = 0;
+struct parlist_trace par_trace = 
+{
+  .compare_val = 0,
+  .par_ptr = {NULL},
+  .trace_display = {0},
+  .trace_length = 0
+};
 
 /* PARAMS STORED IN EEPROM */
-U16 trace_config;
-U16 trace_every_period;
-U16 u16TraceParamNumber_1;
-U16 u16TraceParamNumber_2;
-U16 u16CompareParameter;
-S16 s16CmpValue;
+U16 trace_config = 0;
+U16 trace_every_period = 0;
+U16 u16TraceParamNumber_1 = 0;
+U16 u16TraceParamNumber_2 = 0;
+U16 u16CompareParameter = 0;
+S16 s16CmpValue = 0;
 
 
-S16 *trace_source_addr[]  =
+const S16 *trace_source_addr[]  =
 {
 /* 0 */    (S16*)NULL,
 /*******************************************************/
 /* MEASURE.C */
-/* 1 */    (S16*)&ADC[AdcCh_0],
-/* 2 */    (S16*)&ADC[AdcCh_1],
+/* 1 */   (S16*)&ADC[AdcCh_0],
+/* 2 */   (S16*)&ADC[AdcCh_1],
 
-/* 3 */    (S16*)&mes1.Current,
-/* 4 */    (S16*)&mes1.line_phase,
+/* 3 */   (S16*)&mes1.Current,
+/* 4 */   (S16*)&mes1.line_phase,
 
-/* 5 */    (S16*)&T_ctrl.T_fbk,
-/* 6 */    (S16*)&T_ctrl.heat_periods,
-/* 7 */    (S16*)&T_ctrl.tmpctrl_triac_state,
+/* 5 */   (S16*)&T_ctrl.T_fbk,
+/* 6 */   (S16*)&T_ctrl.heat_periods,
+/* 7 */   (S16*)&T_ctrl.tmpctrl_triac_state,
 
-/* 8 */(S16*)&ident.ident_mes_temp,
-/* 9 */(S16*)&ident.U_Temp_in,
-/* 10 */(S16*)&ident.U_Temp_out,
-/* 11 */(S16*)&brs.triac_state,
-/* 12 */(S16*)&ERR_CONTROL,
-/* 13 */(S16*)&mes2.Line_period_zc_T2,
+/* 8 */   (S16*)&ident.ident_mes_temp,
+/* 9 */   (S16*)&ident.U_Temp_in,
+/* 10 */  (S16*)&ident.U_Temp_out,
+/* 11 */  (S16*)&ident.triac_state,
+/* 12 */  (S16*)&ERR_CONTROL,
+/* 13 */  (S16*)&mes2.Line_period_zc_T2,
 /*******************************************************/
 };
 

@@ -75,9 +75,29 @@ struct temperature_control T_ctrl =
   .tmpctrl_triac_state = 0,
   .T_UserStep = 5,
 };
-struct bresenham_struct brs = {0};
-struct pid_struct pid = {0};
-struct overload_protection overprot = {0};
+struct pid_struct pid = 
+{
+  .D_term = 0,
+  .I_term = 0,
+  .Kd = (0.4 * 1024),
+  .Ki = (0.12 * 1024),
+  .Ki_Limit = 20,
+  .Kp = (0.25 * 1024),
+  .Out = 0,
+  .P_term = 0,
+  .Sum = 0,
+  .err = 0,
+  .err_prev = 0,
+};
+struct overload_protection overprot = 
+{
+  .cop_periods = 0,
+  .cop_periods_trip = 700,
+  .cop_time_sec = 0,
+  .cop_time_trip_sec = 7,
+  .cop_timer = 0,
+  .power_half_periods = 0,
+};
 
 /* Exported from MEASURE.C */
 extern struct Mes1 mes1;
