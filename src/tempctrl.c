@@ -35,7 +35,6 @@
 /*----------------------------------------------------------------------------*/
 /* Local macros                                                               */
 /*----------------------------------------------------------------------------*/
-#define BRESENHAM_DISTRIBUTION      1
 
 /*----------------------------------------------------------------------------*/
 /* Local types                                                                */
@@ -58,10 +57,27 @@ U16 tmpctrl_nextstate;
 /*----------------------------------------------------------------------------*/
 /* Exported data                                                              */
 /*----------------------------------------------------------------------------*/
-struct temperature_control T_ctrl;
-struct bresenham_struct brs;
-struct pid_struct pid;
-struct overload_protection overprot;
+struct temperature_control T_ctrl = 
+{
+  .T_Ref_User = 350,
+  .T_Ref_User_Sleep = 220,
+  .T_Ref_User_tmp = 350,
+  .T_cal_gain = 10,
+  .T_cal_offset = 0,
+  .T_delta = 0,
+  .T_fbk = 0,
+  .T_sum = 0,
+  .bresenham_distribution = 0,
+  .heat_periods = 0,
+  .heat_periods_debug = 0,
+  .per_counter = 0,
+  .tmpctrl_samp_time = 20,
+  .tmpctrl_triac_state = 0,
+  .T_UserStep = 5,
+};
+struct bresenham_struct brs = {0};
+struct pid_struct pid = {0};
+struct overload_protection overprot = {0};
 
 /* Exported from MEASURE.C */
 extern struct Mes1 mes1;
@@ -78,9 +94,7 @@ extern volatile U16 ERR_CONTROL;
 /* Local function prototypes                                                  */
 /*----------------------------------------------------------------------------*/
 U16 tmpctrl_timer_t1(U16 cmd, U16 cons);
-#if BRESENHAM_DISTRIBUTION == 1
 static S16 bresenham_distribution(tDistributionCmd cmd, U16 distribution_periods_y, U16 max_periods_x);
-#endif 
 
 /******************************************************************************/
 /******************************************************************************/
@@ -139,12 +153,17 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
       
       if((tc)->heat_periods > 0)
       {
-#if BRESENHAM_DISTRIBUTION == 1
-        if(-1 != bresenham_distribution(eLoadDustibutionPeriods, (tc)->heat_periods , (tc)->tmpctrl_samp_time))
-#endif
+        S16 brs_output = 0;
+        
+        if(FALSE != tc->bresenham_distribution)
+        {
+           brs_output = bresenham_distribution(eLoadDustibutionPeriods, (tc)->heat_periods , (tc)->tmpctrl_samp_time);
+        }
+        
+        if(-1 != brs_output)
         {
           tmpctrl_mainstate = TMPCTRL_TRIAC_FIRE;
-          pinLED = 1;    
+          pinLED = 1;
           
           if((tc)->heat_periods >= (tc)->tmpctrl_samp_time)
           {
@@ -171,47 +190,50 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
     case TMPCTRL_TRIAC_FIRE:
       if(_zero_cross())
       {
-#if BRESENHAM_DISTRIBUTION == 1
-        S16 output = bresenham_distribution(eRunDistribution, 0 , 0);
-        
-        if(1 == output && _drive_enabled())
+        if(FALSE != tc->bresenham_distribution)
         {
-          _FIRE_TRIAC();
-          pinLED = 1; 
-          (tc)->tmpctrl_triac_state = 1;
-        }
-        else if(0 == output)
-        {
-          (tc)->tmpctrl_triac_state = 0;
-          pinLED = 0; 
-        }
-        else if(-1 == output)
-        {
-          tmpctrl_mainstate = tmpctrl_nextstate;
-          (tc)->tmpctrl_triac_state = 0;
-          pinLED = 0; 
-        }
-        else
-        {
-          //nothing to do here
-        }
-#else
-        if((tc)->heat_periods)
-        {
-          (tc)->heat_periods--;
-          if(_drive_enabled())
+          S16 output = bresenham_distribution(eRunDistribution, 0 , 0);
+          
+          if(1 == output && _drive_enabled())
           {
             _FIRE_TRIAC();
+            pinLED = 1; 
             (tc)->tmpctrl_triac_state = 1;
+          }
+          else if(0 == output)
+          {
+            (tc)->tmpctrl_triac_state = 0;
+            pinLED = 0; 
+          }
+          else if(-1 == output)
+          {
+            tmpctrl_mainstate = tmpctrl_nextstate;
+            (tc)->tmpctrl_triac_state = 0;
+            pinLED = 0; 
+          }
+          else
+          {
+            //nothing to do here
           }
         }
         else
         {
-          tmpctrl_mainstate = tmpctrl_nextstate;
-          (tc)->tmpctrl_triac_state = 0;
-          pinLED = 0;    
-        }
-#endif        
+          if((tc)->heat_periods)
+          {
+            (tc)->heat_periods--;
+            if(_drive_enabled())
+            {
+              _FIRE_TRIAC();
+              (tc)->tmpctrl_triac_state = 1;
+            }
+          }
+          else
+          {
+            tmpctrl_mainstate = tmpctrl_nextstate;
+            (tc)->tmpctrl_triac_state = 0;
+            pinLED = 0;    
+          }
+        }     
       }
         
       break;
@@ -463,7 +485,7 @@ void Inc_User_Temp(void)
 {
   if(T_ctrl.T_Ref_User_tmp < TEMP_USER_MAX)
   {
-    T_ctrl.T_Ref_User_tmp += TEMP_USER_STEP;
+    T_ctrl.T_Ref_User_tmp += T_ctrl.T_UserStep;
   }
 }
 /******************************************************************************/
@@ -477,7 +499,7 @@ void Dec_User_Temp(void)
 {
   if(T_ctrl.T_Ref_User_tmp > TEMP_USER_MIN)
   {
-    T_ctrl.T_Ref_User_tmp -= TEMP_USER_STEP;
+    T_ctrl.T_Ref_User_tmp -= T_ctrl.T_UserStep;
   }
 }
 /******************************************************************************/
@@ -506,7 +528,6 @@ U16 tmpctrl_timer_t1(U16 cmd, U16 cons)
   return(count);
 }
 
-#if BRESENHAM_DISTRIBUTION == 1
 /******************************************************************************
  * Name: 
  * Params: 
@@ -575,16 +596,8 @@ static S16 bresenham_distribution(tDistributionCmd cmd, U16 distribution_periods
     {
       if(delta_error > 0 || bias != 0)
       {
-        if((periods_counter % 2) == 0)
-        {
-          // even 
-          bias++;
-        }
-        else
-        {
-          // odd
-          bias--;
-        }
+        if((periods_counter % 2) == 0) { bias++;  }// even
+        else { bias--; }// odd
         
         output = 1;
         delta_error -= 2 * dx;
@@ -606,7 +619,3 @@ static S16 bresenham_distribution(tDistributionCmd cmd, U16 distribution_periods
   
   return output;
 }
-#endif
-
-
-

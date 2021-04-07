@@ -29,7 +29,7 @@
 #define IDENT_TRACE_START_AFTER_SHOT    2u
 
 /* BRESENHAM DISTRIBUTION PARAMETERS */
-#define BSM_CONTROL_PERIODS_MAX            16u
+#define BSM_CONTROL_PERIODS_MAX            50u
 
 #define SQRT_OF_TWO                    1.4142f    
 

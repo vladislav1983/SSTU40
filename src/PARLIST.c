@@ -185,6 +185,8 @@ const iolist iopar[] =
   {261,"Triac State",                 (U16 *)&T_ctrl.tmpctrl_triac_state,     (U16 *)&T_ctrl.tmpctrl_triac_state,       2,"urr",    0xFFFFul,      0, 5,0,    1 },
   {262,"TMPCTRL State",               (U16 *)&tmpctrl_mainstate,              (U16 *)&tmpctrl_mainstate,                2,"urr",    0xFFFFul,      0, 5,0,    1 },
   {264,"Temp Calibration Offset",     (S16 *)&T_ctrl.T_cal_offset,            (S16 *)&T_ctrl.T_cal_offset,              2,"snr",    50ul,        -50, 0,0,    1 },
+  {265,"Bresenham distribution",      (U8 * )&T_ctrl.bresenham_distribution,  (U8  *)&T_ctrl.bresenham_distribution,    1,"unr",    1,             0, 0,0,    1 },
+  {266,"Set Temperature Step",        (U8 * )&T_ctrl.T_UserStep,              (U8  *)&T_ctrl.T_UserStep,                1,"unr",    50,            1, 0,0,    1 },
   //PI Controller
   {270,"Kp",                          (U16 *)&pid.Kp,                         (U16 *)&pid.Kp,                           2,"unr",    0xFFFFul,      0, 0,0, 1024 },
   {271,"Ki",                          (U16 *)&pid.Ki,                         (U16 *)&pid.Ki,                           2,"unr",    0xFFFFul,      0, 0,0, 1024 },
@@ -287,18 +289,14 @@ iolist* IF_Parlist_bnu(U16 U32PrmNumber)
 void Params_check_limit(void)
 {
     
-    if(EE_Valid != 1000) _set_ee_valid_error(1);
-    
-    if(time.Hib_Time == 0) _set_param_limit_error(1);
-    
-    
+    if(EE_Valid != 1000)                  _set_ee_valid_error(1);
+    if(time.Hib_Time == 0)                _set_param_limit_error(1);
     if(T_ctrl.T_Ref_User > TEMP_USER_MAX) _set_param_limit_error(1);
-    if((T_ctrl.tmpctrl_samp_time < 0) || (T_ctrl.tmpctrl_samp_time > 50)) _set_param_limit_error(1);
+    if((T_ctrl.tmpctrl_samp_time == 0) || (T_ctrl.tmpctrl_samp_time > 50)) _set_param_limit_error(1);
     if(T_ctrl.T_cal_gain < 10) _set_param_limit_error(1);
-    
-    if((pid.Kp < 0) || (pid.Kp == 0xFFFFu)) _set_param_limit_error(1);
-    if((pid.Ki < 0) || (pid.Ki == 0xFFFFu)) _set_param_limit_error(1);
-    if((pid.Kd < 0) || (pid.Kd == 0xFFFFu)) _set_param_limit_error(1);
+    if((pid.Kp < 0) ) _set_param_limit_error(1);
+    if((pid.Ki < 0) ) _set_param_limit_error(1);
+    if((pid.Kd < 0) ) _set_param_limit_error(1);
 }
 /******************************************************************************/
 /*

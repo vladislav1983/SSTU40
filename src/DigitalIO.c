@@ -29,10 +29,10 @@
 /*----------------------------------------------------------------------------*/
 /* Local constants                                                            */
 /*----------------------------------------------------------------------------*/  
-#define DEBOUNCE_TIME_T2        5        // Debounce time in task2 periods. 5*5ms = 25ms. Used for user buttons.
-#define DEBOUNCE_TIME_STAND        10        // Debounce time in line periods  100*10ms = 100ms. 
-#define DEBOUNCE_TIME_CART        10        // Debounce time in line periods  10*10ms = 100ms. 
-#define DEBOUNCE_TIME_EXTR        5        // Debounce time in line periods  50*10ms = 50ms.
+#define DEBOUNCE_TIME_T2          5        // Debounce time in task2 periods. 5*5ms = 25ms. Used for user buttons.
+#define DEBOUNCE_TIME_STAND       10       // Debounce time in line periods  10*10ms = 100ms. 
+#define DEBOUNCE_TIME_CART        10       // Debounce time in line periods  10*10ms = 100ms. 
+#define DEBOUNCE_TIME_EXTR        10       // Debounce time in line periods  10*10ms = 50ms.
 
 #define CARTRIDGE_DETECTION_TIMEOUT        95    //task1 periods
 /*----------------------------------------------------------------------------*/
