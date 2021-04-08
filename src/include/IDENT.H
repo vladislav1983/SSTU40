@@ -47,31 +47,48 @@
 /*----------------------------------------------------------------------------*/
 /* Exported type                                                              */
 /*----------------------------------------------------------------------------*/
+typedef enum 
+{
+  eIdentTool_Unknown = 0,
+  eIdentTool_2210,
+  eIdentTool_2245,
+  eIdentTool_NR,
+}teIdentToolType;
 
 /*----------------------------------------------------------------------------*/
 /* Exported data                                                              */
 /*----------------------------------------------------------------------------*/
 struct cartridge_ident
 {
+  U32 IdentCurrent_Sum;
+  U16 IdentCurrent_Sum_Counter;
   U16 U_Temp_in;
   U16 U_Temp_out;
   U16 U_Temp_max;
   S16 U_Temp_delta;
   U16 U_Temp_sum;
   U16 Ident_peak_current;
+  U16 Ident_current;
   U16 IDENT_Peak_Power;
   U16 IDENT_MAX_RMS_Power;
+  
 
   U16 ident_mode;
   U16 ident_periods;
-  U16 ident_periods_load;
-  U16 ident_trace_start;
   BOOL triac_state;
   BOOL ident_mes_temp;
+  teIdentToolType IdentTool;
 
   /* PARAMS STORED IN EEPROM */
-  U16 ident_deltaT_trip;
+  U16 ident_deltaT_trip_low;
+  U16 ident_deltaT_trip_high;
   U16 ident_current_trip;
+  U16 ident_trace_start;
+  U16 ident_periods_load;
+  U16 ident_cur_2210_low;
+  U16 ident_cur_2210_high;
+  U16 ident_cur_2245_low;
+  U16 ident_cur_2245_high;
 };
 /*----------------------------------------------------------------------------*/
 /* Constant exported data                                                     */
