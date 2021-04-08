@@ -170,7 +170,7 @@ void do_trace(void)
         
         _set_trace_state(1);
         STORE_POS = 0;                //perform clear
-        Clear_Trace_Array();
+        memset(TRSB, 0, sizeof(TRSB));
     }
     
     if(_condition_start_bit() && _trace_state() && !_trace_running())
@@ -247,27 +247,6 @@ void do_trace(void)
 
 /******************************************************************************/
 /*
-* Purpose: Trace array clear
-* Input: none
-* Output:  none
-*/
-/******************************************************************************/
-void Clear_Trace_Array(void)
-{
-    U16 steps;
-    U16 vars;
-
-    for(vars = 0;vars <= NB_TRACE_VARS;vars++)
-    {
-        for(steps = 0;steps <= TRACE_STEPS;steps++)
-        {
-            TRSB[steps][vars] = 0;
-        }
-    }
-}
-
-/******************************************************************************/
-/*
 * Purpose: Trace Initialization.
 * Input: none
 * Output:  
@@ -276,9 +255,7 @@ void Clear_Trace_Array(void)
 void trace_init_first(void)
 {
     par_trace.trace_length = sizeof(trace_source_addr);
-    
-    Clear_Trace_Array();
-    
+       
     /* set pc control side config*/
     _set_reset_trace(1);
     

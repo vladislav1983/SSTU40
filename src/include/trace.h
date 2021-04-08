@@ -18,7 +18,7 @@
 /*----------------------------------------------------------------------------*/
 /* Constant data                                                              */
 /*----------------------------------------------------------------------------*/
-#define TRACE_STEPS         150
+#define TRACE_STEPS         300
 #define NB_TRACE_VARS        2
 #define TRACE_LEN             (TRACE_STEPS + 1)
 
@@ -104,7 +104,6 @@ struct parlist_trace
 U16 IF_Get_TRSB_CntBytes(void);
 void trace_init_first(void);
 void init_trace(void);
-void Clear_Trace_Array(void);
 void do_trace(void);
 
 
