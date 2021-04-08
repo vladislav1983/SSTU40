@@ -231,7 +231,7 @@ static void EE_WriteU32(_IN_ const _prog_addressT pEEpointer, _IN_ iolist *pIop)
 	
 	EEpointer = pEEpointer;
 	
-	u16ToEEprom = (U16)Lou(value_to_write);    // extract low 16 bytes form U32
+	u16ToEEprom = Lou(value_to_write);    // extract low 16 bytes form U32
 	
 	_set_eeprom_busy(1);
 	
@@ -239,7 +239,7 @@ static void EE_WriteU32(_IN_ const _prog_addressT pEEpointer, _IN_ iolist *pIop)
 	EE_Write_U16(&u16ToEEprom, &EEpointer);
 	EEpointer += sizeof(U16);    // increment EEPROM pointer
 	
-	u16ToEEprom = (U16)Hiu(value_to_write);    // extract high 16 bytes from U32
+	u16ToEEprom = Hiu(value_to_write);    // extract high 16 bytes from U32
 	
 	EE_Erase_U16(&EEpointer);
 	EE_Write_U16(&u16ToEEprom, &EEpointer);        // Write high 16 bytes to eeprom.

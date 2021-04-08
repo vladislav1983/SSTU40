@@ -81,7 +81,7 @@ struct cartridge_ident ident =
   .ident_cur_2210_low = 2000,
   .ident_cur_2210_high = 4000,
   .ident_cur_2245_low  = 4500,
-  .ident_cur_2245_high = 8000,
+  .ident_cur_2245_high = 9000,
 };
 
 /* TRACE.C */
@@ -320,6 +320,18 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
   
   return(result);
 }
+/******************************************************************************/
+/*
+ * Purpose: 
+ * Input: 
+ * Output: 
+ */
+/******************************************************************************/
+teIdentToolType ident_get_current_tool(void)
+{
+  return ident.IdentTool;
+}
+
 /******************************************************************************/
 /*                                                                            */
 /*                       L O C A L   F U N C T I O N S                        */

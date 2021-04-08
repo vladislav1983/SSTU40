@@ -20,8 +20,8 @@
 /*----------------------------------------------------------------------------*/
 /* IDENT PARAMETERS */
 #define IDENT_PERIODS_MAX               100u
-#define IDENT_MEASURE_AFTER_TIME        60u        /* Measure after zero cross in task1 time periods */
-#define IDENT_AVERAGE_TIME              32u        /* Average time in task1 periods */
+#define IDENT_MEASURE_AFTER_TIME        1000u      /* Measure after zero cross in task1 time periods 100 ms*/
+#define IDENT_AVERAGE_TIME              32u       /* Average time in task1 periods */
 #define IDENT_AVERAGE_DIVIDER           5u        /* Average divider  */
 #define IDENT_WAIT_AFTER_ZC_TIME        60u
 #define IDENT_MES_TIME_AFTER_SHOT       10000    //1.5s in task1 periods for temp update
@@ -31,7 +31,7 @@
 /* BRESENHAM DISTRIBUTION PARAMETERS */
 #define BSM_CONTROL_PERIODS_MAX         50u
 
-#define SQRT_OF_TWO                     1.4142f    
+#define SQRT_OF_TWO                     1.4142f
 
 /* IDENT MODES OF OPERATION */
 #define IDENT_INIT                      1
@@ -107,5 +107,6 @@ extern struct cartridge_ident ident;
 /* Exported functions                                                          */
 /*----------------------------------------------------------------------------*/
 BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch);
+teIdentToolType ident_get_current_tool(void);
 
 #endif /* IDENT_H */

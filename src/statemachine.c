@@ -41,23 +41,25 @@
 /*----------------------------------------------------------------------------*/
 /* LOAD VALUES FOR STATEMACHINE TIMERS */
 /* TIMER VALUES RUN IN TASK2 */
-#define LOAD_T2_4SEC            800u  
-#define LOAD_T2_3SEC            600u
-#define LOAD_T2_2SEC            400u 
-#define LOAD_T2_1SEC            200u
-#define LOAD_T2_500mS            100u
-#define LOAD_T2_250mS            50u
+#define LOAD_T2_4SEC                800u  
+#define LOAD_T2_3SEC                600u
+#define LOAD_T2_2SEC                400u 
+#define LOAD_T2_1SEC                200u
+#define LOAD_T2_500mS               100u
+#define LOAD_T2_250mS               50u
 
 /* TIMER VALUES RUN IN TASK1 */
-#define LOAD_T1_40m                400u       //40ms in task1 time
-#define LOAD_T1_100m            1000u      //100ms in task1 time
-#define LOAD_T1_200m            2000u      //200ms in task1 time
-#define LOAD_T1_500m            5000u      //500ms in task1 time
-#define LOAD_T1_1s                10000u  //1s in task1 time
-#define LOAD_T1_1500ms            15000u  //1.5s in task1 time
-#define LOAD_T1_2s                20000u  //2s in task1 time
-#define LOAD_T1_3s                30000u  //3s in task1 time
-#define LOAD_T1_4s                40000u  //4s in task1 time
+#define LOAD_T1_40m                 400u       //40ms in task1 time
+#define LOAD_T1_100m                1000u      //100ms in task1 time
+#define LOAD_T1_200m                2000u      //200ms in task1 time
+#define LOAD_T1_500m                5000u      //500ms in task1 time
+#define LOAD_T1_1s                  10000u  //1s in task1 time
+#define LOAD_T1_1500ms              15000u  //1.5s in task1 time
+#define LOAD_T1_2s                  20000u  //2s in task1 time
+#define LOAD_T1_3s                  30000u  //3s in task1 time
+#define LOAD_T1_4s                  40000u  //4s in task1 time
+
+#define TEMP_UPDATE_RATE_DEFAULT    200   // 1s LCD update rate - default
 
 /*----------------------------------------------------------------------------*/
 /* Local macros                                                               */
@@ -82,7 +84,13 @@ static teTemperatureUsers ActiveTempUser = eTEMP_USER;
 /*----------------------------------------------------------------------------*/
 /* Constant local data                                                        */
 /*----------------------------------------------------------------------------*/
-#define TEMP_UPDATE_RATE_DEFAULT    200   // 1s LCD update rate - default
+static const char * ToolString[eIdentTool_NR] = 
+{
+  "TOOL: UNKNOWN",
+  "   TOOL: 2210",
+  "   TOOL: 2245"
+};
+
 /*----------------------------------------------------------------------------*/
 /* Exported data                                                              */
 /*----------------------------------------------------------------------------*/
@@ -369,7 +377,7 @@ void state_machine_T2(void)
       if(prevstate_T2 != mainstate_T2)
       {
         IF_LCDPutc('\f');
-        IF_LCDPuts("   TOOL: 2245");
+        IF_LCDPuts(ToolString[ident_get_current_tool()]);
         IF_LCDPutc('\n');
         IF_LCDPuts("ACT. TEMP: ");
         IF_LCDGotoXY(15,2);

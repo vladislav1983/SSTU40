@@ -1,4 +1,4 @@
-Microchip Technology Inc, vv3_31 (A)  f/›Å 
+Microchip Technology Inc, vv3_31 (A) ;cD´iòo:
 
 Tool Name:
   c:\program files (x86)\microchip\mplab c30\bin\bin\..\bin/pic30-elf-ld.exe
@@ -124,7 +124,7 @@ Data EEPROM Memory  [Origin = 0x7ffc00, Length = 0x400]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-_02e3a380606ea9f8         0x7ffc00               0x400           0x400  (1024)
+_02baa380606ec849         0x7ffc00               0x400           0x400  (1024)
 
                         Total data EEPROM used (bytes):          0x400  (1024) 100%
 
@@ -2028,7 +2028,7 @@ __c30_signature
                   0x0041d4                  _triac_fire_timer
                   0x0041f0                  _triac_control_init
 
-_02e3a380606ea9f8
+_02baa380606ec849
                     0xfc00        0x400 load address 0x7ffc00  
- _02e3a380606ea9f8
+ _02baa380606ec849
                     0xfc00        0x400 build/default/production/_ext/1360937237/eeprom.o
