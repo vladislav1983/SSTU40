@@ -105,7 +105,7 @@ do{                                                             \
 //==========================================================================================================
 // Local data                                                                 
 //==========================================================================================================
-static U16 _EEDATA(512)     EEdata[512];
+volatile U16 _EEDATA(512)     EEdata[512];
 static U16 ee_state = PARACT_INIT;
 
 //==========================================================================================================
@@ -278,7 +278,7 @@ static void EE_WriteU32(_IN_ const _prog_addressT pEEpointer, _IN_ iolist *pIop)
 static void EE_WriteU16(_IN_ const _prog_addressT pEEpointer, _IN_ iolist *pIop,_IN_ const BOOL bValueType)
 {
 	_prog_addressT EEpointer;
-	U16 u16ToEEprom;
+	U16 u16ToEEprom = 0;
 	U16 u16ParamTemp;
 	
 	EEpointer = pEEpointer;
@@ -360,7 +360,7 @@ static U32 EE_ReadU32(_IN_ const _prog_addressT pEEpointer)
 //==========================================================================================================
 static void EE_WriteChecksum(_IN_ U16 u16Cheksum,_IN_ const BOOL bBank)
 {
-	_prog_addressT EEpointer;
+	_prog_addressT EEpointer = 0 ;
 	
 	if(bBank == cBank1)
 	{
@@ -653,7 +653,7 @@ void ee_param_act(BOOL init,BOOL read_all_params)
 //==========================================================================================================
 HRESULT EE_CheckEEprom(void)
 {
-	_prog_addressT EEpointer;
+	_prog_addressT EEpointer = 0;
 	U16  u16Temp;
 	U16  u16Counter;
 	U16 u16IoParMembers;

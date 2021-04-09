@@ -70,7 +70,6 @@ struct cartridge_ident ident =
   .triac_state = 0,
   .IdentCurrent_Sum = 0,
   .Ident_current = 0,
-  .IdentCurrent_Sum_Counter = 0,
   .IdentTool = eIdentTool_Unknown,
   // stored in nvm
   .ident_deltaT_trip_low  = 15,
@@ -111,11 +110,9 @@ U16 ident_timeout_timer_t1(U16 cmd, U16 cons);
 /******************************************************************************/
 BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
 {
-  struct cartridge_ident *id;
+  struct cartridge_ident *id = _get_ident();
   U16 ident_current;
   BOOL result = 0;
-  
-  id = _get_ident();
   
   if(ident_init) (id)->ident_mode = IDENT_INIT; //Check for identification.
   
@@ -123,8 +120,8 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
   {
     /*---------------------------------------------------*/    
     case IDENT_INIT:
-      if((id)->ident_periods_load > IDENT_PERIODS_MAX) (id)->ident_periods = IDENT_PERIODS_MAX; //Load halfperiods for identification
-      else (id)->ident_periods = (id)->ident_periods_load;
+    {
+      if((id)->ident_periods_load > IDENT_PERIODS_MAX) (id)->ident_periods_load = IDENT_PERIODS_MAX; //Load halfperiods for identification
       
       ident_timer_t1(TIMER_LOAD, 20);    //load timer for four zc periods wait
       
@@ -143,25 +140,26 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
       (id)->Ident_current = 0;
       (id)->IdentCurrent_Sum_Counter = 0;
       (id)->IdentTool = eIdentTool_Unknown;
-      
+      (id)->ident_periods = (id)->ident_periods_load;
+    }
+    break;
     /*---------------------------------------------------*/
     case IDENT_WAIT_MES_TEMP:
+    {
       if(_zero_cross())
       {
-        ident_timer_t1(TIMER_COUNT, 0); //Count timer
-        
-        if(ident_timer_t1(TIMER_READ, 0)) //Read timer
+        if(ident_timer_t1(TIMER_COUNT, 0)) 
         {
           ident_timer_t1(TIMER_LOAD, IDENT_AVERAGE_TIME);
           (id)->ident_mode = IDENT_MES_TEMP;
         }
       }
-      break;
+    }
+    break;
     /*---------------------------------------------------*/
     case IDENT_MES_TEMP:
-      ident_timer_t1(TIMER_COUNT, 0); //Count timer
-      
-      if(ident_timer_t1(TIMER_READ, 0)) //Read timer
+    {
+      if(ident_timer_t1(TIMER_COUNT, 0))
       {
         (id)->U_Temp_sum += ADC_Temp_Ch;
         (id)->ident_mes_temp = 1;
@@ -180,9 +178,11 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
         
         (id)->ident_mode = IDENT_TRIAC_FIRE;
       }
-      break;
+    }
+    break;
     /*---------------------------------------------------*/    
     case IDENT_TRIAC_FIRE:
+    {
       if(_zero_cross())
       {
         if(id->ident_periods)
@@ -215,11 +215,11 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
       {
         (id)->Ident_peak_current = ident_current;
       }
-      
-      break;
+    }  
+    break;
     /*---------------------------------------------------*/
     case IDENT_WAIT_STATE: 
-      
+    {
       if(_zero_cross())
       {
         if((id)->ident_trace_start == IDENT_TRACE_START_AFTER_SHOT)
@@ -231,28 +231,26 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
         
         ident_timer_t1(TIMER_LOAD, IDENT_MEASURE_AFTER_TIME); // Load timer for measure start after zero cross
       }
-      break;
+    }
+    break;
     /*---------------------------------------------------*/    
     case IDENT_WAIT_AFTER_ZC: //Wait one period for temp update 
-      ident_timer_t1(TIMER_COUNT, 0); //Count timer
-      
-      if(!ident_timer_t1(TIMER_READ, 0))
+    {
+      if(!ident_timer_t1(TIMER_COUNT, 0))
       {
         (id)->ident_mode = IDENT_MES_TEMP_2;
-        ident_timeout_timer_t1(1, IDENT_MES_TIME_AFTER_SHOT);    //load timer 2s
+        ident_timeout_timer_t1(TIMER_LOAD, IDENT_MES_TIME_AFTER_SHOT);    
         ident_timer_t1(TIMER_LOAD, IDENT_AVERAGE_TIME);    //load timer for averaging
         (id)->ident_mes_temp = 1;
       }
-      break;
+    }
+    break;
     /*---------------------------------------------------*/    
     case IDENT_MES_TEMP_2:
-      ident_timeout_timer_t1(2, 0); //count ident timer
-      ident_timer_t1(TIMER_COUNT, 0); //Count timer
-      
-      if(ident_timer_t1(TIMER_READ, 0))
+    {
+      if(ident_timer_t1(TIMER_COUNT, 0))
       {
         (id)->U_Temp_sum += ADC_Temp_Ch;
-        result = 0;
       }
       else
       {
@@ -262,19 +260,21 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
         
         ident_timer_t1(TIMER_LOAD, IDENT_AVERAGE_TIME);    //load timer for averaging
         
-        if(((id)->U_Temp_max)> ((id)->U_Temp_out))
+        if(((id)->U_Temp_max) > ((id)->U_Temp_out))
         {
           (id)->U_Temp_out = (id)->U_Temp_max;
         }
-        else
-        {
-          if(!ident_timeout_timer_t1(0, 0)) (id)->ident_mode = IDENT_EXIT;
-        }
       }
-      break;
+      
+      if(!ident_timeout_timer_t1(TIMER_COUNT, 0)) 
+      {
+        (id)->ident_mode = IDENT_EXIT;
+      }
+    }
+    break;
     /*---------------------------------------------------*/    
     case IDENT_EXIT:
-      
+    {
       (id)->U_Temp_delta = (id)->U_Temp_out - (id)->U_Temp_in;
       if((id)->U_Temp_delta < (id)->ident_deltaT_trip_low)    _set_ident_error(1);
       if((id)->U_Temp_delta > (id)->ident_deltaT_trip_high)   _set_ident_error(1);
@@ -307,10 +307,9 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
       }
       
       result = 1; //quit ident
-      
-      break;
-      /*---------------------------------------------------*/    
-      
+    }
+    break;
+    /*---------------------------------------------------*/    
     default :   // Undefined state
       mAssert(cFalse);
       _set_global_system_fault(1);
@@ -351,10 +350,17 @@ teIdentToolType ident_get_current_tool(void)
 /******************************************************************************/
 U16 ident_timer_t1(U16 cmd, U16 cons)               
 {         
-  static U16 count;
+  static U16 count = 0;
   
-  if(cmd==1)    count = cons;    
-  else if(count && cmd==2) count--;
+  if(cmd == TIMER_LOAD)
+  {
+    count = cons;    
+  }
+  else if(count > 0 && cmd == TIMER_COUNT) 
+  {
+    count--;
+  }
+  
   return(count);
 }
 /******************************************************************************/
@@ -371,10 +377,17 @@ U16 ident_timer_t1(U16 cmd, U16 cons)
 /******************************************************************************/
 U16 ident_timeout_timer_t1(U16 cmd, U16 cons)               
 {         
-  static U16 count;
+  static U16 count = 0;
   
-  if(cmd==1)    count = cons;    
-  else if(count && cmd==2) count--;
+  if(cmd == TIMER_LOAD)
+  {
+    count = cons;    
+  }
+  else if(count > 0 && cmd == TIMER_COUNT)
+  {
+    count--;
+  }
+  
   return(count);
 }
 

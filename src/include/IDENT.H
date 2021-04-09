@@ -24,12 +24,9 @@
 #define IDENT_AVERAGE_TIME              32u       /* Average time in task1 periods */
 #define IDENT_AVERAGE_DIVIDER           5u        /* Average divider  */
 #define IDENT_WAIT_AFTER_ZC_TIME        60u
-#define IDENT_MES_TIME_AFTER_SHOT       10000    //1.5s in task1 periods for temp update
+#define IDENT_MES_TIME_AFTER_SHOT       15000    //1.5s in task1 periods for temp update
 #define IDENT_TRACE_START_BEFORE_SHOT   1u
 #define IDENT_TRACE_START_AFTER_SHOT    2u
-
-/* BRESENHAM DISTRIBUTION PARAMETERS */
-#define BSM_CONTROL_PERIODS_MAX         50u
 
 #define SQRT_OF_TWO                     1.4142f
 

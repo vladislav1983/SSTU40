@@ -9,7 +9,7 @@
  *===================================================================================================================*/
 #ifndef DIGITALIO_H
 #define DIGITALIO_H
-    
+
 /*----------------------------------------------------------------------------*/
 /* Included files to resolve specific definitions in this file                */
 /*----------------------------------------------------------------------------*/
@@ -19,10 +19,10 @@
 /* Constant data                                                              */
 /*----------------------------------------------------------------------------*/
 /* Cartridge detection states */
-#define CART_DET_SCAN_INIT                1
-#define CART_DET_SCAN_ZERO_CROSS        2
-#define CART_DET_SCAN_CARTRIDGE            3
-#define CART_DET_WAIT_STATE                4
+#define CART_DET_SCAN_INIT                  1
+#define CART_DET_SCAN_ZERO_CROSS            2
+#define CART_DET_SCAN_CARTRIDGE             3
+#define CART_DET_WAIT_STATE                 4
 
 /*----------------------------------------------------------------------------*/
 /* Exported type                                                              */
@@ -39,11 +39,11 @@
 /*----------------------------------------------------------------------------*/
 /* Exported Macros                                                            */
 /*----------------------------------------------------------------------------*/
-#define INT0_RISING_EDGE        0        
-#define INT0_FALLING_EDGE        1
+#define INT0_RISING_EDGE                    0        
+#define INT0_FALLING_EDGE                   1
 
-#define DISABLE_TEMP_MEASURE()    pinMES_EN = 0;
-#define ENABLE_TEMP_MEASURE()    pinMES_EN = 1;
+#define DISABLE_TEMP_MEASURE()              pinMES_EN = 0;
+#define ENABLE_TEMP_MEASURE()               pinMES_EN = 1;
 
 /*----------------------------------------------------------------------------*/
 /* Exported functions                                                         */

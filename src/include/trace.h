@@ -31,7 +31,6 @@
 /*----------------------------------------------------------------------------*/
 struct parlist_trace
 {
- S16 *par_ptr[NB_TRACE_VARS];
  U16  trace_length;
  
  /* PARAMS STORED IN EEPROM */
