@@ -134,21 +134,27 @@ int main()
     delay_ms(200);
     
     INTCON1bits.NSTDIS = 0;    // Enable Nested Interrupts
-    SET_CPU_IPL(0b000);        // Force CPU interrupt priority to low. All user masked interrupts with ptiority from 0 to 7 are Enabled.(Safe version)
     
     IF_Uart_Init(38400);
     
     ClrWdt();         // Clear WDT
     _SWDTEN = 1;    // Enable WDT    
     
+    SET_CPU_IPL(0b000);        // Force CPU interrupt priority to low. All user masked interrupts with ptiority from 0 to 7 are Enabled.(Safe version)
+    
     while(1)
     {
-    /* BACKGROUND LOOP. */
+      /* BACKGROUND LOOP. */
+      if(!_is_task1_execute() && !_is_task2_execute())
+      {
+        DisableInterrupts();
+        ee_param_act(0,0); // Online parameters actualization in background
+        EnableInterrupts();
+      }
+      Idle();
       if(!_is_task1_execute() && !_is_task2_execute()) Sirem_Engine(); // Serial Communication run in background loop    
       Idle();
       if(!_is_task1_execute() && !_is_task2_execute()) TaskTimesCalc(pTtime_pointer);
-      Idle();
-      if(!_is_task1_execute() && !_is_task2_execute()) ee_param_act(0,0); // Online parameters actualization in background
       Idle();
       if(!_is_task1_execute() && !_is_task2_execute()) Params_check_limit();
       ClrWdt();    //<------ Clear Watchdog timer

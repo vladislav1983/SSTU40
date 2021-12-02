@@ -84,7 +84,15 @@ typedef U8                      HRESULT;
 
 #define _getbit(src,bitn)        ((src) & (1 << (bitn)))
 
-#define absi(x)                 ((x)>=0 ? (x) : -(x))            /* absolut of integer */
+#define absi(x)                           ((x)>=0 ? (x) : -(x))            /* absolut of integer */
+#define DisableInterrupts() \
+{ \
+ int DISI_save;                 \
+                                 \
+  DISI_save = DISICNT;           \
+  asm volatile ("disi #0x3FFF"); \
+}
+#define EnableInterrupts()                  DISICNT = 0;
 
 #define mAssert(Cond)   (                   \
 {                                           \

@@ -379,8 +379,8 @@ void state_machine_T2(void)
         IF_LCDPutc('\f');
         IF_LCDPuts(ToolString[ident_get_current_tool()]);
         IF_LCDPutc('\n');
-        IF_LCDPuts("ACT. TEMP: ");
-        IF_LCDGotoXY(15,2);
+        IF_LCDPuts("T:    oC P:    W");
+        IF_LCDGotoXY(7,2);
         IF_LCDPutc(0xDF);    //Degree Sign
         IF_LCDPuts("C");
         
@@ -391,10 +391,19 @@ void state_machine_T2(void)
       stm_timer_T2(2,0);
       if(!stm_timer_T2(0,0))
       {
-        IF_LCDGotoXY(11,2);
+        // clear temperature
+        IF_LCDGotoXY(3,2);
         IF_LCDPuts("   ");
-        IF_LCDGotoXY(11,2);
+        IF_LCDGotoXY(3,2);
+        // print temperature
         IF_LCDPutn(Get_Temp_Actual());
+        // clear power
+        IF_LCDGotoXY(12,2);
+        IF_LCDPuts("   ");
+        IF_LCDGotoXY(12,2);
+        // print power
+        IF_LCDPutn(mes2.Actaul_Power);
+        
         stm_timer_T2(1, LCD_update_rate);
       }
       
@@ -501,7 +510,7 @@ void state_machine_T2(void)
         IF_LCDPutc('\f');
         if(ActiveTempUser == eTEMP_USER)
         {
-          IF_LCDPuts("   TOOL: 2245");
+          IF_LCDPuts(ToolString[ident_get_current_tool()]);
           IF_LCDPutc('\n');
           IF_LCDPuts("  SET TEMP: ");
         }

@@ -5,17 +5,19 @@
         <group>
             <file>file:/D:/Projects/SSTU40/src/eeprom.c</file>
             <file>file:/D:/Projects/SSTU40/src/IDENT.c</file>
+            <file>file:/D:/Projects/SSTU40/src/include/trace.h</file>
             <file>file:/D:/Projects/SSTU40/src/include/systmr.h</file>
             <file>file:/D:/Projects/SSTU40/src/DigitalIO.c</file>
             <file>file:/D:/Projects/SSTU40/src/triac_control.c</file>
             <file>file:/D:/Projects/SSTU40/src/measure.c</file>
-            <file>file:/D:/Projects/SSTU40/src/include/statemachine.h</file>
             <file>file:/D:/Projects/SSTU40/src/sirem.c</file>
+            <file>file:/D:/Projects/SSTU40/src/include/statemachine.h</file>
             <file>file:/D:/Projects/SSTU40/src/vuart.c</file>
             <file>file:/D:/Projects/SSTU40/src/main.c</file>
             <file>file:/D:/Projects/SSTU40/src/statemachine.c</file>
             <file>file:/D:/Projects/SSTU40/src/LCD.c</file>
             <file>file:/D:/Projects/SSTU40/src/Crc16.c</file>
+            <file>file:/D:/Projects/SSTU40/SST40%20V4.0.X/nbproject/Makefile-default.mk</file>
             <file>file:/D:/Projects/SSTU40/src/tempctrl.c</file>
             <file>file:/D:/Projects/SSTU40/src/Common/basedef.h</file>
             <file>file:/D:/Projects/SSTU40/src/Common/DigitalIoCfg.h</file>
@@ -25,13 +27,16 @@
             <file>file:/D:/Projects/SSTU40/src/include/Crc16.h</file>
             <file>file:/D:/Projects/SSTU40/src/include/eeprom.h</file>
             <file>file:/D:/Projects/SSTU40/src/include/measure.h</file>
+            <file>file:/D:/Projects/SSTU40/src/Common/p30F4013.h</file>
             <file>file:/D:/Projects/SSTU40/src/include/LCD.h</file>
             <file>file:/D:/Projects/SSTU40/src/task.c</file>
+            <file>file:/D:/Projects/SSTU40/src/RotaryEncoder/RotaryEncoder_cfg.c</file>
             <file>file:/D:/Projects/SSTU40/src/traps.c</file>
             <file>file:/D:/Projects/SSTU40/src/Common/p30f3014.h</file>
             <file>file:/D:/Projects/SSTU40/Template.c</file>
             <file>file:/D:/Projects/SSTU40/src/include/PARLIST.h</file>
             <file>file:/D:/Projects/SSTU40/Template.h</file>
+            <file>file:/D:/Projects/SSTU40/src/include/DigitalIO.h</file>
             <file>file:/D:/Projects/SSTU40/src/vADC.c</file>
             <file>file:/D:/Projects/SSTU40/src/include/tempctrl.h</file>
             <file>file:/D:/Projects/SSTU40/src/systmr.c</file>
