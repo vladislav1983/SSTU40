@@ -12,7 +12,7 @@
 #if defined(__dsPIC30F3014__)
     /* Configuration Bit Settings */
     _FOSC(CSW_FSCM_OFF & XT_PLL8);                 //Fail safe monitor ON & HS / 2 * PLLX16
-    _FWDT(WDT_OFF & WDTPSA_1 & WDTPSB_16);           //WDT Period = 2 ms • Prescale A • Prescale B
+    _FWDT(WDT_OFF & WDTPSA_1 & XT_PLL4);           //WDT Period = 2 ms • Prescale A • Prescale B
     _FBORPOR(PBOR_ON & BORV_27 & PWRT_64 & MCLR_EN);
 #   if defined(__DEBUG)
     _FGS(CODE_PROT_OFF);
@@ -21,7 +21,7 @@
 #   endif
 #elif defined(__dsPIC30F4013__)
 /* Configuration Bit Settings */
-    _FOSC(CSW_FSCM_OFF & XT_PLL8);                 //Fail safe monitor ON & HS / 2 * PLLX16
+    _FOSC(CSW_FSCM_OFF & XT_PLL4);                 
     _FWDT(WDT_OFF & WDTPSA_1 & WDTPSB_16);           //WDT Period = 2 ms • Prescale A • Prescale B
     _FBORPOR(PBOR_ON & BORV27 & PWRT_64 & MCLR_EN);
 #   if defined(__DEBUG)
@@ -121,42 +121,29 @@ int main()
     measure_init();
     temp_ctrl_init();
     
-    /* END INIT */
-    
-    IF_LCDPutc('\f');
-    IF_LCDPuts("    SSTU 4.0");
-    IF_LCDPutc('\n');
-    IF_LCDPuts("     V");
-    IF_LCDPutn((FIRMWARE_BASE_VERSION / 100));
-    IF_LCDPutc('.');
-    IF_LCDPutn(FIRMWARE_SUB_VERSION);
-    
-    delay_ms(200);
-    
+    /* END INIT */   
     INTCON1bits.NSTDIS = 0;    // Enable Nested Interrupts
     
     IF_Uart_Init(38400);
     
-    ClrWdt();         // Clear WDT
+    ClrWdt();       // Clear WDT
     _SWDTEN = 1;    // Enable WDT    
+    
+    ee_param_act(/*init*/1,/*read_all_params*/0);     // INIT and put in update checksum state
     
     SET_CPU_IPL(0b000);        // Force CPU interrupt priority to low. All user masked interrupts with ptiority from 0 to 7 are Enabled.(Safe version)
     
     while(1)
     {
       /* BACKGROUND LOOP. */
-      if(!_is_task1_execute() && !_is_task2_execute())
-      {
-        DisableInterrupts();
-        ee_param_act(0,0); // Online parameters actualization in background
-        EnableInterrupts();
-      }
+      if(!_is_task1_execute() && !_is_task2_execute()) ee_param_act(0,0); // Online parameters actualization in background
       Idle();
       if(!_is_task1_execute() && !_is_task2_execute()) Sirem_Engine(); // Serial Communication run in background loop    
       Idle();
       if(!_is_task1_execute() && !_is_task2_execute()) TaskTimesCalc(pTtime_pointer);
       Idle();
       if(!_is_task1_execute() && !_is_task2_execute()) Params_check_limit();
+      Idle();
       ClrWdt();    //<------ Clear Watchdog timer
       Idle();
     }

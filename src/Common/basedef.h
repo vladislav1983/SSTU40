@@ -15,7 +15,7 @@
 
 //PLL=16x, OSC=8Mhz -> Freq = (OSC) * PLL;
 #define cOSC_KHz    ((U32)8000ul)                             // Oscillator frequancy
-#define cPLL_KHz    ((U32)8ul*(cOSC_KHz))                   // PLL frequency kHz.
+#define cPLL_KHz    ((U32)4ul*(cOSC_KHz))                   // PLL frequency kHz.
 #define cPLL_MHz    ((U32)(cPLL_KHz)/(U32)1000ul)            // PLL frequency Mhz
 #define cFCY_HZ     (((cPLL_KHz)*(U32)1000ul)/(U32)4ul)      // Instruction clock - Hz
 #define cFCY_MHZ    ((cPLL_KHz)/(U32)4ul/(U32)1000ul)          // Instruction clock - MHz
@@ -85,14 +85,8 @@ typedef U8                      HRESULT;
 #define _getbit(src,bitn)        ((src) & (1 << (bitn)))
 
 #define absi(x)                           ((x)>=0 ? (x) : -(x))            /* absolut of integer */
-#define DisableInterrupts() \
-{ \
- int DISI_save;                 \
-                                 \
-  DISI_save = DISICNT;           \
-  asm volatile ("disi #0x3FFF"); \
-}
-#define EnableInterrupts()                  DISICNT = 0;
+#define DisableInterrupts()       SET_CPU_IPL(0b111)
+#define EnableInterrupts()        SET_CPU_IPL(0b000)
 
 #define mAssert(Cond)   (                   \
 {                                           \

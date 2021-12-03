@@ -104,7 +104,7 @@ extern struct cartridge_ident ident;
 extern struct Times time;
 
 /* EEPROM.C */
-extern U16 EE_CHKS;
+extern U16 EE_CHKS[cNumberOfBanks];
 extern U16 EE_Valid;
 extern U16 EE_par_update;
 extern U16 EE_Bank1Valid;
@@ -217,7 +217,8 @@ const iolist iopar[] =
   /* debug */
   {910,"debug_var_1",                 (S16 *)&debug_var_1,                    (S16 *)&debug_var_1,                      2,"srr",    32767ul,  -32768, 0,0,    1 },
   /* EEPROM.C */                                                                                                                                                
-  {950,"EEPROM Checksum",             (U16 *)&EE_CHKS,                        (U16 *)&EE_CHKS,                          2,"urr",    0xFFFFul,      0, 5,0,    1 },
+  {949,"EEPROM Checksum bank 1",      (U16 *)&EE_CHKS[0],                     (U16 *)&EE_CHKS[0],                       2,"urr",    0xFFFFul,      0, 5,0,    1 },
+  {950,"EEPROM Checksum bank 2",      (U16 *)&EE_CHKS[1],                     (U16 *)&EE_CHKS[1],                       2,"urr",    0xFFFFul,      0, 5,0,    1 },
   {951,"EEPROM Valid (1000)",         (U16 *)&EE_Valid,                       (U16 *)&EE_Valid,                         2,"unr",    0xFFFFul,      0, 0,0,    1 },
   {952,"EEPROM Update (Debug)",       (U16 *)&EE_par_update,                  (U16 *)&EE_par_update,                    2,"urr",    0xFFFFul,      0, 5,0,    1 },
   {953,"EEPROM ActiveBank",           (BOOL *)&ParamAct.bActiveBank,          (BOOL *)&ParamAct.bActiveBank,            1,"urr",    0xFFFFul,      0, 5,0,    1 },
