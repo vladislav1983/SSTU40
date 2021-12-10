@@ -27,7 +27,6 @@
 /* Exported data                                                              */
 /*----------------------------------------------------------------------------*/
 
-
 /*----------------------------------------------------------------------------*/
 /* Constant exported data                                                     */
 /*----------------------------------------------------------------------------*/
@@ -35,16 +34,19 @@
 /*----------------------------------------------------------------------------*/
 /* Exported Macros                                                            */
 /*----------------------------------------------------------------------------*/
+#define LCD_DEGREE_SIGN_IDX         0
+#define LCD_EMPTY_HEART             1
+#define LCD_FULL_HEART              2
 
 /*----------------------------------------------------------------------------*/
 /* Exported functions                                                           */
 /*----------------------------------------------------------------------------*/
 void IF_LCDInit(void);
 void IF_LCDPutc(U8 u8CharToLcd);
+void IF_LCDPutSpecialChar(U8 X, U8 Y, U8 CharIdx);
 void IF_LCDGotoXY(U8 x,U8 y);
 void IF_LCDPuts(const char *u8StrToLcd);
 void IF_LCDPutn(U32 t);
-void LCDSendByte(U8 u8ByteToLcd,U8 u8Adress);
 void IF_LCD_UpdateState(U16 u16CurrentState);
 void LCD_printf(char *format, ...);
 

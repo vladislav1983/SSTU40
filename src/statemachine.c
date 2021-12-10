@@ -112,6 +112,7 @@ U16 stm_timer_T2(U16 cmd,U16 cons);
 U16 stm_timer_II_T2(U16 cmd, U16 cons);
 U16 stm_timer_T1(U16 cmd,U16 cons);
 void PrintHibernationTime(void);
+void PrintTriacState(void);
 
 /******************************************************************************/
 /*
@@ -381,8 +382,7 @@ void state_machine_T2(void)
         IF_LCDPutc('\n');
         IF_LCDPuts("T:    oC P:    W");
         IF_LCDGotoXY(7,2);
-        IF_LCDPutc(0xDF);    //Degree Sign
-        IF_LCDPuts("C");
+        IF_LCDPutc(LCD_DEGREE_SIGN_IDX);    //Degree Sign
         
         prevstate_T2 = ST2_TMPCTRL;
         stm_timer_T2(1, LCD_update_rate);
@@ -403,6 +403,7 @@ void state_machine_T2(void)
         IF_LCDGotoXY(12,2);
         // print power
         IF_LCDPutn(mes2.Actaul_Power);
+        PrintTriacState();
         
         stm_timer_T2(1, LCD_update_rate);
       }
@@ -429,7 +430,7 @@ void state_machine_T2(void)
         IF_LCDPutc('\n');
         IF_LCDPuts("SLEEP TEMP: ");
         IF_LCDGotoXY(15,2);
-        IF_LCDPutc(0xDF);    //Degree Sign
+        IF_LCDPutc(LCD_DEGREE_SIGN_IDX);    //Degree Sign
         IF_LCDPuts("C");
         prevstate_T2 = ST2_STAND;
         stm_timer_T2(1, LCD_update_rate);
@@ -443,6 +444,7 @@ void state_machine_T2(void)
         IF_LCDPuts("   ");
         IF_LCDGotoXY(12,2);
         IF_LCDPutn(Get_Temp_Actual());
+        PrintTriacState();
         
         stm_timer_T2(1, LCD_update_rate);
       }
@@ -522,7 +524,7 @@ void state_machine_T2(void)
         }
         
         IF_LCDGotoXY(15,2);
-        IF_LCDPutc(0xDF);    //Degree Sign
+        IF_LCDPutc(LCD_DEGREE_SIGN_IDX);    //Degree Sign
         IF_LCDPuts("C");
         prevstate_T2 = ST2_CHANGE_USER_REF;
         stm_timer_T2(1,LOAD_T2_500mS);
@@ -737,6 +739,26 @@ void state_machine_T2(void)
     IF_LCDPuts(":   ");
     IF_LCDGotoXY(13,2);
     IF_LCDPutn(stat_stat.HibTimeSeconds);
-  }    
+  } 
+ /******************************************************************************/
+  /*
+   * Name: 
+   * Params: 
+   * Purpose:   
+   */
+  /******************************************************************************/
+  void PrintTriacState(void)
+  {
+    IF_LCDGotoXY(16, 1);
+    
+    if(T_ctrl.tmpctrl_triac_state)
+    {
+      IF_LCDPutc(LCD_FULL_HEART);
+    }
+    else
+    {
+      IF_LCDPutc(LCD_EMPTY_HEART);
+    }
+  }  
 
   

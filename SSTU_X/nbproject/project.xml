@@ -3,21 +3,19 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>SST40 V4.0</name>
-            <creation-uuid>d8e1556a-1d9a-433a-a2fd-53d0fd5f52de</creation-uuid>
+            <name>SSTU_X</name>
+            <creation-uuid>cdf1209a-e5e5-48b2-8828-94a0a6e24e11</creation-uuid>
             <make-project-type>0</make-project-type>
-            <c-extensions/>
+            <c-extensions>c</c-extensions>
             <cpp-extensions/>
-            <header-extensions/>
+            <header-extensions>h</header-extensions>
             <asminc-extensions/>
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList>
-                <sourceRootElem>..</sourceRootElem>
-                <sourceRootElem>..\src</sourceRootElem>
-                <sourceRootElem>..\src\RotaryEncoder</sourceRootElem>
-                <sourceRootElem>..\src\Common</sourceRootElem>
-                <sourceRootElem>..\src\include</sourceRootElem>
+                <sourceRootElem>../src/Common</sourceRootElem>
+                <sourceRootElem>../src</sourceRootElem>
+                <sourceRootElem>../src/RotaryEncoder</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

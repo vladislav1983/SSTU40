@@ -315,6 +315,11 @@ void cart_stat_det(void)
       Nop();
       Nop();
       Nop();
+      Nop();
+      Nop();
+      Nop();
+      Nop();
+      Nop();
       
       pinSTAT_DET = 0;
       
@@ -328,6 +333,11 @@ void cart_stat_det(void)
       {
         pinMES_EN = 0;
         
+        Nop();
+        Nop();
+        Nop();
+        Nop();
+        Nop();
         Nop();
         Nop();
         Nop();

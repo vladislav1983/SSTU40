@@ -14,11 +14,11 @@
 #define FIRMWARE_SUB_VERSION        00
 
 //PLL=16x, OSC=8Mhz -> Freq = (OSC) * PLL;
-#define cOSC_KHz    ((U32)8000ul)                             // Oscillator frequancy
-#define cPLL_KHz    ((U32)4ul*(cOSC_KHz))                   // PLL frequency kHz.
-#define cPLL_MHz    ((U32)(cPLL_KHz)/(U32)1000ul)            // PLL frequency Mhz
-#define cFCY_HZ     (((cPLL_KHz)*(U32)1000ul)/(U32)4ul)      // Instruction clock - Hz
-#define cFCY_MHZ    ((cPLL_KHz)/(U32)4ul/(U32)1000ul)          // Instruction clock - MHz
+#define cOSC_KHz    ((U32)8000ul)                        // Oscillator frequancy
+#define cPLL_KHz    ((U32)4ul*(cOSC_KHz))                // PLL frequency kHz.
+#define cPLL_MHz    ((U32)(cPLL_KHz)/(U32)1000ul)        // PLL frequency Mhz
+#define cFCY_HZ     (((cPLL_KHz)*(U32)1000ul)/(U32)4ul)  // Instruction clock - Hz
+#define cFCY_MHZ    ((cPLL_KHz)/(U32)4ul/(U32)1000ul)    // Instruction clock - MHz
 #define cTCY_NS     (1000UL/cFCY_MHZ)
 
 /* INTERRUPT PRIORITY LEVELS */
@@ -99,7 +99,7 @@ typedef U8                      HRESULT;
 #else
     #error "CPU settings not match!"
 #endif
-
+#include "libpic30.h"
 #include "DigitalIoCfg.h"
 
 #endif /* BASEDEF_H */
