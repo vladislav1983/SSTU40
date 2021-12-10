@@ -28,80 +28,57 @@
 #include "Crc16.h"
 
 //==========================================================================================================
-// Local constants                                                            
+// Glocal data                                                                 
 //==========================================================================================================
-// Define here physical start and end address of eeprom.
-#define EE_BASE_ADDR                0x7FFC00
-#define EE_END_ADDR                 0x7FFFFE
+U16 _EEDATA(2)     EEdata_Bank1[EE_BANK_SIZE/(sizeof(U16))];
+U16 _EEDATA(2)     EEdata_Bank2[EE_BANK_SIZE/(sizeof(U16))];
+U16 _EEDATA(2)     EEdata_ValidFlag;
 
-#define EE_ALIGNMENT                (2U)
-#define EE_START_LOG_ADDRESS        (0U)
-#define EE_INIT_VALUE_ADDRESS       ((EE_END_ADDR - EE_BASE_ADDR) / EE_ALIGNMENT)
-#define EE_END_LOG_ADDRESS          (((EE_END_ADDR - EE_BASE_ADDR) / EE_ALIGNMENT) - 2)
-
-// Banks start addresses
-#define EE_BANK1_START_ADDR         EE_START_LOG_ADDRESS
-#define EE_BANK2_START_ADDR         (EE_END_LOG_ADDRESS / 2)
-
-// Checksums in banks addresses
-#define EE_BANK1_CHK_ADDR           ((EE_END_LOG_ADDRESS / 2) - 1)
-#define EE_BANK2_CHK_ADDR           EE_END_LOG_ADDRESS
-
-// Bank definition
-#define cBank1                      (0U)
-#define cBank2                      (1U)
-
+//==========================================================================================================
+// Local types 
+//==========================================================================================================
 /* Param Actualization states */
-#define PARACT_INIT                 1
-#define PARACT_PARAMS_UPDATE        2
-#define PARACT_PARAMS_READ_ALL      3
+typedef enum
+{
+  PARACT_INIT = 0,
+  PARACT_PARAMS_UPDATE,
+  PARACT_PARAMS_READ_ALL
+}tEE_state_type;
+
+//==========================================================================================================
+// Local data                                                                 
+//==========================================================================================================
+static tEE_state_type ee_state = PARACT_INIT;
+static _prog_addressT EE_pio = 0;
+
+//==========================================================================================================
+// Local macros
+//==========================================================================================================
+// Bank definition
+#define cBank1                                  (0U)
+#define cBank2                                  (1U)
 
 // Value Type define
-#define cU8ValueType                (0U)
-#define cU16ValueType               (1U)
+#define cU8ValueType                            (0U)
+#define cU16ValueType                           (1U)
 
-#define cEE_InitializedValue        ((U16)(0xAA55))
-
-
-//==========================================================================================================
-// Local macros                                                               
-//==========================================================================================================
-
+#define cEE_InitializedValue                    ((U16)(0xAA55))
+// Checksums in banks addresses
+#define EE_BANK_CHK_ADDR												((EE_BANK_SIZE/sizeof(U16)) - sizeof(U16) - 1)
 #define mGet_ParamAct()                         (&ParamAct)
 //----------------------------------------------------------------------------------------------------------
-#define mSetEEpointerChecksumBank1(EEpointer)   _init_prog_address(EEpointer, EEdata[EE_BANK1_CHK_ADDR])
-#define mSetEEpointerChecksumBank2(EEpointer)   _init_prog_address(EEpointer, EEdata[EE_BANK2_CHK_ADDR])
-//----------------------------------------------------------------------------------------------------------
-#define mSetActiveBank1(EEpointer)                              \
-do{                                                             \
-    _init_prog_address(EEpointer, EEdata[EE_BANK1_START_ADDR]); \
-    } while(0)
-//----------------------------------------------------------------------------------------------------------
-#define mSetActiveBank2(EEpointer)                              \
-do{                                                             \
-    _init_prog_address(EEpointer, EEdata[EE_BANK2_START_ADDR]); \
-    } while(0)
-//----------------------------------------------------------------------------------------------------------
+#define mSetEEpointerChecksumBank1(EEpointer)   _init_prog_address(EEpointer, EEdata_Bank1[EE_BANK_CHK_ADDR])
+#define mSetEEpointerChecksumBank2(EEpointer)   _init_prog_address(EEpointer, EEdata_Bank2[EE_BANK_CHK_ADDR])
+#define mSetActiveBank1(EEpointer)              _init_prog_address(EEpointer, EEdata_Bank1[0])
+#define mSetActiveBank2(EEpointer)							_init_prog_address(EEpointer, EEdata_Bank2[0])
 #define mSetActiveBank(Bank)                                    \
 do{                                                             \
     if((Bank) == cBank1)      mSetActiveBank1(EE_pio);          \
     else if((Bank) == cBank2) mSetActiveBank2(EE_pio);          \
     else                      mAssert(cFalse);                  \
-    } while (0)
+} while (0)
 //----------------------------------------------------------------------------------------------------------
 #define mReadU16ValueEE(EEPointer, ReadedValue) EE_MemCopy(&EEPointer, &ReadedValue)
-
-//==========================================================================================================
-// Local types 
-//==========================================================================================================
-
-
-//==========================================================================================================
-// Local data                                                                 
-//==========================================================================================================
-volatile U16 _EEDATA(512)     EEdata[512];
-static U16 ee_state = PARACT_INIT;
-static _prog_addressT EE_pio = 0;
 
 //==========================================================================================================
 // Constant local data                                                        
@@ -126,7 +103,6 @@ sParamAct ParamAct =
 //==========================================================================================================
 // Constant exported data                                                     
 //==========================================================================================================
-
 
 //==========================================================================================================
 // Local function prototypes                                                  
@@ -226,7 +202,7 @@ static void EE_WriteU32(_IN_ const _prog_addressT pEEpointer, _IN_ iolist *pIop)
   
   EEpointer = pEEpointer;
   
-  u16ToEEprom = Lou(value_to_write);    // extract low 16 bytes form U32
+  u16ToEEprom = (value_to_write & 0xFFFFu);    // extract low 16 bytes form U32
   
   _set_eeprom_busy(1);
   
@@ -234,7 +210,7 @@ static void EE_WriteU32(_IN_ const _prog_addressT pEEpointer, _IN_ iolist *pIop)
   EE_Write_U16(&u16ToEEprom, &EEpointer);
   EEpointer += sizeof(U16);    // increment EEPROM pointer
   
-  u16ToEEprom = Hiu(value_to_write);    // extract high 16 bytes from U32
+  u16ToEEprom = (value_to_write >> 16) & 0xFFFFu;    // extract high 16 bytes from U32
   
   EE_Erase_U16(&EEpointer);
   EE_Write_U16(&u16ToEEprom, &EEpointer);        // Write high 16 bytes to eeprom.
@@ -657,7 +633,7 @@ HRESULT EE_CheckEEprom(void)
   EEState = S_FALSE;
   
   // Init prog address to location EE_INIT_VALUE_ADDRESS
-  _init_prog_address(EEpointer, EEdata[EE_INIT_VALUE_ADDRESS]);
+  _init_prog_address(EEpointer, EEdata_ValidFlag);
   
   mReadU16ValueEE(EEpointer, u16Temp);
   
@@ -666,11 +642,22 @@ HRESULT EE_CheckEEprom(void)
     // EEprom not initialized. Erase content ant write 0x0000 in all eeprom cells, because after erase 
     // eeprom cell value is 0xFFFF, it is too dangerous to leave eeprom uninitialized.
     EE_Erase_All();
-    
-    _init_prog_address(EEpointer, EEdata[EE_START_LOG_ADDRESS]);
+
     u16Temp = 0x0000;
     
-    for(u16Counter = 0; u16Counter < EE_END_LOG_ADDRESS; u16Counter++)
+        
+    for(mSetActiveBank1(EEpointer), u16Counter = 0; 
+        u16Counter < (EE_BANK_SIZE/sizeof(U16)); 
+        u16Counter++)
+    {
+      EE_Erase_U16(&EEpointer);
+      EE_Write_U16(&u16Temp, &EEpointer);
+      EEpointer += sizeof(U16);
+    }
+           
+    for(mSetActiveBank2(EEpointer), u16Counter = 0; 
+        u16Counter < (EE_BANK_SIZE/sizeof(U16)); 
+        u16Counter++)
     {
       EE_Erase_U16(&EEpointer);
       EE_Write_U16(&u16Temp, &EEpointer);
@@ -679,7 +666,7 @@ HRESULT EE_CheckEEprom(void)
     
     // Write proper value that indicate eeprom is initialized.
     u16Temp = cEE_InitializedValue;
-    _init_prog_address(EEpointer, EEdata[EE_INIT_VALUE_ADDRESS]);
+    _init_prog_address(EEpointer, EEdata_ValidFlag);
     
     EE_Erase_U16(&EEpointer);
     EE_Write_U16(&u16Temp, &EEpointer);
@@ -696,7 +683,7 @@ HRESULT EE_CheckEEprom(void)
     pio++;
   }
   
-  if(u16EepromMembers < (EE_END_LOG_ADDRESS / 2) ) 
+  if(u16EepromMembers < (EE_BANK_SIZE/sizeof(U16)) ) 
   {
     EEState = S_OK;
   }
