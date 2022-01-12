@@ -196,9 +196,9 @@ const iolist iopar[] =
   {265,"Bresenham distribution",      (U8 * )&T_ctrl.bresenham_distribution,  (U8  *)&T_ctrl.bresenham_distribution,    1,"unr",    1,             0, 0,0,    1 },
   {266,"Set Temperature Step",        (U8 * )&T_ctrl.T_UserStep,              (U8  *)&T_ctrl.T_UserStep,                1,"unr",    50,            1, 0,0,    1 },
   //PI Controller
-  {270,"Kp",                          (U16 *)&pid.Kp,                         (U16 *)&pid.Kp,                           2,"unr",    0xFFFFul,      0, 0,0, 1024 },
-  {271,"Ki",                          (U16 *)&pid.Ki,                         (U16 *)&pid.Ki,                           2,"unr",    0xFFFFul,      0, 0,0, 1024 },
-  {272,"Kd",                          (U16 *)&pid.Kd,                         (U16 *)&pid.Kd,                           2,"unr",    0xFFFFul,      0, 0,0, 1024 },
+  {270,"Kp",                          (U16 *)&pid.Kp,                         (U16 *)&pid.Kp,                           2,"unr",    0xFFFFul,      0, 0,0,    32768 },
+  {271,"Ki",                          (U16 *)&pid.Ki,                         (U16 *)&pid.Ki,                           2,"unr",    0xFFFFul,      0, 0,0,    1 },
+  {272,"Kd",                          (U16 *)&pid.Kd,                         (U16 *)&pid.Kd,                           2,"unr",    0xFFFFul,      0, 0,0,    1 },
   {273,"Ki_Limit",                    (S16 *)&pid.Ki_Limit,                   (S16 *)&pid.Ki_Limit,                     2,"snr",    32767ul,  -32768, 0,0,    1 },
   {274,"Out",                         (S16 *)&pid.Out,                        (S16 *)&pid.Out,                          2,"srr",    32767ul,  -32768, 5,0,    1 },
   {275,"P_term",                      (S16 *)&pid.P_term,                     (S16 *)&pid.P_term,                       2,"srr",    32767ul,  -32768, 5,0,    1 },

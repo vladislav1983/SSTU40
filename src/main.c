@@ -47,6 +47,7 @@
 #if defined(ROTARY_ENCODER_USED)
 #include "RotaryEncoder.h"
 #endif
+#include "MathTools.h"
 
 /*----------------------------------------------------------------------------*/
 /* Constant data                                                              */
@@ -106,6 +107,7 @@ int main()
         ee_param_act(0,0);    // RUN read all parameters. NO NEED REINIT!
     }
     
+    DSP_Engine_Init();
     IF_DigitalIO_Init();
 #if defined(ROTARY_ENCODER_USED)
     RotaryEncoder_Init();

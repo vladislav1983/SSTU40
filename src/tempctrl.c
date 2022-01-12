@@ -26,6 +26,7 @@
 #include "statemachine.h"
 #include "triac_control.h"
 #include "ident.h"
+#include "MathTools.h"
 
 /*----------------------------------------------------------------------------*/
 /* Local constants                                                            */
@@ -77,15 +78,16 @@ struct temperature_control T_ctrl =
 };
 struct pid_struct pid = 
 {
+  .P_term = 0,
   .D_term = 0,
   .I_term = 0,
-  .Kd = (0.4 * 1024),
-  .Ki = (0.12 * 1024),
-  .Ki_Limit = 20,
-  .Kp = (0.25 * 1024),
+  .Integral = 0,
+  .Derivative = 0,
+  .Kp = (0.7 * 32768),
+  .Ki = 1640,
+  .Kd = 6554,
+  .Ki_Limit = 50,
   .Out = 0,
-  .P_term = 0,
-  .Sum = 0,
   .err = 0,
   .err_prev = 0,
 };
@@ -322,30 +324,31 @@ S16 PID(U16 Ref, U16 Fbk)
 {
   struct pid_struct *tp =_get_pid();
   struct temperature_control *tc = _get_T_ctrl();
+  S32 PidOut = 0;
   
   (tp)->err = Ref - Fbk;
   
-  (tp)->P_term = ((S32)(tp)->err * (tp)->Kp) >> 10;                           //Proportiaonal term calculation
-  (tp)->I_term = ((S32)(tp)->Sum * (tp)->Ki) >> 10;
-  (tp)->D_term = (((S32)(tp)->err_prev - (tp)->err) * (tp)->Kd) >> 10;    //Derivate term calculation
+  tp->Integral += (tp->err) * ((U32)(tc->tmpctrl_samp_time + 1uL) * 10uL * 32768uL);  // sample time is in grid half periods 
+  
+  if(     tp->Integral >  (tp)->Ki_Limit) tp->Integral =  (tp)->Ki_Limit;
+  else if(tp->Integral < -(tp)->Ki_Limit) tp->Integral = -(tp)->Ki_Limit;
+  
+  tp->Derivative = _builtin_divsd( ((S32)(tp->err - tp->err_prev) * 32768L), ((tc->tmpctrl_samp_time + 1uL) * 10uL) );
+  
+  (tp)->P_term = fmul_q15((Q15)tp->Kp, (Q15)tp->err);
+  (tp)->I_term = fmul_q15((Q15)tp->Ki, (Q15)tp->Integral);
+  (tp)->D_term = fmul_q15((Q15)tp->Kd, (Q15)tp->Derivative);
   
   (tp)->err_prev = (tp)->err;
-  (tp)->Sum += (tp)->err;
-  
-  if(     (tp)->Sum > (tp)->Ki_Limit)  (tp)->Sum = (tp)->Ki_Limit;
-  else if((tp)->Sum < -(tp)->Ki_Limit) (tp)->Sum = -(tp)->Ki_Limit;
-  
-  (tp)->Out = (tp)->P_term + (tp)->I_term - (tp)->D_term;
+  PidOut = (tp)->P_term + (tp)->I_term + (tp)->D_term;
   
   // output saturation
-  if((tp)->Out > (S16)(tc)->tmpctrl_samp_time) 
-  {
-    (tp)->Out = (S16)(tc)->tmpctrl_samp_time;
-  }
-  else if((tp)->Out < -(S16)((tc)->tmpctrl_samp_time)) 
-  {
-    (tp)->Out = -(S16)((tc)->tmpctrl_samp_time);
-  }
+  if(PidOut > (S16)(tc)->tmpctrl_samp_time) 
+    PidOut = (S16)(tc)->tmpctrl_samp_time;
+  else if(PidOut < -(S16)((tc)->tmpctrl_samp_time)) 
+    PidOut = -(S16)((tc)->tmpctrl_samp_time);
+  
+  tp->Out = PidOut;
   
   return((tp)->Out);
 }
@@ -364,9 +367,11 @@ void Reset_PID(void)
   (tp)->P_term = 0;
   (tp)->I_term = 0;
   (tp)->D_term = 0;
+  tp->Integral = 0;
+  tp->Derivative = 0;
   
+  tp->err = 0;
   (tp)->err_prev = 0;
-  (tp)->Sum = 0;
   (tp)->Out = 0;
 }
 

@@ -199,8 +199,21 @@ void state_machine_T1(void)
       else if(cartridge_ident(0,ADC[AdcCh_0]))
       {
         stm_timer_T1(1, LOAD_T1_100m);
-        if(_stand()) nextstate_T1 = ST1_STAND;
-        else nextstate_T1 = ST1_TMPCTRL;
+        
+        if(_stand()) 
+        {
+          /* OK, We must reset pid controller and tmpctrl module before use it for first time in this state ! */
+          Reset_TMPCTRL();
+          Reset_PID();
+          nextstate_T1 = ST1_STAND;
+        }
+        else 
+        {
+          /* OK, We must reset pid controller and tmpctrl module before use it for first time in this state ! */
+          Reset_TMPCTRL();
+          Reset_PID();
+          nextstate_T1 = ST1_TMPCTRL;
+        }
         mainstate_T1 = ST1_WAIT_STATE;
         prevstate_T1 = ST1_IDENT;
       }
@@ -211,9 +224,6 @@ void state_machine_T1(void)
       {
         mainstate_T2 = ST2_TMPCTRL;
         prevstate_T1 = ST1_TMPCTRL;
-        /* OK, We must reset pid controller and tmpctrl module before use it for first time in this state ! */
-        Reset_TMPCTRL();
-        Reset_PID();
       }
       
       temp_ctrl(ADC[AdcCh_0], 0); //<------ Control User Temp
@@ -228,9 +238,6 @@ void state_machine_T1(void)
       {
         mainstate_T2 = ST2_STAND;
         prevstate_T1 = ST1_STAND;
-        /* OK, We must reset pid controller and tmpctrl module before use it for first time in this state ! */
-        Reset_TMPCTRL();
-        Reset_PID();
       }
       
       temp_ctrl(ADC[AdcCh_0], 1); // Control User Temp Sleep

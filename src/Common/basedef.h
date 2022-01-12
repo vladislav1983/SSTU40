@@ -38,6 +38,7 @@ typedef unsigned long long      U64;
 
 typedef signed char             S8;
 typedef signed int              S16;
+typedef signed int              Q15;
 typedef signed long             S32;
 
 typedef float                   F32;

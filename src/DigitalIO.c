@@ -34,7 +34,7 @@
 #define DEBOUNCE_TIME_CART        10       // Debounce time in line periods  10*10ms = 100ms. 
 #define DEBOUNCE_TIME_EXTR        10       // Debounce time in line periods  10*10ms = 50ms.
 
-#define CARTRIDGE_DETECTION_TIMEOUT        95    //task1 periods
+#define CARTRIDGE_DETECTION_TIMEOUT        90    //task1 periods
 /*----------------------------------------------------------------------------*/
 /* Local macros                                                               */
 /*----------------------------------------------------------------------------*/

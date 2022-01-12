@@ -107,18 +107,16 @@ struct pid_struct
  S16 P_term;
  S16 I_term;
  S16 D_term;
- 
+ S32 Integral;
+ S16 Derivative;
  S16 err;
  S16 err_prev;
- 
- S16 Sum;
  S16 Out;
  
  /* PARAMS STORED IN EEPROM */
- S16 Kp;
- S16 Ki;
- S16 Kd;
- 
+ U16 Kp;
+ U16 Ki;
+ U16 Kd;
  S16 Ki_Limit;
 };
 
