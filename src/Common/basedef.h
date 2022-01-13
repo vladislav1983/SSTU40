@@ -15,7 +15,7 @@
 
 //PLL=16x, OSC=8Mhz -> Freq = (OSC) * PLL;
 #define cOSC_KHz    ((U32)8000ul)                        // Oscillator frequancy
-#define cPLL_KHz    ((U32)4ul*(cOSC_KHz))                // PLL frequency kHz.
+#define cPLL_KHz    ((U32)8ul*(cOSC_KHz))                // PLL frequency kHz.
 #define cPLL_MHz    ((U32)(cPLL_KHz)/(U32)1000ul)        // PLL frequency Mhz
 #define cFCY_HZ     (((cPLL_KHz)*(U32)1000ul)/(U32)4ul)  // Instruction clock - Hz
 #define cFCY_MHZ    ((cPLL_KHz)/(U32)4ul/(U32)1000ul)    // Instruction clock - MHz

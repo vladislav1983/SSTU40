@@ -629,6 +629,7 @@ HRESULT EE_CheckEEprom(void)
   U16 u16EepromMembers = 0;
   iolist *pio = (iolist*)iopar;
   HRESULT EEState;
+  BOOL EE_OK = cFalse;
   
   EEState = S_FALSE;
   
@@ -645,7 +646,6 @@ HRESULT EE_CheckEEprom(void)
 
     u16Temp = 0x0000;
     
-        
     for(mSetActiveBank1(EEpointer), u16Counter = 0; 
         u16Counter < (EE_BANK_SIZE/sizeof(U16)); 
         u16Counter++)
@@ -671,6 +671,11 @@ HRESULT EE_CheckEEprom(void)
     EE_Erase_U16(&EEpointer);
     EE_Write_U16(&u16Temp, &EEpointer);
   }
+  else
+  {
+    EEState = S_OK;
+    EE_OK = cTrue;
+  }
   
   // Check size of eeprom is enough.
   u16IoParMembers = IF_Parlist_GetCntMembers();
@@ -685,11 +690,15 @@ HRESULT EE_CheckEEprom(void)
   
   if(u16EepromMembers < (EE_BANK_SIZE/sizeof(U16)) ) 
   {
-    EEState = S_OK;
+    if(EE_OK == cTrue)
+    {
+      EEState = S_OK;
+    }
   }
   else
   {
     _set_ee_size_error(1);
+    EEState = S_FALSE;
   }
   
   return(EEState);

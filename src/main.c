@@ -11,8 +11,8 @@
 
 #if defined(__dsPIC30F3014__)
     /* Configuration Bit Settings */
-    _FOSC(CSW_FSCM_OFF & XT_PLL8);                 //Fail safe monitor ON & HS / 2 * PLLX16
-    _FWDT(WDT_OFF & WDTPSA_1 & XT_PLL4);           //WDT Period = 2 ms • Prescale A • Prescale B
+    _FOSC(CSW_FSCM_OFF & XT_PLL8);                 //Fail safe monitor ON & HS / 2 * PLLX8
+    _FWDT(WDT_OFF & WDTPSA_8 & WDTPSB_5);           //WDT Period = 2 ms ? Prescale A ? Prescale B = 2 * 8 * 5 = 80ms
     _FBORPOR(PBOR_ON & BORV_27 & PWRT_64 & MCLR_EN);
 #   if defined(__DEBUG)
     _FGS(CODE_PROT_OFF);
@@ -21,7 +21,7 @@
 #   endif
 #elif defined(__dsPIC30F4013__)
 /* Configuration Bit Settings */
-    _FOSC(CSW_FSCM_OFF & XT_PLL4);                 
+    _FOSC(CSW_FSCM_OFF & XT_PLL8);                 
     _FWDT(WDT_OFF & WDTPSA_8 & WDTPSB_5);           //WDT Period = 2 ms ? Prescale A ? Prescale B = 2 * 8 * 5 = 80ms
     _FBORPOR(PBOR_ON & BORV27 & PWRT_64 & MCLR_EN);
 #   if defined(__DEBUG)
@@ -102,9 +102,9 @@ int main()
     
     if(EE_CheckEEprom() == S_OK)
     {
-        /* Parameters Read */
-        ee_param_act(1,1);     // INIT and put in PARACT_PARAMS_READ_ALL state
-        ee_param_act(0,0);    // RUN read all parameters. NO NEED REINIT!
+      /* Parameters Read */
+      ee_param_act(1,1);     // INIT and put in PARACT_PARAMS_READ_ALL state
+      ee_param_act(0,0);    // RUN read all parameters. NO NEED REINIT!
     }
     
     DSP_Engine_Init();
