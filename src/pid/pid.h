@@ -31,12 +31,16 @@ typedef struct
  U16 Ki2;
  U16 Kd2;
  U8  P_term_scale;
+ U16 Fbk_Filt_ms;
 }tPidCfg;
 
 typedef struct
 {
   tPidIntegral Integral;
-  S16 error_prev;
+  S32 Fbk_filt;
+  S16 error_filt_prev;
+  U16 Fbk_Filt_ms;
+  U32 Fbk_Filt;
 }tPidData;
 
 typedef struct
@@ -53,7 +57,14 @@ typedef struct
 
 #define PID_DECLARE_INSTANCE(x) \
   extern tPidCfg PID_##x##_Cfg; \
-  tPidData PID_##x##_Data = {.Integral = {0}, .error_prev = 0}; \
+  tPidData PID_##x##_Data = \
+  { \
+    .Integral = {0}, \
+    .error_filt_prev = 0, \
+    .Fbk_filt = 0,  \
+    .Fbk_Filt_ms = 0, \
+    .Fbk_Filt = 0,  \
+  }; \
   const tPidInstance PID_##x = {&PID_##x##_Cfg, &PID_##x##_Data}; \
   tPidCfg PID_##x##_Cfg =
 
@@ -79,7 +90,7 @@ extern tPidData PID_##x##_Data
 /*-----------------------------------------------------------------------------
   DECLARATION OF GLOBAL FUNCTIONS
 -----------------------------------------------------------------------------*/
-extern S16 PidProcess(const tPidInstance * instance, S16 Ref, S16 Fbk, S16 PidMax);
+extern S16 PidProcess(const tPidInstance * instance, S16 Ref, S16 Fbk, U16 SampleTime_ms, S16 PidMax);
 extern void PidReset(const tPidInstance * instance);
 
 /*-----------------------------------------------------------------------------

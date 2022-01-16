@@ -9,6 +9,7 @@
 -----------------------------------------------------------------------------*/
 #include "pid.h"
 #include "pid_cfg.h"
+#include "MathTools.h"
 
 
 /*-----------------------------------------------------------------------------
@@ -51,40 +52,62 @@ static tPidIntegral pid_satlimit(S32 x, S32 min, S32 max);
 //- **************************************************************************
 //! \brief 
 //- **************************************************************************
-S16 PidProcess(const tPidInstance * instance, S16 Ref, S16 Fbk, S16 PidMax)
+S16 PidProcess(const tPidInstance * instance, S16 Ref, S16 Fbk, U16 SampleTime_ms, S16 PidMax)
 {
   S32 PidOut = 0;
   S32 P_term;
   S32 D_term;
-  S16 error;
+  S16 error_filt;
   
   if(NULL != instance)
   {
-    if(instance->cfg->P_term_scale < 16)
+    if(   instance->cfg->P_term_scale < 16
+       && instance->cfg->Fbk_Filt_ms > 0
+       && instance->cfg->Fbk_Filt_ms >= SampleTime_ms
+       && SampleTime_ms > 10)
     {
       S32 P_term_min = -(S32)((U32)1uL << (15u + instance->cfg->P_term_scale));
       S32 P_term_max = (S32)((U32)1uL << (15u + instance->cfg->P_term_scale)) - 1uL;
       S32 ID_term_min = -(S32)((U32)PidMax << 16);
       S32 ID_term_max = (S32)((U32)PidMax << 16);
       
-      error = Ref - Fbk;
+      // input filtration
+      if(instance->cfg->Fbk_Filt_ms != instance->data->Fbk_Filt_ms)
+      {
+          if(((U32)instance->cfg->Fbk_Filt_ms + SampleTime_ms) < 65535)
+        {
+          instance->data->Fbk_Filt = _builtin_divsd( ((S32)65536L * SampleTime_ms), (instance->cfg->Fbk_Filt_ms));
+          instance->data->Fbk_Filt_ms = instance->cfg->Fbk_Filt_ms;
+        }
+        else
+        {
+          _set_param_limit_error(1);
+        }
+      }
+      // Filter function: y(n)=y(n?1)+a[x(n)?(y(n?1)/65536)],
+      instance->data->Fbk_filt += (S32)((S32)instance->data->Fbk_Filt * (S16)(Fbk - Hi(instance->data->Fbk_filt )));
+      // error calculation
+      error_filt = Ref - Hi(instance->data->Fbk_filt);
       
-      if((error < 0 && instance->data->Integral.sat < 0) || (error > 0 && instance->data->Integral.sat > 0))
+      // integration
+      if((error_filt < 0 && instance->data->Integral.sat < 0) || (error_filt > 0 && instance->data->Integral.sat > 0))
       {
         // do nothing if there is saturation, and error is in the same direction;
       }
       else
       {
-        instance->data->Integral.x += (S32)instance->cfg->Ki2 * error;
+        instance->data->Integral.x += (S32)instance->cfg->Ki2 * error_filt;
       }
-      
+      // integral saturation
       instance->data->Integral = pid_satlimit(instance->data->Integral.x, ID_term_min, ID_term_max);
       
-      P_term = pid_limit((S32)instance->cfg->Kp * error, P_term_min, P_term_max);
-      D_term = pid_limit((S32)instance->cfg->Kd2 * (error - instance->data->error_prev), ID_term_min, ID_term_max);
+      // P and D terms calculation
+      P_term = pid_limit((S32)instance->cfg->Kp * error_filt, P_term_min, P_term_max);
+      D_term = pid_limit((S32)instance->cfg->Kd2 * (error_filt - instance->data->error_filt_prev), ID_term_min, ID_term_max);
       
+      // PID output limitation
       PidOut = pid_limit((P_term >> instance->cfg->P_term_scale) + (instance->data->Integral.x >> 16) + (D_term >> 16), -PidMax, PidMax);
-      instance->data->error_prev = error;
+      instance->data->error_filt_prev = error_filt;
     }
     else
     {
@@ -109,7 +132,8 @@ void PidReset(const tPidInstance * instance)
   {
     instance->data->Integral.x = 0;
     instance->data->Integral.sat = 0;
-    instance->data->error_prev = 0;
+    instance->data->error_filt_prev = 0;
+    instance->data->Fbk_filt = 0;
   }
   else
   {

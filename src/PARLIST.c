@@ -183,7 +183,7 @@ const iolist iopar[] =
  /* TMPCTRL.C */                                                                                                                                      
   {250,"Temp Ref User (Real)",        (U16 *)&T_ctrl.T_Ref_User,                 (U16 *)&T_ctrl.T_Ref_User,                2,"unr",    450ul,         0, 0,0,    1 },
   {251,"Temp Ref User Sleep (Real)",  (U16 *)&T_ctrl.T_Ref_User_Sleep,           (U16 *)&T_ctrl.T_Ref_User_Sleep,          2,"unr",    450ul,         0, 0,0,    1 },
-  {252,"TMPCTRL Sample Time",         (U16 *)&T_ctrl.tmpctrl_samp_time,          (U16 *)&T_ctrl.tmpctrl_samp_time,         2,"unr",    100ul,         0, 0,0,    1 },
+  {252,"TMPCTRL Sample Time",         (U16 *)&T_ctrl.tmpctrl_samp_time,          (U16 *)&T_ctrl.tmpctrl_samp_time,         2,"unr",    100ul,        10, 0,0,    1 },
   {253,"Temp Calibration Gain",       (U16 *)&T_ctrl.T_cal_gain,                 (U16 *)&T_ctrl.T_cal_gain,                2,"unr",    32767ul,       0, 0,0, 1024 },
   {254,"Overload Periods Trip",       (U16 *)&overprot.cop_periods_trip,         (U16 *)&overprot.cop_periods_trip,        2,"unr",    0xFFFFul,      0, 0,0,    1 },
   {255,"Overload Time Trip",          (U16 *)&overprot.cop_time_trip_sec,        (U16 *)&overprot.cop_time_trip_sec,       2,"unr",    0xFFFFul,      0, 0,0,    1 },
@@ -206,8 +206,9 @@ const iolist iopar[] =
   {281,"Ki2 [Ki*dt]",                 (U16 *)&PID_C245ToolPid_Cfg.Ki2,           (U16 *)&PID_C245ToolPid_Cfg.Ki2,           2,"unr",    0xFFFFul,             0, 0,0,    1 },
   {282,"Kd2 [Kd/dt]",                 (U16 *)&PID_C245ToolPid_Cfg.Kd2,           (U16 *)&PID_C245ToolPid_Cfg.Kd2,           2,"unr",    0xFFFFul,             0, 0,0,    1 },
   {283,"P term Scale [1<<(15+X)]",    (U8  *)&PID_C245ToolPid_Cfg.P_term_scale,  (U8  *)&PID_C245ToolPid_Cfg.P_term_scale,  2,"unr",    16,                   0, 0,0,    1 },
-  {284,"Integral",                    (S32 *)&PID_C245ToolPid_Data.Integral.x,   (S32 *)&PID_C245ToolPid_Data.Integral.x,   4,"srr",    2147483647, -2147483647, 5,0,    1 },
-  {285,"Integral Saturation",         (S8  *)&PID_C245ToolPid_Data.Integral.sat, (S8  *)&PID_C245ToolPid_Data.Integral.sat, 1,"srr",    1,                   -1, 5,0,    1 },
+  {284,"Fbk Filter [ms]",             (U16 *)&PID_C245ToolPid_Cfg.Fbk_Filt_ms,   (U16 *)&PID_C245ToolPid_Cfg.Fbk_Filt_ms,   2,"unr",    10000,        (1+2*100), 0,0,    1 },
+  {285,"Integral",                    (S32 *)&PID_C245ToolPid_Data.Integral.x,   (S32 *)&PID_C245ToolPid_Data.Integral.x,   4,"srr",    2147483647, -2147483647, 5,0,    1 },
+  {286,"Integral Saturation",         (S8  *)&PID_C245ToolPid_Data.Integral.sat, (S8  *)&PID_C245ToolPid_Data.Integral.sat, 1,"srr",    1,                   -1, 5,0,    1 },
   /* TASK */  
   {900,"Task1 Time",                  (U32 *)&Ttime.Task1Time_us,                (U32 *)&Ttime.Task1Time_us,               4,"urr",    0xFFFFFFFFul,  0, 5,0, 1000 },
   {901,"Task2 Time",                  (U32 *)&Ttime.Task2Time_us,                (U32 *)&Ttime.Task2Time_us,               4,"urr",    0xFFFFFFFFul,  0, 5,0, 1000 },
