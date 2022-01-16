@@ -204,14 +204,12 @@ void state_machine_T1(void)
         {
           /* OK, We must reset pid controller and tmpctrl module before use it for first time in this state ! */
           Reset_TMPCTRL();
-          Reset_PID();
           nextstate_T1 = ST1_STAND;
         }
         else 
         {
           /* OK, We must reset pid controller and tmpctrl module before use it for first time in this state ! */
           Reset_TMPCTRL();
-          Reset_PID();
           nextstate_T1 = ST1_TMPCTRL;
         }
         mainstate_T1 = ST1_WAIT_STATE;

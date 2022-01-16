@@ -14,6 +14,7 @@
 /* Included files to resolve specific definitions in this file                */
 /*----------------------------------------------------------------------------*/
 #include "basedef.h"
+#include "MathTools.h"
 
 /*----------------------------------------------------------------------------*/
 /* Constant data                                                              */
@@ -90,6 +91,11 @@ struct temperature_control
  BOOL tmpctrl_triac_state;
  
  U16 T_Ref_User_tmp;            // Temporary User Temperature.
+ U16 ThermalPeriod;
+ U16 ThermalPeriod_pos;
+ U16 ThermalPeriod_neg;
+ S16 ThermalOvershoot_pos;
+ S16 ThermalOvershoot_neg;
  
  /* PARAMS STORED IN EEPROM */
  U16 tmpctrl_samp_time;    // Temperature control sample time in line halfperiods.
@@ -100,24 +106,6 @@ struct temperature_control
  U16 T_Ref_User_Sleep;    // User Temperature in Sleep Mode.
  BOOL bresenham_distribution;
  U8 T_UserStep;
-};
-
-struct pid_struct
-{
- S16 P_term;
- S16 I_term;
- S16 D_term;
- S32 Integral;
- S16 Derivative;
- S16 err;
- S16 err_prev;
- S16 Out;
- 
- /* PARAMS STORED IN EEPROM */
- U16 Kp;
- U16 Ki;
- U16 Kd;
- S16 Ki_Limit;
 };
 
 struct bresenham_struct
@@ -150,9 +138,6 @@ struct overload_protection
 extern struct temperature_control T_ctrl;
 #define _get_T_ctrl()    (&T_ctrl)
 
-extern struct pid_struct pid;
-#define _get_pid()    (&pid)
-
 extern struct overload_protection overprot;
 #define _get_overload_protection()    (&overprot)
 
@@ -167,9 +152,7 @@ U16 Get_User_Temp(void);
 void Inc_User_Temp(void);
 void Dec_User_Temp(void);
 void temp_ctrl_init(void);
-S16 PID(U16 Ref, U16 Fbk);
 void Cartridge_overload_protection(void);
-void Reset_PID(void);
 void Reset_TMPCTRL(void);
 
 

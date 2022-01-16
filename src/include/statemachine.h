@@ -232,6 +232,9 @@ extern volatile U16 ERR_CONTROL;
 #define _ee_valid_error()                   (_getbit(ERR_CONTROL,11))       /* bit 11 */
 #define _set_ee_valid_error(x)              (_putbit((x),ERR_CONTROL,11))   /* bit 11 */
 
+#define _pid_windup_error()                 (_getbit(ERR_CONTROL,12))       /* bit 12 */
+#define _set_pid_windup_error(x)            (_putbit((x),ERR_CONTROL,12))   /* bit 12 */
+
 /*    
     ERR_CONTROL 
     Bit 0        -    Grid Frequency_error              1: Line overfrequency  0: Line freq OK

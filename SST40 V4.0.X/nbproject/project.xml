@@ -18,6 +18,7 @@
                 <sourceRootElem>..\src\RotaryEncoder</sourceRootElem>
                 <sourceRootElem>..\src\Common</sourceRootElem>
                 <sourceRootElem>..\src\include</sourceRootElem>
+                <sourceRootElem>../src/pid</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

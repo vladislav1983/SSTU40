@@ -34,6 +34,12 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="f1" displayName="pid" projectFiles="true">
+        <itemPath>../src/pid/pid.c</itemPath>
+        <itemPath>../src/pid/pid.h</itemPath>
+        <itemPath>../src/pid/pid_cfg.c</itemPath>
+        <itemPath>../src/pid/pid_cfg.h</itemPath>
+      </logicalFolder>
       <itemPath>../src/DigitalIO.c</itemPath>
       <itemPath>../src/main.c</itemPath>
       <itemPath>../src/systmr.c</itemPath>
@@ -69,6 +75,7 @@
     <Elem>..\src\RotaryEncoder</Elem>
     <Elem>..\src\Common</Elem>
     <Elem>..\src\include</Elem>
+    <Elem>../src/pid</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -127,7 +134,7 @@
         <property key="enable-symbols" value="true"/>
         <property key="enable-unroll-loops" value="false"/>
         <property key="extra-include-directories"
-                  value="..\src\Common;..\src\include;.;..\src\RotaryEncoder"/>
+                  value="..\src\Common;..\src\include;.;..\src\RotaryEncoder;..\src\pid"/>
         <property key="isolate-each-function" value="false"/>
         <property key="optimization-level" value="1"/>
         <property key="post-instruction-scheduling" value="default"/>
@@ -237,7 +244,7 @@
         <property key="programoptions.preservedataflash.ranges"
                   value="${programoptions.preservedataflash.ranges}"/>
         <property key="programoptions.preserveeeprom" value="true"/>
-        <property key="programoptions.preserveeeprom.ranges" value="0x7ffc00-0x7fffff"/>
+        <property key="programoptions.preserveeeprom.ranges" value="7ffc00-7fffff"/>
         <property key="programoptions.preserveprogram.ranges" value=""/>
         <property key="programoptions.preserveprogramrange" value="false"/>
         <property key="programoptions.preserveuserid" value="true"/>

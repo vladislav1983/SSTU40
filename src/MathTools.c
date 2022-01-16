@@ -459,7 +459,8 @@ S16 udiv_32(_IN_ U32 u32Divident_long, _IN_ U16 u16Divider)
 Q15 fmul_q15(Q15 qA, Q15 qB)
 {
 	Q15 res;
-	
+	BOOL DSP_Mode = CORCONbits.IF;
+  
 	CORCONbits.IF = 0; // Put DSP Engine in fractional mode
 	
 	// clear it out.. this is special since it's 40 bits long...
@@ -470,10 +471,11 @@ Q15 fmul_q15(Q15 qA, Q15 qB)
 	// get value out and put into fractional C.
 	res = __builtin_sacr(DSP_ACCU_A, 0);
 	
-	//CORCONbits.IF = 1;  // Put DSP Engine in Integer mode
+	CORCONbits.IF = DSP_Mode;  // Restore DSP Engine mode
 
 	return(res);
 }
+
 //==========================================================================================================
 // Parameters: (S16)A, (S16)B
 //
@@ -485,8 +487,9 @@ Q15 fmul_q15(Q15 qA, Q15 qB)
 S32 mul_s16(S16 A, S16 B)
 {
 	S32 res;
-	
-	//CORCONbits.IF = 1; // Put DSP Engine in Integer mode
+	BOOL DSP_Mode = CORCONbits.IF;
+  
+	CORCONbits.IF = 1; // Put DSP Engine in Integer mode
 	
 	// clear it out.. this is special since it's 40 bits long...
 	//DSP_ACCU_A = __builtin_clr(); 	// clear out accumulator
@@ -496,7 +499,7 @@ S32 mul_s16(S16 A, S16 B)
 	// get value out 
 	//res = (S32)__builtin_sacr(DSP_ACCU_A, 0);
 
-	//CORCONbits.IF = 0;
+	CORCONbits.IF = DSP_Mode;  // Restore DSP Engine mode
 
 	return(res);
 }
@@ -509,13 +512,13 @@ S32 mul_s16(S16 A, S16 B)
 //==========================================================================================================
 void DSP_Engine_Init(void)
 {
-	CORCONbits.PSV  	= 1;	// Turn On PSV Space visibility
-	CORCONbits.SATA 	= 1;	// DSP Accumulator A in Super Saturation Mode 
-	CORCONbits.SATB 	= 1;	// DSP Accumulator B in Super Saturation Mode 
-	CORCONbits.ACCSAT 	= 1;	// Accumulator Saturation Mode Select bit -> 1 = 9.31 saturation (super saturation)		
-	CORCONbits.IF	 	= 0;	// DSP In Fractional Mode
-	CORCONbits.RND      = 1;	// 1 = Biased (conventional) rounding enabled
-	//CORCONbits.US	 	= 0;	// DSP In Signed Mode
+	CORCONbits.PSV  	= 1;       // Turn On PSV Space visibility
+	CORCONbits.SATA 	= 1;       // DSP Accumulator A in Super Saturation Mode 
+	CORCONbits.SATB 	= 1;       // DSP Accumulator B in Super Saturation Mode 
+	CORCONbits.ACCSAT 	= 1;     // Accumulator Saturation Mode Select bit -> 1 = 9.31 saturation (super saturation)		
+	CORCONbits.IF	 	= 1;         // DSP In Integer mode
+	CORCONbits.RND      = 1;     // 1 = Biased (conventional) rounding enabled
+	CORCONbits.US	 	= 0;       // DSP In Signed Mode
 }
 //==========================================================================================================
 //                                                                            
