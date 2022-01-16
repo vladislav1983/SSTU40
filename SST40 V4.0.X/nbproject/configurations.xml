@@ -78,7 +78,7 @@
         <targetDevice>dsPIC30F4013</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>PICkit3PlatformTool</platformTool>
+        <platformTool>noID</platformTool>
         <languageToolchain>C30</languageToolchain>
         <languageToolchainVersion>3_31</languageToolchainVersion>
         <platform>3</platform>

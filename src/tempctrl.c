@@ -328,25 +328,27 @@ S16 PID(U16 Ref, U16 Fbk)
   
   (tp)->err = Ref - Fbk;
   
-  tp->Integral += (tp->err) * ((U32)(tc->tmpctrl_samp_time + 1uL) * 10uL * 32768uL);  // sample time is in grid half periods 
+  tp->Integral += _builtin_mulsu(tp->err, (tc->tmpctrl_samp_time + 1uL) * 10uL);  
   
-  if(     tp->Integral >  (tp)->Ki_Limit) tp->Integral =  (tp)->Ki_Limit;
-  else if(tp->Integral < -(tp)->Ki_Limit) tp->Integral = -(tp)->Ki_Limit;
+  if(     tp->Integral >  (S32)(tp->Ki_Limit)) 
+    tp->Integral =  (S32)(tp->Ki_Limit);
+  else if(tp->Integral < -(S32)(tp->Ki_Limit)) 
+    tp->Integral = -(S32)(tp->Ki_Limit);
   
-  tp->Derivative = _builtin_divsd( ((S32)(tp->err - tp->err_prev) * 32768L), ((tc->tmpctrl_samp_time + 1uL) * 10uL) );
+  tp->Derivative = _builtin_divsd(_builtin_mulsu((tp->err - tp->err_prev), tp->Kd), ((tc->tmpctrl_samp_time + 1uL) * 10uL) );
   
-  (tp)->P_term = fmul_q15((Q15)tp->Kp, (Q15)tp->err);
-  (tp)->I_term = fmul_q15((Q15)tp->Ki, (Q15)tp->Integral);
-  (tp)->D_term = fmul_q15((Q15)tp->Kd, (Q15)tp->Derivative);
+  (tp)->P_term = fmul_q15(tp->Kp, tp->err);
+  (tp)->I_term = _builtin_mulus(tp->Ki, tp->Integral);
+  (tp)->D_term = _builtin_divsd(tp->Derivative, 32768);
   
   (tp)->err_prev = (tp)->err;
-  PidOut = (tp)->P_term + (tp)->I_term + (tp)->D_term;
+  PidOut = (tp)->P_term + _builtin_divsd((tp)->I_term + (tp)->D_term, 1000);
   
   // output saturation
-  if(PidOut > (S16)(tc)->tmpctrl_samp_time) 
-    PidOut = (S16)(tc)->tmpctrl_samp_time;
-  else if(PidOut < -(S16)((tc)->tmpctrl_samp_time)) 
-    PidOut = -(S16)((tc)->tmpctrl_samp_time);
+  if(PidOut > (S32)(tc->tmpctrl_samp_time)) 
+    PidOut = (S32)(tc->tmpctrl_samp_time);
+  else if(PidOut < -(S32)(tc->tmpctrl_samp_time)) 
+    PidOut = -(S32)(tc->tmpctrl_samp_time);
   
   tp->Out = PidOut;
   
