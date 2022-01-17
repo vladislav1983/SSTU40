@@ -45,6 +45,17 @@ typedef struct
   U32 Out_Filt_coeff;
   S32 Fbk_Filt;
   S32 Out_Filt;
+  // pid control period
+  S32 error_filt;
+  S8 out_sign;
+  U16 OutCnt_pos;
+  U16 OutCnt_neg;
+  S16 OutPeriod;
+  // pid control overshoot
+  U16 OutOvershootTmp_pos;
+  U16 OutOvershootTmp_neg;
+  S16 Overshoot_pos;
+  S16 Overshoot_neg;
 }tPidData;
 
 typedef struct
@@ -71,6 +82,15 @@ typedef struct
     .Out_Filt_coeff = 0, \
     .Fbk_Filt = 0,  \
     .Out_Filt = 0, \
+    .error_filt = 0, \
+    .out_sign = 0, \
+    .OutCnt_pos = 0, \
+    .OutCnt_neg = 0, \
+    .OutPeriod = -1, \
+    .OutOvershootTmp_pos = 0, \
+    .OutOvershootTmp_neg = 0, \
+    .Overshoot_pos = -1, \
+    .Overshoot_neg = -1, \
   }; \
   const tPidInstance PID_##x = {&PID_##x##_Cfg, &PID_##x##_Data}; \
   tPidCfg PID_##x##_Cfg =

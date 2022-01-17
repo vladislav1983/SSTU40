@@ -45,6 +45,7 @@
 -----------------------------------------------------------------------------*/
 static S32 pid_limit(S32 x, S32 min, S32 max);
 static tPidIntegral pid_satlimit(S32 x, S32 min, S32 max);
+static void pid_calc_period_and_overshoot(const tPidInstance * instance, S16 Ref, S16 Fbk, U16 SampleTime_ms);
 
 /*-----------------------------------------------------------------------------
     DEFINITION OF GLOBAL FUNCTIONS
@@ -91,7 +92,7 @@ S16 PidProcess(const tPidInstance * instance, S16 Ref, S16 Fbk, U16 SampleTime_m
       {
         if(((U32)instance->cfg->Fbk_Filt_ms + SampleTime_ms) < 65535)
         {
-          instance->data->Fbk_Filt_coeff = _builtin_divsd( ((S32)65536L * SampleTime_ms), (instance->cfg->Fbk_Filt_ms));
+          instance->data->Fbk_Filt_coeff = _builtin_divud( ((U32)65536ul * SampleTime_ms), (instance->cfg->Fbk_Filt_ms));
           instance->data->Fbk_Filt_ms = instance->cfg->Fbk_Filt_ms;
         }
         else
@@ -127,12 +128,16 @@ S16 PidProcess(const tPidInstance * instance, S16 Ref, S16 Fbk, U16 SampleTime_m
       // output filtration coefficient calculation
       if(instance->cfg->Out_Filt_ms != instance->data->Out_Filt_ms)
       {
-        instance->data->Out_Filt_coeff = _builtin_divsd( ((S32)65536L * SampleTime_ms), (instance->cfg->Out_Filt_ms));
+        instance->data->Out_Filt_coeff = _builtin_divud( ((U32)65536ul * SampleTime_ms), (instance->cfg->Out_Filt_ms));
         instance->data->Out_Filt_ms = instance->cfg->Out_Filt_ms;
       }
       // output filtration
       instance->data->Out_Filt += (S32)((S32)instance->data->Out_Filt_coeff * (S16)(PidOut - Hi(instance->data->Out_Filt)));
       PidOut_Filt = Hi(instance->data->Out_Filt);
+      // calculate period and overshoot 
+#if PID_DEBUG != 0
+      pid_calc_period_and_overshoot(instance, Ref, Fbk, SampleTime_ms);
+#endif
       // save prev. error
       instance->data->error_filt_prev = error_filt;
     }
@@ -162,6 +167,17 @@ void PidReset(const tPidInstance * instance)
     instance->data->error_filt_prev = 0;
     instance->data->Fbk_Filt = 0;
     instance->data->Out_Filt = 0;
+#if PID_DEBUG != 0
+    instance->data->OutOvershootTmp_neg = 0;
+    instance->data->OutOvershootTmp_pos = 0;
+    instance->data->Overshoot_neg = -1;
+    instance->data->Overshoot_pos = -1;
+    instance->data->OutPeriod = -1;
+    instance->data->OutCnt_neg = 0;
+    instance->data->OutCnt_pos = 0;
+    instance->data->out_sign = 0;
+    instance->data->error_filt = 0;
+#endif
   }
   else
   {
@@ -212,6 +228,71 @@ static tPidIntegral pid_satlimit(S32 x, S32 min, S32 max)
    
   return PidIntegral;
 }
+
+#if PID_DEBUG != 0
+//- **************************************************************************
+//! \brief 
+//- **************************************************************************
+static void pid_calc_period_and_overshoot(const tPidInstance * instance, S16 Ref, S16 Fbk, U16 SampleTime_ms)
+{
+  S16 error;
+  S16 error_filt;
+  S16 sign_prev = 0;
+
+  error = Ref - Fbk;
+
+  // 10 seconds filtration of error
+  instance->data->error_filt += (S32)(_builtin_divud( ((S32)65536L * SampleTime_ms), 10000u) * (S16)(error - Hi(instance->data->error_filt )));
+  error_filt = Hi(instance->data->error_filt);
+  
+  if(error > error_filt)
+  {
+    instance->data->OutCnt_pos++;
+    sign_prev = instance->data->out_sign;
+    instance->data->out_sign = 1;
+    
+    // overshoot calculation
+    if(error > instance->data->OutOvershootTmp_pos)
+    {
+      instance->data->OutOvershootTmp_pos = error;
+    }
+  }
+  else if(error < error_filt)
+  {
+    instance->data->OutCnt_neg++;
+    sign_prev = instance->data->out_sign;
+    instance->data->out_sign = -1;
+    
+    // overshoot calculation
+    if(error < instance->data->OutOvershootTmp_neg)
+    {
+      instance->data->OutOvershootTmp_neg = error;
+    }
+  }
+
+  if(instance->data->out_sign == 1 && sign_prev == -1)
+  {
+    if(instance->data->OutCnt_pos > 0 && instance->data->OutCnt_neg > 0)
+    {
+      instance->data->OutPeriod = (instance->data->OutCnt_pos + instance->data->OutCnt_neg) * SampleTime_ms;
+      instance->data->Overshoot_pos = instance->data->OutOvershootTmp_pos;
+      instance->data->Overshoot_neg = instance->data->OutOvershootTmp_neg;
+    }
+    else
+    {
+      instance->data->OutPeriod = -1;
+      instance->data->Overshoot_pos = -1;
+      instance->data->Overshoot_neg = -1; 
+    }
+    
+    instance->data->OutCnt_pos = 1;
+    instance->data->OutCnt_neg = 0;
+    instance->data->OutOvershootTmp_pos = 0;
+    instance->data->OutOvershootTmp_neg = 0;
+  }
+}
+#endif
+
 /*-----------------------------------------------------------------------------
     END OF MODULE
 -----------------------------------------------------------------------------*/

@@ -210,6 +210,9 @@ const iolist iopar[] =
   {285,"Out Filter [ms]",             (U16 *)&PID_C245ToolPid_Cfg.Out_Filt_ms,   (U16 *)&PID_C245ToolPid_Cfg.Out_Filt_ms,   2,"unr",    10000,        (1+2*110), 0,0,    1 },
   {286,"Integral",                    (S32 *)&PID_C245ToolPid_Data.Integral.x,   (S32 *)&PID_C245ToolPid_Data.Integral.x,   4,"srr",    2147483647, -2147483647, 5,0,    1 },
   {287,"Integral Saturation",         (S8  *)&PID_C245ToolPid_Data.Integral.sat, (S8  *)&PID_C245ToolPid_Data.Integral.sat, 1,"srr",    1,                   -1, 5,0,    1 },
+  {288,"Output Period [ms]",          (S16 *)&PID_C245ToolPid_Data.OutPeriod,    (S16 *)&PID_C245ToolPid_Data.OutPeriod,    2,"srr",    32767ul,         -32768, 5,0,    1 },
+  {289,"Overshoot_pos",               (S16 *)&PID_C245ToolPid_Data.Overshoot_pos,(S16 *)&PID_C245ToolPid_Data.Overshoot_pos,2,"srr",    32767ul,         -32768, 5,0,    1 },
+  {290,"Overshoot_neg",               (S16 *)&PID_C245ToolPid_Data.Overshoot_neg,(S16 *)&PID_C245ToolPid_Data.Overshoot_neg,2,"srr",    32767ul,         -32768, 5,0,    1 },
   /* TASK */  
   {900,"Task1 Time",                  (U32 *)&Ttime.Task1Time_us,                (U32 *)&Ttime.Task1Time_us,               4,"urr",    0xFFFFFFFFul,  0, 5,0, 1000 },
   {901,"Task2 Time",                  (U32 *)&Ttime.Task2Time_us,                (U32 *)&Ttime.Task2Time_us,               4,"urr",    0xFFFFFFFFul,  0, 5,0, 1000 },
