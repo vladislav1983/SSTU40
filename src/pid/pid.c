@@ -53,7 +53,7 @@ static tPidIntegral pid_satlimit(S32 x, S32 min, S32 max);
 //! \brief 
 // evaluate process gain:
 // Kp = deltaT / deltaHalfHeatPeriods - get it from identification component
-// Kp is around 50 / 10 = 5 adc_deg/half_period - 2.5 deg/hp
+// Kp is around 40 / 20 = 2 adc_deg/half_period - 1 deg/hp
 // selecting p term scaling:
 // Max input = 1024 adc (temperature)
 // Max output = 10 half periods fo sample time = 100ms
@@ -79,7 +79,7 @@ S16 PidProcess(const tPidInstance * instance, S16 Ref, S16 Fbk, U16 SampleTime_m
     if(   instance->cfg->P_term_scale < 16
        && instance->cfg->Fbk_Filt_ms >= (2 * SampleTime_ms)
        && instance->cfg->Out_Filt_ms >= (2 * SampleTime_ms)
-       && (SampleTime_ms > 100 && SampleTime_ms < 32768) )
+       && (SampleTime_ms > 50 && SampleTime_ms < 32768) )
     {
       S32 P_term_min  = -(S32)((U32)1uL << (15u + instance->cfg->P_term_scale));
       S32 P_term_max  =  (S32)((U32)1uL << (15u + instance->cfg->P_term_scale)) - 1uL;
