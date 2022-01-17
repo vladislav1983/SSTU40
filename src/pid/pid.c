@@ -8,9 +8,8 @@
     INCLUDE FILES
 -----------------------------------------------------------------------------*/
 #include "pid.h"
-#include "pid_cfg.h"
+#include "pid_types.h"
 #include "MathTools.h"
-
 
 /*-----------------------------------------------------------------------------
     DEFINITION OF GLOBAL VARIABLES
@@ -45,7 +44,9 @@
 -----------------------------------------------------------------------------*/
 static S32 pid_limit(S32 x, S32 min, S32 max);
 static tPidIntegral pid_satlimit(S32 x, S32 min, S32 max);
+#if PID_DEBUG != 0
 static void pid_calc_period_and_overshoot(const tPidInstance * instance, S16 Ref, S16 Fbk, U16 SampleTime_ms);
+#endif
 
 /*-----------------------------------------------------------------------------
     DEFINITION OF GLOBAL FUNCTIONS

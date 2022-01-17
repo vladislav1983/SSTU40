@@ -1,4 +1,4 @@
-Microchip Technology Inc, vv3_31 (A) 0-UAœŠj2
+Microchip Technology Inc, vv3_31 (A) esêìb[6
 
 Tool Name:
   c:\program files (x86)\microchip\mplab c30\bin\bin\..\bin/pic30-elf-ld.exe
@@ -133,9 +133,9 @@ Data EEPROM Memory  [Origin = 0x7ffc00, Length = 0x400]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-_032c6f5061e5898e         0x7ffc00               0x1fe           0x1fe  (510)
-_032c70e061e5898e         0x7ffdfe               0x1fe           0x1fe  (510)
-_032c715061e5898e         0x7ffffc                 0x2             0x2  (2)
+_03316f5061e59370         0x7ffc00               0x1fe           0x1fe  (510)
+_033170e061e59370         0x7ffdfe               0x1fe           0x1fe  (510)
+_0331715061e59370         0x7ffffc                 0x2             0x2  (2)
 
                         Total data EEPROM used (bytes):          0x3fe  (1022) 99%
 
@@ -810,31 +810,31 @@ userdata
  .debug_abbrev    0x001ce3        0x146 build/default/production/_ext/659864977/pid.o
  .debug_abbrev    0x001e29         0x83 build/default/production/_ext/659864977/pid_cfg.o
 
-.debug_line       0x000000       0x547d
+.debug_line       0x000000       0x5495
  *(.debug_line)
  .debug_line      0x000000        0x4e5 build/default/production/_ext/1360937237/DigitalIO.o
  .debug_line      0x0004e5        0x313 build/default/production/_ext/1360937237/main.o
  .debug_line      0x0007f8        0x29f build/default/production/_ext/1360937237/systmr.o
  .debug_line      0x000a97        0x41c build/default/production/_ext/1360937237/task.o
  .debug_line      0x000eb3        0x836 build/default/production/_ext/1360937237/sirem.o
- .debug_line      0x0016e9        0x1e5 build/default/production/_ext/1360937237/PARLIST.o
- .debug_line      0x0018ce        0x32b build/default/production/_ext/1360937237/trace.o
- .debug_line      0x001bf9        0x36e build/default/production/_ext/1360937237/vuart.o
- .debug_line      0x001f67        0x1c0 build/default/production/_ext/1360937237/vADC.o
- .debug_line      0x002127        0xa89 build/default/production/_ext/1360937237/statemachine.o
- .debug_line      0x002bb0        0x3ed build/default/production/_ext/1360937237/LCD.o
- .debug_line      0x002f9d        0x6cf build/default/production/_ext/1360937237/eeprom.o
- .debug_line      0x00366c        0x15e build/default/production/_ext/1360937237/triac_control.o
- .debug_line      0x0037ca        0x461 build/default/production/_ext/1360937237/IDENT.o
- .debug_line      0x003c2b        0x6f7 build/default/production/_ext/1360937237/tempctrl.o
- .debug_line      0x004322        0x2b2 build/default/production/_ext/1360937237/measure.o
- .debug_line      0x0045d4        0x13a build/default/production/_ext/1360937237/traps.o
- .debug_line      0x00470e        0x2a8 build/default/production/_ext/2014683921/RotaryEncoder.o
- .debug_line      0x0049b6        0x1bc build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
- .debug_line      0x004b72         0xea build/default/production/_ext/1360937237/Crc16.o
- .debug_line      0x004c5c        0x3ad build/default/production/_ext/1360937237/MathTools.o
- .debug_line      0x005009        0x3ad build/default/production/_ext/659864977/pid.o
- .debug_line      0x0053b6         0xc7 build/default/production/_ext/659864977/pid_cfg.o
+ .debug_line      0x0016e9        0x1eb build/default/production/_ext/1360937237/PARLIST.o
+ .debug_line      0x0018d4        0x32b build/default/production/_ext/1360937237/trace.o
+ .debug_line      0x001bff        0x36e build/default/production/_ext/1360937237/vuart.o
+ .debug_line      0x001f6d        0x1c0 build/default/production/_ext/1360937237/vADC.o
+ .debug_line      0x00212d        0xa89 build/default/production/_ext/1360937237/statemachine.o
+ .debug_line      0x002bb6        0x3ed build/default/production/_ext/1360937237/LCD.o
+ .debug_line      0x002fa3        0x6cf build/default/production/_ext/1360937237/eeprom.o
+ .debug_line      0x003672        0x15e build/default/production/_ext/1360937237/triac_control.o
+ .debug_line      0x0037d0        0x461 build/default/production/_ext/1360937237/IDENT.o
+ .debug_line      0x003c31        0x6fd build/default/production/_ext/1360937237/tempctrl.o
+ .debug_line      0x00432e        0x2b2 build/default/production/_ext/1360937237/measure.o
+ .debug_line      0x0045e0        0x13a build/default/production/_ext/1360937237/traps.o
+ .debug_line      0x00471a        0x2a8 build/default/production/_ext/2014683921/RotaryEncoder.o
+ .debug_line      0x0049c2        0x1bc build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
+ .debug_line      0x004b7e         0xea build/default/production/_ext/1360937237/Crc16.o
+ .debug_line      0x004c68        0x3ad build/default/production/_ext/1360937237/MathTools.o
+ .debug_line      0x005015        0x3b3 build/default/production/_ext/659864977/pid.o
+ .debug_line      0x0053c8         0xcd build/default/production/_ext/659864977/pid_cfg.o
 
 .debug_frame      0x000000        0x9da
  *(.debug_frame)
@@ -2157,21 +2157,21 @@ __c30_signature
  .init.delay32    0x005856         0x1c c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libpic30-elf.a(delay32.eo)
                   0x005856                  ___delay32
 
-_032c6f5061e5898e
+_03316f5061e59370
                     0xfc00        0x1fe load address 0x7ffc00  
- _032c6f5061e5898e
+ _03316f5061e59370
                     0xfc00        0x1fe build/default/production/_ext/1360937237/eeprom.o
                     0xfc00                  _EEdata_Bank1
 
-_032c70e061e5898e
+_033170e061e59370
                     0xfdfe        0x1fe load address 0x7ffdfe  
- _032c70e061e5898e
+ _033170e061e59370
                     0xfdfe        0x1fe build/default/production/_ext/1360937237/eeprom.o
                     0xfdfe                  _EEdata_Bank2
 
-_032c715061e5898e
+_0331715061e59370
                     0xfffc          0x2 load address 0x7ffffc  
- _032c715061e5898e
+ _0331715061e59370
                     0xfffc          0x2 build/default/production/_ext/1360937237/eeprom.o
                     0xfffc                  _EEdata_ValidFlag
 

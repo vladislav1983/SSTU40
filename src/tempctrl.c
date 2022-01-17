@@ -27,7 +27,7 @@
 #include "triac_control.h"
 #include "ident.h"
 #include "MathTools.h"
-#include "pid_cfg.h"
+#include "pid.h"
 
 /*----------------------------------------------------------------------------*/
 /* Local constants                                                            */

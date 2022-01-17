@@ -39,6 +39,7 @@
         <itemPath>../src/pid/pid.h</itemPath>
         <itemPath>../src/pid/pid_cfg.c</itemPath>
         <itemPath>../src/pid/pid_cfg.h</itemPath>
+        <itemPath>../src/pid/pid_types.h</itemPath>
       </logicalFolder>
       <itemPath>../src/DigitalIO.c</itemPath>
       <itemPath>../src/main.c</itemPath>
