@@ -158,7 +158,7 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
       
       (tc)->T_delta = T_Ref_local - (tc)->T_fbk;
       
-      (tc)->heat_periods = PidProcess(PID_INSTANCE(C245ToolPid), T_Ref_local, (tc)->T_fbk, (tc)->tmpctrl_samp_time,(tc)->tmpctrl_samp_time);
+      (tc)->heat_periods = PidProcess(PID_INSTANCE(C245ToolPid), T_Ref_local, (tc)->T_fbk, (((tc)->tmpctrl_samp_time + 1u) * 10u),(tc)->tmpctrl_samp_time);
       (tc)->heat_periods_debug = (tc)->heat_periods;
       CalcThermalTimeConstant(T_Ref_local, (tc)->T_fbk, cFalse);
       

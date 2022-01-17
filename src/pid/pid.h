@@ -32,15 +32,19 @@ typedef struct
  U16 Kd2;
  U8  P_term_scale;
  U16 Fbk_Filt_ms;
+ U16 Out_Filt_ms;
 }tPidCfg;
 
 typedef struct
 {
   tPidIntegral Integral;
-  S32 Fbk_filt;
   S16 error_filt_prev;
   U16 Fbk_Filt_ms;
-  U32 Fbk_Filt;
+  U32 Fbk_Filt_coeff;
+  U16 Out_Filt_ms;
+  U32 Out_Filt_coeff;
+  S32 Fbk_Filt;
+  S32 Out_Filt;
 }tPidData;
 
 typedef struct
@@ -61,9 +65,12 @@ typedef struct
   { \
     .Integral = {0}, \
     .error_filt_prev = 0, \
-    .Fbk_filt = 0,  \
     .Fbk_Filt_ms = 0, \
+    .Fbk_Filt_coeff = 0, \
+    .Out_Filt_ms = 0, \
+    .Out_Filt_coeff = 0, \
     .Fbk_Filt = 0,  \
+    .Out_Filt = 0, \
   }; \
   const tPidInstance PID_##x = {&PID_##x##_Cfg, &PID_##x##_Data}; \
   tPidCfg PID_##x##_Cfg =

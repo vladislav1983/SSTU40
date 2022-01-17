@@ -141,6 +141,7 @@
         <property key="pre-instruction-scheduling" value="default"/>
         <property key="preprocessor-macros" value="ROTARY_ENCODER_USED"/>
         <property key="scalar-model" value="default"/>
+        <appendMe value="-save-temps"/>
       </C30>
       <C30-AS>
         <property key="assembler-symbols" value=""/>
@@ -174,7 +175,7 @@
         <property key="extra-lib-directories" value="..;."/>
         <property key="general-code-protect" value="no_code_protect"/>
         <property key="general-write-protect" value="no_write_protect"/>
-        <property key="generate-cross-reference-file" value="false"/>
+        <property key="generate-cross-reference-file" value="true"/>
         <property key="heap-size" value=""/>
         <property key="input-libraries" value=""/>
         <property key="linker-symbols" value=""/>
