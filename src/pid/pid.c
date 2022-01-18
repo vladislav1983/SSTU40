@@ -81,7 +81,8 @@ S16 PidProcess(const tPidInstance * instance, S16 Ref, S16 Fbk, U16 SampleTime_m
     if(   instance->cfg->P_term_scale < 16
        && instance->cfg->Fbk_Filt_ms >= (2 * SampleTime_ms)
        && instance->cfg->Out_Filt_ms >= (2 * SampleTime_ms)
-       && (SampleTime_ms > 50 && SampleTime_ms < 32768) )
+       && (SampleTime_ms > 50 && SampleTime_ms < 20000) 
+       && PidMax > 0)
     {
       S32 P_term_min  = -(S32)((U32)1uL << (15u + instance->cfg->P_term_scale));
       S32 P_term_max  =  (S32)((U32)1uL << (15u + instance->cfg->P_term_scale)) - 1uL;
@@ -108,7 +109,7 @@ S16 PidProcess(const tPidInstance * instance, S16 Ref, S16 Fbk, U16 SampleTime_m
       error = Ref = Fbk;
       
       // integration
-      if((error < 0 && instance->data->Integral.sat < 0) || (error > 0 && instance->data->Integral.sat > 0))
+      if((error < 0 && instance->data->Integral.sat == PidSat_neg) || (error > 0 && instance->data->Integral.sat == PidSat_pos))
       {
         // do nothing if there is saturation, and error is in the same direction;
       }
@@ -164,7 +165,7 @@ void PidReset(const tPidInstance * instance)
   if(NULL!= instance)
   {
     instance->data->Integral.x = 0;
-    instance->data->Integral.sat = 0;
+    instance->data->Integral.sat = PidSat_none;
     instance->data->error_filt_prev = 0;
     instance->data->Fbk_Filt = 0;
     instance->data->Out_Filt = 0;
@@ -214,17 +215,17 @@ static tPidIntegral pid_satlimit(S32 x, S32 min, S32 max)
   if(x > min && x < max)
   {
     PidIntegral.x = x;
-    PidIntegral.sat = 0;
+    PidIntegral.sat = PidSat_none;
   }
   else if(x < min)
   {
     PidIntegral.x = min;
-    PidIntegral.sat = -1;
+    PidIntegral.sat = PidSat_neg;
   }
   else if(x > max)
   {
     PidIntegral.x = max;
-    PidIntegral.sat = 1;
+    PidIntegral.sat = PidSat_pos;
   }
    
   return PidIntegral;

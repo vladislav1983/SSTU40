@@ -26,24 +26,24 @@
 //==========================================================================================================
 // Constant data                                                              
 //==========================================================================================================
-#define 	SINTAB_LEN			512 	// 2^9
-#define		SIN_LEN_DIV			9
+#define SINTAB_LEN          512 	// 2^9
+#define	SIN_LEN_DIV         9
 
-#define 	SQRT_TAB_LEN		512 	// 2^9
-#define 	SQRT_LEN_DIV		9
+#define SQRT_TAB_LEN        512 	// 2^9
+#define SQRT_LEN_DIV        9
 
-#define 	ATAN_TABLE_LEN		129
-#define 	DEC_PLACES_BEFORE 	7     	/* Corresponds to 128 values */
-#define 	DEC_PLACES_AFTER 	(15-DEC_PLACES_BEFORE)
+#define ATAN_TABLE_LEN      129
+#define DEC_PLACES_BEFORE 	7     	/* Corresponds to 128 values */
+#define DEC_PLACES_AFTER    (15-DEC_PLACES_BEFORE)
 
 /*
 *	arithmetic constants
 *	====================
 */
-#define PI				3.141592654
-#define SQRT2			1.414213562
-#define SQRT3			1.732050808
-#define SQRT3OV2		0.866025403
+#define PI          3.1415926535897932384626433832795
+#define SQRT2       1.4142135623730950488016887242097
+#define SQRT3       1.7320508075688772935274463415059
+#define SQRT3OV2		0.86602540378443864676372317075294
 /*
 *	Fractional arithmetic constants
 *	================================
@@ -203,6 +203,7 @@ extern U32 pow_16(S16 x, U16 n);
 extern S16 sdiv_32(_IN_ S32 s32Divident_long, _IN_ S16 s16Divider);
 extern S16 udiv_32(_IN_ U32 u32Divident_long, _IN_ U16 u16Divider);
 extern Q15 fmul_q15(Q15 qA, Q15 qB);
+extern U16 fmul_qu15(U16 quA, U16 quB);
 extern S32 mul_s16(S16 A, S16 B);
 extern void DSP_Engine_Init(void);
 

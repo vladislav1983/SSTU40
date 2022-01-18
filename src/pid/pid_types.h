@@ -18,10 +18,17 @@
 /*-----------------------------------------------------------------------------
   DEFINITION OF GLOBAL TYPES
 -----------------------------------------------------------------------------*/
+typedef enum
+{
+  PidSat_none = 0,
+  PidSat_pos =  1,
+  PidSat_neg = -1,
+}tPidSat;
+
 typedef struct
 {
   S32 x;
-  S8  sat;
+  tPidSat  sat;
 }tPidIntegral;
 
 typedef struct 
@@ -48,7 +55,7 @@ typedef struct
 #if PID_DEBUG != 0
   // pid control period
   S32 error_filt;
-  S8 out_sign;
+  S8  out_sign;
   U16 OutCnt_pos;
   U16 OutCnt_neg;
   S16 OutPeriod;
