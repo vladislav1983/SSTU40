@@ -66,6 +66,17 @@ struct cartridge_ident
   U16 ident_periods;
   BOOL triac_state;
   teIdentToolType IdentTool;
+  
+  // https://controlguru.com/design-and-tuning-recipe-must-consider-nonlinear-process-behavior/
+  // Kp describes the direction PV moves and how far it travels in response to a change in CO.
+  // Kp = delta PV / delta CO = delta Temp / ident periods * 1000
+  S16 Kp;
+  // Dead time is the delay from when a controller output (CO) signal is issued until when the measured process variable (PV) first begins to respond.
+  U32 Dt_us;
+  U16 Dt_counter;
+  U16 Dt_Temp_in;
+  // In general terms, the time constant, Tp, describes how fast the PV moves in response to a change in the CO.
+  U32 Tp_us;
 
   /* PARAMS STORED IN EEPROM */
   U16 ident_deltaT_trip_low;

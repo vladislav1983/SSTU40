@@ -69,6 +69,11 @@ struct cartridge_ident ident =
   .IdentCurrent_filt = 0,
   .Ident_current = 0,
   .IdentTool = eIdentTool_Unknown,
+  .Kp = 0,
+  .Dt_counter = 0,
+  .Dt_Temp_in = 0,
+  .Dt_us = 0,
+  .Tp_us = 0,
   // stored in nvm
   .ident_deltaT_trip_low  = 15,
   .ident_deltaT_trip_high = 50,
@@ -136,6 +141,11 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
       id->Ident_current = 0;
       id->IdentTool = eIdentTool_Unknown;
       id->ident_periods = id->ident_periods_load;
+      id->Kp = 0;
+      id->Dt_counter = 0;
+      id->Dt_Temp_in = 0;
+      id->Dt_us = 0;
+      id->Tp_us = 0;
     }
     break;
     /*---------------------------------------------------*/
@@ -223,10 +233,17 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
       id->U_Temp_filt += (S32)( (S32)((65.536 * (F32)T1_TIME) / TEMP_FILT_ms) * (S16)(ADC_Temp_Ch - Hi(id->U_Temp_filt)) );
       #undef TEMP_FILT_ms
       U16 U_Temp_max = Hi(id->U_Temp_filt);
+      
+      if(id->Dt_counter == 0)
+      {
+        id->Dt_Temp_in = ADC_Temp_Ch;
+        id->Dt_counter = IDENT_MEASURE_AFTER_TIME;
+      }
 
       if(U_Temp_max > id->U_Temp_out)
       {
         id->U_Temp_out = U_Temp_max;
+        id->Dt_counter++;
       }
       else
       {
@@ -265,6 +282,23 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
       {
         id->IdentTool = eIdentTool_Unknown;
       }
+      
+      // process gain calculation
+      if(id->ident_periods_load > 0)
+      {
+        id->Kp = ( ((S16)id->U_Temp_out - (S16)id->Dt_Temp_in) * (S32)1000uL) / id->ident_periods_load;
+      }
+      else
+      {
+        _set_param_limit_error(1);
+      }
+      // process dead time calculation
+      id->Dt_us = ((U32)id->Dt_counter * 100u);
+      
+      // process time constant calculation
+      // tp = 0.63 * dt. ident_periods_load is in half periods (10ms)
+      // (U16)(0.63 * 100.0) * (U16)( (id->ident_periods_load * ((10u * 1000u) / 100u) ) + ( id->Dt_counter * (100u / 100u) ) );
+      id->Tp_us = (U32)(63u) * (U16)( (id->ident_periods_load * 100u) + id->Dt_counter );
       
       result = 1; //quit ident
     }

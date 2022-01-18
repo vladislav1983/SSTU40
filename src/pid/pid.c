@@ -53,6 +53,7 @@ static void pid_calc_period_and_overshoot(const tPidInstance * instance, S16 Ref
 -----------------------------------------------------------------------------*/
 //- **************************************************************************
 //! \brief 
+// https://www.embeddedrelated.com/showarticle/123.php
 // evaluate process gain:
 // Kp = deltaT / deltaHalfHeatPeriods - get it from identification component
 // Kp is around 40 / 20 = 2 adc_deg/half_period - 1 deg/hp
