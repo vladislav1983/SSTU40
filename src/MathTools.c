@@ -477,6 +477,34 @@ Q15 fmul_q15(Q15 qA, Q15 qB)
 }
 
 //==========================================================================================================
+// Parameters: A, B
+//
+// Return: Fractional Product ->(A*B) >> 15. Note that CORCONbits.IF = 0 -> DSP Fractional Operations
+//
+// Description: Unsigned Fractional Multiplication
+//              Note that DSP Engine accumulators are in super-saturation mode !!!
+//==========================================================================================================
+U16 fmul_qu15(U16 quA, U16 quB)
+{
+  U16 res;
+	BOOL DSP_Mode = CORCONbits.IF;
+  
+	CORCONbits.IF = 0; // Put DSP Engine in fractional mode
+	
+	// clear it out.. this is special since it's 40 bits long...
+	DSP_ACCU_A = __builtin_clr(); 	// clear out accumulator
+	
+	// do the multiplication.. DSP_ACCU_A stored in 40 bit accumulator
+	DSP_ACCU_A = __builtin_mpy(quA, quB, NULL, NULL, 0, NULL, NULL, 0);
+	// get value out and put into fractional C.
+	res = __builtin_sacr(DSP_ACCU_A, 0);
+	
+	CORCONbits.IF = DSP_Mode;  // Restore DSP Engine mode
+
+	return(res);
+}
+
+//==========================================================================================================
 // Parameters: (S16)A, (S16)B
 //
 // Return: (S32)Long = A*B

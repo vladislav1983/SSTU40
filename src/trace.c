@@ -106,7 +106,6 @@ const S16 volatile *trace_source_addr[]  =
   /* 6 */   (S16*)&T_ctrl.heat_periods,
   /* 7 */   (S16*)&T_ctrl.tmpctrl_triac_state,
 
-  /* 8 */   (S16*)&ident.ident_mes_temp,
   /* 9 */   (S16*)&ident.U_Temp_in,
   /* 10 */  (S16*)&ident.U_Temp_out,
   /* 11 */  (S16*)&ident.triac_state,

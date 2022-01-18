@@ -20,26 +20,22 @@
 /*----------------------------------------------------------------------------*/
 /* IDENT PARAMETERS */
 #define IDENT_PERIODS_MAX               100u
-#define IDENT_MEASURE_AFTER_TIME        1000u      /* Measure after zero cross in task1 time periods 100 ms*/
-#define IDENT_AVERAGE_TIME              32u       /* Average time in task1 periods */
-#define IDENT_AVERAGE_DIVIDER           5u        /* Average divider  */
-#define IDENT_WAIT_AFTER_ZC_TIME        60u
-#define IDENT_MES_TIME_AFTER_SHOT       15000    //1.5s in task1 periods for temp update
-#define IDENT_TRACE_START_BEFORE_SHOT   1u
-#define IDENT_TRACE_START_AFTER_SHOT    2u
-
-#define SQRT_OF_TWO                     1.4142f
+#define IDENT_MEASURE_AFTER_TIME        (5E3   / T1_TIME) /* 5000 us*/
+#define IDENT_AVERAGE_TIME              (500E3 / T1_TIME) /* 500ms Average time in task1 periods */
 
 /* IDENT MODES OF OPERATION */
-#define IDENT_INIT                      1
-#define IDENT_WAIT_MES_TEMP             2
-#define IDENT_MES_TEMP                  3
-#define IDENT_TRIAC_FIRE                4
-#define IDENT_WAIT_STATE                5
-#define IDENT_WAIT_AFTER_ZC             6
-#define IDENT_MES_TEMP_2                7
-#define IDENT_EXIT                      8
-#define IDENT_UNDEFINED_STATE           100
+typedef enum
+{
+  IDENT_INIT = 1,
+  IDENT_WAIT_MES_TEMP,
+  IDENT_MES_TEMP,
+  IDENT_TRIAC_FIRE,
+  IDENT_WAIT_AFTER_ZC,
+  IDENT_MES_TEMP_2,
+  IDENT_EXIT,
+  IDENT_UNDEFINED_STATE
+}tIdentMode;
+
 
 /*----------------------------------------------------------------------------*/
 /* Exported type                                                              */
@@ -57,30 +53,24 @@ typedef enum
 /*----------------------------------------------------------------------------*/
 struct cartridge_ident
 {
-  U32 IdentCurrent_Sum;
-  U16 IdentCurrent_Sum_Counter;
+  S32 IdentCurrent_filt;
   U16 U_Temp_in;
   U16 U_Temp_out;
-  U16 U_Temp_max;
   S16 U_Temp_delta;
-  U16 U_Temp_sum;
+  S32 U_Temp_filt;
   U16 Ident_peak_current;
   U16 Ident_current;
-  U16 IDENT_Peak_Power;
   U16 IDENT_MAX_RMS_Power;
   
-
-  U16 ident_mode;
+  tIdentMode ident_mode;
   U16 ident_periods;
   BOOL triac_state;
-  BOOL ident_mes_temp;
   teIdentToolType IdentTool;
 
   /* PARAMS STORED IN EEPROM */
   U16 ident_deltaT_trip_low;
   U16 ident_deltaT_trip_high;
   U16 ident_current_trip;
-  U16 ident_trace_start;
   U16 ident_periods_load;
   U16 ident_cur_2210_low;
   U16 ident_cur_2210_high;
