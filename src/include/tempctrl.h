@@ -91,11 +91,6 @@ struct temperature_control
  BOOL tmpctrl_triac_state;
  
  U16 T_Ref_User_tmp;            // Temporary User Temperature.
- U16 ThermalPeriod;
- U16 ThermalPeriod_pos;
- U16 ThermalPeriod_neg;
- S16 ThermalOvershoot_pos;
- S16 ThermalOvershoot_neg;
  
  /* PARAMS STORED IN EEPROM */
  U16 tmpctrl_samp_time;    // Temperature control sample time in line halfperiods.

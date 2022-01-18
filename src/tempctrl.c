@@ -104,7 +104,6 @@ extern volatile U16 ERR_CONTROL;
 /*----------------------------------------------------------------------------*/
 U16 tmpctrl_timer_t1(U16 cmd, U16 cons);
 static S16 bresenham_distribution(tDistributionCmd cmd, U16 distribution_periods_y, U16 max_periods_x);
-static void CalcThermalTimeConstant(U16 Ref, U16 Fbk, BOOL reset);
 
 /******************************************************************************/
 /******************************************************************************/
@@ -160,7 +159,6 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
       
       (tc)->heat_periods = PidProcess(PID_INSTANCE(C245ToolPid), T_Ref_local, (tc)->T_fbk, (((tc)->tmpctrl_samp_time + 1u) * 10u),(tc)->tmpctrl_samp_time);
       (tc)->heat_periods_debug = (tc)->heat_periods;
-      CalcThermalTimeConstant(T_Ref_local, (tc)->T_fbk, cFalse);
       
       if((tc)->heat_periods > 0)
       {
@@ -299,89 +297,7 @@ void Reset_TMPCTRL(void)
   
   (tc)->T_fbk = 0;
   (tc)->heat_periods = 0;
-  CalcThermalTimeConstant(0, 0, cTrue);
   PidReset(PID_INSTANCE(C245ToolPid));
-}
-
-/*************************************************************************************************/
-/*
- * Purpose: 
- * Input: 
- * Output: 
- * Note: 
- */
-/*************************************************************************************************/
-static void CalcThermalTimeConstant(U16 Ref, U16 Fbk, BOOL reset)
-{
-  struct temperature_control *tc = _get_T_ctrl();
-  
-  static S16 sign = 0;
-  static S16 sign_prev = 0;
-  static U16 Fbk_prev = 0;
-  static S16 ThermalOvershoot_pos_loc = 0;
-  static S16 ThermalOvershoot_neg_loc = 0;
-  S16 error;
-  
-  if(reset != cFalse)
-  {
-    tc->ThermalPeriod_pos = 0;
-    tc->ThermalPeriod_neg = 0;
-    sign = 0;
-    sign_prev = 0;
-    Fbk_prev = 0;
-    tc->ThermalPeriod = 0;
-    tc->ThermalOvershoot_pos = 0;
-    tc->ThermalOvershoot_neg = 0;
-  }
-  
-  if(Fbk > Fbk_prev)
-  {
-    tc->ThermalPeriod_pos++;
-    sign_prev = sign;
-    sign = 1;
-  }
-  else if(Fbk < Fbk_prev)
-  {
-    tc->ThermalPeriod_neg++;
-    sign_prev = sign;
-    sign = -1;
-  }
-  
-  Fbk_prev = Fbk;
-  
-  error = Fbk - Ref;
-  
-  if(error > 0)
-  {
-    if(error > ThermalOvershoot_pos_loc)
-    {
-      ThermalOvershoot_pos_loc = error;
-    }
-  }
-  else if(error < 0)
-  {
-    if(error < ThermalOvershoot_neg_loc)
-    {
-      ThermalOvershoot_neg_loc = error;
-    }
-  }
-  
-  if(sign == 1 && sign_prev == -1)
-  {
-    if(tc->ThermalPeriod_pos > 0 && tc->ThermalPeriod_neg > 0)
-    {
-      tc->ThermalPeriod = (tc->ThermalPeriod_pos + tc->ThermalPeriod_neg) * (tc->tmpctrl_samp_time * 10u);
-    }
-    
-    tc->ThermalOvershoot_pos = ThermalOvershoot_pos_loc;
-    tc->ThermalOvershoot_neg = ThermalOvershoot_neg_loc;
-    
-    tc->ThermalPeriod_pos = 0;
-    tc->ThermalPeriod_neg = 0;
-    ThermalOvershoot_pos_loc = 0;
-    ThermalOvershoot_neg_loc = 0;
-    sign_prev = sign;
-  }
 }
 
 /******************************************************************************/
