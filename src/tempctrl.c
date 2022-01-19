@@ -127,46 +127,44 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
   {
     /*---------------------------------------------------*/    
     case TMPCTRL_INIT:
+      tc->T_sum = 0;
+      tmpctrl_timer_t1(TMPCTRL_TIMER_LOAD, TMPCTRL_AVERAGE_TIME);
       tmpctrl_mainstate = TMPCTRL_MEASURE_TEMP;
       break;
-      /*---------------------------------------------------*/    
+      /*---------------------------------------------------*/
     case TMPCTRL_MEASURE_TEMP:
-      tmpctrl_timer_t1(TMPCTRL_TIMER_COUNT, 0);
-      
-      if(tmpctrl_timer_t1(TMPCTRL_TIMER_READ, 0))
+      if(tmpctrl_timer_t1(TMPCTRL_TIMER_COUNT, 0))
       {
-        (tc)->T_sum += Temp_ADC_Ch;
+        tc->T_sum += Temp_ADC_Ch;
       }
       else
       {
-        (tc)->T_fbk = (tc)->T_sum >> TMPCTRL_AVERAGE_DIVIDER;
-        (tc)->T_sum = 0;
+        tc->T_fbk = tc->T_sum >> TMPCTRL_AVERAGE_DIVIDER;
+        tc->T_fbk = ((U32)tc->T_fbk * tc->T_cal_gain) >> 10;
+        tc->T_fbk += (S16)tc->T_cal_offset;
         
-        (tc)->T_fbk = ((U32)(tc)->T_fbk * (tc)->T_cal_gain) >> 10;
-        (tc)->T_fbk += (S16)tc->T_cal_offset;
-        
-        if((tc)->T_fbk > MAX_TEMP_TRIP_RAW) _set_overtemperature_error(1); /* if overtemperature --> trip error */
+        if(tc->T_fbk > MAX_TEMP_TRIP_RAW) _set_overtemperature_error(1); /* if overtemperature --> trip error */
         tmpctrl_mainstate = TMPCTRL_CONTROL;
       }
       break;
       /*---------------------------------------------------*/
     case TMPCTRL_CONTROL:
       
-      if(sleep_flag) T_Ref_local = (tc)->T_Ref_User_Sleep << 1;
-      else T_Ref_local = (tc)->T_Ref_User << 1;
+      if(sleep_flag) T_Ref_local = tc->T_Ref_User_Sleep << 1;
+      else T_Ref_local = tc->T_Ref_User << 1;
       
-      (tc)->T_delta = T_Ref_local - (tc)->T_fbk;
+      tc->T_delta = T_Ref_local - tc->T_fbk;
       
-      (tc)->heat_periods = PidProcess(PID_INSTANCE(C245ToolPid), T_Ref_local, (tc)->T_fbk, (((tc)->tmpctrl_samp_time + 1u) * 10u),(tc)->tmpctrl_samp_time);
-      (tc)->heat_periods_debug = (tc)->heat_periods;
+      tc->heat_periods = PidProcess(PID_INSTANCE(C245ToolPid), T_Ref_local, tc->T_fbk, ((tc->tmpctrl_samp_time + 1u) * 10u),tc->tmpctrl_samp_time);
+      tc->heat_periods_debug = tc->heat_periods;
       
-      if((tc)->heat_periods > 0)
+      if(tc->heat_periods > 0)
       {
         S16 brs_output = 0;
         
         if(FALSE != tc->bresenham_distribution)
         {
-           brs_output = bresenham_distribution(eLoadDustibutionPeriods, (tc)->heat_periods , (tc)->tmpctrl_samp_time);
+           brs_output = bresenham_distribution(eLoadDustibutionPeriods, tc->heat_periods , tc->tmpctrl_samp_time);
         }
         
         if(-1 != brs_output)
@@ -174,24 +172,24 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
           tmpctrl_mainstate = TMPCTRL_TRIAC_FIRE;
           pinLED = 1;
           
-          if((tc)->heat_periods >= (tc)->tmpctrl_samp_time)
+          if(tc->heat_periods >= tc->tmpctrl_samp_time)
           {
             // immediately measure temp
             tmpctrl_timer_t1(TMPCTRL_TIMER_LOAD, TMPCTRL_WAIT_AFTER_ZC_TIME);
             tmpctrl_nextstate = TMPCTRL_WAIT_AFTER_ZC_STATE;
-            (tc)->per_counter = 0;
+            tc->per_counter = 0;
           }
           else
           {
             // wait for sample time
-            tmpctrl_nextstate = TMPCTRL_WAIT_X_PERIODS_STATE;  
-            (tc)->per_counter = (tc)->heat_periods;
+            tmpctrl_nextstate = TMPCTRL_WAIT_X_PERIODS_STATE;
+            tc->per_counter = tc->heat_periods;
           }
         }
       }
       else
       {
-        (tc)->per_counter = 0;
+        tc->per_counter = 0;
         tmpctrl_mainstate = TMPCTRL_WAIT_X_PERIODS_STATE;
       }
       break;
@@ -207,17 +205,17 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
           {
             _FIRE_TRIAC();
             pinLED = 1; 
-            (tc)->tmpctrl_triac_state = 1;
+            tc->tmpctrl_triac_state = 1;
           }
           else if(0 == output)
           {
-            (tc)->tmpctrl_triac_state = 0;
+            tc->tmpctrl_triac_state = 0;
             pinLED = 0; 
           }
           else if(-1 == output)
           {
             tmpctrl_mainstate = tmpctrl_nextstate;
-            (tc)->tmpctrl_triac_state = 0;
+            tc->tmpctrl_triac_state = 0;
             pinLED = 0; 
           }
           else
@@ -227,19 +225,19 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
         }
         else
         {
-          if((tc)->heat_periods)
+          if(tc->heat_periods)
           {
-            (tc)->heat_periods--;
+            tc->heat_periods--;
             if(_drive_enabled())
             {
               _FIRE_TRIAC();
-              (tc)->tmpctrl_triac_state = 1;
+              tc->tmpctrl_triac_state = 1;
             }
           }
           else
           {
             tmpctrl_mainstate = tmpctrl_nextstate;
-            (tc)->tmpctrl_triac_state = 0;
+            tc->tmpctrl_triac_state = 0;
             pinLED = 0;    
           }
         }     
@@ -261,11 +259,11 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
     case TMPCTRL_WAIT_X_PERIODS_STATE:
       if(_zero_cross())
       {
-        (tc)->per_counter++;
+        tc->per_counter++;
         
-        if((tc)->per_counter >= (tc)->tmpctrl_samp_time)
+        if(tc->per_counter >= tc->tmpctrl_samp_time)
         {
-          (tc)->per_counter = 0;
+          tc->per_counter = 0;
           tmpctrl_timer_t1(TMPCTRL_TIMER_LOAD, TMPCTRL_WAIT_AFTER_ZC_TIME);
           tmpctrl_mainstate = TMPCTRL_WAIT_AFTER_ZC_STATE;
         }
@@ -293,10 +291,10 @@ void Reset_TMPCTRL(void)
   struct temperature_control *tc = _get_T_ctrl();
   
   tmpctrl_mainstate = TMPCTRL_WAIT_X_PERIODS_STATE;
-  (tc)->per_counter = (tc)->tmpctrl_samp_time;
+  tc->per_counter = tc->tmpctrl_samp_time;
   
-  (tc)->T_fbk = 0;
-  (tc)->heat_periods = 0;
+  tc->T_fbk = 0;
+  tc->heat_periods = 0;
   PidReset(PID_INSTANCE(C245ToolPid));
 }
 
@@ -473,8 +471,11 @@ U16 tmpctrl_timer_t1(U16 cmd, U16 cons)
 {         
   static U16 count;
   
-  if(cmd==1)    count = cons;    
-  else if(count && cmd==2) count--;
+  if(cmd == TMPCTRL_TIMER_LOAD)
+    count = cons;    
+  else if((count > 0) && (cmd == TMPCTRL_TIMER_COUNT)) 
+    count--;
+  
   return(count);
 }
 

@@ -101,7 +101,7 @@ void IF_SysTmr3_Init(void)
   T3CONbits.TSIDL = TMR3_STOP_IN_IDLE_MODE;
   T3CONbits.TGATE = TMR3_GATED_TIME_ACUMULATION_ENABLE;
   T3CONbits.TCKPS = TMR3_PRESCALER;
-  T3CONbits.TCS     = TMR3_CLOCK_SOURCE;
+  T3CONbits.TCS   = TMR3_CLOCK_SOURCE;
   
   TMR3 = 0;
   PR3 = (U16)((((cFCY_MHZ) * (cTMR3_ISR_TICK_us)) / (cTMR3_PRESC)) - 1ul);     // set period1 register
