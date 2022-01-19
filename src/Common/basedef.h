@@ -38,7 +38,6 @@ typedef unsigned long long      U64;
 
 typedef signed char             S8;
 typedef signed int              S16;
-typedef signed int              Q15;
 typedef signed long             S32;
 
 typedef float                   F32;
@@ -52,6 +51,7 @@ typedef U8                      BOOL;
 
 typedef U8                      HRESULT;
 #define S_OK                    ((HRESULT)0x00u)
+#define E_OK                    ((HRESULT)0x00u)
 #define S_FALSE                 ((HRESULT)0x01u)
 #define E_INVALIDARG            ((HRESULT)0x02u)
 #define E_FAIL                  ((HRESULT)0x03u)
@@ -101,6 +101,8 @@ typedef U8                      HRESULT;
     #error "CPU settings not match!"
 #endif
 #include "libpic30.h"
+#include "dsp.h"
+#include "libq.h"
 #include "DigitalIoCfg.h"
 
 #endif /* BASEDEF_H */

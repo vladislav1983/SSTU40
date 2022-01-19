@@ -26,7 +26,7 @@
 #include "sirem.h"
 #include "parlist.h"
 #include "vuart.h"
-#include "vADC.h"
+#include "adc_drv.h"
 #include "measure.h"
 #include "tempctrl.h"
 #include "ident.h"
@@ -35,7 +35,7 @@
 /*----------------------------------------------------------------------------*/
 /* EXPORTED from other modules                                                */
 /*----------------------------------------------------------------------------*/
-extern U16 U16Adc[AdcCh_Cnt];
+extern tAdcBuffer AdcBuffer;
 extern const iolist iopar[];
 
 /* MEASURE.C */
@@ -96,19 +96,17 @@ const S16 volatile *trace_source_addr[]  =
   /* 0 */    (S16*)NULL,
   /*******************************************************/
   /* MEASURE.C */
-  /* 1 */   (S16*)&ADC[AdcCh_0],
-  /* 2 */   (S16*)&ADC[AdcCh_1],
+  /* 1 */   (S16*)&AdcBuffer[ADC_CH0_TEMP],
+  /* 2 */   (S16*)&AdcBuffer[ADC_CH1_CURRENT],
 
   /* 3 */   (S16*)&mes1.Current,
   /* 4 */   (S16*)&mes1.line_phase,
 
   /* 5 */   (S16*)&T_ctrl.T_fbk,
   /* 6 */   (S16*)&T_ctrl.heat_periods,
-  /* 7 */   (S16*)&T_ctrl.tmpctrl_triac_state,
 
   /* 9 */   (S16*)&ident.U_Temp_in,
   /* 10 */  (S16*)&ident.U_Temp_out,
-  /* 11 */  (S16*)&ident.triac_state,
   /* 12 */  (S16*)&ERR_CONTROL,
   /* 13 */  (S16*)&mes2.Line_period_zc_T2,
   /* 14 */  (S16*)&ident.ident_periods,

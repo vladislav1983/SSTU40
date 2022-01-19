@@ -12,9 +12,9 @@
 /* Body Identification                                                        */
 /*----------------------------------------------------------------------------*/
 #ifdef TRIAC_CONTROL_C
-    #error "!!! FileName ID. It should be Unique !!!"
+#error "!!! FileName ID. It should be Unique !!!"
 #else
-    #define TRIAC_CONTROL_C
+#define TRIAC_CONTROL_C
 #endif
 /*----------------------------------------------------------------------------*/
 /* Included files to resolve specific definitions in this file                */
@@ -68,35 +68,32 @@ static U16 triac_fire_counter;
 
 /******************************************************************************/
 /*
-* Purpose: Triac fire counter . Triac fire pulse. Called at end of every task1 period 
-* Input:
-* Output:
-*/
+ * Purpose: Triac fire counter . Triac fire pulse. Called at end of every task1 period 
+ * Input:
+ * Output:
+ */
 /******************************************************************************/
 void triac_fire_timer(void)
 {
-    if(_TRIAC())    //if triack fired
+  if(_TRIAC())    //if triack fired
+  {
+    if(!--triac_fire_counter) 
     {
-        if(!--triac_fire_counter) 
-        {
-            _TRIAC_OFF();
-            triac_fire_counter = TRIAC_FIRE_TIME;
-        }
+      _TRIAC_OFF();
+      triac_fire_counter = TRIAC_FIRE_TIME;
     }
-
+  }
 }
 /******************************************************************************/
 /*
-* Purpose: 
-* Input:
-* Output:
-*/
+ * Purpose: 
+ * Input:
+ * Output:
+ */
 /******************************************************************************/
 void triac_control_init(void)
 {
-
-    triac_fire_counter = TRIAC_FIRE_TIME;
-
+  triac_fire_counter = TRIAC_FIRE_TIME;
 }
 /******************************************************************************/
 /******************************************************************************/

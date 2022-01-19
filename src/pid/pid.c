@@ -58,13 +58,13 @@ static void pid_calc_period_and_overshoot(const tPidInstance * instance, S16 Ref
 // Kp = deltaT / deltaHalfHeatPeriods - get it from identification component
 // Kp is around 40 / 20 = 2 adc_deg/half_period - 1 deg/hp
 // selecting p term scaling:
-// Max input = 1024 adc (temperature)
+// Max input = 32768 adc (temperature)
 // Max output = 10 half periods fo sample time = 100ms
-// select gain = 10 -> 1 adc_deg = 10 half periods
-// (1 * K)>> 4 = 10 -> K = 160
+// select gain = 10 -> 16 adc (1 deg) = 10 half periods
+// (16 * K)>> 8 = 10 -> K = 160
 // for gain = 1 to 10 -> output = 1 to 10 half periods
-// (1 * K) >> 4 = 1 -> K = 16
-// (1 * K) >> 4 = 10 -> K = 160
+// (16 * K) >> 8 = 1 -> K = 16
+// (16 * K) >> 8 = 10 -> K = 160
 // full range overflow check T e max , Gain = max
 // (1024 * 160) >> 4 = 10240
 //- **************************************************************************

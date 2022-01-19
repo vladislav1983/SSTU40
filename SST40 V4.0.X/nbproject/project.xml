@@ -19,6 +19,7 @@
                 <sourceRootElem>..\src\Common</sourceRootElem>
                 <sourceRootElem>..\src\include</sourceRootElem>
                 <sourceRootElem>../src/pid</sourceRootElem>
+                <sourceRootElem>../src/peripheral_30F_24H_33F</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

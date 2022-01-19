@@ -25,6 +25,7 @@
 #define DC_OFFSET_UPPER_LIMIT         520
 #define DC_OFFSET_LOWER_LIMIT         490
 
+#define CURRENT_MAX_mA                25000u
 /*----------------------------------------------------------------------------*/
 /* Exported type                                                              */
 /*----------------------------------------------------------------------------*/
@@ -60,9 +61,7 @@ struct mes_par
 
   /* PARAMS STORED IN EEPROM */
   U16 Transformer_Voltage;
-  U16 Curr_conv_coeff;
   U16 Overcurr_limit;
-  U16 ZC_det_timeout;
 };
 
 /* Macros and extern struct definitions */
@@ -88,8 +87,8 @@ extern struct mes_par mespar;
 void zero_cross(void);
 void zero_cross_II(void);
 void measure_T2(void);
-BOOL DC_Autotunning(U16 ADC_Current_Channel);
-void Current_measure(U16 ADC_Currnet_Raw);
+BOOL DC_Autotunning(void);
+void Current_measure(void);
 void measure_init(void);
 
 #endif /* MEASURE_H */

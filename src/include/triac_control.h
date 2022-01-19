@@ -38,16 +38,23 @@
 /*----------------------------------------------------------------------------*/
 /* Triac control */
 #define _FIRE_TRIAC()(                    \
-{                                        \
-    pinTH_FIRE = 1;                        \
-    _set_triac_state(1);                \
+{                                         \
+  if(_drive_enabled())                    \
+  {                                       \
+    pinTH_FIRE = 1;                       \
+    _set_triac_state(1);                  \
     _set_over_prot_triac_state(1);        \
+  }                                       \
+  else                                    \
+  {                                       \
+    _TRIAC_OFF();                         \
+  }                                       \
 })    
 
 #define _TRIAC_OFF()(                    \
 {                                        \
-    pinTH_FIRE = 0;                        \
-    _set_triac_state(0);                \
+    pinTH_FIRE = 0;                      \
+    _set_triac_state(0);                 \
 })    
 
 #define _TRIAC()                        pinTH_FIRE

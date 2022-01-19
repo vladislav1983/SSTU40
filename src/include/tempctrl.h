@@ -23,13 +23,14 @@
 /* Temp = Uadc*delta / Ktemp , where
  *  Uadc - adc output raw code
  *  Temp - actual temerature of cartridge
- *  delta - adc step transfer (Vref / 1024) = 5/1024 = 4,88mV
  *  Ktemp - thermocouple and it's amplifier transfer function 
  *  Kth - thermocouple transfer function 26,85uV / C
- *  Gain - amplifier gain = 372,44 ==> Ktemp = Kth * Gain = 26,85uV * 372,44 = 10mV / C
+ *  Gain - amplifier gain = 372,44 ==> Ktemp = Kth * Gain = 26uV * 372,44 = 9,7mV / C
+ *  Temp Max = 5000mV / 9,7mV = 512deg 
  * 
  *  Now we calc actual Temp of cartridge
- *  Temp = Uadc*delta / Ktemp = Uadc * 4,88 / 10 = Uadc / 2,048
+ *  Temp Max = 32768 = 500 degC
+ *  K = 32768 / 500 = 65.536
  *
  * After that bullshits...
  * ------------------------------------------------------------------------------
@@ -37,43 +38,36 @@
  * ------------------------------------------------------------------------------
  */
 /******************************************************************************/
+#define TEMP_MAX                          (512.0)
+#define TEMP_SCALE                        (32768.0 / TEMP_MAX)
 
-#define RAW_TEMP_MAX                      900u        //Max temp = 450C = 1000 -> adc raw value
-#define RAW_TEMP_MIN                      200u        //min temp = 100C =  200 -> adc raw value
-#define MIN_TEMP_TRIP_RAW                 10u
-#define MAX_TEMP_TRIP_RAW                 900u
+#define TEMP_TRIP                         460u
+#define TEMP_USER_MAX                     450u
+#define TEMP_USER_MIN                     100u
+#define TEMP_DISPLAY_ACCURACY_DIV         1u
+#define TEMP_DISPLAY_ACCURACY             (1u << TEMP_DISPLAY_ACCURACY_DIV)
 
-#define TEMP_USER_MAX                     450
-#define TEMP_USER_MIN                     100
-#define TEMP_DISPLAY_ACCURACY             2u
+#define TEMP_USER_MAX_Q15                 Q15((F32)TEMP_USER_MAX / TEMP_MAX)
+#define TEMP_USER_MIN_Q15                 Q15((F32)TEMP_USER_MIN / TEMP_MAX)
+#define TEMP_TRIP_Q15                     Q15((F32)TEMP_TRIP / TEMP_MAX)
+#define TEMP_1DEG_Q15                     Q15(1.0 / TEMP_MAX)
 
 /* TMPCTRL Parameters */
-#define TMPCTRL_WAIT_AFTER_ZC_TIME        50u
-#define TMPCTRL_AVERAGE_DIVIDER           5u
-#define TMPCTRL_AVERAGE_TIME              (1u << TMPCTRL_AVERAGE_DIVIDER)
+#define TMPCTRL_WAIT_AFTER_ZC_TIME        MS_TO_T1_TICKS(5ul)
+#define TMPCTRL_AVERAGE_DIV               5u
+#define TMPCTRL_AVERAGE_TIME              (1u << TMPCTRL_AVERAGE_DIV)
 #define TMPCTRL_MAX_HEAT_PERIODS          32u
 
-#define TMPCTRL_TIMER_READ                0
-#define TMPCTRL_TIMER_LOAD                1
-#define TMPCTRL_TIMER_COUNT               2
-
-
-/* TEMPERATURE CONTROL STATES */
-#define TMPCTRL_INIT                      1
-#define TMPCTRL_MEASURE_TEMP              2
-#define TMPCTRL_CONTROL                   3
-#define TMPCTRL_TRIAC_FIRE                4
-#define TMPCTRL_WAIT_AFTER_ZC_STATE       5
-#define TMPCTRL_WAIT_X_PERIODS_STATE      6
-#define TMPCTRL_UNDEF_STATE               100
+#define TMPCTRL_CAL_GAIN_SCALE_DIV        10u
+#define TMPCTRL_CAL_GAIN_SCALE            (1u << TMPCTRL_CAL_GAIN_SCALE_DIV)
 
 /*----------------------------------------------------------------------------*/
 /* Exported type                                                              */
 /*----------------------------------------------------------------------------*/
 typedef enum
 {
- eTEMP_USER,
-   eTEMP_USER_SLEEP,
+  eTEMP_USER,
+  eTEMP_USER_SLEEP,
 }teTemperatureUsers;
 
 /*----------------------------------------------------------------------------*/
@@ -82,13 +76,11 @@ typedef enum
 struct temperature_control
 {
  U16 T_fbk;
- S16 T_delta;
+ U16 T_PID_fbk;
  U16 T_sum;
  U16 per_counter;
  S16 heat_periods;
  S16 heat_periods_debug;
- 
- BOOL tmpctrl_triac_state;
  
  U16 T_Ref_User_tmp;            // Temporary User Temperature.
  
@@ -139,7 +131,7 @@ extern struct overload_protection overprot;
 /*----------------------------------------------------------------------------*/
 /* Exported functions                                                            */
 /*----------------------------------------------------------------------------*/
-void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag);
+void temp_ctrl(BOOL sleep_flag);
 U16 Get_Temp_Actual(void);
 void Set_User_Temp(teTemperatureUsers user);
 void Reset_User_Temp(teTemperatureUsers user);

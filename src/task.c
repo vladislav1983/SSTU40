@@ -28,12 +28,12 @@
 #include "statemachine.h"
 #include "trace.h"
 #include "DigitalIO.h"
-#include "vADC.h"
 #include "tempctrl.h"
 #include "vuart.h"
 #if defined(ROTARY_ENCODER_USED) 
 #include "RotaryEncoder.h"
 #endif
+#include "adc_drv.h"
 
 /*----------------------------------------------------------------------------*/
 /* Local constants                                                            */
@@ -99,11 +99,11 @@ void __attribute__((__interrupt__,no_auto_psv)) _T3Interrupt(void)
     
     zero_cross_II();
     
-    ADC_Sample_Read();
+    AdcReadAllChannels();
     
     state_machine_T1();
     
-    Current_measure(ADC[AdcCh_1]);
+    Current_measure();
     
     cart_stat_det();
     

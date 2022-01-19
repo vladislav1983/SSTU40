@@ -28,30 +28,55 @@
 #include "ident.h"
 #include "MathTools.h"
 #include "pid.h"
+#include "adc_drv.h"
+#include "MathTools.h"
 
 /*----------------------------------------------------------------------------*/
 /* Local constants                                                            */
 /*----------------------------------------------------------------------------*/
-
+#define TMPCTRL_TIMER_READ                0
+#define TMPCTRL_TIMER_LOAD                1
+#define TMPCTRL_TIMER_COUNT               2
 
 /*----------------------------------------------------------------------------*/
 /* Local macros                                                               */
 /*----------------------------------------------------------------------------*/
+#define TEMP_TO_Q15(X)                    (_Q15)(Q15( (F32)(X) / TEMP_MAX))
 
 /*----------------------------------------------------------------------------*/
 /* Local types                                                                */
 /*----------------------------------------------------------------------------*/
 typedef enum
 {
-  eLoadDustibutionPeriods, 
+  eLoadDustibutionPeriods = 0, 
   eRunDistribution,
 }tDistributionCmd;
+
+typedef enum 
+{
+  eDistr_OFF = 0,
+  eDistr_ON  = 1,
+  eDistr_FINISH = 255
+}tDistributionResult;
+
+/* TEMPERATURE CONTROL STATES */
+typedef enum
+{
+  TMPCTRL_INIT = 0,
+  TMPCTRL_MEASURE_TEMP,
+  TMPCTRL_CONTROL,
+  TMPCTRL_TRIAC_FIRE,
+  TMPCTRL_WAIT_AFTER_ZC_STATE,
+  TMPCTRL_WAIT_X_PERIODS_STATE,
+  TMPCTRL_UNDEF_STATE
+}tTmpCtrlState;
 
 /*----------------------------------------------------------------------------*/
 /* Local data                                                                 */
 /*----------------------------------------------------------------------------*/
-U16 tmpctrl_mainstate;
-U16 tmpctrl_nextstate;
+tTmpCtrlState tmpctrl_mainstate = TMPCTRL_INIT;
+tTmpCtrlState tmpctrl_nextstate = TMPCTRL_INIT;
+
 /*----------------------------------------------------------------------------*/
 /* Constant local data                                                        */
 /*----------------------------------------------------------------------------*/
@@ -61,20 +86,19 @@ U16 tmpctrl_nextstate;
 /*----------------------------------------------------------------------------*/
 struct temperature_control T_ctrl = 
 {
-  .T_Ref_User = 350,
-  .T_Ref_User_Sleep = 220,
-  .T_Ref_User_tmp = 350,
+  .T_Ref_User = TEMP_TO_Q15(350),
+  .T_Ref_User_Sleep = TEMP_TO_Q15(220),
+  .T_Ref_User_tmp = TEMP_TO_Q15(350),
   .T_cal_gain = 1126,
   .T_cal_offset = 20,
-  .T_delta = 0,
   .T_fbk = 0,
+  .T_PID_fbk = 0,
   .T_sum = 0,
   .bresenham_distribution = 0,
   .heat_periods = 0,
   .heat_periods_debug = 0,
   .per_counter = 0,
   .tmpctrl_samp_time = 10,
-  .tmpctrl_triac_state = 0,
   .T_UserStep = 5,
 };
 
@@ -103,7 +127,7 @@ extern volatile U16 ERR_CONTROL;
 /* Local function prototypes                                                  */
 /*----------------------------------------------------------------------------*/
 U16 tmpctrl_timer_t1(U16 cmd, U16 cons);
-static S16 bresenham_distribution(tDistributionCmd cmd, U16 distribution_periods_y, U16 max_periods_x);
+static tDistributionResult bresenham_distribution(tDistributionCmd cmd, U16 distribution_periods_y, U16 max_periods_x);
 
 /******************************************************************************/
 /******************************************************************************/
@@ -118,56 +142,62 @@ static S16 bresenham_distribution(tDistributionCmd cmd, U16 distribution_periods
  * Output:    none
  */
 /******************************************************************************/
-void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
+void temp_ctrl(BOOL sleep_flag)
 {
   struct temperature_control *tc = _get_T_ctrl();
-  U16 T_Ref_local;
+  const U16 Temp_ADC_Ch = AdcReadChannel(ADC_CH0_TEMP);
   
   switch(tmpctrl_mainstate)
   {
     /*---------------------------------------------------*/    
     case TMPCTRL_INIT:
+    {
       tc->T_sum = 0;
       tmpctrl_timer_t1(TMPCTRL_TIMER_LOAD, TMPCTRL_AVERAGE_TIME);
       tmpctrl_mainstate = TMPCTRL_MEASURE_TEMP;
-      break;
-      /*---------------------------------------------------*/
+    }
+    break;
+    /*---------------------------------------------------*/
     case TMPCTRL_MEASURE_TEMP:
+    {
       if(tmpctrl_timer_t1(TMPCTRL_TIMER_COUNT, 0))
       {
         tc->T_sum += Temp_ADC_Ch;
       }
       else
       {
-        tc->T_fbk = tc->T_sum >> TMPCTRL_AVERAGE_DIVIDER;
-        tc->T_fbk = ((U32)tc->T_fbk * tc->T_cal_gain) >> 10;
-        tc->T_fbk += (S16)tc->T_cal_offset;
+        tc->T_fbk = tc->T_sum >> TMPCTRL_AVERAGE_DIV;
+        tc->T_PID_fbk = ((U32)tc->T_fbk * tc->T_cal_gain) >> TMPCTRL_CAL_GAIN_SCALE_DIV;
+        tc->T_PID_fbk += (S16)tc->T_cal_offset;
         
-        if(tc->T_fbk > MAX_TEMP_TRIP_RAW) _set_overtemperature_error(1); /* if overtemperature --> trip error */
+        if(tc->T_fbk > TEMP_TRIP_Q15) _set_overtemperature_error(1); /* if overtemperature --> trip error */
         tmpctrl_mainstate = TMPCTRL_CONTROL;
       }
-      break;
-      /*---------------------------------------------------*/
+    }
+    break;
+    /*---------------------------------------------------*/
     case TMPCTRL_CONTROL:
+    {
+      U16 T_ref_pid;
       
-      if(sleep_flag) T_Ref_local = tc->T_Ref_User_Sleep << 1;
-      else T_Ref_local = tc->T_Ref_User << 1;
+      if(sleep_flag) 
+        T_ref_pid = tc->T_Ref_User_Sleep;
+      else 
+        T_ref_pid = tc->T_Ref_User;
       
-      tc->T_delta = T_Ref_local - tc->T_fbk;
-      
-      tc->heat_periods = PidProcess(PID_INSTANCE(C245ToolPid), T_Ref_local, tc->T_fbk, ((tc->tmpctrl_samp_time + 1u) * 10u),tc->tmpctrl_samp_time);
+      tc->heat_periods = PidProcess(PID_INSTANCE(C245ToolPid), T_ref_pid, tc->T_PID_fbk, ((tc->tmpctrl_samp_time + 1u) * 10u),tc->tmpctrl_samp_time);
       tc->heat_periods_debug = tc->heat_periods;
       
       if(tc->heat_periods > 0)
       {
-        S16 brs_output = 0;
+        tDistributionResult brs_output = 0;
         
         if(FALSE != tc->bresenham_distribution)
         {
            brs_output = bresenham_distribution(eLoadDustibutionPeriods, tc->heat_periods , tc->tmpctrl_samp_time);
         }
         
-        if(-1 != brs_output)
+        if(eDistr_FINISH != brs_output)
         {
           tmpctrl_mainstate = TMPCTRL_TRIAC_FIRE;
           pinLED = 1;
@@ -192,30 +222,29 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
         tc->per_counter = 0;
         tmpctrl_mainstate = TMPCTRL_WAIT_X_PERIODS_STATE;
       }
-      break;
-      /*---------------------------------------------------*/
+    }
+    break;
+    /*---------------------------------------------------*/
     case TMPCTRL_TRIAC_FIRE:
+    {
       if(_zero_cross())
       {
         if(FALSE != tc->bresenham_distribution)
         {
-          S16 output = bresenham_distribution(eRunDistribution, 0 , 0);
+          tDistributionResult output = bresenham_distribution(eRunDistribution, 0 , 0);
           
-          if(1 == output && _drive_enabled())
+          if(eDistr_ON == output)
           {
             _FIRE_TRIAC();
             pinLED = 1; 
-            tc->tmpctrl_triac_state = 1;
           }
-          else if(0 == output)
+          else if(eDistr_OFF == output)
           {
-            tc->tmpctrl_triac_state = 0;
             pinLED = 0; 
           }
-          else if(-1 == output)
+          else if(eDistr_FINISH == output)
           {
             tmpctrl_mainstate = tmpctrl_nextstate;
-            tc->tmpctrl_triac_state = 0;
             pinLED = 0; 
           }
           else
@@ -228,24 +257,20 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
           if(tc->heat_periods)
           {
             tc->heat_periods--;
-            if(_drive_enabled())
-            {
-              _FIRE_TRIAC();
-              tc->tmpctrl_triac_state = 1;
-            }
+            _FIRE_TRIAC();
           }
           else
           {
             tmpctrl_mainstate = tmpctrl_nextstate;
-            tc->tmpctrl_triac_state = 0;
             pinLED = 0;    
           }
         }     
       }
-        
-      break;
-      /*---------------------------------------------------*/
+    }
+    break;
+    /*---------------------------------------------------*/
     case TMPCTRL_WAIT_AFTER_ZC_STATE:
+    {
       tmpctrl_timer_t1(TMPCTRL_TIMER_COUNT, 0);
       
       if(!tmpctrl_timer_t1(TMPCTRL_TIMER_READ, 0))
@@ -253,10 +278,11 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
         tmpctrl_mainstate = TMPCTRL_MEASURE_TEMP;
         tmpctrl_timer_t1(TMPCTRL_TIMER_LOAD, TMPCTRL_AVERAGE_TIME);
       }
-      
-      break;
-      /*---------------------------------------------------*/
+    } 
+    break;
+    /*---------------------------------------------------*/
     case TMPCTRL_WAIT_X_PERIODS_STATE:
+    {
       if(_zero_cross())
       {
         tc->per_counter++;
@@ -268,9 +294,9 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
           tmpctrl_mainstate = TMPCTRL_WAIT_AFTER_ZC_STATE;
         }
       }    
-      break;
-      /*---------------------------------------------------*/
-      
+    }
+    break;
+    /*---------------------------------------------------*/
     default :   // Undefined state 
       mAssert(cFalse);
       _set_global_system_fault(1);
@@ -294,6 +320,7 @@ void Reset_TMPCTRL(void)
   tc->per_counter = tc->tmpctrl_samp_time;
   
   tc->T_fbk = 0;
+  tc->T_PID_fbk = 0;
   tc->heat_periods = 0;
   PidReset(PID_INSTANCE(C245ToolPid));
 }
@@ -347,7 +374,6 @@ void temp_ctrl_init(void)
   tmpctrl_mainstate = TMPCTRL_INIT;
   T_ctrl.per_counter = 0;
   T_ctrl.T_Ref_User_tmp = T_ctrl.T_Ref_User;
-  
 }
 
 /******************************************************************************/
@@ -360,9 +386,11 @@ void temp_ctrl_init(void)
 U16 Get_Temp_Actual(void)
 {
   U16 tmpp;
-  tmpp = (T_ctrl.T_fbk >> 1) + (TEMP_DISPLAY_ACCURACY / 2);
-  tmpp /= TEMP_DISPLAY_ACCURACY;
-  tmpp *= TEMP_DISPLAY_ACCURACY;
+  U16 T_fbk_tmp = T_ctrl.T_fbk;
+  
+  tmpp = fmul_q15(T_fbk_tmp, TEMP_MAX) + (TEMP_DISPLAY_ACCURACY / 2);
+  tmpp >>= TEMP_DISPLAY_ACCURACY_DIV;
+  tmpp <<= TEMP_DISPLAY_ACCURACY_DIV;
   return(tmpp);
 }
 /******************************************************************************/
@@ -433,7 +461,7 @@ void Inc_User_Temp(void)
 {
   if(T_ctrl.T_Ref_User_tmp < TEMP_USER_MAX)
   {
-    T_ctrl.T_Ref_User_tmp += T_ctrl.T_UserStep;
+    T_ctrl.T_Ref_User_tmp += (TEMP_1DEG_Q15 * T_ctrl.T_UserStep);
   }
 }
 /******************************************************************************/
@@ -447,7 +475,7 @@ void Dec_User_Temp(void)
 {
   if(T_ctrl.T_Ref_User_tmp > TEMP_USER_MIN)
   {
-    T_ctrl.T_Ref_User_tmp -= T_ctrl.T_UserStep;
+    T_ctrl.T_Ref_User_tmp -= (TEMP_1DEG_Q15 * T_ctrl.T_UserStep);
   }
 }
 /******************************************************************************/
@@ -514,14 +542,14 @@ U16 tmpctrl_timer_t1(U16 cmd, U16 cons)
       D = D + 2*ydy
  
  ******************************************************************************/
-static S16 bresenham_distribution(tDistributionCmd cmd, U16 distribution_periods_y, U16 max_periods_x)
+static tDistributionResult bresenham_distribution(tDistributionCmd cmd, U16 distribution_periods_y, U16 max_periods_x)
 {
   static S16 delta_error = 0;
   static U16 periods_counter = 0;
   static S16 dy = 0;
   static S16 dx = 0;
   static S16 bias = 0;
-  S16 output = 0;
+  tDistributionResult output = eDistr_OFF;
   
   if(cmd == eLoadDustibutionPeriods)
   {
@@ -538,7 +566,7 @@ static S16 bresenham_distribution(tDistributionCmd cmd, U16 distribution_periods
     else
     {
       _set_param_limit_error(1);
-      output = -1;
+      output = eDistr_FINISH;
     }
   }
   else if(cmd == eRunDistribution)
@@ -550,7 +578,7 @@ static S16 bresenham_distribution(tDistributionCmd cmd, U16 distribution_periods
         if((periods_counter % 2) == 0) { bias++;  }// even
         else { bias--; }// odd
         
-        output = 1;
+        output = eDistr_ON;
         delta_error -= 2 * dx;
       }
       
@@ -558,14 +586,14 @@ static S16 bresenham_distribution(tDistributionCmd cmd, U16 distribution_periods
     }
     else
     {
-      output = -1;
+      output = eDistr_FINISH;
     }
   }
   else
   {
     mAssert(cFalse);
     _set_global_system_fault(1);
-    output = -1;
+    output = eDistr_FINISH;
   }
   
   return output;

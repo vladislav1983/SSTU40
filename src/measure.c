@@ -21,27 +21,28 @@
 /*----------------------------------------------------------------------------*/
 #include "basedef.h"
 #include "measure.h"
-#include "vADC.h"
 #include "task.h"
 #include "tempctrl.h"
 #include "statemachine.h"
 #include "DigitalIO.h"
 #include "ident.h"
+#include "adc_drv.h"
+#include "MathTools.h"
 
 /*----------------------------------------------------------------------------*/
 /* Local constants                                                            */
 /*----------------------------------------------------------------------------*/
-#define cZC_TIMER_READ          0
-#define cZC_TIMER_START         1
-#define cZC_TIMER_COUNT         2
+#define cZC_TIMER_READ                0
+#define cZC_TIMER_START               1
+#define cZC_TIMER_COUNT               2
 
-// zero cross trip thresholds in TASK1 perios
-#define cZC_TRIP_MAX            MS_TO_T1_TICKS(11.7) // 11.7ms
-#define zZC_TRIP_MIN            MS_TO_T1_TICKS(7.7)  // 7.7ms
+// zero cross trip thresholds in TASK1 periods
+#define cZC_TRIP_MAX                  MS_TO_T1_TICKS(11.7) // 11.7ms
+#define zZC_TRIP_MIN                  MS_TO_T1_TICKS(7.7)  // 7.7ms
 
 // zero cross window times in TASK1 periods
-#define cZC_CLOSED_WINDOW_TIMER MS_TO_T1_TICKS(7.5)                               // zc detection disabled
-#define cZC_OPEN_WINDOW_TIMER   (MS_TO_T1_TICKS(12.5) - cZC_CLOSED_WINDOW_TIMER)  // zc detection enabled
+#define cZC_CLOSED_WINDOW_TIMER       MS_TO_T1_TICKS(7.5)                               // zc detection disabled
+#define cZC_OPEN_WINDOW_TIMER         (MS_TO_T1_TICKS(12.5) - cZC_CLOSED_WINDOW_TIMER)  // zc detection enabled
 
 /*----------------------------------------------------------------------------*/
 /* Local macros                                                               */
@@ -68,9 +69,17 @@ eZeroCrosDetectionState ZeroCrosDetectionState;
 /* Exported data                                                              */
 /*----------------------------------------------------------------------------*/
 /* Data structures declaration */
-struct Mes1 mes1;
-struct Mes2 mes2;
-struct mes_par mespar;
+struct Mes1 mes1 = {0};
+struct Mes2 mes2 = {0};
+struct mes_par mespar  = 
+{
+  .dc_average_counter = DC_AVERAGE_TIME,
+  .dc_sum = 0,
+
+  /* PARAMS STORED IN EEPROM */
+  .Transformer_Voltage =19,
+  .Overcurr_limit = 12000,
+};
 
 /*----------------------------------------------------------------------------*/
 /* Exported data from other modules                                           */
@@ -160,16 +169,17 @@ void zero_cross_II(void)
  * Output:  1: DC autotunning complete  0: DC autotunning in progress
  */
 /******************************************************************************/
-BOOL DC_Autotunning(U16 ADC_Current_Channel)
+BOOL DC_Autotunning(void)
 {
   struct Mes1 *m1 = _get_mes1();
   struct mes_par *mp = _get_mespar();
   BOOL result;
+  const U16 ADC_Currnet_Raw = AdcReadChannel(ADC_CH1_CURRENT);
   
   if((mp)->dc_average_counter)
   {
     
-    (mp)->dc_sum += ADC_Current_Channel;
+    (mp)->dc_sum += ADC_Currnet_Raw;
     (mp)->dc_average_counter--;
     result = 0;
   }
@@ -196,33 +206,31 @@ BOOL DC_Autotunning(U16 ADC_Current_Channel)
  * Rsh = 0.05 Ohm - Current measure resistor
  * G = 2 - Current measure amplifier gain
  * Uoff = 2.5 V - Voltage offset
- * dADC = 5V / 1024 = 4,8828125 mV - ADC conversion coefficient
- * ADC - ADC LSB code
- *
- * Kc = (G * Rsh) / I = 100mV / A  = - Current conversion ratio
- * Digital Kc - DKc = Kc / dADC = 20,48 ADC / A
- * Curr_conv_coeff = [1(A) / DKc (ADC/mA)] = 48,828 mA / LSB - Digital current conversion ratio -> Curr_conv_coeff
- *
- *
- * Current Actual = [(ADC * (Curr_conv_coeff * 1024)) / 1024] - scaled by 1024, Current in mA
- *
+ * U_Rsh_max = 2.5 / 2 = 1.25V
+ * Imax = U_Rsh_max / Rsh 1.25 / 0.05 = 25A
  */
 /******************************************************************************/
-void Current_measure(U16 ADC_Currnet_Raw)
+void Current_measure(void)
 {
   struct Mes1 *m1 = _get_mes1();
   struct mes_par *mp = _get_mespar();
   S16 Current_limit;
   S16 Current_tmp;
+  const U16 ADC_Currnet_Raw = AdcReadChannel(ADC_CH1_CURRENT);
   
   Current_limit = (m1)->Curr_offset + (mp)->Overcurr_limit;
-  
   Current_tmp = ADC_Currnet_Raw - (m1)->Curr_offset;
-  (m1)->Current = ((S32)Current_tmp * (mp)->Curr_conv_coeff) >> 10;
+
+  (m1)->Current = fmul_q15(Current_tmp,  CURRENT_MAX_mA);
   
-  
-  if(_power_up_ok()) if(((m1)->Current > Current_limit) || ((m1)->Current < -Current_limit)) _set_overcurrent_error(1);
-  
+  if(_power_up_ok())
+  {
+    if(    ((m1)->Current > Current_limit) 
+        || ((m1)->Current < -Current_limit)) 
+    {
+      _set_overcurrent_error(1);
+    }
+  }
 }
 
 /******************************************************************************/
@@ -238,13 +246,12 @@ void measure_T2(void)
   struct overload_protection *cop = _get_overload_protection();
   struct cartridge_ident *id = _get_ident();
   
-  if((m2)->Line_period_zc_T2)
+  if((m2)->Line_period_zc_T2 > 0)
   {
-    (m2)->Line_frequency_zc = (60000u / (m2)->Line_period_zc_T2);
+    (m2)->Line_frequency_zc = _builtin_divud(60000u, (m2)->Line_period_zc_T2);
   }
   
   (m2)->Actaul_Power = ((id)->IDENT_MAX_RMS_Power * (cop)->power_half_periods) / 100;
-  
 }
 /******************************************************************************/
 /*

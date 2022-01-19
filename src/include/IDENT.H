@@ -64,7 +64,6 @@ struct cartridge_ident
   
   tIdentMode ident_mode;
   U16 ident_periods;
-  BOOL triac_state;
   teIdentToolType IdentTool;
   
   // https://controlguru.com/design-and-tuning-recipe-must-consider-nonlinear-process-behavior/
@@ -104,7 +103,7 @@ extern struct cartridge_ident ident;
 /*----------------------------------------------------------------------------*/
 /* Exported functions                                                          */
 /*----------------------------------------------------------------------------*/
-BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch);
+BOOL cartridge_ident(BOOL ident_init);
 teIdentToolType ident_get_current_tool(void);
 
 #endif /* IDENT_H */

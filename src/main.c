@@ -35,7 +35,6 @@
 #include "DigitalIO.h"
 #include "task.h"
 #include "vuart.h"
-#include "vADC.h"
 #include "statemachine.h"
 #include "eeprom.h"
 #include "LCD.h"
@@ -48,6 +47,7 @@
 #include "RotaryEncoder.h"
 #endif
 #include "MathTools.h"
+#include "adc_drv.h"
 
 /*----------------------------------------------------------------------------*/
 /* Constant data                                                              */
@@ -117,7 +117,7 @@ int main()
     IF_SysTmr1_Init();
     IF_SysTmr2_Init();
     IF_SysTmr3_Init();
-    IF_ADC_INIT();
+    AdcDrv_Init();
     state_machine_init();
     triac_control_init();
     measure_init();

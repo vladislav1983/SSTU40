@@ -28,6 +28,7 @@
 #include "measure.h"
 #include "trace.h"
 #include "MathTools.h"
+#include "adc_drv.h"
 
 /*----------------------------------------------------------------------------*/
 /* Local constants                                                            */
@@ -65,7 +66,6 @@ struct cartridge_ident ident =
   .U_Temp_filt = 0,
   .ident_mode = IDENT_INIT,
   .ident_periods = 0,
-  .triac_state = 0,
   .IdentCurrent_filt = 0,
   .Ident_current = 0,
   .IdentTool = eIdentTool_Unknown,
@@ -110,12 +110,13 @@ U16 ident_timeout_timer_t1(U16 cmd, U16 cons);
  * Output: 1: Ident finished 0: Ident in progress.
  */
 /******************************************************************************/
-BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
+BOOL cartridge_ident(BOOL ident_init)
 {
   struct cartridge_ident *id = _get_ident();
   U16 ident_current;
   BOOL result = 0;
   const BOOL zero_cross = _zero_cross();
+  const U16 ADC_Temp_Ch = AdcReadChannel(ADC_CH0_TEMP);
   
   if(ident_init) id->ident_mode = IDENT_INIT; //Check for identification.
   
@@ -136,7 +137,6 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
       id->U_Temp_in = 0;
       id->U_Temp_out = 0;
       id->U_Temp_filt = 0;
-      id->triac_state = 0;
       id->IdentCurrent_filt = 0;
       id->Ident_current = 0;
       id->IdentTool = eIdentTool_Unknown;
@@ -172,7 +172,7 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
       }
       else
       {
-        id->U_Temp_in = Hi(id->U_Temp_filt);
+        id->U_Temp_in = fmul_q15(Hi(id->U_Temp_filt), TEMP_MAX);
         id->U_Temp_filt = 0;
         id->ident_mode = IDENT_TRIAC_FIRE;
       }
@@ -186,17 +186,12 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
         if(id->ident_periods)
         {
           id->ident_periods--;
-          if(_drive_enabled()) 
-          {
-            _FIRE_TRIAC();
-            id->triac_state = TRUE;
-          }
+          _FIRE_TRIAC();
         }
         else
         {
           id->ident_mode = IDENT_WAIT_AFTER_ZC;
           ident_timer_t1(TIMER_LOAD, IDENT_MEASURE_AFTER_TIME); // Load timer for measure start after zero cross
-          id->triac_state = FALSE;
         }
       }
       
@@ -242,7 +237,7 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
 
       if(U_Temp_max > id->U_Temp_out)
       {
-        id->U_Temp_out = U_Temp_max;
+        id->U_Temp_out = fmul_q15(U_Temp_max, TEMP_MAX);
         id->Dt_counter++;
       }
       else
@@ -257,7 +252,6 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
       id->U_Temp_delta = id->U_Temp_out - id->U_Temp_in;
       if(id->U_Temp_delta < id->ident_deltaT_trip_low)    _set_ident_error(1);
       if(id->U_Temp_delta > id->ident_deltaT_trip_high)   _set_ident_error(1);
-      
       
       U16 IDENT_Peak_Power    = _builtin_divud( ((U32)id->Ident_peak_current  * mespar.Transformer_Voltage), 1000u);
       id->IDENT_MAX_RMS_Power =  fmul_qu15(qSQRT2, IDENT_Peak_Power);

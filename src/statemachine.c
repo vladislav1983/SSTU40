@@ -27,7 +27,6 @@
 #include "sirem.h"
 #include "PARLIST.h"
 #include "vuart.h"
-#include "vADC.h"
 #include "trace.h"
 #include "eeprom.h"
 #include "measure.h"
@@ -175,9 +174,9 @@ void state_machine_T1(void)
       break;
       /*------------------------*/
     case ST1_DC_AUTOTUNNING:
-      if(DC_Autotunning(ADC[1])) //Current measure DC autotunning
+      if(DC_Autotunning()) //Current measure DC autotunning
       {
-        cartridge_ident(1, 0);     // INIT ident routine
+        cartridge_ident(1);     // INIT ident routine
         stm_timer_T1(1,LOAD_T1_500m);
         nextstate_T1 = ST1_IDENT;
         mainstate_T1 = ST1_WAIT_STATE;
@@ -195,12 +194,15 @@ void state_machine_T1(void)
         mainstate_T2 = ST2_CHECKING_CARTRIDGE;
       }
       
-      if(_extractor()) mainstate_T1 = ST1_EXTRACTOR;
-      else if(cartridge_ident(0,ADC[AdcCh_0]))
+      if(_extractor()) 
+      {
+        mainstate_T1 = ST1_EXTRACTOR;
+      }
+      else if(cartridge_ident(0))
       {
         stm_timer_T1(1, LOAD_T1_100m);
         
-        if(_stand()) 
+        if(_stand())
         {
           /* OK, We must reset pid controller and tmpctrl module before use it for first time in this state ! */
           Reset_TMPCTRL();
@@ -224,7 +226,7 @@ void state_machine_T1(void)
         prevstate_T1 = ST1_TMPCTRL;
       }
       
-      temp_ctrl(ADC[AdcCh_0], 0); //<------ Control User Temp
+      temp_ctrl(0); //<------ Control User Temp
       
       if(_extractor()) mainstate_T1 = ST1_EXTRACTOR;
       else if(_stand()) mainstate_T1 = ST1_STAND;
@@ -238,7 +240,7 @@ void state_machine_T1(void)
         prevstate_T1 = ST1_STAND;
       }
       
-      temp_ctrl(ADC[AdcCh_0], 1); // Control User Temp Sleep
+      temp_ctrl(1); // Control User Temp Sleep
       
       if(Timestate_Cartridge_Control(0))
       {
@@ -260,7 +262,7 @@ void state_machine_T1(void)
       if(!_extractor())
       {
         stm_timer_T1(1, LOAD_T1_500m);
-        cartridge_ident(1, 0); //INIT ident routine
+        cartridge_ident(1); //INIT ident routine
         nextstate_T1 = ST1_IDENT;
         mainstate_T1 = ST1_WAIT_STATE;
       }
@@ -270,7 +272,7 @@ void state_machine_T1(void)
       if(_cartridge_present())
       {
         stm_timer_T1(1, LOAD_T1_500m);
-        cartridge_ident(1, 0); //INIT ident routine
+        cartridge_ident(1); //INIT ident routine
         nextstate_T1 = ST1_IDENT;
         mainstate_T1 = ST1_WAIT_STATE;
       }
@@ -286,7 +288,7 @@ void state_machine_T1(void)
       if(!_stand())
       {
         stm_timer_T1(1, LOAD_T1_500m);
-        cartridge_ident(1, 0); //INIT ident routine
+        cartridge_ident(1); //INIT ident routine
         nextstate_T1 = ST1_IDENT;
         mainstate_T1 = ST1_WAIT_STATE;
         _set_hibernate(0);
@@ -756,7 +758,7 @@ void state_machine_T2(void)
   {
     IF_LCDGotoXY(16, 1);
     
-    if(T_ctrl.tmpctrl_triac_state)
+    if(_triac_state())
     {
       IF_LCDPutc(LCD_FULL_HEART);
     }
