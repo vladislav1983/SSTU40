@@ -36,12 +36,12 @@
 #define cZC_TIMER_COUNT         2
 
 // zero cross trip thresholds in TASK1 perios
-#define cZC_TRIP_MAX            120 // 11.7ms
-#define zZC_TRIP_MIN            80  // 7.7ms
+#define cZC_TRIP_MAX            MS_TO_T1_TICKS(11.7) // 11.7ms
+#define zZC_TRIP_MIN            MS_TO_T1_TICKS(7.7)  // 7.7ms
 
 // zero cross window times in TASK1 periods
-#define cZC_CLOSED_WINDOW_TIMER 75          // zc detection disabled
-#define cZC_OPEN_WINDOW_TIMER   (125 - 75)  // zc detection enabled
+#define cZC_CLOSED_WINDOW_TIMER MS_TO_T1_TICKS(7.5)                               // zc detection disabled
+#define cZC_OPEN_WINDOW_TIMER   (MS_TO_T1_TICKS(12.5) - cZC_CLOSED_WINDOW_TIMER)  // zc detection enabled
 
 /*----------------------------------------------------------------------------*/
 /* Local macros                                                               */
@@ -53,7 +53,7 @@
 typedef enum teZeroCrosDetectionState
 {
   eZeroCrossOpenWindow,
-    eZeroCrossClosedWindow
+  eZeroCrossClosedWindow
 }eZeroCrosDetectionState;
 /*----------------------------------------------------------------------------*/
 /* Local data                                                                 */
@@ -121,7 +121,7 @@ void zero_cross_II(void)
         if(_power_up_ok()) 
         {
           if(    ((m2)->Line_period_zc_T2 >= cZC_TRIP_MAX) 
-            || ((m2)->Line_period_zc_T2 <= zZC_TRIP_MIN)) 
+              || ((m2)->Line_period_zc_T2 <= zZC_TRIP_MIN)) 
           {
             _set_grid_freq_error(1); //Trip Grid Frequency Error
           }

@@ -49,8 +49,8 @@
 
 /* TMPCTRL Parameters */
 #define TMPCTRL_WAIT_AFTER_ZC_TIME        50u
-#define TMPCTRL_AVERAGE_TIME              32u
 #define TMPCTRL_AVERAGE_DIVIDER           5u
+#define TMPCTRL_AVERAGE_TIME              (1u << TMPCTRL_AVERAGE_DIVIDER)
 #define TMPCTRL_MAX_HEAT_PERIODS          32u
 
 #define TMPCTRL_TIMER_READ                0
