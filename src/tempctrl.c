@@ -145,7 +145,7 @@ static tDistributionResult bresenham_distribution(tDistributionCmd cmd, U16 dist
 void temp_ctrl(BOOL sleep_flag)
 {
   struct temperature_control *tc = _get_T_ctrl();
-  const U16 Temp_ADC_Ch = AdcReadChannel(ADC_CH0_TEMP);
+  const _Q15 Temp_ADC_Ch = AdcReadChannel(ADC_CH0_TEMP);
   
   switch(tmpctrl_mainstate)
   {

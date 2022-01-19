@@ -19,13 +19,13 @@
 /*----------------------------------------------------------------------------*/
 /* Constant data                                                              */
 /*----------------------------------------------------------------------------*/
-#define T1_TIME            cTMR3_ISR_TICK_us /* Timer 3 reference */
-#define T2_TIME            cTMR1_ISR_TICK_us /* Timer 1 reference */
+#define T1_TIME_us              cTMR3_ISR_TICK_us /* Timer 3 reference */
+#define T2_TIME_us              cTMR1_ISR_TICK_us /* Timer 1 reference */
 
-#define MS_TO_T1_TICKS(MS)      (U32)( ((F32)(MS) * 1000.0) / (F32)T1_TIME )
-#define US_TO_T1_TICKS(US)      (U32)( (F32)(US) / (F32)T1_TIME )
+#define MS_TO_T1_TICKS(MS)      (U32)( ((F32)(MS) * 1000.0) / (F32)T1_TIME_us )
+#define US_TO_T1_TICKS(US)      (U32)( (F32)(US) / (F32)T1_TIME_us )
 
-#define MS_TO_T2_TICKS(MS)      (U32)( ((F32)(MS) * 1000.0) / (F32)T2_TIME )
+#define MS_TO_T2_TICKS(MS)      (U32)( ((F32)(MS) * 1000.0) / (F32)T2_TIME_us )
 
 /*----------------------------------------------------------------------------*/
 /* Exported type                                                              */

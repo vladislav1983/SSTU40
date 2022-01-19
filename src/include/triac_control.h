@@ -19,7 +19,7 @@
 /*----------------------------------------------------------------------------*/
 /* Constant data                                                              */
 /*----------------------------------------------------------------------------*/
-#define TRIAC_FIRE_TIME                (2000ul/T1_TIME)            //triac fire time in task1 periods
+#define TRIAC_FIRE_TIME                (2000ul/T1_TIME_us)            //triac fire time in task1 periods
 
 /*----------------------------------------------------------------------------*/
 /* Exported type                                                              */

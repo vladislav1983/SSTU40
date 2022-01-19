@@ -116,7 +116,7 @@ BOOL cartridge_ident(BOOL ident_init)
   U16 ident_current;
   BOOL result = 0;
   const BOOL zero_cross = _zero_cross();
-  const U16 ADC_Temp_Ch = AdcReadChannel(ADC_CH0_TEMP);
+  const _Q15 ADC_Temp_Ch = AdcReadChannel(ADC_CH0_TEMP);
   
   if(ident_init) id->ident_mode = IDENT_INIT; //Check for identification.
   
@@ -167,7 +167,7 @@ BOOL cartridge_ident(BOOL ident_init)
       if(ident_timer_t1(TIMER_COUNT, 0))
       {
         #define TEMP_FILT_ms  200.0
-        id->U_Temp_filt += (S32)( (S32)( (65.536 * (F32)T1_TIME) / TEMP_FILT_ms ) * (S16)(ADC_Temp_Ch - Hi(id->U_Temp_filt)) );
+        id->U_Temp_filt += (S32)( (S32)( (65.536 * (F32)T1_TIME_us) / TEMP_FILT_ms ) * (S16)(ADC_Temp_Ch - Hi(id->U_Temp_filt)) );
         #undef TEMP_FILT_ms
       }
       else
@@ -197,7 +197,7 @@ BOOL cartridge_ident(BOOL ident_init)
       
       ident_current = absi(mes1.Current);
       #define CURRENT_FILT_ms  20.0
-      id->IdentCurrent_filt += (S32)( (S32)( (65.536 * (F32)T1_TIME) / CURRENT_FILT_ms ) * (S16)(ident_current - Hi(id->IdentCurrent_filt)) );
+      id->IdentCurrent_filt += (S32)( (S32)( (65.536 * (F32)T1_TIME_us) / CURRENT_FILT_ms ) * (S16)(ident_current - Hi(id->IdentCurrent_filt)) );
       #undef CURRENT_FILT_ms
       
       if(ident_current > id->ident_current_trip)
@@ -225,7 +225,7 @@ BOOL cartridge_ident(BOOL ident_init)
     case IDENT_MES_TEMP_2:
     {
       #define TEMP_FILT_ms  50.0
-      id->U_Temp_filt += (S32)( (S32)((65.536 * (F32)T1_TIME) / TEMP_FILT_ms) * (S16)(ADC_Temp_Ch - Hi(id->U_Temp_filt)) );
+      id->U_Temp_filt += (S32)( (S32)((65.536 * (F32)T1_TIME_us) / TEMP_FILT_ms) * (S16)(ADC_Temp_Ch - Hi(id->U_Temp_filt)) );
       #undef TEMP_FILT_ms
       U16 U_Temp_max = Hi(id->U_Temp_filt);
       

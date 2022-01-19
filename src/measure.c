@@ -174,7 +174,7 @@ BOOL DC_Autotunning(void)
   struct Mes1 *m1 = _get_mes1();
   struct mes_par *mp = _get_mespar();
   BOOL result;
-  const U16 ADC_Currnet_Raw = AdcReadChannel(ADC_CH1_CURRENT);
+  const _Q15 ADC_Currnet_Raw = AdcReadChannel(ADC_CH1_CURRENT);
   
   if((mp)->dc_average_counter)
   {
@@ -216,7 +216,7 @@ void Current_measure(void)
   struct mes_par *mp = _get_mespar();
   S16 Current_limit;
   S16 Current_tmp;
-  const U16 ADC_Currnet_Raw = AdcReadChannel(ADC_CH1_CURRENT);
+  const _Q15 ADC_Currnet_Raw = AdcReadChannel(ADC_CH1_CURRENT);
   
   Current_limit = (m1)->Curr_offset + (mp)->Overcurr_limit;
   Current_tmp = ADC_Currnet_Raw - (m1)->Curr_offset;

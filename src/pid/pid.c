@@ -103,7 +103,7 @@ S16 PidProcess(const tPidInstance * instance, S16 Ref, S16 Fbk, U16 SampleTime_m
           _set_param_limit_error(1);
         }
       }
-      // Filter function: y(n)=y(n?1)+a[x(n)?(y(n?1)/65536)],
+      // Filter function: y(n)=y(n-1)+a[x(n)*(y(n-1)/65536)],
       instance->data->Fbk_Filt += (S32)((S32)instance->data->Fbk_Filt_coeff * (S16)(Fbk - Hi(instance->data->Fbk_Filt )));
       // error calculation
       error_filt = Ref - Hi(instance->data->Fbk_Filt);

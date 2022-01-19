@@ -20,8 +20,8 @@
 /*----------------------------------------------------------------------------*/
 /* IDENT PARAMETERS */
 #define IDENT_PERIODS_MAX               100u
-#define IDENT_MEASURE_AFTER_TIME        (5E3   / T1_TIME) /* 5000 us*/
-#define IDENT_AVERAGE_TIME              (500E3 / T1_TIME) /* 500ms Average time in task1 periods */
+#define IDENT_MEASURE_AFTER_TIME        (5E3   / T1_TIME_us) /* 5000 us*/
+#define IDENT_AVERAGE_TIME              (500E3 / T1_TIME_us) /* 500ms Average time in task1 periods */
 
 /* IDENT MODES OF OPERATION */
 typedef enum

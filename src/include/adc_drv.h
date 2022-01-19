@@ -30,7 +30,7 @@ typedef enum
   ADC_CH_NUM 
 }tAdcChList;
 
-typedef U16 tAdcChannel;
+typedef _Q15 tAdcChannel;
 typedef tAdcChannel tAdcBuffer[ADC_CH_NUM];
 
 
