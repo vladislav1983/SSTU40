@@ -80,7 +80,6 @@ S16 PidProcess(const tPidInstance * instance, S16 Ref, S16 Fbk, U16 SampleTime_m
   {
     if(   instance->cfg->P_term_scale < 16
        && instance->cfg->Fbk_Filt_ms >= (2 * SampleTime_ms)
-       && instance->cfg->Out_Filt_ms >= (2 * SampleTime_ms)
        && (SampleTime_ms > 50 && SampleTime_ms < 20000) 
        && PidMax > 0)
     {
@@ -94,7 +93,7 @@ S16 PidProcess(const tPidInstance * instance, S16 Ref, S16 Fbk, U16 SampleTime_m
       {
         if(((U32)instance->cfg->Fbk_Filt_ms + SampleTime_ms) < 65535)
         {
-          instance->data->Fbk_Filt_coeff = _builtin_divud( ((U32)65536ul * SampleTime_ms), (instance->cfg->Fbk_Filt_ms));
+          instance->data->Fbk_Filt_coeff = _builtin_divud( _builtin_muluu(65536ul, SampleTime_ms), (instance->cfg->Fbk_Filt_ms));
           instance->data->Fbk_Filt_ms = instance->cfg->Fbk_Filt_ms;
         }
         else
@@ -103,10 +102,10 @@ S16 PidProcess(const tPidInstance * instance, S16 Ref, S16 Fbk, U16 SampleTime_m
         }
       }
       // Filter function: y(n)=y(n?1)+a[x(n)?(y(n?1)/65536)],
-      instance->data->Fbk_Filt += (S32)((S32)instance->data->Fbk_Filt_coeff * (S16)(Fbk - Hi(instance->data->Fbk_Filt )));
+      instance->data->Fbk_Filt += (S32)_builtin_mulus(instance->data->Fbk_Filt_coeff, (S16)(Fbk - Hi(instance->data->Fbk_Filt )));
       // error calculation
       error_filt = Ref - Hi(instance->data->Fbk_Filt);
-      error = Ref = Fbk;
+      error = Ref - Fbk;
       
       // integration
       if((error < 0 && instance->data->Integral.sat == PidSat_neg) || (error > 0 && instance->data->Integral.sat == PidSat_pos))
@@ -115,27 +114,35 @@ S16 PidProcess(const tPidInstance * instance, S16 Ref, S16 Fbk, U16 SampleTime_m
       }
       else
       {
-        instance->data->Integral.x += (S32)instance->cfg->Ki2 * error;
+        instance->data->Integral.x += (S32)_builtin_mulus(instance->cfg->Ki2, error);
       }
       // integral saturation
       instance->data->Integral = pid_satlimit(instance->data->Integral.x, ID_term_min, ID_term_max);
       
       // P and D terms calculation
-      P_term = pid_limit((S32)instance->cfg->Kp * error, P_term_min, P_term_max);
-      D_term = pid_limit((S32)instance->cfg->Kd2 * (error_filt - instance->data->error_filt_prev), ID_term_min, ID_term_max);
+      P_term = pid_limit(_builtin_mulus(instance->cfg->Kp, error), P_term_min, P_term_max);
+      P_term >>= instance->cfg->P_term_scale;
+      D_term = pid_limit(_builtin_mulus(instance->cfg->Kd2, (error_filt - instance->data->error_filt_prev)), ID_term_min, ID_term_max);
       
       // PID output limitation
       PidOut = pid_limit((P_term >> instance->cfg->P_term_scale) + (instance->data->Integral.x >> 16) + (D_term >> 16), -PidMax, PidMax);
       
-      // output filtration coefficient calculation
-      if(instance->cfg->Out_Filt_ms != instance->data->Out_Filt_ms)
+      if(instance->cfg->Out_Filt_ms != 0)
       {
-        instance->data->Out_Filt_coeff = _builtin_divud( ((U32)65536ul * SampleTime_ms), (instance->cfg->Out_Filt_ms));
-        instance->data->Out_Filt_ms = instance->cfg->Out_Filt_ms;
+        // output filtration coefficient calculation
+        if(instance->cfg->Out_Filt_ms != instance->data->Out_Filt_ms)
+        {
+          instance->data->Out_Filt_coeff = _builtin_divud( ((U32)65536ul * SampleTime_ms), (instance->cfg->Out_Filt_ms));
+          instance->data->Out_Filt_ms = instance->cfg->Out_Filt_ms;
+        }
+        // output filtration
+        instance->data->Out_Filt += (S32)_builtin_mulus(instance->data->Out_Filt_coeff, (S16)(PidOut - Hi(instance->data->Out_Filt)));
+        PidOut_Filt = Hi(instance->data->Out_Filt);
       }
-      // output filtration
-      instance->data->Out_Filt += (S32)((S32)instance->data->Out_Filt_coeff * (S16)(PidOut - Hi(instance->data->Out_Filt)));
-      PidOut_Filt = Hi(instance->data->Out_Filt);
+      else
+      {
+        PidOut_Filt = PidOut;
+      }
       // calculate period and overshoot 
 #if PID_DEBUG != 0
       pid_calc_period_and_overshoot(instance, Ref, Fbk, SampleTime_ms);
@@ -243,8 +250,8 @@ static void pid_calc_period_and_overshoot(const tPidInstance * instance, S16 Ref
 
   error = Ref - Fbk;
 
-  // 10 seconds filtration of error
-  instance->data->error_filt += (S32)(_builtin_divud( ((S32)65536L * SampleTime_ms), 10000u) * (S16)(error - Hi(instance->data->error_filt )));
+  // X seconds filtration of error
+  instance->data->error_filt += (S32)_builtin_mulus(_builtin_divud( _builtin_muluu(65536u, SampleTime_ms), 20000u), (S16)(error - Hi(instance->data->error_filt )));
   error_filt = Hi(instance->data->error_filt);
   
   if(error > error_filt)
@@ -252,24 +259,24 @@ static void pid_calc_period_and_overshoot(const tPidInstance * instance, S16 Ref
     instance->data->OutCnt_pos++;
     sign_prev = instance->data->out_sign;
     instance->data->out_sign = 1;
-    
-    // overshoot calculation
-    if(error > instance->data->OutOvershootTmp_pos)
-    {
-      instance->data->OutOvershootTmp_pos = error;
-    }
   }
   else if(error < error_filt)
   {
     instance->data->OutCnt_neg++;
     sign_prev = instance->data->out_sign;
     instance->data->out_sign = -1;
-    
-    // overshoot calculation
-    if(error < instance->data->OutOvershootTmp_neg)
-    {
-      instance->data->OutOvershootTmp_neg = error;
-    }
+  }
+  
+  // overshoot calculation
+  if(error > instance->data->OutOvershootTmp_pos)
+  {
+    instance->data->OutOvershootTmp_pos = error;
+  }
+  
+  // overshoot calculation
+  if(error < instance->data->OutOvershootTmp_neg)
+  {
+    instance->data->OutOvershootTmp_neg = error;
   }
 
   if(instance->data->out_sign == 1 && sign_prev == -1)

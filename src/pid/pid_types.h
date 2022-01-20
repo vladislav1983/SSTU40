@@ -60,8 +60,8 @@ typedef struct
   U16 OutCnt_neg;
   S16 OutPeriod;
   // pid control overshoot
-  U16 OutOvershootTmp_pos;
-  U16 OutOvershootTmp_neg;
+  S16 OutOvershootTmp_pos;
+  S16 OutOvershootTmp_neg;
   S16 Overshoot_pos;
   S16 Overshoot_neg;
 #endif

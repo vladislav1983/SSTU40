@@ -201,8 +201,8 @@ const iolist iopar[] =
   {281,"Ki2 [Ki*dt]",                 (U16 *)&PID_C245ToolPid_Cfg.Ki2,           (U16 *)&PID_C245ToolPid_Cfg.Ki2,           2,"unr",    0xFFFFul,             0, 0,0,    1 },
   {282,"Kd2 [Kd/dt]",                 (U16 *)&PID_C245ToolPid_Cfg.Kd2,           (U16 *)&PID_C245ToolPid_Cfg.Kd2,           2,"unr",    0xFFFFul,             0, 0,0,    1 },
   {283,"P term Scale [1<<(15+X)]",    (U8  *)&PID_C245ToolPid_Cfg.P_term_scale,  (U8  *)&PID_C245ToolPid_Cfg.P_term_scale,  2,"unr",    15,                   0, 0,0,    1 },
-  {284,"Fbk Filter [ms]",             (U16 *)&PID_C245ToolPid_Cfg.Fbk_Filt_ms,   (U16 *)&PID_C245ToolPid_Cfg.Fbk_Filt_ms,   2,"unr",    10000,        (1+2*110), 0,0,    1 },
-  {285,"Out Filter [ms]",             (U16 *)&PID_C245ToolPid_Cfg.Out_Filt_ms,   (U16 *)&PID_C245ToolPid_Cfg.Out_Filt_ms,   2,"unr",    10000,        (1+2*110), 0,0,    1 },
+  {284,"Fbk Filter [ms]",             (U16 *)&PID_C245ToolPid_Cfg.Fbk_Filt_ms,   (U16 *)&PID_C245ToolPid_Cfg.Fbk_Filt_ms,   2,"unr",    10000,                0, 0,0,    1 },
+  {285,"Out Filter [ms]",             (U16 *)&PID_C245ToolPid_Cfg.Out_Filt_ms,   (U16 *)&PID_C245ToolPid_Cfg.Out_Filt_ms,   2,"unr",    10000,                0, 0,0,    1 },
   {286,"Integral",                    (S32 *)&PID_C245ToolPid_Data.Integral.x,   (S32 *)&PID_C245ToolPid_Data.Integral.x,   4,"srr",    2147483647, -2147483647, 5,0,    1 },
   {287,"Integral Saturation",         (S8  *)&PID_C245ToolPid_Data.Integral.sat, (S8  *)&PID_C245ToolPid_Data.Integral.sat, 1,"srr",    1,                   -1, 5,0,    1 },
 #if PID_DEBUG != 0
