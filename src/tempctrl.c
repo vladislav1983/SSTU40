@@ -142,6 +142,7 @@ void temp_ctrl(U16 Temp_ADC_Ch, BOOL sleep_flag)
         tc->T_fbk = tc->T_sum >> TMPCTRL_AVERAGE_DIVIDER;
         tc->T_fbk = ((U32)tc->T_fbk * tc->T_cal_gain) >> 10;
         tc->T_fbk += (S16)tc->T_cal_offset;
+        tc->T_sum = 0;
         
         if(tc->T_fbk > MAX_TEMP_TRIP_RAW) _set_overtemperature_error(1); /* if overtemperature --> trip error */
         tmpctrl_mainstate = TMPCTRL_CONTROL;
@@ -295,6 +296,7 @@ void Reset_TMPCTRL(void)
   
   tc->T_fbk = 0;
   tc->heat_periods = 0;
+  tc->T_sum = 0;
   PidReset(PID_INSTANCE(C245ToolPid));
 }
 

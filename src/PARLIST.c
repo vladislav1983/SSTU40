@@ -176,6 +176,9 @@ const iolist iopar[] =
   {216,"ident current 2245 high",     (U16 *)&ident.ident_cur_2245_high,         (U16 *)&ident.ident_cur_2245_high,        2,"unr",    15000ul,       0, 0,0,    1 },
   {217,"ident tool",                  (U8 * )&ident.IdentTool,                   (U8  *)&ident.IdentTool,                  1,"urr",    0xFFul,        0, 5,0,    1 },
   {218,"Ident Current",               (U16 *)&ident.Ident_current,               (U16 *)&ident.Ident_current,              2,"urr",    0xFFFFul,      0, 5,0,    1 },
+  {219,"Process Gain",                (S16 *)&ident.Kp,                          (S16 *)&ident.Kp,                         2,"srr",    32767ul,  -32768, 5,0,    1 },
+  {220,"Process Dead Time",           (U32 *)&ident.Dt_us,                       (U32 *)&ident.Dt_us,                      4,"urr",    0xFFFFFFFFul,  0, 5,0,    1 },
+  {221,"Process Time Constant",       (U32 *)&ident.Tp_us,                       (U32 *)&ident.Tp_us,                      4,"urr",    0xFFFFFFFFul,  0, 5,0,    1 },
      
  /* TMPCTRL.C */                                                                                                                                      
   {250,"Temp Ref User (Real)",        (U16 *)&T_ctrl.T_Ref_User,                 (U16 *)&T_ctrl.T_Ref_User,                2,"unr",    450ul,         0, 0,0,    1 },
@@ -189,7 +192,6 @@ const iolist iopar[] =
   {258,"Heat Periods",                (S16 *)&T_ctrl.heat_periods,               (S16 *)&T_ctrl.heat_periods,              2,"srr",    32767ul,  -32768, 5,0,    1 },
   {260,"heat_periods_debug",          (S16 *)&T_ctrl.heat_periods_debug,         (S16 *)&T_ctrl.heat_periods_debug,        2,"srr",    32767ul,  -32768, 0,0,    1 },
   {261,"Triac State",                 (U16 *)&T_ctrl.tmpctrl_triac_state,        (U16 *)&T_ctrl.tmpctrl_triac_state,       2,"urr",    0xFFFFul,      0, 5,0,    1 },
-//{262,"TMPCTRL State",               (U16 *)&tmpctrl_mainstate,                 (U16 *)&tmpctrl_mainstate,                2,"urr",    0xFFFFul,      0, 5,0,    1 },
   {264,"Temp Calibration Offset",     (S16 *)&T_ctrl.T_cal_offset,               (S16 *)&T_ctrl.T_cal_offset,              2,"snr",    50ul,        -50, 0,0,    1 },
   {265,"Bresenham distribution",      (U8 * )&T_ctrl.bresenham_distribution,     (U8  *)&T_ctrl.bresenham_distribution,    1,"unr",    1,             0, 0,0,    1 },
   {266,"Set Temperature Step",        (U8 * )&T_ctrl.T_UserStep,                 (U8  *)&T_ctrl.T_UserStep,                1,"unr",    50,            1, 0,0,    1 },

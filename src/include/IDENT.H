@@ -21,9 +21,9 @@
 /*----------------------------------------------------------------------------*/
 /* IDENT PARAMETERS */
 #define IDENT_PERIODS_MAX               100u
-#define IDENT_MEASURE_AFTER_TIME        (5E3   / T1_TIME) /* 5000 us*/
-#define IDENT_AVERAGE_TIME              (500E3 / T1_TIME) /* 500ms Average time in task1 periods */
-#define IDENT_MES_TIME_AFTER_SHOT       (1500E3 / T1_TIME) 
+#define IDENT_MEASURE_AFTER_TIME        MS_TO_T1_TICKS(5)/* 5000 us*/
+#define IDENT_AVERAGE_TIME              MS_TO_T1_TICKS(500)/* 500ms Average time in task1 periods */
+#define IDENT_MES_TIME_AFTER_SHOT       MS_TO_T1_TICKS(1000)
 
 
 /* IDENT MODES OF OPERATION */

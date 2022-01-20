@@ -189,7 +189,7 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
         else
         {
           id->ident_mode = IDENT_WAIT_AFTER_ZC;
-          ident_timer_t1(TIMER_LOAD, IDENT_MEASURE_AFTER_TIME); // Load timer for measure start after zero cross
+          ident_timer_t1(TIMER_LOAD, IDENT_MEASURE_AFTER_TIME);
           id->triac_state = FALSE;
         }
       }
@@ -282,19 +282,19 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
       // process gain calculation
       if(id->ident_periods_load > 0)
       {
-        id->Kp = ( ((S16)id->U_Temp_out - (S16)id->Dt_Temp_in) * (S32)1000uL) / id->ident_periods_load;
+        id->Kp = _builtin_divsd(_builtin_mulsu( ((S16)id->U_Temp_out - (S16)id->Dt_Temp_in), 1000u), id->ident_periods_load);
       }
       else
       {
         _set_param_limit_error(1);
       }
       // process dead time calculation
-      id->Dt_us = ((U32)id->Dt_counter * 100u);
+      id->Dt_us = _builtin_muluu(id->Dt_counter, 100u);
       
       // process time constant calculation
       // tp = 0.63 * dt. ident_periods_load is in half periods (10ms)
       // (U16)(0.63 * 100.0) * (U16)( (id->ident_periods_load * ((10u * 1000u) / 100u) ) + ( id->Dt_counter * (100u / 100u) ) );
-      id->Tp_us = (U32)(63u) * (U16)( (id->ident_periods_load * 100u) + id->Dt_counter );
+      id->Tp_us = _builtin_muluu(63u,  _builtin_muluu(id->ident_periods_load, 100u) + id->Dt_counter );
       
       result = 1; //quit ident
     }
