@@ -459,9 +459,9 @@ S16 udiv_32(_IN_ U32 u32Divident_long, _IN_ U16 u16Divider)
 Q15 fmul_q15(Q15 qA, Q15 qB)
 {
 	Q15 res;
-	BOOL DSP_Mode = CORCONbits.IF;
   
 	CORCONbits.IF = 0; // Put DSP Engine in fractional mode
+  CORCONbits.US	= 0;
 	
 	// clear it out.. this is special since it's 40 bits long...
 	DSP_ACCU_A = __builtin_clr(); 	// clear out accumulator
@@ -471,8 +471,6 @@ Q15 fmul_q15(Q15 qA, Q15 qB)
 	// get value out and put into fractional C.
 	res = __builtin_sacr(DSP_ACCU_A, 0);
 	
-	CORCONbits.IF = DSP_Mode;  // Restore DSP Engine mode
-
 	return(res);
 }
 
@@ -487,10 +485,10 @@ Q15 fmul_q15(Q15 qA, Q15 qB)
 U16 fmul_qu15(U16 quA, U16 quB)
 {
   U16 res;
-	BOOL DSP_Mode = CORCONbits.IF;
-  
+
 	CORCONbits.IF = 0; // Put DSP Engine in fractional mode
-	
+	CORCONbits.US	= 1; // unsigned mode
+  
 	// clear it out.. this is special since it's 40 bits long...
 	DSP_ACCU_A = __builtin_clr(); 	// clear out accumulator
 	
@@ -499,8 +497,6 @@ U16 fmul_qu15(U16 quA, U16 quB)
 	// get value out and put into fractional C.
 	res = __builtin_sacr(DSP_ACCU_A, 0);
 	
-	CORCONbits.IF = DSP_Mode;  // Restore DSP Engine mode
-
 	return(res);
 }
 
@@ -515,9 +511,9 @@ U16 fmul_qu15(U16 quA, U16 quB)
 S32 mul_s16(S16 A, S16 B)
 {
 	S32 res;
-	BOOL DSP_Mode = CORCONbits.IF;
   
 	CORCONbits.IF = 1; // Put DSP Engine in Integer mode
+  CORCONbits.US	= 0;
 	
 	// clear it out.. this is special since it's 40 bits long...
 	//DSP_ACCU_A = __builtin_clr(); 	// clear out accumulator
@@ -526,8 +522,6 @@ S32 mul_s16(S16 A, S16 B)
 	res = __builtin_mulss(A, B);
 	// get value out 
 	//res = (S32)__builtin_sacr(DSP_ACCU_A, 0);
-
-	CORCONbits.IF = DSP_Mode;  // Restore DSP Engine mode
 
 	return(res);
 }

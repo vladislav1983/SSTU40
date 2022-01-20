@@ -52,6 +52,7 @@
 #define qOneBy3			0x2AAB			// 1/3 * 32768 in fractional format
 #define qSQRT3OV2		0x6EDA			// SQRT(3)/2 in Fractional Format
 #define qSQRT2			0xB504			// SQRT(2)   in Fractional Format
+#define qOneBySq2   (32768.0 / SQRT2)
 #define qSQRT3			0xDDB3			// SQRT(3)   in Fractional Format
 #define qPI_deg			(32768ul)
 #define qHalf_PI_deg	(qPI_deg / 2)

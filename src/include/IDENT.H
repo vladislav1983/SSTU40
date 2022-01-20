@@ -14,6 +14,7 @@
 /* Included files to resolve specific definitions in this file                */
 /*----------------------------------------------------------------------------*/
 #include "basedef.h"
+#include "task.h"
 
 /*----------------------------------------------------------------------------*/
 /* Constant data                                                              */
@@ -22,6 +23,8 @@
 #define IDENT_PERIODS_MAX               100u
 #define IDENT_MEASURE_AFTER_TIME        (5E3   / T1_TIME) /* 5000 us*/
 #define IDENT_AVERAGE_TIME              (500E3 / T1_TIME) /* 500ms Average time in task1 periods */
+#define IDENT_MES_TIME_AFTER_SHOT       (1500E3 / T1_TIME) 
+
 
 /* IDENT MODES OF OPERATION */
 typedef enum

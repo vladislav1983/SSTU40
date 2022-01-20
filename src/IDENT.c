@@ -115,7 +115,6 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
   struct cartridge_ident *id = _get_ident();
   U16 ident_current;
   BOOL result = 0;
-  const BOOL zero_cross = _zero_cross();
   
   if(ident_init) id->ident_mode = IDENT_INIT; //Check for identification.
   
@@ -126,8 +125,6 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
     {
       if(id->ident_periods_load > IDENT_PERIODS_MAX) 
         id->ident_periods_load = IDENT_PERIODS_MAX; //Load halfperiods for identification
-      
-      ident_timer_t1(TIMER_LOAD, 20);    //load timer 
       
       id->ident_mode = IDENT_WAIT_MES_TEMP;     
       id->IDENT_MAX_RMS_Power = 0;
@@ -151,13 +148,10 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
     /*---------------------------------------------------*/
     case IDENT_WAIT_MES_TEMP:
     {
-      if(zero_cross)
+      if(_zero_cross())
       {
-        if(ident_timer_t1(TIMER_COUNT, 0)) 
-        {
-          ident_timer_t1(TIMER_LOAD, IDENT_AVERAGE_TIME);
-          id->ident_mode = IDENT_MES_TEMP;
-        }
+        ident_timer_t1(TIMER_LOAD, IDENT_AVERAGE_TIME);
+        id->ident_mode = IDENT_MES_TEMP;
       }
     }
     break;
@@ -166,8 +160,8 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
     {
       if(ident_timer_t1(TIMER_COUNT, 0))
       {
-        #define TEMP_FILT_ms  200.0
-        id->U_Temp_filt += (S32)( (S32)( (65.536 * (F32)T1_TIME) / TEMP_FILT_ms ) * (S16)(ADC_Temp_Ch - Hi(id->U_Temp_filt)) );
+        #define TEMP_FILT_ms  100.0
+        id->U_Temp_filt += (S32)_builtin_mulus( (U16)( (65.536 * (F32)T1_TIME) / TEMP_FILT_ms ), (S16)(ADC_Temp_Ch - Hi(id->U_Temp_filt)) );
         #undef TEMP_FILT_ms
       }
       else
@@ -181,7 +175,7 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
     /*---------------------------------------------------*/    
     case IDENT_TRIAC_FIRE:
     {
-      if(zero_cross)
+      if(_zero_cross())
       {
         if(id->ident_periods)
         {
@@ -202,7 +196,7 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
       
       ident_current = absi(mes1.Current);
       #define CURRENT_FILT_ms  20.0
-      id->IdentCurrent_filt += (S32)( (S32)( (65.536 * (F32)T1_TIME) / CURRENT_FILT_ms ) * (S16)(ident_current - Hi(id->IdentCurrent_filt)) );
+      id->IdentCurrent_filt += (S32)_builtin_mulus( (U16)((65.536 * (F32)T1_TIME) / CURRENT_FILT_ms ), (S16)(ident_current - Hi(id->IdentCurrent_filt)) );
       #undef CURRENT_FILT_ms
       
       if(ident_current > id->ident_current_trip)
@@ -223,6 +217,7 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
       if(!ident_timer_t1(TIMER_COUNT, 0))
       {
         id->ident_mode = IDENT_MES_TEMP_2;
+        ident_timer_t1(TIMER_LOAD, IDENT_MES_TIME_AFTER_SHOT);
       }
     }
     break;
@@ -230,9 +225,9 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
     case IDENT_MES_TEMP_2:
     {
       #define TEMP_FILT_ms  50.0
-      id->U_Temp_filt += (S32)( (S32)((65.536 * (F32)T1_TIME) / TEMP_FILT_ms) * (S16)(ADC_Temp_Ch - Hi(id->U_Temp_filt)) );
+      id->U_Temp_filt += (S32)_builtin_mulus( (U16)((65.536 * (F32)T1_TIME) / TEMP_FILT_ms), (S16)(ADC_Temp_Ch - Hi(id->U_Temp_filt)) );
       #undef TEMP_FILT_ms
-      U16 U_Temp_max = Hi(id->U_Temp_filt);
+      U16 U_Temp = Hi(id->U_Temp_filt);
       
       if(id->Dt_counter == 0)
       {
@@ -240,12 +235,13 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
         id->Dt_counter = IDENT_MEASURE_AFTER_TIME;
       }
 
-      if(U_Temp_max > id->U_Temp_out)
+      if(U_Temp > id->U_Temp_out)
       {
-        id->U_Temp_out = U_Temp_max;
+        id->U_Temp_out = U_Temp;
         id->Dt_counter++;
       }
-      else
+      
+      if(!ident_timer_t1(TIMER_COUNT, 0))
       {
         id->ident_mode = IDENT_EXIT;
       }
@@ -259,8 +255,8 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
       if(id->U_Temp_delta > id->ident_deltaT_trip_high)   _set_ident_error(1);
       
       
-      U16 IDENT_Peak_Power    = _builtin_divud( ((U32)id->Ident_peak_current  * mespar.Transformer_Voltage), 1000u);
-      id->IDENT_MAX_RMS_Power =  fmul_qu15(qSQRT2, IDENT_Peak_Power);
+      U16 IDENT_Peak_Power    = _builtin_divud( _builtin_muluu(id->Ident_peak_current, mespar.Transformer_Voltage), 1000u);
+      id->IDENT_MAX_RMS_Power =  fmul_qu15(qOneBySq2, IDENT_Peak_Power);
       
       id->ident_mode = IDENT_UNDEFINED_STATE;
       
