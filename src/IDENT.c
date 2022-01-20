@@ -27,6 +27,7 @@
 #include "DigitalIO.h"
 #include "measure.h"
 #include "trace.h"
+#include "MathTools.h"
 
 /*----------------------------------------------------------------------------*/
 /* Local constants                                                            */
@@ -57,25 +58,26 @@
 struct cartridge_ident ident = 
 {
   .IDENT_MAX_RMS_Power = 0,
-  .IDENT_Peak_Power = 0,
   .Ident_peak_current = 0,
   .U_Temp_delta = 0,
   .U_Temp_in = 0,
-  .U_Temp_max = 0,
   .U_Temp_out = 0,
-  .U_Temp_sum = 0,
-  .ident_mes_temp = 0,
+  .U_Temp_filt = 0,
   .ident_mode = IDENT_INIT,
   .ident_periods = 0,
   .triac_state = 0,
-  .IdentCurrent_Sum = 0,
+  .IdentCurrent_filt = 0,
   .Ident_current = 0,
   .IdentTool = eIdentTool_Unknown,
+  .Kp = 0,
+  .Dt_counter = 0,
+  .Dt_Temp_in = 0,
+  .Dt_us = 0,
+  .Tp_us = 0,
   // stored in nvm
   .ident_deltaT_trip_low  = 15,
   .ident_deltaT_trip_high = 50,
   .ident_current_trip = 12000,  // 12A default trip
-  .ident_trace_start = 0,
   .ident_periods_load = 16,
   .ident_cur_2210_low = 2000,
   .ident_cur_2210_high = 4000,
@@ -113,45 +115,48 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
   struct cartridge_ident *id = _get_ident();
   U16 ident_current;
   BOOL result = 0;
+  const BOOL zero_cross = _zero_cross();
   
-  if(ident_init) (id)->ident_mode = IDENT_INIT; //Check for identification.
+  if(ident_init) id->ident_mode = IDENT_INIT; //Check for identification.
   
-  switch((id)->ident_mode)
+  switch(id->ident_mode)
   {
     /*---------------------------------------------------*/    
     case IDENT_INIT:
     {
-      if((id)->ident_periods_load > IDENT_PERIODS_MAX) (id)->ident_periods_load = IDENT_PERIODS_MAX; //Load halfperiods for identification
+      if(id->ident_periods_load > IDENT_PERIODS_MAX) 
+        id->ident_periods_load = IDENT_PERIODS_MAX; //Load halfperiods for identification
       
-      ident_timer_t1(TIMER_LOAD, 20);    //load timer for four zc periods wait
+      ident_timer_t1(TIMER_LOAD, 20);    //load timer 
       
-      (id)->ident_mode = IDENT_WAIT_MES_TEMP;     
-      (id)->IDENT_MAX_RMS_Power = 0;
-      (id)->IDENT_Peak_Power = 0;
-      (id)->Ident_peak_current = 0;
-      (id)->U_Temp_delta = 0;
-      (id)->U_Temp_in = 0;
-      (id)->U_Temp_max = 0;
-      (id)->U_Temp_out = 0;
-      (id)->U_Temp_sum = 0;
-      (id)->ident_mes_temp = 0;
-      (id)->triac_state = 0;
-      (id)->IdentCurrent_Sum = 0;
-      (id)->Ident_current = 0;
-      (id)->IdentCurrent_Sum_Counter = 0;
-      (id)->IdentTool = eIdentTool_Unknown;
-      (id)->ident_periods = (id)->ident_periods_load;
+      id->ident_mode = IDENT_WAIT_MES_TEMP;     
+      id->IDENT_MAX_RMS_Power = 0;
+      id->Ident_peak_current = 0;
+      id->U_Temp_delta = 0;
+      id->U_Temp_in = 0;
+      id->U_Temp_out = 0;
+      id->U_Temp_filt = 0;
+      id->triac_state = 0;
+      id->IdentCurrent_filt = 0;
+      id->Ident_current = 0;
+      id->IdentTool = eIdentTool_Unknown;
+      id->ident_periods = id->ident_periods_load;
+      id->Kp = 0;
+      id->Dt_counter = 0;
+      id->Dt_Temp_in = 0;
+      id->Dt_us = 0;
+      id->Tp_us = 0;
     }
     break;
     /*---------------------------------------------------*/
     case IDENT_WAIT_MES_TEMP:
     {
-      if(_zero_cross())
+      if(zero_cross)
       {
         if(ident_timer_t1(TIMER_COUNT, 0)) 
         {
           ident_timer_t1(TIMER_LOAD, IDENT_AVERAGE_TIME);
-          (id)->ident_mode = IDENT_MES_TEMP;
+          id->ident_mode = IDENT_MES_TEMP;
         }
       }
     }
@@ -161,29 +166,22 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
     {
       if(ident_timer_t1(TIMER_COUNT, 0))
       {
-        (id)->U_Temp_sum += ADC_Temp_Ch;
-        (id)->ident_mes_temp = 1;
+        #define TEMP_FILT_ms  200.0
+        id->U_Temp_filt += (S32)( (S32)( (65.536 * (F32)T1_TIME) / TEMP_FILT_ms ) * (S16)(ADC_Temp_Ch - Hi(id->U_Temp_filt)) );
+        #undef TEMP_FILT_ms
       }
       else
       {
-        (id)->U_Temp_in = (id)->U_Temp_sum >> IDENT_AVERAGE_DIVIDER;
-        (id)->U_Temp_sum = 0;
-        (id)->ident_mes_temp = 0; // Measure flag used for debug
-        
-        if((id)->ident_trace_start == IDENT_TRACE_START_BEFORE_SHOT) // Start trace for debug
-        {
-          _set_reset_trace(1);
-          _set_manual_start_trace(1);
-        }
-        
-        (id)->ident_mode = IDENT_TRIAC_FIRE;
+        id->U_Temp_in = Hi(id->U_Temp_filt);
+        id->U_Temp_filt = 0;
+        id->ident_mode = IDENT_TRIAC_FIRE;
       }
     }
     break;
     /*---------------------------------------------------*/    
     case IDENT_TRIAC_FIRE:
     {
-      if(_zero_cross())
+      if(zero_cross)
       {
         if(id->ident_periods)
         {
@@ -196,102 +194,81 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
         }
         else
         {
-          (id)->ident_mode = IDENT_WAIT_STATE;
+          id->ident_mode = IDENT_WAIT_AFTER_ZC;
+          ident_timer_t1(TIMER_LOAD, IDENT_MEASURE_AFTER_TIME); // Load timer for measure start after zero cross
           id->triac_state = FALSE;
         }
       }
       
       ident_current = absi(mes1.Current);
-      id->IdentCurrent_Sum += ident_current;
-      id->IdentCurrent_Sum_Counter++;
+      #define CURRENT_FILT_ms  20.0
+      id->IdentCurrent_filt += (S32)( (S32)( (65.536 * (F32)T1_TIME) / CURRENT_FILT_ms ) * (S16)(ident_current - Hi(id->IdentCurrent_filt)) );
+      #undef CURRENT_FILT_ms
       
-      if(ident_current > (id)->ident_current_trip)
+      if(ident_current > id->ident_current_trip)
       {
         _set_ident_error(1);
         _set_overcurrent_error(1);
       }
       
-      if(ident_current > (id)->Ident_peak_current)
+      if(ident_current > id->Ident_peak_current)
       {
-        (id)->Ident_peak_current = ident_current;
+        id->Ident_peak_current = ident_current;
       }
     }  
     break;
-    /*---------------------------------------------------*/
-    case IDENT_WAIT_STATE: 
-    {
-      if(_zero_cross())
-      {
-        if((id)->ident_trace_start == IDENT_TRACE_START_AFTER_SHOT)
-        {
-          _set_reset_trace(1);
-          _set_manual_start_trace(1);
-        }
-        (id)->ident_mode = IDENT_WAIT_AFTER_ZC;
-        
-        ident_timer_t1(TIMER_LOAD, IDENT_MEASURE_AFTER_TIME); // Load timer for measure start after zero cross
-      }
-    }
-    break;
     /*---------------------------------------------------*/    
-    case IDENT_WAIT_AFTER_ZC: //Wait one period for temp update 
+    case IDENT_WAIT_AFTER_ZC: 
     {
       if(!ident_timer_t1(TIMER_COUNT, 0))
       {
-        (id)->ident_mode = IDENT_MES_TEMP_2;
-        ident_timeout_timer_t1(TIMER_LOAD, IDENT_MES_TIME_AFTER_SHOT);    
-        ident_timer_t1(TIMER_LOAD, IDENT_AVERAGE_TIME);    //load timer for averaging
-        (id)->ident_mes_temp = 1;
+        id->ident_mode = IDENT_MES_TEMP_2;
       }
     }
     break;
     /*---------------------------------------------------*/    
     case IDENT_MES_TEMP_2:
     {
-      if(ident_timer_t1(TIMER_COUNT, 0))
+      #define TEMP_FILT_ms  50.0
+      id->U_Temp_filt += (S32)( (S32)((65.536 * (F32)T1_TIME) / TEMP_FILT_ms) * (S16)(ADC_Temp_Ch - Hi(id->U_Temp_filt)) );
+      #undef TEMP_FILT_ms
+      U16 U_Temp_max = Hi(id->U_Temp_filt);
+      
+      if(id->Dt_counter == 0)
       {
-        (id)->U_Temp_sum += ADC_Temp_Ch;
+        id->Dt_Temp_in = ADC_Temp_Ch;
+        id->Dt_counter = IDENT_MEASURE_AFTER_TIME;
+      }
+
+      if(U_Temp_max > id->U_Temp_out)
+      {
+        id->U_Temp_out = U_Temp_max;
+        id->Dt_counter++;
       }
       else
       {
-        (id)->ident_mes_temp = 0;
-        (id)->U_Temp_max = (id)->U_Temp_sum >> IDENT_AVERAGE_DIVIDER;
-        (id)->U_Temp_sum = 0;
-        
-        ident_timer_t1(TIMER_LOAD, IDENT_AVERAGE_TIME);    //load timer for averaging
-        
-        if(((id)->U_Temp_max) > ((id)->U_Temp_out))
-        {
-          (id)->U_Temp_out = (id)->U_Temp_max;
-        }
-      }
-      
-      if(!ident_timeout_timer_t1(TIMER_COUNT, 0)) 
-      {
-        (id)->ident_mode = IDENT_EXIT;
+        id->ident_mode = IDENT_EXIT;
       }
     }
     break;
     /*---------------------------------------------------*/    
     case IDENT_EXIT:
     {
-      (id)->U_Temp_delta = (id)->U_Temp_out - (id)->U_Temp_in;
-      if((id)->U_Temp_delta < (id)->ident_deltaT_trip_low)    _set_ident_error(1);
-      if((id)->U_Temp_delta > (id)->ident_deltaT_trip_high)   _set_ident_error(1);
+      id->U_Temp_delta = id->U_Temp_out - id->U_Temp_in;
+      if(id->U_Temp_delta < id->ident_deltaT_trip_low)    _set_ident_error(1);
+      if(id->U_Temp_delta > id->ident_deltaT_trip_high)   _set_ident_error(1);
       
-      (id)->IDENT_Peak_Power    = (((id)->Ident_peak_current / 1000) * mespar.Transformer_Voltage);
-      (id)->IDENT_MAX_RMS_Power =  ( ( (U16)(32768.0 / SQRT_OF_TWO) * (U32)(id)->IDENT_Peak_Power)) >> 15;
       
-      (id)->ident_mode = IDENT_UNDEFINED_STATE;
+      U16 IDENT_Peak_Power    = _builtin_divud( ((U32)id->Ident_peak_current  * mespar.Transformer_Voltage), 1000u);
+      id->IDENT_MAX_RMS_Power =  fmul_qu15(qSQRT2, IDENT_Peak_Power);
+      
+      id->ident_mode = IDENT_UNDEFINED_STATE;
       
       // calculate identification current
-      if(id->IdentCurrent_Sum_Counter > 0)
-      {
-        id->Ident_current = id->IdentCurrent_Sum / id->IdentCurrent_Sum_Counter;
-        id->Ident_current = ((U32)id->Ident_current * (U16)(1.11 * 1024.0)) >> 10; // from avg to rms current
-      }
+      ident_current = Hi(id->IdentCurrent_filt);
+      id->Ident_current = fmul_qu15(ident_current, ( (PI / (2.0 * SQRT2) ) * 32768.0)); // from avg to rms current
       
-      if(   id->Ident_current > id->ident_cur_2210_low 
+      if(   id->Ident_current > id->ident_cur_2210_low
          && id->Ident_current < id->ident_cur_2210_high )
       {
         id->IdentTool = eIdentTool_2210;
@@ -306,10 +283,30 @@ BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch)
         id->IdentTool = eIdentTool_Unknown;
       }
       
+      // process gain calculation
+      if(id->ident_periods_load > 0)
+      {
+        id->Kp = ( ((S16)id->U_Temp_out - (S16)id->Dt_Temp_in) * (S32)1000uL) / id->ident_periods_load;
+      }
+      else
+      {
+        _set_param_limit_error(1);
+      }
+      // process dead time calculation
+      id->Dt_us = ((U32)id->Dt_counter * 100u);
+      
+      // process time constant calculation
+      // tp = 0.63 * dt. ident_periods_load is in half periods (10ms)
+      // (U16)(0.63 * 100.0) * (U16)( (id->ident_periods_load * ((10u * 1000u) / 100u) ) + ( id->Dt_counter * (100u / 100u) ) );
+      id->Tp_us = (U32)(63u) * (U16)( (id->ident_periods_load * 100u) + id->Dt_counter );
+      
       result = 1; //quit ident
     }
     break;
-    /*---------------------------------------------------*/    
+    /*---------------------------------------------------*/
+    case IDENT_UNDEFINED_STATE:
+      // do nothing here
+      break;
     default :   // Undefined state
       mAssert(cFalse);
       _set_global_system_fault(1);
