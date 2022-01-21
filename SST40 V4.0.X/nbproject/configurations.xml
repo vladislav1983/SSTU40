@@ -14,7 +14,6 @@
       <itemPath>../src/include/PARLIST.h</itemPath>
       <itemPath>../src/include/trace.h</itemPath>
       <itemPath>../src/include/vuart.h</itemPath>
-      <itemPath>../src/include/vADC.h</itemPath>
       <itemPath>../src/include/statemachine.h</itemPath>
       <itemPath>../src/include/LCD.h</itemPath>
       <itemPath>../src/include/eeprom.h</itemPath>
@@ -49,7 +48,6 @@
       <itemPath>../src/PARLIST.c</itemPath>
       <itemPath>../src/trace.c</itemPath>
       <itemPath>../src/vuart.c</itemPath>
-      <itemPath>../src/vADC.c</itemPath>
       <itemPath>../src/statemachine.c</itemPath>
       <itemPath>../src/LCD.c</itemPath>
       <itemPath>../src/eeprom.c</itemPath>
@@ -63,6 +61,8 @@
       <itemPath>../src/Crc16.c</itemPath>
       <itemPath>../src/MathTools.c</itemPath>
       <itemPath>../src/include/MathTools.h</itemPath>
+      <itemPath>../src/adc_drv.c</itemPath>
+      <itemPath>../src/include/adc_drv.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

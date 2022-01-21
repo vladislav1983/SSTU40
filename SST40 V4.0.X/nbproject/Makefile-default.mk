@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=../src/DigitalIO.c ../src/main.c ../src/systmr.c ../src/task.c ../src/sirem.c ../src/PARLIST.c ../src/trace.c ../src/vuart.c ../src/vADC.c ../src/statemachine.c ../src/LCD.c ../src/eeprom.c ../src/triac_control.c ../src/IDENT.c ../src/tempctrl.c ../src/measure.c ../src/traps.c ../src/RotaryEncoder/RotaryEncoder.c ../src/RotaryEncoder/RotaryEncoder_cfg.c ../src/Crc16.c ../src/MathTools.c ../src/pid/pid.c ../src/pid/pid_cfg.c
+SOURCEFILES_QUOTED_IF_SPACED=../src/pid/pid.c ../src/pid/pid_cfg.c ../src/DigitalIO.c ../src/main.c ../src/systmr.c ../src/task.c ../src/sirem.c ../src/PARLIST.c ../src/trace.c ../src/vuart.c ../src/statemachine.c ../src/LCD.c ../src/eeprom.c ../src/triac_control.c ../src/IDENT.c ../src/tempctrl.c ../src/measure.c ../src/traps.c ../src/RotaryEncoder/RotaryEncoder.c ../src/RotaryEncoder/RotaryEncoder_cfg.c ../src/Crc16.c ../src/MathTools.c ../src/adc_drv.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/1360937237/DigitalIO.o ${OBJECTDIR}/_ext/1360937237/main.o ${OBJECTDIR}/_ext/1360937237/systmr.o ${OBJECTDIR}/_ext/1360937237/task.o ${OBJECTDIR}/_ext/1360937237/sirem.o ${OBJECTDIR}/_ext/1360937237/PARLIST.o ${OBJECTDIR}/_ext/1360937237/trace.o ${OBJECTDIR}/_ext/1360937237/vuart.o ${OBJECTDIR}/_ext/1360937237/vADC.o ${OBJECTDIR}/_ext/1360937237/statemachine.o ${OBJECTDIR}/_ext/1360937237/LCD.o ${OBJECTDIR}/_ext/1360937237/eeprom.o ${OBJECTDIR}/_ext/1360937237/triac_control.o ${OBJECTDIR}/_ext/1360937237/IDENT.o ${OBJECTDIR}/_ext/1360937237/tempctrl.o ${OBJECTDIR}/_ext/1360937237/measure.o ${OBJECTDIR}/_ext/1360937237/traps.o ${OBJECTDIR}/_ext/2014683921/RotaryEncoder.o ${OBJECTDIR}/_ext/2014683921/RotaryEncoder_cfg.o ${OBJECTDIR}/_ext/1360937237/Crc16.o ${OBJECTDIR}/_ext/1360937237/MathTools.o ${OBJECTDIR}/_ext/659864977/pid.o ${OBJECTDIR}/_ext/659864977/pid_cfg.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/1360937237/DigitalIO.o.d ${OBJECTDIR}/_ext/1360937237/main.o.d ${OBJECTDIR}/_ext/1360937237/systmr.o.d ${OBJECTDIR}/_ext/1360937237/task.o.d ${OBJECTDIR}/_ext/1360937237/sirem.o.d ${OBJECTDIR}/_ext/1360937237/PARLIST.o.d ${OBJECTDIR}/_ext/1360937237/trace.o.d ${OBJECTDIR}/_ext/1360937237/vuart.o.d ${OBJECTDIR}/_ext/1360937237/vADC.o.d ${OBJECTDIR}/_ext/1360937237/statemachine.o.d ${OBJECTDIR}/_ext/1360937237/LCD.o.d ${OBJECTDIR}/_ext/1360937237/eeprom.o.d ${OBJECTDIR}/_ext/1360937237/triac_control.o.d ${OBJECTDIR}/_ext/1360937237/IDENT.o.d ${OBJECTDIR}/_ext/1360937237/tempctrl.o.d ${OBJECTDIR}/_ext/1360937237/measure.o.d ${OBJECTDIR}/_ext/1360937237/traps.o.d ${OBJECTDIR}/_ext/2014683921/RotaryEncoder.o.d ${OBJECTDIR}/_ext/2014683921/RotaryEncoder_cfg.o.d ${OBJECTDIR}/_ext/1360937237/Crc16.o.d ${OBJECTDIR}/_ext/1360937237/MathTools.o.d ${OBJECTDIR}/_ext/659864977/pid.o.d ${OBJECTDIR}/_ext/659864977/pid_cfg.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/_ext/659864977/pid.o ${OBJECTDIR}/_ext/659864977/pid_cfg.o ${OBJECTDIR}/_ext/1360937237/DigitalIO.o ${OBJECTDIR}/_ext/1360937237/main.o ${OBJECTDIR}/_ext/1360937237/systmr.o ${OBJECTDIR}/_ext/1360937237/task.o ${OBJECTDIR}/_ext/1360937237/sirem.o ${OBJECTDIR}/_ext/1360937237/PARLIST.o ${OBJECTDIR}/_ext/1360937237/trace.o ${OBJECTDIR}/_ext/1360937237/vuart.o ${OBJECTDIR}/_ext/1360937237/statemachine.o ${OBJECTDIR}/_ext/1360937237/LCD.o ${OBJECTDIR}/_ext/1360937237/eeprom.o ${OBJECTDIR}/_ext/1360937237/triac_control.o ${OBJECTDIR}/_ext/1360937237/IDENT.o ${OBJECTDIR}/_ext/1360937237/tempctrl.o ${OBJECTDIR}/_ext/1360937237/measure.o ${OBJECTDIR}/_ext/1360937237/traps.o ${OBJECTDIR}/_ext/2014683921/RotaryEncoder.o ${OBJECTDIR}/_ext/2014683921/RotaryEncoder_cfg.o ${OBJECTDIR}/_ext/1360937237/Crc16.o ${OBJECTDIR}/_ext/1360937237/MathTools.o ${OBJECTDIR}/_ext/1360937237/adc_drv.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/_ext/659864977/pid.o.d ${OBJECTDIR}/_ext/659864977/pid_cfg.o.d ${OBJECTDIR}/_ext/1360937237/DigitalIO.o.d ${OBJECTDIR}/_ext/1360937237/main.o.d ${OBJECTDIR}/_ext/1360937237/systmr.o.d ${OBJECTDIR}/_ext/1360937237/task.o.d ${OBJECTDIR}/_ext/1360937237/sirem.o.d ${OBJECTDIR}/_ext/1360937237/PARLIST.o.d ${OBJECTDIR}/_ext/1360937237/trace.o.d ${OBJECTDIR}/_ext/1360937237/vuart.o.d ${OBJECTDIR}/_ext/1360937237/statemachine.o.d ${OBJECTDIR}/_ext/1360937237/LCD.o.d ${OBJECTDIR}/_ext/1360937237/eeprom.o.d ${OBJECTDIR}/_ext/1360937237/triac_control.o.d ${OBJECTDIR}/_ext/1360937237/IDENT.o.d ${OBJECTDIR}/_ext/1360937237/tempctrl.o.d ${OBJECTDIR}/_ext/1360937237/measure.o.d ${OBJECTDIR}/_ext/1360937237/traps.o.d ${OBJECTDIR}/_ext/2014683921/RotaryEncoder.o.d ${OBJECTDIR}/_ext/2014683921/RotaryEncoder_cfg.o.d ${OBJECTDIR}/_ext/1360937237/Crc16.o.d ${OBJECTDIR}/_ext/1360937237/MathTools.o.d ${OBJECTDIR}/_ext/1360937237/adc_drv.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/_ext/1360937237/DigitalIO.o ${OBJECTDIR}/_ext/1360937237/main.o ${OBJECTDIR}/_ext/1360937237/systmr.o ${OBJECTDIR}/_ext/1360937237/task.o ${OBJECTDIR}/_ext/1360937237/sirem.o ${OBJECTDIR}/_ext/1360937237/PARLIST.o ${OBJECTDIR}/_ext/1360937237/trace.o ${OBJECTDIR}/_ext/1360937237/vuart.o ${OBJECTDIR}/_ext/1360937237/vADC.o ${OBJECTDIR}/_ext/1360937237/statemachine.o ${OBJECTDIR}/_ext/1360937237/LCD.o ${OBJECTDIR}/_ext/1360937237/eeprom.o ${OBJECTDIR}/_ext/1360937237/triac_control.o ${OBJECTDIR}/_ext/1360937237/IDENT.o ${OBJECTDIR}/_ext/1360937237/tempctrl.o ${OBJECTDIR}/_ext/1360937237/measure.o ${OBJECTDIR}/_ext/1360937237/traps.o ${OBJECTDIR}/_ext/2014683921/RotaryEncoder.o ${OBJECTDIR}/_ext/2014683921/RotaryEncoder_cfg.o ${OBJECTDIR}/_ext/1360937237/Crc16.o ${OBJECTDIR}/_ext/1360937237/MathTools.o ${OBJECTDIR}/_ext/659864977/pid.o ${OBJECTDIR}/_ext/659864977/pid_cfg.o
+OBJECTFILES=${OBJECTDIR}/_ext/659864977/pid.o ${OBJECTDIR}/_ext/659864977/pid_cfg.o ${OBJECTDIR}/_ext/1360937237/DigitalIO.o ${OBJECTDIR}/_ext/1360937237/main.o ${OBJECTDIR}/_ext/1360937237/systmr.o ${OBJECTDIR}/_ext/1360937237/task.o ${OBJECTDIR}/_ext/1360937237/sirem.o ${OBJECTDIR}/_ext/1360937237/PARLIST.o ${OBJECTDIR}/_ext/1360937237/trace.o ${OBJECTDIR}/_ext/1360937237/vuart.o ${OBJECTDIR}/_ext/1360937237/statemachine.o ${OBJECTDIR}/_ext/1360937237/LCD.o ${OBJECTDIR}/_ext/1360937237/eeprom.o ${OBJECTDIR}/_ext/1360937237/triac_control.o ${OBJECTDIR}/_ext/1360937237/IDENT.o ${OBJECTDIR}/_ext/1360937237/tempctrl.o ${OBJECTDIR}/_ext/1360937237/measure.o ${OBJECTDIR}/_ext/1360937237/traps.o ${OBJECTDIR}/_ext/2014683921/RotaryEncoder.o ${OBJECTDIR}/_ext/2014683921/RotaryEncoder_cfg.o ${OBJECTDIR}/_ext/1360937237/Crc16.o ${OBJECTDIR}/_ext/1360937237/MathTools.o ${OBJECTDIR}/_ext/1360937237/adc_drv.o
 
 # Source Files
-SOURCEFILES=../src/DigitalIO.c ../src/main.c ../src/systmr.c ../src/task.c ../src/sirem.c ../src/PARLIST.c ../src/trace.c ../src/vuart.c ../src/vADC.c ../src/statemachine.c ../src/LCD.c ../src/eeprom.c ../src/triac_control.c ../src/IDENT.c ../src/tempctrl.c ../src/measure.c ../src/traps.c ../src/RotaryEncoder/RotaryEncoder.c ../src/RotaryEncoder/RotaryEncoder_cfg.c ../src/Crc16.c ../src/MathTools.c ../src/pid/pid.c ../src/pid/pid_cfg.c
+SOURCEFILES=../src/pid/pid.c ../src/pid/pid_cfg.c ../src/DigitalIO.c ../src/main.c ../src/systmr.c ../src/task.c ../src/sirem.c ../src/PARLIST.c ../src/trace.c ../src/vuart.c ../src/statemachine.c ../src/LCD.c ../src/eeprom.c ../src/triac_control.c ../src/IDENT.c ../src/tempctrl.c ../src/measure.c ../src/traps.c ../src/RotaryEncoder/RotaryEncoder.c ../src/RotaryEncoder/RotaryEncoder_cfg.c ../src/Crc16.c ../src/MathTools.c ../src/adc_drv.c
 
 
 
@@ -107,6 +107,20 @@ endif
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
+${OBJECTDIR}/_ext/659864977/pid.o: ../src/pid/pid.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/659864977" 
+	@${RM} ${OBJECTDIR}/_ext/659864977/pid.o.d 
+	@${RM} ${OBJECTDIR}/_ext/659864977/pid.o.ok ${OBJECTDIR}/_ext/659864977/pid.o.err 
+	@${RM} ${OBJECTDIR}/_ext/659864977/pid.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/659864977/pid.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -DROTARY_ENCODER_USED -I"../src/Common" -I"../src/include" -I"." -I"../src/RotaryEncoder" -I"../src/pid" -mlarge-code -mlarge-data -mconst-in-code -O1 -MMD -MF "${OBJECTDIR}/_ext/659864977/pid.o.d" -o ${OBJECTDIR}/_ext/659864977/pid.o ../src/pid/pid.c     -save-temps
+	
+${OBJECTDIR}/_ext/659864977/pid_cfg.o: ../src/pid/pid_cfg.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/659864977" 
+	@${RM} ${OBJECTDIR}/_ext/659864977/pid_cfg.o.d 
+	@${RM} ${OBJECTDIR}/_ext/659864977/pid_cfg.o.ok ${OBJECTDIR}/_ext/659864977/pid_cfg.o.err 
+	@${RM} ${OBJECTDIR}/_ext/659864977/pid_cfg.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/659864977/pid_cfg.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -DROTARY_ENCODER_USED -I"../src/Common" -I"../src/include" -I"." -I"../src/RotaryEncoder" -I"../src/pid" -mlarge-code -mlarge-data -mconst-in-code -O1 -MMD -MF "${OBJECTDIR}/_ext/659864977/pid_cfg.o.d" -o ${OBJECTDIR}/_ext/659864977/pid_cfg.o ../src/pid/pid_cfg.c     -save-temps
+	
 ${OBJECTDIR}/_ext/1360937237/DigitalIO.o: ../src/DigitalIO.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
 	@${RM} ${OBJECTDIR}/_ext/1360937237/DigitalIO.o.d 
@@ -162,13 +176,6 @@ ${OBJECTDIR}/_ext/1360937237/vuart.o: ../src/vuart.c  nbproject/Makefile-${CND_C
 	@${RM} ${OBJECTDIR}/_ext/1360937237/vuart.o.ok ${OBJECTDIR}/_ext/1360937237/vuart.o.err 
 	@${RM} ${OBJECTDIR}/_ext/1360937237/vuart.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360937237/vuart.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -DROTARY_ENCODER_USED -I"../src/Common" -I"../src/include" -I"." -I"../src/RotaryEncoder" -I"../src/pid" -mlarge-code -mlarge-data -mconst-in-code -O1 -MMD -MF "${OBJECTDIR}/_ext/1360937237/vuart.o.d" -o ${OBJECTDIR}/_ext/1360937237/vuart.o ../src/vuart.c     -save-temps
-	
-${OBJECTDIR}/_ext/1360937237/vADC.o: ../src/vADC.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
-	@${RM} ${OBJECTDIR}/_ext/1360937237/vADC.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1360937237/vADC.o.ok ${OBJECTDIR}/_ext/1360937237/vADC.o.err 
-	@${RM} ${OBJECTDIR}/_ext/1360937237/vADC.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1360937237/vADC.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -DROTARY_ENCODER_USED -I"../src/Common" -I"../src/include" -I"." -I"../src/RotaryEncoder" -I"../src/pid" -mlarge-code -mlarge-data -mconst-in-code -O1 -MMD -MF "${OBJECTDIR}/_ext/1360937237/vADC.o.d" -o ${OBJECTDIR}/_ext/1360937237/vADC.o ../src/vADC.c     -save-temps
 	
 ${OBJECTDIR}/_ext/1360937237/statemachine.o: ../src/statemachine.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
@@ -254,21 +261,28 @@ ${OBJECTDIR}/_ext/1360937237/MathTools.o: ../src/MathTools.c  nbproject/Makefile
 	@${RM} ${OBJECTDIR}/_ext/1360937237/MathTools.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360937237/MathTools.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -DROTARY_ENCODER_USED -I"../src/Common" -I"../src/include" -I"." -I"../src/RotaryEncoder" -I"../src/pid" -mlarge-code -mlarge-data -mconst-in-code -O1 -MMD -MF "${OBJECTDIR}/_ext/1360937237/MathTools.o.d" -o ${OBJECTDIR}/_ext/1360937237/MathTools.o ../src/MathTools.c     -save-temps
 	
+${OBJECTDIR}/_ext/1360937237/adc_drv.o: ../src/adc_drv.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/adc_drv.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/adc_drv.o.ok ${OBJECTDIR}/_ext/1360937237/adc_drv.o.err 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/adc_drv.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1360937237/adc_drv.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -DROTARY_ENCODER_USED -I"../src/Common" -I"../src/include" -I"." -I"../src/RotaryEncoder" -I"../src/pid" -mlarge-code -mlarge-data -mconst-in-code -O1 -MMD -MF "${OBJECTDIR}/_ext/1360937237/adc_drv.o.d" -o ${OBJECTDIR}/_ext/1360937237/adc_drv.o ../src/adc_drv.c     -save-temps
+	
+else
 ${OBJECTDIR}/_ext/659864977/pid.o: ../src/pid/pid.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/659864977" 
 	@${RM} ${OBJECTDIR}/_ext/659864977/pid.o.d 
 	@${RM} ${OBJECTDIR}/_ext/659864977/pid.o.ok ${OBJECTDIR}/_ext/659864977/pid.o.err 
 	@${RM} ${OBJECTDIR}/_ext/659864977/pid.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/659864977/pid.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -DROTARY_ENCODER_USED -I"../src/Common" -I"../src/include" -I"." -I"../src/RotaryEncoder" -I"../src/pid" -mlarge-code -mlarge-data -mconst-in-code -O1 -MMD -MF "${OBJECTDIR}/_ext/659864977/pid.o.d" -o ${OBJECTDIR}/_ext/659864977/pid.o ../src/pid/pid.c     -save-temps
+	@${FIXDEPS} "${OBJECTDIR}/_ext/659864977/pid.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -DROTARY_ENCODER_USED -I"../src/Common" -I"../src/include" -I"." -I"../src/RotaryEncoder" -I"../src/pid" -mlarge-code -mlarge-data -mconst-in-code -O1 -MMD -MF "${OBJECTDIR}/_ext/659864977/pid.o.d" -o ${OBJECTDIR}/_ext/659864977/pid.o ../src/pid/pid.c     -save-temps
 	
 ${OBJECTDIR}/_ext/659864977/pid_cfg.o: ../src/pid/pid_cfg.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/659864977" 
 	@${RM} ${OBJECTDIR}/_ext/659864977/pid_cfg.o.d 
 	@${RM} ${OBJECTDIR}/_ext/659864977/pid_cfg.o.ok ${OBJECTDIR}/_ext/659864977/pid_cfg.o.err 
 	@${RM} ${OBJECTDIR}/_ext/659864977/pid_cfg.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/659864977/pid_cfg.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE) -g -D__DEBUG -D__MPLAB_DEBUGGER_PK3=1 -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -DROTARY_ENCODER_USED -I"../src/Common" -I"../src/include" -I"." -I"../src/RotaryEncoder" -I"../src/pid" -mlarge-code -mlarge-data -mconst-in-code -O1 -MMD -MF "${OBJECTDIR}/_ext/659864977/pid_cfg.o.d" -o ${OBJECTDIR}/_ext/659864977/pid_cfg.o ../src/pid/pid_cfg.c     -save-temps
+	@${FIXDEPS} "${OBJECTDIR}/_ext/659864977/pid_cfg.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -DROTARY_ENCODER_USED -I"../src/Common" -I"../src/include" -I"." -I"../src/RotaryEncoder" -I"../src/pid" -mlarge-code -mlarge-data -mconst-in-code -O1 -MMD -MF "${OBJECTDIR}/_ext/659864977/pid_cfg.o.d" -o ${OBJECTDIR}/_ext/659864977/pid_cfg.o ../src/pid/pid_cfg.c     -save-temps
 	
-else
 ${OBJECTDIR}/_ext/1360937237/DigitalIO.o: ../src/DigitalIO.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
 	@${RM} ${OBJECTDIR}/_ext/1360937237/DigitalIO.o.d 
@@ -324,13 +338,6 @@ ${OBJECTDIR}/_ext/1360937237/vuart.o: ../src/vuart.c  nbproject/Makefile-${CND_C
 	@${RM} ${OBJECTDIR}/_ext/1360937237/vuart.o.ok ${OBJECTDIR}/_ext/1360937237/vuart.o.err 
 	@${RM} ${OBJECTDIR}/_ext/1360937237/vuart.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360937237/vuart.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -DROTARY_ENCODER_USED -I"../src/Common" -I"../src/include" -I"." -I"../src/RotaryEncoder" -I"../src/pid" -mlarge-code -mlarge-data -mconst-in-code -O1 -MMD -MF "${OBJECTDIR}/_ext/1360937237/vuart.o.d" -o ${OBJECTDIR}/_ext/1360937237/vuart.o ../src/vuart.c     -save-temps
-	
-${OBJECTDIR}/_ext/1360937237/vADC.o: ../src/vADC.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
-	@${RM} ${OBJECTDIR}/_ext/1360937237/vADC.o.d 
-	@${RM} ${OBJECTDIR}/_ext/1360937237/vADC.o.ok ${OBJECTDIR}/_ext/1360937237/vADC.o.err 
-	@${RM} ${OBJECTDIR}/_ext/1360937237/vADC.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/1360937237/vADC.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -DROTARY_ENCODER_USED -I"../src/Common" -I"../src/include" -I"." -I"../src/RotaryEncoder" -I"../src/pid" -mlarge-code -mlarge-data -mconst-in-code -O1 -MMD -MF "${OBJECTDIR}/_ext/1360937237/vADC.o.d" -o ${OBJECTDIR}/_ext/1360937237/vADC.o ../src/vADC.c     -save-temps
 	
 ${OBJECTDIR}/_ext/1360937237/statemachine.o: ../src/statemachine.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
@@ -416,19 +423,12 @@ ${OBJECTDIR}/_ext/1360937237/MathTools.o: ../src/MathTools.c  nbproject/Makefile
 	@${RM} ${OBJECTDIR}/_ext/1360937237/MathTools.o 
 	@${FIXDEPS} "${OBJECTDIR}/_ext/1360937237/MathTools.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -DROTARY_ENCODER_USED -I"../src/Common" -I"../src/include" -I"." -I"../src/RotaryEncoder" -I"../src/pid" -mlarge-code -mlarge-data -mconst-in-code -O1 -MMD -MF "${OBJECTDIR}/_ext/1360937237/MathTools.o.d" -o ${OBJECTDIR}/_ext/1360937237/MathTools.o ../src/MathTools.c     -save-temps
 	
-${OBJECTDIR}/_ext/659864977/pid.o: ../src/pid/pid.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/659864977" 
-	@${RM} ${OBJECTDIR}/_ext/659864977/pid.o.d 
-	@${RM} ${OBJECTDIR}/_ext/659864977/pid.o.ok ${OBJECTDIR}/_ext/659864977/pid.o.err 
-	@${RM} ${OBJECTDIR}/_ext/659864977/pid.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/659864977/pid.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -DROTARY_ENCODER_USED -I"../src/Common" -I"../src/include" -I"." -I"../src/RotaryEncoder" -I"../src/pid" -mlarge-code -mlarge-data -mconst-in-code -O1 -MMD -MF "${OBJECTDIR}/_ext/659864977/pid.o.d" -o ${OBJECTDIR}/_ext/659864977/pid.o ../src/pid/pid.c     -save-temps
-	
-${OBJECTDIR}/_ext/659864977/pid_cfg.o: ../src/pid/pid_cfg.c  nbproject/Makefile-${CND_CONF}.mk
-	@${MKDIR} "${OBJECTDIR}/_ext/659864977" 
-	@${RM} ${OBJECTDIR}/_ext/659864977/pid_cfg.o.d 
-	@${RM} ${OBJECTDIR}/_ext/659864977/pid_cfg.o.ok ${OBJECTDIR}/_ext/659864977/pid_cfg.o.err 
-	@${RM} ${OBJECTDIR}/_ext/659864977/pid_cfg.o 
-	@${FIXDEPS} "${OBJECTDIR}/_ext/659864977/pid_cfg.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -DROTARY_ENCODER_USED -I"../src/Common" -I"../src/include" -I"." -I"../src/RotaryEncoder" -I"../src/pid" -mlarge-code -mlarge-data -mconst-in-code -O1 -MMD -MF "${OBJECTDIR}/_ext/659864977/pid_cfg.o.d" -o ${OBJECTDIR}/_ext/659864977/pid_cfg.o ../src/pid/pid_cfg.c     -save-temps
+${OBJECTDIR}/_ext/1360937237/adc_drv.o: ../src/adc_drv.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}/_ext/1360937237" 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/adc_drv.o.d 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/adc_drv.o.ok ${OBJECTDIR}/_ext/1360937237/adc_drv.o.err 
+	@${RM} ${OBJECTDIR}/_ext/1360937237/adc_drv.o 
+	@${FIXDEPS} "${OBJECTDIR}/_ext/1360937237/adc_drv.o.d" $(SILENT) -rsi ${MP_CC_DIR}../ -c ${MP_CC} $(MP_EXTRA_CC_PRE)  -g -omf=elf -x c -c -mcpu=$(MP_PROCESSOR_OPTION) -Wall -DROTARY_ENCODER_USED -I"../src/Common" -I"../src/include" -I"." -I"../src/RotaryEncoder" -I"../src/pid" -mlarge-code -mlarge-data -mconst-in-code -O1 -MMD -MF "${OBJECTDIR}/_ext/1360937237/adc_drv.o.d" -o ${OBJECTDIR}/_ext/1360937237/adc_drv.o ../src/adc_drv.c     -save-temps
 	
 endif
 

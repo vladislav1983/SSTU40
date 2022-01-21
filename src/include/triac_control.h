@@ -19,7 +19,7 @@
 /*----------------------------------------------------------------------------*/
 /* Constant data                                                              */
 /*----------------------------------------------------------------------------*/
-#define TRIAC_FIRE_TIME                (2000ul/T1_TIME)            //triac fire time in task1 periods
+#define TRIAC_FIRE_TIME                (2000ul/T1_TIME_us)            //triac fire time in task1 periods
 
 /*----------------------------------------------------------------------------*/
 /* Exported type                                                              */
@@ -38,16 +38,24 @@
 /*----------------------------------------------------------------------------*/
 /* Triac control */
 #define _FIRE_TRIAC()(                    \
-{                                        \
-    pinTH_FIRE = 1;                        \
-    _set_triac_state(1);                \
+{                                         \
+  if(   (_drive_enabled()     != 0)       \
+     && (_drive_disabled_pc() == 0))      \
+  {                                       \
+    pinTH_FIRE = 1;                       \
+    _set_triac_state(1);                  \
     _set_over_prot_triac_state(1);        \
+  }                                       \
+  else                                    \
+  {                                       \
+    _TRIAC_OFF();                         \
+  }                                       \
 })    
 
 #define _TRIAC_OFF()(                    \
 {                                        \
-    pinTH_FIRE = 0;                        \
-    _set_triac_state(0);                \
+    pinTH_FIRE = 0;                      \
+    _set_triac_state(0);                 \
 })    
 
 #define _TRIAC()                        pinTH_FIRE

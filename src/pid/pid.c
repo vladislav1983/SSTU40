@@ -58,15 +58,15 @@ static void pid_calc_period_and_overshoot(const tPidInstance * instance, S16 Ref
 // Kp = deltaT / deltaHalfHeatPeriods - get it from identification component
 // Kp is around 40 / 20 = 2 adc_deg/half_period - 1 deg/hp
 // selecting p term scaling:
-// Max input = 1024 adc (temperature)
+// Max input = 32768 adc (temperature)
 // Max output = 10 half periods fo sample time = 100ms
-// select gain = 10 -> 1 adc_deg = 10 half periods
-// (1 * K)>> 4 = 10 -> K = 160
+// select gain = 10 -> 64 adc (1 deg) = 10 half periods
+// (64 * K)>> 10 = 10 -> K = 160
 // for gain = 1 to 10 -> output = 1 to 10 half periods
-// (1 * K) >> 4 = 1 -> K = 16
-// (1 * K) >> 4 = 10 -> K = 160
+// (64 * K) >> 10 = 1  -> K = 16
+// (64 * K) >> 10 = 10 -> K = 160
 // full range overflow check T e max , Gain = max
-// (1024 * 160) >> 4 = 10240
+// (32768 * 160) >> 10 = 5120
 //- **************************************************************************
 S16 PidProcess(const tPidInstance * instance, S16 Ref, S16 Fbk, U16 SampleTime_ms, S16 PidMax)
 {
@@ -80,14 +80,15 @@ S16 PidProcess(const tPidInstance * instance, S16 Ref, S16 Fbk, U16 SampleTime_m
   if(NULL != instance)
   {
     if(   instance->cfg->P_term_scale < 16
+       && instance->cfg->DI_term_limit <= PidMax
        && instance->cfg->Fbk_Filt_ms >= (2 * SampleTime_ms)
        && (SampleTime_ms > 50 && SampleTime_ms < 20000) 
        && PidMax > 0)
     {
       S32 P_term_min  = -(S32)((U32)1uL << (15u + instance->cfg->P_term_scale));
       S32 P_term_max  =  (S32)((U32)1uL << (15u + instance->cfg->P_term_scale)) - 1uL;
-      S32 ID_term_min = -(S32)((U32)PidMax << 16);
-      S32 ID_term_max =  (S32)((U32)PidMax << 16);
+      S32 ID_term_min = -(S32)((U32)instance->cfg->DI_term_limit << 16);
+      S32 ID_term_max =  (S32)((U32)instance->cfg->DI_term_limit << 16);
       
       // input filtration
       if(instance->cfg->Fbk_Filt_ms != instance->data->Fbk_Filt_ms)
@@ -102,23 +103,23 @@ S16 PidProcess(const tPidInstance * instance, S16 Ref, S16 Fbk, U16 SampleTime_m
           _set_param_limit_error(1);
         }
       }
-      // Filter function: y(n)=y(n?1)+a[x(n)?(y(n?1)/65536)],
+      // Filter function: y(n)=y(n-1)+a[x(n)*(y(n-1)/65536)],
       instance->data->Fbk_Filt += (S32)_builtin_mulus(instance->data->Fbk_Filt_coeff, (S16)(Fbk - Hi(instance->data->Fbk_Filt )));
       // error calculation
       error_filt = Ref - Hi(instance->data->Fbk_Filt);
       error = Ref - Fbk;
       
       // integration
-      if((error < 0 && instance->data->Integral.sat == PidSat_neg) || (error > 0 && instance->data->Integral.sat == PidSat_pos))
+      if((error < 0 && instance->data->Integral.sat < PidSat_none) || (error > 0 && instance->data->Integral.sat > PidSat_none))
       {
         // do nothing if there is saturation, and error is in the same direction;
       }
       else
       {
         instance->data->Integral.x += (S32)_builtin_mulus(instance->cfg->Ki2, error);
+        // integral saturation
+        instance->data->Integral = pid_satlimit(instance->data->Integral.x, ID_term_min, ID_term_max);
       }
-      // integral saturation
-      instance->data->Integral = pid_satlimit(instance->data->Integral.x, ID_term_min, ID_term_max);
       
       // P and D terms calculation
       P_term = pid_limit(_builtin_mulus(instance->cfg->Kp, error), P_term_min, P_term_max);
@@ -126,7 +127,7 @@ S16 PidProcess(const tPidInstance * instance, S16 Ref, S16 Fbk, U16 SampleTime_m
       D_term = pid_limit(_builtin_mulus(instance->cfg->Kd2, (error_filt - instance->data->error_filt_prev)), ID_term_min, ID_term_max);
       
       // PID output limitation
-      PidOut = pid_limit((P_term >> instance->cfg->P_term_scale) + (instance->data->Integral.x >> 16) + (D_term >> 16), -PidMax, PidMax);
+      PidOut = pid_limit((P_term >> instance->cfg->P_term_scale) + Hi(instance->data->Integral.x) + Hi(D_term), -PidMax, PidMax);
       
       if(instance->cfg->Out_Filt_ms != 0)
       {
@@ -252,7 +253,7 @@ static void pid_calc_period_and_overshoot(const tPidInstance * instance, S16 Ref
   error = Ref - Fbk;
 
   // X seconds filtration of error
-  instance->data->error_filt += (S32)_builtin_mulus(_builtin_divud( _builtin_muluu(65536u, SampleTime_ms), 20000u), (S16)(error - Hi(instance->data->error_filt )));
+  instance->data->error_filt += (S32)_builtin_mulus(_builtin_divud( _builtin_muluu(65536u, SampleTime_ms), 10000u), (S16)(error - Hi(instance->data->error_filt )));
   error_filt = Hi(instance->data->error_filt);
   
   if(error > error_filt)

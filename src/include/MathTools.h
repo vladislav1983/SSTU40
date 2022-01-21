@@ -37,17 +37,19 @@
 #define DEC_PLACES_AFTER    (15-DEC_PLACES_BEFORE)
 
 /*
-*	arithmetic constants
-*	====================
-*/
+ *	arithmetic constants
+ *	====================
+ */
+#ifndef PI
 #define PI          3.1415926535897932384626433832795
+#endif
 #define SQRT2       1.4142135623730950488016887242097
 #define SQRT3       1.7320508075688772935274463415059
 #define SQRT3OV2		0.86602540378443864676372317075294
 /*
-*	Fractional arithmetic constants
-*	================================
-*/
+ *	Fractional arithmetic constants
+ *	================================
+ */
 #define qOneBySq3		0x49E7			// 1/SQRT(3)*32768 (Fractional format)
 #define qOneBy3			0x2AAB			// 1/3 * 32768 in fractional format
 #define qSQRT3OV2		0x6EDA			// SQRT(3)/2 in Fractional Format
@@ -79,25 +81,25 @@ extern const S16	sintab[];
 //==========================================================================================================
 /******************************************************************************/
 /*
-* Purpose:  Sine Function with linear interpolation in a small degrees input.
-* Input: 	alpha = 2^16*x/(2*PI)
-* Output:   sin(x)*32768
-*/
+ * Purpose:  Sine Function with linear interpolation in a small degrees input.
+ * Input: 	alpha = 2^16*x/(2*PI)
+ * Output:   sin(x)*32768
+ */
 /******************************************************************************/
 static inline S16 sine(U16 alpha)	
 {	
-if (  ( ((S16)alpha) <  (S16)( 0.25*65536.0/(2*PI)) ) && ( ((S16)alpha) >  (S16)(-0.25*65536.0/(2*PI)) )  )
-   return((S32)(256*PI)*(S16)alpha >> 8);
-else
-   return(sintab[(U16)(alpha)>>(16-SIN_LEN_DIV)]);
+  if (  ( ((S16)alpha) <  (S16)( 0.25*65536.0/(2*PI)) ) && ( ((S16)alpha) >  (S16)(-0.25*65536.0/(2*PI)) )  )
+    return((S32)(256*PI)*(S16)alpha >> 8);
+  else
+    return(sintab[(U16)(alpha)>>(16-SIN_LEN_DIV)]);
 }
 
 /******************************************************************************/
 /*
-* Purpose:  
-* Input: 	
-* Output: 
-*/
+ * Purpose:  
+ * Input: 	
+ * Output: 
+ */
 /******************************************************************************/
 static inline S32 limit(S32 x, S32 min, S32 max)
 {
@@ -106,16 +108,16 @@ static inline S32 limit(S32 x, S32 min, S32 max)
   else if(x < min)
     return min;
   else if(x > max)
-   return max;
+    return max;
   else
     return x;
 }
 /******************************************************************************/
 /*
-* Purpose:  
-* Input: 	
-* Output: 
-*/
+ * Purpose:  
+ * Input: 	
+ * Output: 
+ */
 /******************************************************************************/
 static inline tSatLimit satlimit(S32 x, S32 min, S32 max)
 {
@@ -136,29 +138,29 @@ static inline tSatLimit satlimit(S32 x, S32 min, S32 max)
     SatLimit.x = max;
     SatLimit.sat = 1;
   }
-   
+  
   return SatLimit;
 }
 
 /******************************************************************************/
 /*
-* Purpose:  Cosine Function with linear interpolation in a small degrees input.
-* Input: 	alpha = 2^16*x/(2*PI)
-* Output:   cos(x)*32768
-*/
+ * Purpose:  Cosine Function with linear interpolation in a small degrees input.
+ * Input: 	alpha = 2^16*x/(2*PI)
+ * Output:   cos(x)*32768
+ */
 /******************************************************************************/
 #define cosine(alpha)	sine(16384 - (alpha))
 
 /*
-*	macro definitions for arithmetic functions
-*	==========================================
-*/
+ *	macro definitions for arithmetic functions
+ *	==========================================
+ */
 #define absi(x)             ((x)>=0 ? (x) : -(x))		/* absolute of integer */
-#define sign(x)			    ((x)>=0 ? 1 : -1)			/* sign function 1/-1 */
-#define sigm(x)			    ((x)>=0 ? 0 : 1)			/* sign function 0/1 */
-#define signmul(x,y)		((y)>=0 ? (x) : -(x))		/* set sign(x) according sign(y) */
-#define max_int(x,y)	    ((x)>=(y) ? (x) : (y))		/* return maximum of (x,y) */
-#define min_int(x,y)		((x)>=(y) ? (y) : (x))		/* return minimum of (x,y) */
+#define sign(x)             ((x)>=0 ? 1 : -1)			/* sign function 1/-1 */
+#define sigm(x)             ((x)>=0 ? 0 : 1)			/* sign function 0/1 */
+#define signmul(x,y)        ((y)>=0 ? (x) : -(x))		/* set sign(x) according sign(y) */
+#define max_int(x,y)        ((x)>=(y) ? (x) : (y))		/* return maximum of (x,y) */
+#define min_int(x,y)        ((x)>=(y) ? (y) : (x))		/* return minimum of (x,y) */
 #define boolean(x)	        ((x)==0 ? FALSE : TRUE)		/* integer to boolean conversion */
 #define MulFracBy2(x,y)     ((((S32)(x)*(y))<<1)>>16)   /* operands word */
 #define MulFracBy2L(x,y)    (((x)*(y))>>15)             /* operands long */
@@ -168,22 +170,32 @@ static inline tSatLimit satlimit(S32 x, S32 min, S32 max)
 /*
  *	macro definitions for bit/byte functions
  *	==========================================
-*/
+ */
 #define _putbit(value,dst,bitn)	 (		\
-{										\
-    if(value)							\
-    dst = ((dst) | (U16)(1u << bitn));	\
-    else								\
-    dst = ((dst) & (U16)~(1u << bitn));	\
-})
+{                                     \
+  if(value)                           \
+  dst = ((dst) | (U16)(1u << bitn));	\
+  else                                \
+  dst = ((dst) & (U16)~(1u << bitn));	\
+ })
 
 #define _getbit(src,bitn)	((src) & (1 << (bitn)))
 
-#define Hi(LongVar)		    (*((S16 *)&(LongVar)+1))
+#define BIT(n)                                          (1ULL << (n))
+#define BITMASK(len)                                    (BIT(len) - 1)
+#define BITMAP_GET_VALUE(bitmap, bitlen, shift)         ( ((bitmap) >> (shift)) & (bitlen) )
+#define BITMAP_SET_VALUE(bitmap, val, bitlen, shift)    ((bitmap) = ((bitmap) & ~((bitlen) << (shift))) | (((val) << (shift)) & ((bitlen) << (shift))))
+#define BIT_GET(value, bit)                             ( ((value) >> (bit)) & 0x01uL  )
+#define BIT_SET(value, bit)                             ( (value) |= 0x01uL << (bit) )
+#define BIT_CLEAR(value, bit)                           ( (value) &= ~(0x01uL << (bit)) )
+#define ROUND_UP(x)                                     (((x) < 0) ? ( (((x) * 2L) - 1L) / 2L ) : ( (((x) * 2L) + 1L) / 2L ))
+#define fround(x)                                       (((x) < 0) ?  ((x) - 0.5 ) : ((x) + 0.5 ) )
+
+#define Hi(LongVar)         (*((S16 *)&(LongVar)+1))
 #define Lo(LongVar)         (*(S16 *)&(LongVar))
-#define Hiu(LongVar)	    (*((U16 *)&(LongVar)+1))
+#define Hiu(LongVar)        (*((U16 *)&(LongVar)+1))
 #define Lou(LongVar)        (*(U16 *)&(LongVar))
-#define HiBy(WordVar)	    (*((U8 *)&(WordVar)+1))
+#define HiBy(WordVar)       (*((U8 *)&(WordVar)+1))
 #define LoBy(WordVar)       (*(U8 *)&(WordVar))
 
 // Built-in Functions Wrappers
@@ -203,7 +215,7 @@ extern S16 sqrt_32(U32 rad);
 extern U32 pow_16(S16 x, U16 n);
 extern S16 sdiv_32(_IN_ S32 s32Divident_long, _IN_ S16 s16Divider);
 extern S16 udiv_32(_IN_ U32 u32Divident_long, _IN_ U16 u16Divider);
-extern Q15 fmul_q15(Q15 qA, Q15 qB);
+extern _Q15 fmul_q15(_Q15 qA, _Q15 qB);
 extern U16 fmul_qu15(U16 quA, U16 quB);
 extern S32 mul_s16(S16 A, S16 B);
 extern void DSP_Engine_Init(void);

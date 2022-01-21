@@ -38,6 +38,7 @@ typedef struct
  U16 Ki2;
  U16 Kd2;
  U8  P_term_scale;
+ U8  DI_term_limit;
  U16 Fbk_Filt_ms;
  U16 Out_Filt_ms;
 }tPidCfg;

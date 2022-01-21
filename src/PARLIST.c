@@ -23,7 +23,7 @@
 #include "basedef.h"
 #include "PARLIST.h"
 #include "systmr.h"
-#include "vADC.h"
+#include "adc_drv.h"
 #include "trace.h"
 #include "task.h"
 #include "measure.h"
@@ -61,8 +61,7 @@ const U16 C30_Version = __C30_VERSION__;
 /*----------------------------------------------------------------------------*/
 /* Exported data                                                              */
 /*----------------------------------------------------------------------------*/
-/* ADC.C */
-extern U16 ADC[AdcCh_Cnt];
+extern tAdcBuffer AdcBuffer;
 
 /* TRACE.C */
 extern U16 trace_config;
@@ -147,14 +146,13 @@ const iolist iopar[] =
   {149,"Line Period Zero Cross",      (U16 *)&mes2.Line_period_zc_T2,            (U16 *)&mes2.Line_period_zc_T2,           2,"urr",    0xFFFFul,      0, 5,0,   10 },
   {150,"Curr offset",                 (U16 *)&mes1.Curr_offset,                  (U16 *)&mes1.Curr_offset,                 2,"urr",    0xFFFFul,      0, 5,0,    1 },
   {151,"Current",                     (S16 *)&mes1.Current,                      (S16 *)&mes1.Current,                     2,"srr",    32767ul,  -32768, 5,0,    1 },
-  {152,"Curr conv coeff",             (U16 *)&mespar.Curr_conv_coeff,            (U16 *)&mespar.Curr_conv_coeff,           2,"unr",    0xFFFFul,      0, 0,0, 1024 },
   {153,"Overcurrent limit",           (U16 *)&mespar.Overcurr_limit,             (U16 *)&mespar.Overcurr_limit,            2,"unr",    0xFFFFul,      0, 0,0,    1 },
   {154,"Line Frequency (zero cross)", (U16 *)&mes2.Line_frequency_zc,            (U16 *)&mes2.Line_frequency_zc,           2,"urr",    0xFFFFul,      0, 5,0,    6 },
 //{155,"empty",                       (U16 *)&empty,                             (U16 *)&empty,                            2,"urr",    0xFFFFul,      0, 5,0,0},
   {156,"Actual Power",                (U16 *)&mes2.Actaul_Power,                 (U16 *)&mes2.Actaul_Power,                2,"urr",    0xFFFFul,      0, 5,0,    0 },
   /* ADC.C */   
-  {160,"ADC[0]",                      (U16 *)&ADC[AdcCh_0],                      (U16 *)&ADC[AdcCh_0],                     2,"urr",    0xFFFFul,      0, 5,0,    1 },
-  {161,"ADC[1]",                      (U16 *)&ADC[AdcCh_1],                      (U16 *)&ADC[AdcCh_1],                     2,"urr",    0xFFFFul,      0, 5,0,    1 },
+  {160,"ADC_CH0_TEMP",                (U16 *)&AdcBuffer[ADC_CH0_TEMP],           (U16 *)&AdcBuffer[ADC_CH0_TEMP],          2,"urr",    0xFFFFul,      0, 5,0,    1 },
+  {161,"ADC_CH1_CURRENT",             (U16 *)&AdcBuffer[ADC_CH1_CURRENT],        (U16 *)&AdcBuffer[ADC_CH1_CURRENT],       2,"urr",    0xFFFFul,      0, 5,0,    1 },
  /* SYSTMR.C */   
   {170,"Hib Min",                     (U16 *)&time.min,                          (U16 *)&time.min,                         2,"urr",    0xFFFFul,      0, 5,0,    1 },
   {171,"Hib Sec",                     (U16 *)&time.sec,                          (U16 *)&time.sec,                         2,"urr",    0xFFFFul,      0, 5,0,    1 },
@@ -176,39 +174,39 @@ const iolist iopar[] =
   {216,"ident current 2245 high",     (U16 *)&ident.ident_cur_2245_high,         (U16 *)&ident.ident_cur_2245_high,        2,"unr",    15000ul,       0, 0,0,    1 },
   {217,"ident tool",                  (U8 * )&ident.IdentTool,                   (U8  *)&ident.IdentTool,                  1,"urr",    0xFFul,        0, 5,0,    1 },
   {218,"Ident Current",               (U16 *)&ident.Ident_current,               (U16 *)&ident.Ident_current,              2,"urr",    0xFFFFul,      0, 5,0,    1 },
-  {219,"Process Gain",                (S16 *)&ident.Kp,                          (S16 *)&ident.Kp,                         2,"srr",    32767ul,  -32768, 5,0,    1 },
+  {219,"Process Gain",                (U16 *)&ident.Kp,                          (U16 *)&ident.Kp,                         2,"urr",    0xFFFFul,      0, 5,0,    1 },
   {220,"Process Dead Time",           (U32 *)&ident.Dt_us,                       (U32 *)&ident.Dt_us,                      4,"urr",    0xFFFFFFFFul,  0, 5,0,    1 },
   {221,"Process Time Constant",       (U32 *)&ident.Tp_us,                       (U32 *)&ident.Tp_us,                      4,"urr",    0xFFFFFFFFul,  0, 5,0,    1 },
      
  /* TMPCTRL.C */                                                                                                                                      
-  {250,"Temp Ref User (Real)",        (U16 *)&T_ctrl.T_Ref_User,                 (U16 *)&T_ctrl.T_Ref_User,                2,"unr",    450ul,         0, 0,0,    1 },
-  {251,"Temp Ref User Sleep (Real)",  (U16 *)&T_ctrl.T_Ref_User_Sleep,           (U16 *)&T_ctrl.T_Ref_User_Sleep,          2,"unr",    450ul,         0, 0,0,    1 },
-  {252,"TMPCTRL Sample Time",         (U16 *)&T_ctrl.tmpctrl_samp_time,          (U16 *)&T_ctrl.tmpctrl_samp_time,         2,"unr",    100ul,        10, 0,0,    1 },
-  {253,"Temp Calibration Gain",       (U16 *)&T_ctrl.T_cal_gain,                 (U16 *)&T_ctrl.T_cal_gain,                2,"unr",    32767ul,       0, 0,0, 1024 },
-  {254,"Overload Periods Trip",       (U16 *)&overprot.cop_periods_trip,         (U16 *)&overprot.cop_periods_trip,        2,"unr",    0xFFFFul,      0, 0,0,    1 },
-  {255,"Overload Time Trip",          (U16 *)&overprot.cop_time_trip_sec,        (U16 *)&overprot.cop_time_trip_sec,       2,"unr",    0xFFFFul,      0, 0,0,    1 },
-  {256,"Temp Feedback",               (U16 *)&T_ctrl.T_fbk,                      (U16 *)&T_ctrl.T_fbk,                     2,"urr",    0xFFFFul,      0, 5,0,    1 },
-  {257,"Temp Delta",                  (S16 *)&T_ctrl.T_delta,                    (S16 *)&T_ctrl.T_delta,                   2,"srr",    32767ul,  -32768, 5,0,    1 },
-  {258,"Heat Periods",                (S16 *)&T_ctrl.heat_periods,               (S16 *)&T_ctrl.heat_periods,              2,"srr",    32767ul,  -32768, 5,0,    1 },
-  {260,"heat_periods_debug",          (S16 *)&T_ctrl.heat_periods_debug,         (S16 *)&T_ctrl.heat_periods_debug,        2,"srr",    32767ul,  -32768, 0,0,    1 },
-  {261,"Triac State",                 (U16 *)&T_ctrl.tmpctrl_triac_state,        (U16 *)&T_ctrl.tmpctrl_triac_state,       2,"urr",    0xFFFFul,      0, 5,0,    1 },
-  {264,"Temp Calibration Offset",     (S16 *)&T_ctrl.T_cal_offset,               (S16 *)&T_ctrl.T_cal_offset,              2,"snr",    50ul,        -50, 0,0,    1 },
-  {265,"Bresenham distribution",      (U8 * )&T_ctrl.bresenham_distribution,     (U8  *)&T_ctrl.bresenham_distribution,    1,"unr",    1,             0, 0,0,    1 },
-  {266,"Set Temperature Step",        (U8 * )&T_ctrl.T_UserStep,                 (U8  *)&T_ctrl.T_UserStep,                1,"unr",    50,            1, 0,0,    1 },
+  {250,"Temp Ref User (Real)",        (U16 *)&T_ctrl.T_Ref_User,                 (U16 *)&T_ctrl.T_Ref_User,                2,"unr",    32767ul,       0, 0,0, TEMP_1DEG_Q15          },
+  {251,"Temp Ref User Sleep (Real)",  (U16 *)&T_ctrl.T_Ref_User_Sleep,           (U16 *)&T_ctrl.T_Ref_User_Sleep,          2,"unr",    32767ul,       0, 0,0, TEMP_1DEG_Q15          },
+  {252,"TMPCTRL Sample Time",         (U16 *)&T_ctrl.tmpctrl_samp_time,          (U16 *)&T_ctrl.tmpctrl_samp_time,         2,"unr",    100ul,        10, 0,0, 1                      },
+  {253,"Temp Calibration Gain",       (U16 *)&T_ctrl.T_cal_gain,                 (U16 *)&T_ctrl.T_cal_gain,                2,"unr",    32767ul,       0, 0,0, TMPCTRL_CAL_GAIN_SCALE },
+  {254,"Overload Periods Trip",       (U16 *)&overprot.cop_periods_trip,         (U16 *)&overprot.cop_periods_trip,        2,"unr",    0xFFFFul,      0, 0,0, 1                      },
+  {255,"Overload Time Trip",          (U16 *)&overprot.cop_time_trip_sec,        (U16 *)&overprot.cop_time_trip_sec,       2,"unr",    0xFFFFul,      0, 0,0, 1                      },
+  {256,"Temp Feedback",               (U16 *)&T_ctrl.T_fbk,                      (U16 *)&T_ctrl.T_fbk,                     2,"urr",    0xFFFFul,      0, 5,0, TEMP_1DEG_Q15          },
+  {258,"Heat Periods",                (S16 *)&T_ctrl.heat_periods,               (S16 *)&T_ctrl.heat_periods,              2,"srr",    32767ul,  -32768, 5,0, 1                      },
+  {260,"heat_periods_max",            (S16 *)&T_ctrl.heat_periods_max,         (S16 *)&T_ctrl.heat_periods_max,        2,"srr",    32767ul,  -32768, 0,0, 1                      },
+  {264,"Temp Calibration Offset",     (S16 *)&T_ctrl.T_cal_offset,               (S16 *)&T_ctrl.T_cal_offset,              2,"snr",    50ul,        -50, 0,0, 1                      },
+  {265,"Bresenham distribution",      (U8 * )&T_ctrl.bresenham_distribution,     (U8  *)&T_ctrl.bresenham_distribution,    1,"unr",    1,             0, 0,0, 1                      },
+  {266,"Set Temperature Step",        (U8 * )&T_ctrl.T_UserStep_deg,             (U8  *)&T_ctrl.T_UserStep_deg,            1,"unr",    50,            1, 0,0, 1                      },
+  
   //PID Controller   
   {280,"Kp",                          (U16 *)&PID_C245ToolPid_Cfg.Kp,            (U16 *)&PID_C245ToolPid_Cfg.Kp,            2,"unr",    0xFFFFul,             0, 0,0,    1 },
   {281,"Ki2 [Ki*dt]",                 (U16 *)&PID_C245ToolPid_Cfg.Ki2,           (U16 *)&PID_C245ToolPid_Cfg.Ki2,           2,"unr",    0xFFFFul,             0, 0,0,    1 },
   {282,"Kd2 [Kd/dt]",                 (U16 *)&PID_C245ToolPid_Cfg.Kd2,           (U16 *)&PID_C245ToolPid_Cfg.Kd2,           2,"unr",    0xFFFFul,             0, 0,0,    1 },
-  {283,"P term Scale [1<<(15+X)]",    (U8  *)&PID_C245ToolPid_Cfg.P_term_scale,  (U8  *)&PID_C245ToolPid_Cfg.P_term_scale,  2,"unr",    15,                   0, 0,0,    1 },
+  {283,"P term Scale [P>>X]",         (U8  *)&PID_C245ToolPid_Cfg.P_term_scale,  (U8  *)&PID_C245ToolPid_Cfg.P_term_scale,  1,"unr",    15,                   0, 0,0,    1 },
   {284,"Fbk Filter [ms]",             (U16 *)&PID_C245ToolPid_Cfg.Fbk_Filt_ms,   (U16 *)&PID_C245ToolPid_Cfg.Fbk_Filt_ms,   2,"unr",    10000,                0, 0,0,    1 },
   {285,"Out Filter [ms]",             (U16 *)&PID_C245ToolPid_Cfg.Out_Filt_ms,   (U16 *)&PID_C245ToolPid_Cfg.Out_Filt_ms,   2,"unr",    10000,                0, 0,0,    1 },
-  {286,"Integral",                    (S32 *)&PID_C245ToolPid_Data.Integral.x,   (S32 *)&PID_C245ToolPid_Data.Integral.x,   4,"srr",    2147483647, -2147483647, 5,0,    1 },
+  {286,"Integral",                    (S32 *)&PID_C245ToolPid_Data.Integral.x,   (S32 *)&PID_C245ToolPid_Data.Integral.x,   4,"srr",    2147483646, -2147483647, 5,0,    1 },
   {287,"Integral Saturation",         (S8  *)&PID_C245ToolPid_Data.Integral.sat, (S8  *)&PID_C245ToolPid_Data.Integral.sat, 1,"srr",    1,                   -1, 5,0,    1 },
 #if PID_DEBUG != 0
   {288,"Output Period [ms]",          (S16 *)&PID_C245ToolPid_Data.OutPeriod,    (S16 *)&PID_C245ToolPid_Data.OutPeriod,    2,"srr",    32767ul,         -32768, 5,0,    1 },
   {289,"Overshoot_pos",               (S16 *)&PID_C245ToolPid_Data.Overshoot_pos,(S16 *)&PID_C245ToolPid_Data.Overshoot_pos,2,"srr",    32767ul,         -32768, 5,0,    1 },
   {290,"Overshoot_neg",               (S16 *)&PID_C245ToolPid_Data.Overshoot_neg,(S16 *)&PID_C245ToolPid_Data.Overshoot_neg,2,"srr",    32767ul,         -32768, 5,0,    1 },
 #endif
+  {291,"D,I terms limit",             (U8  *)&PID_C245ToolPid_Cfg.DI_term_limit,  (U8  *)&PID_C245ToolPid_Cfg.DI_term_limit,  1,"unr",    100,                  0, 0,0,    1 },
   /* TASK */  
   {900,"Task1 Time",                  (U32 *)&Ttime.Task1Time_us,                (U32 *)&Ttime.Task1Time_us,               4,"urr",    0xFFFFFFFFul,  0, 5,0, 1000 },
   {901,"Task2 Time",                  (U32 *)&Ttime.Task2Time_us,                (U32 *)&Ttime.Task2Time_us,               4,"urr",    0xFFFFFFFFul,  0, 5,0, 1000 },
@@ -303,9 +301,9 @@ iolist* IF_Parlist_bnu(U16 U32PrmNumber)
 void Params_check_limit(void)
 {
     
-    if(EE_Valid != 1000)                  _set_ee_valid_error(1);
-    if(time.Hib_Time == 0)                _set_param_limit_error(1);
-    if(T_ctrl.T_Ref_User > TEMP_USER_MAX) _set_param_limit_error(1);
+    if(EE_Valid != 1000)                      _set_ee_valid_error(1);
+    if(time.Hib_Time == 0)                    _set_param_limit_error(1);
+    if(T_ctrl.T_Ref_User > TEMP_USER_MAX_Q15) _set_param_limit_error(1);
     if((T_ctrl.tmpctrl_samp_time == 0) || (T_ctrl.tmpctrl_samp_time > 50)) _set_param_limit_error(1);
     if(T_ctrl.T_cal_gain < 10) _set_param_limit_error(1);
 }

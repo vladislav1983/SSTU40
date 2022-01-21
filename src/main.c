@@ -22,7 +22,7 @@
 #elif defined(__dsPIC30F4013__)
 /* Configuration Bit Settings */
     _FOSC(CSW_FSCM_OFF & XT_PLL8);                 
-    _FWDT(WDT_OFF & WDTPSA_8 & WDTPSB_5);           //WDT Period = 2 ms ? Prescale A ? Prescale B = 2 * 8 * 5 = 80ms
+    _FWDT(WDT_OFF & WDTPSA_8 & WDTPSB_7);           //WDT Period = 2 ms ? Prescale A ? Prescale B = 2 * 8 * 5 = 80ms
     _FBORPOR(PBOR_ON & BORV27 & PWRT_64 & MCLR_EN);
 #   if defined(__DEBUG)
         _FGS(CODE_PROT_OFF);
@@ -35,7 +35,6 @@
 #include "DigitalIO.h"
 #include "task.h"
 #include "vuart.h"
-#include "vADC.h"
 #include "statemachine.h"
 #include "eeprom.h"
 #include "LCD.h"
@@ -48,6 +47,7 @@
 #include "RotaryEncoder.h"
 #endif
 #include "MathTools.h"
+#include "adc_drv.h"
 
 /*----------------------------------------------------------------------------*/
 /* Constant data                                                              */
@@ -117,7 +117,7 @@ int main()
     IF_SysTmr1_Init();
     IF_SysTmr2_Init();
     IF_SysTmr3_Init();
-    IF_ADC_INIT();
+    AdcDrv_Init();
     state_machine_init();
     triac_control_init();
     measure_init();
@@ -126,7 +126,7 @@ int main()
     /* END INIT */   
     INTCON1bits.NSTDIS = 0;    // Enable Nested Interrupts
     
-    IF_Uart_Init(38400);
+    IF_Uart_Init(57600);
     
     ClrWdt();       // Clear WDT
     _SWDTEN = 1;    // Enable WDT    

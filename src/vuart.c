@@ -27,7 +27,7 @@
 /*----------------------------------------------------------------------------*/
 /* Local constants                                                            */
 /*----------------------------------------------------------------------------*/
-#define sci_TIMER_TICKS                        150        // 15ms in TASK1 periods
+#define sci_TIMER_TICKS                        50        // 50 * 100 = 5000us
 #define sci_WDT_TIMER_TIMEOUT_RX            10        // 1ms in TASK1 periods
 
 /* Hardware setup. */

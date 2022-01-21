@@ -38,7 +38,6 @@ typedef unsigned long long      U64;
 
 typedef signed char             S8;
 typedef signed int              S16;
-typedef signed int              Q15;
 typedef signed long             S32;
 
 typedef float                   F32;
@@ -52,6 +51,7 @@ typedef U8                      BOOL;
 
 typedef U8                      HRESULT;
 #define S_OK                    ((HRESULT)0x00u)
+#define E_OK                    ((HRESULT)0x00u)
 #define S_FALSE                 ((HRESULT)0x01u)
 #define E_INVALIDARG            ((HRESULT)0x02u)
 #define E_FAIL                  ((HRESULT)0x03u)
@@ -86,8 +86,10 @@ typedef U8                      HRESULT;
 #define _getbit(src,bitn)        ((src) & (1 << (bitn)))
 
 #define absi(x)                           ((x)>=0 ? (x) : -(x))            /* absolut of integer */
-#define DisableInterrupts()       SET_CPU_IPL(0b111)
-#define EnableInterrupts()        SET_CPU_IPL(0b000)
+
+typedef unsigned int        tCPUItState;
+#define SuspendAllInterrupts()        { tCPUItState CPUItState; SET_AND_SAVE_CPU_IPL(CPUItState, 7);
+#define ResumeAllInterrupts()           RESTORE_CPU_IPL(CPUItState); }
 
 #define mAssert(Cond)   (                   \
 {                                           \
@@ -101,6 +103,8 @@ typedef U8                      HRESULT;
     #error "CPU settings not match!"
 #endif
 #include "libpic30.h"
+#include "dsp.h"
+#include "libq.h"
 #include "DigitalIoCfg.h"
 
 #endif /* BASEDEF_H */

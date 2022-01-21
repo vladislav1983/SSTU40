@@ -147,20 +147,20 @@ extern volatile U16 ERR_CONTROL;
 
 
 /* PC CONTROL FLAGS */
-//#define _()                            (_getbit(PC_CONTROL,0))     /* bit 0 */
-//#define _(x)                            (_putbit((x),PC_CONTROL,0)) /* bit 0 */
+#define _drive_disabled_pc()                (_getbit(PC_CONTROL,0))     /* bit 0 */
+#define _set_drive_disabled_pc(x)           (_putbit((x),PC_CONTROL,0)) /* bit 0 */
 
-//#define _()                            (_getbit(PC_CONTROL,1))     /* bit 1 */
-//#define _(x)                            (_putbit((x),PC_CONTROL,1)) /* bit 1 */
+//#define _()                               (_getbit(PC_CONTROL,1))     /* bit 1 */
+//#define _(x)                              (_putbit((x),PC_CONTROL,1)) /* bit 1 */
 
-//#define _()                            (_getbit(PC_CONTROL,2))     /* bit 2 */
-//#define _(x)                            (_putbit((x),PC_CONTROL,2)) /* bit 2 */
+//#define _()                               (_getbit(PC_CONTROL,2))     /* bit 2 */
+//#define _(x)                              (_putbit((x),PC_CONTROL,2)) /* bit 2 */
 
-#define _reset_error_reg()                (_getbit(PC_CONTROL,3))     /* bit 3 */
-#define _set_reset_error_reg(x)            (_putbit((x),PC_CONTROL,3)) /* bit 3 */
+#define _reset_error_reg()                  (_getbit(PC_CONTROL,3))     /* bit 3 */
+#define _set_reset_error_reg(x)             (_putbit((x),PC_CONTROL,3)) /* bit 3 */
 
-//#define _()                            (_getbit(PC_CONTROL,4))     /* bit 4 */
-//#define _(x)                            (_putbit((x),PC_CONTROL,4)) /* bit 4 */
+//#define _()                               (_getbit(PC_CONTROL,4))     /* bit 4 */
+//#define _(x)                              (_putbit((x),PC_CONTROL,4)) /* bit 4 */
 
 
 /*    

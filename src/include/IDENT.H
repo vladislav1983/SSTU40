@@ -21,10 +21,9 @@
 /*----------------------------------------------------------------------------*/
 /* IDENT PARAMETERS */
 #define IDENT_PERIODS_MAX               100u
-#define IDENT_MEASURE_AFTER_TIME        MS_TO_T1_TICKS(5)/* 5000 us*/
-#define IDENT_AVERAGE_TIME              MS_TO_T1_TICKS(500)/* 500ms Average time in task1 periods */
-#define IDENT_MES_TIME_AFTER_SHOT       MS_TO_T1_TICKS(1000)
-
+#define IDENT_MEASURE_AFTER_TIME        MS_TO_T1_TICKS(5.0)
+#define IDENT_AVERAGE_TIME              MS_TO_T1_TICKS(30.0)
+#define IDENT_MES_TIME_AFTER_SHOT       MS_TO_T1_TICKS(1000.0)
 
 /* IDENT MODES OF OPERATION */
 typedef enum
@@ -56,24 +55,24 @@ typedef enum
 /*----------------------------------------------------------------------------*/
 struct cartridge_ident
 {
-  S32 IdentCurrent_filt;
+  U32 IdentCurrent_filt;
   U16 U_Temp_in;
   U16 U_Temp_out;
-  S16 U_Temp_delta;
-  S32 U_Temp_filt;
+  U16 U_Temp_delta;
+  U32 U_Temp_filt;
   U16 Ident_peak_current;
   U16 Ident_current;
   U16 IDENT_MAX_RMS_Power;
+  U16 AverageCnt;
   
   tIdentMode ident_mode;
   U16 ident_periods;
-  BOOL triac_state;
   teIdentToolType IdentTool;
   
   // https://controlguru.com/design-and-tuning-recipe-must-consider-nonlinear-process-behavior/
   // Kp describes the direction PV moves and how far it travels in response to a change in CO.
   // Kp = delta PV / delta CO = delta Temp / ident periods * 1000
-  S16 Kp;
+  U16 Kp;
   // Dead time is the delay from when a controller output (CO) signal is issued until when the measured process variable (PV) first begins to respond.
   U32 Dt_us;
   U16 Dt_counter;
@@ -107,7 +106,7 @@ extern struct cartridge_ident ident;
 /*----------------------------------------------------------------------------*/
 /* Exported functions                                                          */
 /*----------------------------------------------------------------------------*/
-BOOL cartridge_ident(BOOL ident_init,U16 ADC_Temp_Ch);
+BOOL cartridge_ident(BOOL ident_init);
 teIdentToolType ident_get_current_tool(void);
 
 #endif /* IDENT_H */
