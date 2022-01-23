@@ -334,6 +334,7 @@ void temp_ctrl(BOOL sleep_flag, teIdentToolType tool)
 /*************************************************************************************************/
 void Reset_TMPCTRL(void)
 {
+  U16 i;
   struct temperature_control *tc = _get_T_ctrl();
   
   tmpctrl_mainstate = TMPCTRL_WAIT_X_PERIODS_STATE;
@@ -343,7 +344,11 @@ void Reset_TMPCTRL(void)
   tc->heat_periods = 0;
   tc->T_sum = 0;
   tc->heat_periods_max = 0;
-  PidReset(PID_INSTANCE(C245ToolPid));
+  
+  for(i = (U16)eIdentTool_2210; i < (U16)eIdentTool_NR; i++)
+  {
+    PidReset(PidToToolInstanceMap[i].instance);
+  }
 }
 
 /******************************************************************************/
