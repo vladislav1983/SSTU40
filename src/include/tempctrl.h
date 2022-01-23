@@ -15,6 +15,7 @@
 /*----------------------------------------------------------------------------*/
 #include "basedef.h"
 #include "MathTools.h"
+#include "IDENT.H"
 
 /*----------------------------------------------------------------------------*/
 /* Constant data                                                              */
@@ -130,7 +131,7 @@ extern struct overload_protection overprot;
 /*----------------------------------------------------------------------------*/
 /* Exported functions                                                            */
 /*----------------------------------------------------------------------------*/
-void temp_ctrl(BOOL sleep_flag);
+void temp_ctrl(BOOL sleep_flag, teIdentToolType tool);
 _Q15 Get_Temp_Actual(void);
 void Set_User_Temp(teTemperatureUsers user);
 void Reset_User_Temp(teTemperatureUsers user);

@@ -55,6 +55,11 @@ PID_EXPORT_INSTANCE(C245ToolPid);
 PID_EXPORT_CFG(C245ToolPid);
 PID_EXPORT_DATA(C245ToolPid);
 
+PID_EXPORT_INSTANCE(C210ToolPid);
+PID_EXPORT_CFG(C210ToolPid);
+PID_EXPORT_DATA(C210ToolPid);
+
+
 /*-----------------------------------------------------------------------------
   DECLARATION OF GLOBAL CONSTANTS
 -----------------------------------------------------------------------------*/

@@ -227,7 +227,7 @@ void state_machine_T1(void)
         prevstate_T1 = ST1_TMPCTRL;
       }
       
-      temp_ctrl(0); //<------ Control User Temp
+      temp_ctrl(0, ident_get_current_tool()); //<------ Control User Temp
       
       if(_extractor()) mainstate_T1 = ST1_EXTRACTOR;
       else if(_stand()) mainstate_T1 = ST1_STAND;
@@ -241,7 +241,7 @@ void state_machine_T1(void)
         prevstate_T1 = ST1_STAND;
       }
       
-      temp_ctrl(1); // Control User Temp Sleep
+      temp_ctrl(1, ident_get_current_tool()); // Control User Temp Sleep
       
       if(Timestate_Cartridge_Control(0))
       {

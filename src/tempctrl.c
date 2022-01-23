@@ -25,7 +25,6 @@
 #include "measure.h"
 #include "statemachine.h"
 #include "triac_control.h"
-#include "ident.h"
 #include "MathTools.h"
 #include "pid.h"
 #include "adc_drv.h"
@@ -70,6 +69,11 @@ typedef enum
   TMPCTRL_UNDEF_STATE
 }tTmpCtrlState;
 
+typedef struct 
+{
+  const tPidInstance * instance;
+}tPidToToolInstanceMap;
+
 /*----------------------------------------------------------------------------*/
 /* Local data                                                                 */
 /*----------------------------------------------------------------------------*/
@@ -79,6 +83,12 @@ tTmpCtrlState tmpctrl_nextstate = TMPCTRL_INIT;
 /*----------------------------------------------------------------------------*/
 /* Constant local data                                                        */
 /*----------------------------------------------------------------------------*/
+static const tPidToToolInstanceMap PidToToolInstanceMap[eIdentTool_NR] = 
+{
+  /*eIdentTool_Unknown*/ { PID_INSTANCE(C245ToolPid) },
+  /*eIdentTool_2210*/    { PID_INSTANCE(C210ToolPid) },
+  /*eIdentTool_2245*/    { PID_INSTANCE(C245ToolPid) }
+};
 
 /*----------------------------------------------------------------------------*/
 /* Exported data                                                              */
@@ -140,7 +150,7 @@ static tDistributionResult bresenham_distribution(tDistributionCmd cmd, U16 dist
  * Output:    none
  */
 /******************************************************************************/
-void temp_ctrl(BOOL sleep_flag)
+void temp_ctrl(BOOL sleep_flag, teIdentToolType tool)
 {
   struct temperature_control *tc = _get_T_ctrl();
   
@@ -184,7 +194,14 @@ void temp_ctrl(BOOL sleep_flag)
       else 
         T_ref_pid = tc->T_Ref_User;
       
-      tc->heat_periods = PidProcess(PID_INSTANCE(C245ToolPid), T_ref_pid, tc->T_fbk, ((tc->tmpctrl_samp_time + 1u) * 10u),tc->tmpctrl_samp_time);
+      if(tool < eIdentTool_NR)
+      {
+        tc->heat_periods = PidProcess(PidToToolInstanceMap[tool].instance, T_ref_pid, tc->T_fbk, ((tc->tmpctrl_samp_time + 1u) * 10u),tc->tmpctrl_samp_time);
+      }
+      else
+      {
+        mAssert(cFalse);
+      }
       
       if(tc->heat_periods_max < tc->heat_periods)
       {

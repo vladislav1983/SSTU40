@@ -192,10 +192,10 @@ const iolist iopar[] =
   {265,"Bresenham distribution",      (U8 * )&T_ctrl.bresenham_distribution,     (U8  *)&T_ctrl.bresenham_distribution,    1,"unr",    1,             0, 0,0, 1                      },
   {266,"Set Temperature Step",        (U8 * )&T_ctrl.T_UserStep_deg,             (U8  *)&T_ctrl.T_UserStep_deg,            1,"unr",    50,            1, 0,0, 1                      },
   
-  //PID Controller   
+  //PID Controller C245  
   {280,"Kp",                          (U16 *)&PID_C245ToolPid_Cfg.Kp,            (U16 *)&PID_C245ToolPid_Cfg.Kp,            2,"unr",    32768,                0, 0,0,    1 },
   {281,"Ki [ms]",                     (U16 *)&PID_C245ToolPid_Cfg.Ki_ms,         (U16 *)&PID_C245ToolPid_Cfg.Ki_ms,         2,"unr",    32768,                0, 0,0,    1 },
-  {282,"Kd [ms]",                     (U16 *)&PID_C245ToolPid_Cfg.Kd2,         (U16 *)&PID_C245ToolPid_Cfg.Kd2,         2,"unr",    32767,                0, 0,0,    1 },
+  {282,"Kd2 [Kd/dt]",                 (U16 *)&PID_C245ToolPid_Cfg.Kd2,           (U16 *)&PID_C245ToolPid_Cfg.Kd2,           2,"unr",    32767,                0, 0,0,    1 },
   {286,"Integral",                    (S32 *)&PID_C245ToolPid_Data.Integral,     (S32 *)&PID_C245ToolPid_Data.Integral,     4,"srr",    2147483646, -2147483647, 5,0,    1 },
   {287,"Hi(Integral)",                (S16 *)&(PID_C245ToolPid_Data.Integral)+1, (S16 *)&(PID_C245ToolPid_Data.Integral)+1, 2,"srr",    32767ul,         -32768, 5,0,    1 },
 #if PID_DEBUG != 0
@@ -203,7 +203,20 @@ const iolist iopar[] =
   {289,"Overshoot_pos",               (S16 *)&PID_C245ToolPid_Data.Overshoot_pos,(S16 *)&PID_C245ToolPid_Data.Overshoot_pos,2,"srr",    32767ul,         -32768, 5,0,    1 },
   {290,"Overshoot_neg",               (S16 *)&PID_C245ToolPid_Data.Overshoot_neg,(S16 *)&PID_C245ToolPid_Data.Overshoot_neg,2,"srr",    32767ul,         -32768, 5,0,    1 },
 #endif
-  {291,"I term limit",                (S16 *)&PID_C245ToolPid_Cfg.I_term_limit,  (S16 *)&PID_C245ToolPid_Cfg.I_term_limit,  2,"unr",    32767ul,                 0, 0,0,    1 },
+  {291,"I term limit",                (S16 *)&PID_C245ToolPid_Cfg.I_term_limit,  (S16 *)&PID_C245ToolPid_Cfg.I_term_limit,  2,"unr",    32767ul,                 0, 0,0, 1 },
+  //PID Controller C2210  
+  {310,"Kp",                          (U16 *)&PID_C210ToolPid_Cfg.Kp,            (U16 *)&PID_C210ToolPid_Cfg.Kp,            2,"unr",    32768,                0, 0,0,    1 },
+  {311,"Ki [ms]",                     (U16 *)&PID_C210ToolPid_Cfg.Ki_ms,         (U16 *)&PID_C210ToolPid_Cfg.Ki_ms,         2,"unr",    32768,                0, 0,0,    1 },
+  {312,"Kd2 [Kd/dt]",                 (U16 *)&PID_C210ToolPid_Cfg.Kd2,           (U16 *)&PID_C210ToolPid_Cfg.Kd2,           2,"unr",    32767,                0, 0,0,    1 },
+  {313,"Integral",                    (S32 *)&PID_C210ToolPid_Data.Integral,     (S32 *)&PID_C210ToolPid_Data.Integral,     4,"srr",    2147483646, -2147483647, 5,0,    1 },
+  {314,"Hi(Integral)",                (S16 *)&(PID_C210ToolPid_Data.Integral)+1, (S16 *)&(PID_C210ToolPid_Data.Integral)+1, 2,"srr",    32767ul,         -32768, 5,0,    1 },
+#if PID_DEBUG != 0
+  {315,"Output Period [ms]",          (S16 *)&PID_C210ToolPid_Data.OutPeriod,    (S16 *)&PID_C210ToolPid_Data.OutPeriod,    2,"srr",    32767ul,         -32768, 5,0,    1 },
+  {316,"Overshoot_pos",               (S16 *)&PID_C210ToolPid_Data.Overshoot_pos,(S16 *)&PID_C210ToolPid_Data.Overshoot_pos,2,"srr",    32767ul,         -32768, 5,0,    1 },
+  {317,"Overshoot_neg",               (S16 *)&PID_C210ToolPid_Data.Overshoot_neg,(S16 *)&PID_C210ToolPid_Data.Overshoot_neg,2,"srr",    32767ul,         -32768, 5,0,    1 },
+#endif
+  {318,"I term limit",                (S16 *)&PID_C210ToolPid_Cfg.I_term_limit,  (S16 *)&PID_C210ToolPid_Cfg.I_term_limit,  2,"unr",    32767ul,                 0, 0,0, 1 },
+  
   /* TASK */  
   {900,"Task1 Time",                  (U32 *)&Ttime.Task1Time_us,                (U32 *)&Ttime.Task1Time_us,               4,"urr",    0xFFFFFFFFul,  0, 5,0, 1000 },
   {901,"Task2 Time",                  (U32 *)&Ttime.Task2Time_us,                (U32 *)&Ttime.Task2Time_us,               4,"urr",    0xFFFFFFFFul,  0, 5,0, 1000 },
