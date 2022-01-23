@@ -156,7 +156,7 @@
 #define INIT_DELAY_MS                   20u
 #define CFG_FNCT_DELAY_MS               5u
 #define CLEAR_LCD_DELAY_US              1600u
-#define EXEC_DELAY_US                   50u
+#define EXEC_DELAY_US                   100u
 
 /*----------------------------------------------------------------------------*/
 /* Local types                                                                */

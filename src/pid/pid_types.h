@@ -25,34 +25,21 @@ typedef enum
   PidSat_neg = -1,
 }tPidSat;
 
-typedef struct
-{
-  S32 x;
-  tPidSat  sat;
-}tPidIntegral;
-
 typedef struct 
 {
  /* PARAMS STORED IN EEPROM */
  U16 Kp;
- U16 Ki2;
+ U16 Ki_ms;
  U16 Kd2;
- U8  P_term_scale;
- U8  DI_term_limit;
- U16 Fbk_Filt_ms;
- U16 Out_Filt_ms;
+ S16 I_term_limit;
 }tPidCfg;
 
 typedef struct
 {
-  tPidIntegral Integral;
-  S16 error_filt_prev;
-  U16 Fbk_Filt_ms;
-  U32 Fbk_Filt_coeff;
-  U16 Out_Filt_ms;
-  U32 Out_Filt_coeff;
-  S32 Fbk_Filt;
-  S32 Out_Filt;
+  S32 Integral;
+  S16 error_prev;
+  U16 Ki_ms;
+  U16 Ki2;
 #if PID_DEBUG != 0
   // pid control period
   S32 error_filt;

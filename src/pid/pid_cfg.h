@@ -33,17 +33,7 @@
 
 #define PID_DECLARE_INSTANCE(x) \
   extern tPidCfg PID_##x##_Cfg; \
-  tPidData PID_##x##_Data = \
-  { \
-    .Integral = {0}, \
-    .error_filt_prev = 0, \
-    .Fbk_Filt_ms = 0, \
-    .Fbk_Filt_coeff = 0, \
-    .Out_Filt_ms = 0, \
-    .Out_Filt_coeff = 0, \
-    .Fbk_Filt = 0,  \
-    .Out_Filt = 0, \
-  }; \
+  tPidData PID_##x##_Data = {0}; \
   const tPidInstance PID_##x = {&PID_##x##_Cfg, &PID_##x##_Data}; \
   tPidCfg PID_##x##_Cfg =
 

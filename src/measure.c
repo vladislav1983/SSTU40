@@ -129,8 +129,8 @@ void zero_cross_II(void)
         
         if(_power_up_ok()) 
         {
-          if(    ((m2)->Line_period_zc_T2 >= cZC_TRIP_MAX) 
-              || ((m2)->Line_period_zc_T2 <= zZC_TRIP_MIN)) 
+          if(    (((m2)->Line_period_zc_T2 >= cZC_TRIP_MAX) || ((m2)->Line_period_zc_T2 <= zZC_TRIP_MIN))
+              && (_drive_disabled_pc() == 0))
           {
             _set_grid_freq_error(1); //Trip Grid Frequency Error
           }

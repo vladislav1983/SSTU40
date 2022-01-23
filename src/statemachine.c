@@ -46,6 +46,7 @@
 #define LOAD_T2_1SEC                200u
 #define LOAD_T2_500mS               100u
 #define LOAD_T2_250mS               50u
+#define LOAD_T2_20mS                MS_TO_T2_TICKS(20)
 
 /* TIMER VALUES RUN IN TASK1 */
 #define LOAD_T1_40m                 400u       //40ms in task1 time
@@ -395,8 +396,7 @@ void state_machine_T2(void)
         stm_timer_T2(1, LCD_update_rate);
         ActiveTempUser = eTEMP_USER;
       }
-      stm_timer_T2(2,0);
-      if(!stm_timer_T2(0,0))
+      if(!stm_timer_T2(2,0))
       {
         // clear temperature
         IF_LCDGotoXY(3,2);
@@ -444,8 +444,7 @@ void state_machine_T2(void)
         ActiveTempUser = eTEMP_USER_SLEEP;
       }
       
-      stm_timer_T2(2,0);
-      if(!stm_timer_T2(0,0))
+      if(!stm_timer_T2(2,0))
       {
         IF_LCDGotoXY(12,2);
         IF_LCDPuts("   ");
@@ -504,8 +503,7 @@ void state_machine_T2(void)
         stm_timer_T2(1, LCD_update_rate);
       }
       
-      stm_timer_T2(2,0);
-      if(!stm_timer_T2(0,0))
+      if(!stm_timer_T2(2,0))
       {
         PrintHibernationTime();
         stm_timer_T2(1, LCD_update_rate);
@@ -551,8 +549,7 @@ void state_machine_T2(void)
       }
       else
       {
-        stm_timer_T2(2,0);
-        if(!stm_timer_T2(0,0))        // User have 2s to push SELECT button and confirm ref temp
+        if(!stm_timer_T2(2,0))        // User have 2s to push SELECT button and confirm ref temp
         {
           if(ActiveTempUser == eTEMP_USER)
           {
@@ -575,7 +572,7 @@ void state_machine_T2(void)
       IF_LCDPutn(Get_User_Temp());
       
       stm_timer_T2(1,LOAD_T2_2SEC);        //<------ Overload 2s timer again. Used for confirm time.
-      stm_timer_II_T2(1, LOAD_T2_250mS);     //<------ Load 250ms timer before scan buttons again.
+      stm_timer_II_T2(1, LOAD_T2_20mS);     //<------ Load timer before scan buttons again.
       nextstate_T2 = ST2_CHANGE_USER_REF;
       mainstate_T2 = ST2_WAIT_STATE_II;
       break;
@@ -589,7 +586,7 @@ void state_machine_T2(void)
       IF_LCDPutn(Get_User_Temp());
       
       stm_timer_T2(1,LOAD_T2_2SEC);
-      stm_timer_II_T2(1, LOAD_T2_250mS);
+      stm_timer_II_T2(1, LOAD_T2_20mS);
       nextstate_T2 = ST2_CHANGE_USER_REF;
       mainstate_T2 = ST2_WAIT_STATE_II;         
       break;
@@ -603,7 +600,7 @@ void state_machine_T2(void)
       IF_LCDPutn(Get_User_Temp());
       
       stm_timer_T2(1,LOAD_T2_2SEC);
-      stm_timer_II_T2(1, LOAD_T2_250mS);
+      stm_timer_II_T2(1, LOAD_T2_20mS);
       mainstate_T2 = ST2_WAIT_STATE_II;
       
       if(ActiveTempUser == eTEMP_USER)

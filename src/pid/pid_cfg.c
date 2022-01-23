@@ -15,12 +15,9 @@
 PID_DECLARE_INSTANCE(C245ToolPid)
 {
   .Kp = 16,
-  .Ki2 = 0,
+  .Ki_ms = 0,
   .Kd2 = 0,
-  .P_term_scale = 8,
-  .DI_term_limit = 2,
-  .Fbk_Filt_ms = 1000,
-  .Out_Filt_ms = 500,
+  .I_term_limit = 2,
 };
 
 /*-----------------------------------------------------------------------------
