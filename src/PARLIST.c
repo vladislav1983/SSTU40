@@ -313,7 +313,6 @@ void Params_check_limit(void)
     
     if(EE_Valid != 1000)                      _set_ee_valid_error(1);
     if(time.Hib_Time == 0)                    _set_param_limit_error(1);
-    if(T_ctrl.T_Ref_User > TEMP_USER_MAX_Q15) _set_param_limit_error(1);
     if((T_ctrl.tmpctrl_samp_time == 0) || (T_ctrl.tmpctrl_samp_time > 50)) _set_param_limit_error(1);
     if(T_ctrl.T_cal_gain < 10) _set_param_limit_error(1);
 }

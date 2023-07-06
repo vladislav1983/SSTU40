@@ -1,4 +1,4 @@
-Microchip Technology Inc, vv3_31 (A) 
+Microchip Technology Inc, vv3_31 (A) /;ÑƒõÒr
 
 Tool Name:
   c:\program files (x86)\microchip\mplab c30\bin\bin\..\bin/pic30-elf-ld.exe
@@ -21,6 +21,8 @@ Command:
   -Lc:/program files (x86)/microchip/mplab c30/bin/bin/../../support/dsPIC33E/gld \
   -Lc:/program files (x86)/microchip/mplab c30/bin/bin/../../lib/dsPIC33F \
   -Lc:/program files (x86)/microchip/mplab c30/bin/bin/../../support/dsPIC33F/gld \
+  build/default/production/_ext/659864977/pid.o \
+  build/default/production/_ext/659864977/pid_cfg.o \
   build/default/production/_ext/1360937237/DigitalIO.o \
   build/default/production/_ext/1360937237/main.o \
   build/default/production/_ext/1360937237/systmr.o \
@@ -29,7 +31,6 @@ Command:
   build/default/production/_ext/1360937237/PARLIST.o \
   build/default/production/_ext/1360937237/trace.o \
   build/default/production/_ext/1360937237/vuart.o \
-  build/default/production/_ext/1360937237/vADC.o \
   build/default/production/_ext/1360937237/statemachine.o \
   build/default/production/_ext/1360937237/LCD.o \
   build/default/production/_ext/1360937237/eeprom.o \
@@ -42,8 +43,7 @@ Command:
   build/default/production/_ext/2014683921/RotaryEncoder_cfg.o \
   build/default/production/_ext/1360937237/Crc16.o \
   build/default/production/_ext/1360937237/MathTools.o \
-  build/default/production/_ext/659864977/pid.o \
-  build/default/production/_ext/659864977/pid_cfg.o \
+  build/default/production/_ext/1360937237/adc_drv.o \
   --defsym=__MPLAB_BUILD=1 \
   -L.. \
   -L. \
@@ -73,6 +73,10 @@ c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(addsf3.e
                               build/default/production/_ext/1360937237/vuart.o (___subsf3)
 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(divsf3.eo)
                               build/default/production/_ext/1360937237/vuart.o (___divsf3)
+c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(feqltle.eo)
+                              build/default/production/_ext/1360937237/measure.o (___ltsf2)
+c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fgtge.eo)
+                              build/default/production/_ext/1360937237/measure.o (___gtsf2)
 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
                               build/default/production/_ext/1360937237/vuart.o (___fixunssfsi)
 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(floatsisf.eo)
@@ -89,6 +93,8 @@ c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(mulsf3.e
                               build/default/production/_ext/1360937237/vuart.o (___mulsf3)
 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
                               build/default/production/_ext/1360937237/LCD.o (___udivsi3)
+c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fcompare.eo)
+                              c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(feqltle.eo) (__fcompare)
 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libc-elf.a(memset.XXeo)
                               build/default/production/_ext/1360937237/trace.o (_memset)
 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libc-elf.a(strlen.XXeo)
@@ -119,23 +125,23 @@ Program Memory  [Origin = 0x100, Length = 0x7efe]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x100               0x42e           0x645  (1605)
-.const                       0x52e              0x1f90          0x2f58  (12120)
-.text                       0x24be              0x13cc          0x1db2  (7602)
-.dinit                      0x388a               0x434           0x64e  (1614)
-.text                       0x3cbe              0x197a          0x2637  (9783)
-.init.delay32               0x5638                0x1c            0x2a  (42)
+.text                        0x100               0x46c           0x6a2  (1698)
+.const                       0x56c              0x1eca          0x2e2f  (11823)
+.text                       0x2436              0x13b4          0x1d8e  (7566)
+.dinit                      0x37ea               0x45e           0x68d  (1677)
+.text                       0x3c48              0x1970          0x2628  (9768)
+.init.delay32               0x55b8                0x1c            0x2a  (42)
 
-                     Total program memory used (bytes):         0x7ffe  (32766) 67%
+                     Total program memory used (bytes):         0x7f3e  (32574) 66%
 
 
 Data EEPROM Memory  [Origin = 0x7ffc00, Length = 0x400]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-_0347bf5061e68458         0x7ffc00               0x1fe           0x1fe  (510)
-_0347c0e061e68458         0x7ffdfe               0x1fe           0x1fe  (510)
-_0347c15061e68458         0x7ffffc                 0x2             0x2  (2)
+_031cea1064a68d4e         0x7ffc00               0x1fe           0x1fe  (510)
+_031ceb6064a68d4e         0x7ffdfe               0x1fe           0x1fe  (510)
+_031cebd064a68d4e         0x7ffffc                 0x2             0x2  (2)
 
                         Total data EEPROM used (bytes):          0x3fe  (1022) 99%
 
@@ -144,18 +150,16 @@ Data Memory  [Origin = 0x800, Length = 0x800]
 
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
-.data                        0x800                   0           0x4ce  (1230)
-.bss                         0xcce                   0            0x30  (48)
-.data                        0xcfe                   0            0x52  (82)
-.bss                         0xd50                   0            0x22  (34)
-.data                        0xd72                   0            0x2c  (44)
-.bss                         0xd9e                   0            0x3a  (58)
-.data                        0xdd8                   0             0xc  (12)
-.bss                         0xde4                   0            0x24  (36)
-.data                        0xe08                   0             0x2  (2)
-.bss                         0xe0a                   0             0x8  (8)
+.data                        0x800                   0           0x4e0  (1248)
+.bss                         0xce0                   0            0x30  (48)
+.data                        0xd10                   0            0x9a  (154)
+.bss                         0xdaa                   0            0x36  (54)
+.data                        0xde0                   0             0xc  (12)
+.bss                         0xdec                   0            0x24  (36)
+.data                        0xe10                   0             0x6  (6)
+.bss                         0xe16                   0             0x8  (8)
 
-                        Total data memory used (bytes):          0x612  (1554) 75%
+                        Total data memory used (bytes):          0x61e  (1566) 76%
 
 
 Dynamic Memory Usage
@@ -163,9 +167,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0xe12                               0x1ee  (494)
+stack                        0xe1e                               0x1e2  (482)
 
-                        Maximum dynamic memory (bytes):          0x1ee  (494)
+                        Maximum dynamic memory (bytes):          0x1e2  (482)
 
 
 External Symbols in Data Memory (by address):
@@ -182,95 +186,99 @@ External Symbols in Data Memory (by address):
                     0x0b3a                  _u16CompareParameter
                     0x0b3c                  _s16CmpValue
                     0x0b3e                  _trace_source_addr
-                    0x0b5e                  _ATAN_TAB
-                    0x0c60                  _PID_C245ToolPid_Data
-                    0x0c90                  _PID_C245ToolPid_Cfg
-                    0x0c9c                  _ident
-                    0x0cfe                  _Ttime
-                    0x0d12                  _stat_stat
-                    0x0d28                  _T_ctrl
-                    0x0d44                  _overprot
-                    0x0d52                  _mes1
-                    0x0d5c                  _mes2
-                    0x0d62                  _mespar
-                    0x0d70                  _ZeroCrosDetectionState
-                    0x0d72                  _mainstate_T2
-                    0x0d78                  _mainstate_T1
-                    0x0d84                  _SYS_CONTROL
-                    0x0d86                  _PC_CONTROL
-                    0x0d88                  _ERR_CONTROL
-                    0x0d8a                  _LCD_update_rate
-                    0x0d8c                  _EE_CHKS
-                    0x0d90                  _EE_Valid
-                    0x0d92                  _EE_par_update
-                    0x0d94                  _ParamAct
-                    0x0dac                  _tmpctrl_mainstate
-                    0x0dae                  _tmpctrl_nextstate
-                    0x0dc2                  _debounce_timer_2
-                    0x0dc4                  _deb_timer_cart
-                    0x0dc6                  _deb_timer_stand
-                    0x0dc8                  _deb_timer_extr
-                    0x0dca                  _cart_det_state
-                    0x0dd6                  _TASK_CONTROL
-                    0x0dd8                  _RotaryEncoder
-                    0x0de4                  _time
-                    0x0df6                  _trace_config
-                    0x0df8                  _trace_every_period
-                    0x0e00                  _ADC
-                    0x0e08                  _debug_var_1
-                    0x0e0a                  _release
-                    0x0e0c                  _u16Nibble_Temp
+                    0x0b58                  _ATAN_TAB
+                    0x0c5a                  _PID_C245ToolPid_Data
+                    0x0c78                  _PID_C245ToolPid_Cfg
+                    0x0c80                  _PID_C210ToolPid_Data
+                    0x0c9e                  _PID_C210ToolPid_Cfg
+                    0x0ca6                  _ident
+                    0x0d10                  _Ttime
+                    0x0d24                  _stat_stat
+                    0x0d3a                  _tmpctrl_mainstate
+                    0x0d3c                  _tmpctrl_nextstate
+                    0x0d3e                  _T_ctrl
+                    0x0d58                  _overprot
+                    0x0d64                  _mainstate_T2
+                    0x0d6a                  _mainstate_T1
+                    0x0d76                  _SYS_CONTROL
+                    0x0d78                  _PC_CONTROL
+                    0x0d7a                  _ERR_CONTROL
+                    0x0d7c                  _LCD_update_rate
+                    0x0d7e                  _mes1
+                    0x0d88                  _mes2
+                    0x0d8e                  _mespar
+                    0x0d98                  _EE_CHKS
+                    0x0d9c                  _EE_Valid
+                    0x0d9e                  _EE_par_update
+                    0x0da0                  _ParamAct
+                    0x0dca                  _debounce_timer_2
+                    0x0dcc                  _deb_timer_cart
+                    0x0dce                  _deb_timer_stand
+                    0x0dd0                  _deb_timer_extr
+                    0x0dd2                  _cart_det_state
+                    0x0dde                  _TASK_CONTROL
+                    0x0de0                  _RotaryEncoder
+                    0x0dec                  _time
+                    0x0dfe                  _trace_config
+                    0x0e00                  _trace_every_period
+                    0x0e0e                  _ZeroCrosDetectionState
+                    0x0e10                  _AdcBuffer
+                    0x0e14                  _debug_var_1
+                    0x0e16                  _release
+                    0x0e18                  _u16Nibble_Temp
 
 External Symbols in Data Memory (by name):
 
-                    0x0e00                  _ADC
-                    0x0b5e                  _ATAN_TAB
-                    0x0d8c                  _EE_CHKS
-                    0x0d90                  _EE_Valid
-                    0x0d92                  _EE_par_update
-                    0x0d88                  _ERR_CONTROL
-                    0x0d8a                  _LCD_update_rate
-                    0x0d86                  _PC_CONTROL
-                    0x0c90                  _PID_C245ToolPid_Cfg
-                    0x0c60                  _PID_C245ToolPid_Data
-                    0x0d94                  _ParamAct
-                    0x0dd8                  _RotaryEncoder
+                    0x0b58                  _ATAN_TAB
+                    0x0e10                  _AdcBuffer
+                    0x0d98                  _EE_CHKS
+                    0x0d9c                  _EE_Valid
+                    0x0d9e                  _EE_par_update
+                    0x0d7a                  _ERR_CONTROL
+                    0x0d7c                  _LCD_update_rate
+                    0x0d78                  _PC_CONTROL
+                    0x0c9e                  _PID_C210ToolPid_Cfg
+                    0x0c80                  _PID_C210ToolPid_Data
+                    0x0c78                  _PID_C245ToolPid_Cfg
+                    0x0c5a                  _PID_C245ToolPid_Data
+                    0x0da0                  _ParamAct
+                    0x0de0                  _RotaryEncoder
                     0x0b28                  _STORE_POS
-                    0x0d84                  _SYS_CONTROL
-                    0x0dd6                  _TASK_CONTROL
+                    0x0d76                  _SYS_CONTROL
+                    0x0dde                  _TASK_CONTROL
                     0x0800                  _TRSB
-                    0x0d28                  _T_ctrl
-                    0x0cfe                  _Ttime
-                    0x0d70                  _ZeroCrosDetectionState
-                    0x0dca                  _cart_det_state
-                    0x0dc4                  _deb_timer_cart
-                    0x0dc8                  _deb_timer_extr
-                    0x0dc6                  _deb_timer_stand
-                    0x0dc2                  _debounce_timer_2
-                    0x0e08                  _debug_var_1
-                    0x0c9c                  _ident
-                    0x0d78                  _mainstate_T1
-                    0x0d72                  _mainstate_T2
-                    0x0d52                  _mes1
-                    0x0d5c                  _mes2
-                    0x0d62                  _mespar
-                    0x0d44                  _overprot
+                    0x0d3e                  _T_ctrl
+                    0x0d10                  _Ttime
+                    0x0e0e                  _ZeroCrosDetectionState
+                    0x0dd2                  _cart_det_state
+                    0x0dcc                  _deb_timer_cart
+                    0x0dd0                  _deb_timer_extr
+                    0x0dce                  _deb_timer_stand
+                    0x0dca                  _debounce_timer_2
+                    0x0e14                  _debug_var_1
+                    0x0ca6                  _ident
+                    0x0d6a                  _mainstate_T1
+                    0x0d64                  _mainstate_T2
+                    0x0d7e                  _mes1
+                    0x0d88                  _mes2
+                    0x0d8e                  _mespar
+                    0x0d58                  _overprot
                     0x0b2e                  _par_trace
-                    0x0e0a                  _release
+                    0x0e16                  _release
                     0x0b3c                  _s16CmpValue
-                    0x0d12                  _stat_stat
-                    0x0de4                  _time
-                    0x0dac                  _tmpctrl_mainstate
-                    0x0dae                  _tmpctrl_nextstate
-                    0x0df6                  _trace_config
+                    0x0d24                  _stat_stat
+                    0x0dec                  _time
+                    0x0d3a                  _tmpctrl_mainstate
+                    0x0d3c                  _tmpctrl_nextstate
+                    0x0dfe                  _trace_config
                     0x0b26                  _trace_control
                     0x0b2a                  _trace_counter
-                    0x0df8                  _trace_every_period
+                    0x0e00                  _trace_every_period
                     0x0b3e                  _trace_source_addr
                     0x0b24                  _trace_state
                     0x0b2c                  _trace_trigger
                     0x0b3a                  _u16CompareParameter
-                    0x0e0c                  _u16Nibble_Temp
+                    0x0e18                  _u16Nibble_Temp
                     0x0b36                  _u16TraceParamNumber_1
                     0x0b38                  _u16TraceParamNumber_2
 
@@ -290,8 +298,8 @@ External Symbols in Program Memory (by address):
 
                   0x000100                  __resetPRI
                   0x000122                  __psv_init
-                  0x000132                  __data_init_standard
                   0x000132                  __data_init
+                  0x000132                  __data_init_standard
                   0x000190                  __DefaultInterrupt
                   0x000194                  __eedata_helper1
                   0x0001be                  __eedata_helper2
@@ -301,272 +309,286 @@ External Symbols in Program Memory (by address):
                   0x00021a                  ___subsf3
                   0x00021c                  ___addsf3
                   0x0002d6                  ___divsf3
-                  0x00035a                  ___fixunssfsi
-                  0x000390                  ___floatsisf
-                  0x0003e6                  __fpack
-                  0x000432                  __funpack
-                  0x00045c                  __funpack2
-                  0x00046c                  __fPropagateNaN
-                  0x00047e                  __fbopExit
-                  0x000486                  __fbopReturnNaN
-                  0x00048c                  ___mulsf3
-                  0x0004f4                  ___udivsi3
-                  0x000514                  _memset
-                  0x000522                  _strlen
-                  0x00052e                  _version
-                  0x000530                  _C30_Version
-                  0x000b46                  _iopar
-                  0x001572                  _sintab
-                  0x001972                  _SQRT_TAB
-                  0x001d72                  _SQRT_TAB2
-                  0x00247e                  _LCD_INIT_STRING
-                  0x002482                  _DegreeChar
-                  0x00248a                  _EmptyHeart
-                  0x002492                  _FullHeart
-                  0x0024b6                  _EncoderClient_cfg
-                  0x0024b8                  _RotaryEncoderPinsPolarity_cfg
-                  0x0024ba                  _PID_C245ToolPid
-                  0x0024be                  _state_machine_T1
-                  0x002728                  _state_machine_T2
-                  0x002b5e                  _state_machine_init
-                  0x002b78                  _stm_timer_T2
-                  0x002b92                  _stm_timer_II_T2
-                  0x002bac                  _stm_timer_T1
-                  0x002bc6                  _PrintHibernationTime
-                  0x002c1c                  _PrintTriacState
-                  0x002c3a                  _Sirem_Engine
-                  0x0034aa                  _ee_param_act
-                  0x0037b0                  _EE_CheckEEprom
-                  0x003cbe                  _PidProcess
-                  0x003eae                  _PidReset
-                  0x004010                  _temp_ctrl
-                  0x0041ae                  _Reset_TMPCTRL
-                  0x0041c4                  _Cartridge_overload_protection
-                  0x004216                  _temp_ctrl_init
-                  0x004224                  _Get_Temp_Actual
-                  0x00422e                  _Set_User_Temp
-                  0x004248                  _Reset_User_Temp
-                  0x004262                  _Get_User_Temp
-                  0x004266                  _Inc_User_Temp
-                  0x004278                  _Dec_User_Temp
-                  0x00428a                  _tmpctrl_timer_t1
-                  0x004320                  _cartridge_ident
-                  0x00458c                  _ident_get_current_tool
-                  0x004590                  _ident_timer_t1
-                  0x0045aa                  _ident_timeout_timer_t1
-                  0x0045c4                  _IF_LCDInit
-                  0x004626                  _IF_LCDPutc
-                  0x00465a                  _IF_LCDPutSpecialChar
-                  0x004680                  _IF_LCDGotoXY
-                  0x0046aa                  _IF_LCDPuts
-                  0x0046ce                  _IF_LCDPutn
-                  0x004754                  _IF_LCD_UpdateState
-                  0x004766                  _LCDSendNibble
-                  0x0047c8                  _LCDSendByte
-                  0x00480e                  _LCD_printf
-                  0x004814                  _ATAN
-                  0x004912                  _sqrt_16
-                  0x00492e                  _sqrt_32
-                  0x00497a                  _pow_16
-                  0x0049ac                  _sdiv_32
-                  0x0049c0                  _udiv_32
-                  0x0049d4                  _fmul_q15
-                  0x0049f6                  _mul_s16
-                  0x004a0c                  _DSP_Engine_Init
-                  0x004a1c                  _IF_DigitalIO_Init
-                  0x004a6c                  _Dio_Scan_T2
-                  0x004ac0                  _cart_stat_det
-                  0x004bd6                  _cart_stat_timer_T1
-                  0x004bf0                  _IF_Uart_Init
-                  0x004c86                  _IF_Uart_MsgGetDataCnt
-                  0x004c96                  _IF_Uart_MsgGet
-                  0x004cc8                  _IF_Uart_RxPurge
-                  0x004cd8                  _IF_Uart_MsgPut
-                  0x004d00                  _IF_UART_PutByte
-                  0x004d1a                  __U1RXInterrupt
-                  0x004d7c                  _sci_timer
-                  0x004d9a                  __T3Interrupt
-                  0x004df8                  __T1Interrupt
-                  0x004e42                  __INT0Interrupt
-                  0x004e46                  _TaskTimesCalc
-                  0x004e7c                  _StationStatistic
-                  0x004f40                  _IF_Get_TRSB_CntBytes
-                  0x004f44                  _do_trace
-                  0x005064                  _trace_init_first
-                  0x005090                  _zero_cross_II
-                  0x0050f4                  _DC_Autotunning
-                  0x005134                  _Current_measure
-                  0x00516e                  _measure_T2
-                  0x00518c                  _measure_init
-                  0x00524a                  _RotaryEncoder_Init
-                  0x005256                  _RotaryEncoder_Scan_T1
-                  0x005290                  _RotaryEncoder_ConsumeStateEvent
-                  0x0052a8                  _main
-                  0x005388                  _IF_SysTmr1_Init
-                  0x0053ae                  _IF_SysTmr3_Init
-                  0x0053d2                  _IF_SysTmr2_Init
-                  0x0053f6                  _delay_us
-                  0x005404                  _delay_ms
-                  0x005414                  _Timestate_Cartridge_Control
-                  0x00545e                  _IF_Parlist_GetCntMembers
-                  0x005462                  _IF_Parlist_GetCntBytes
-                  0x005466                  _IF_Parlist_bnu
-                  0x005494                  _Params_check_limit
-                  0x0054dc                  _Params_Conversion
-                  0x0054de                  _IF_ADC_INIT
-                  0x005534                  _ADC_Sample_Read
-                  0x00554a                  __OscillatorFail
-                  0x005564                  __AddressError
-                  0x00557e                  __StackError
-                  0x005598                  __MathError
-                  0x0055b2                  _RotaryEncoder_cfg_InitPins
-                  0x0055ba                  _RotaryEncoder_cfg_ReadPins
-                  0x0055e6                  _Crc_CalculateCRC16
-                  0x005616                  _triac_fire_timer
-                  0x005632                  _triac_control_init
-                  0x005638                  ___delay32
+                  0x00035a                  ___lesf2
+                  0x00035a                  ___ltsf2
+                  0x00035a                  ___eqsf2
+                  0x00035e                  ___gesf2
+                  0x00035e                  ___gtsf2
+                  0x000362                  ___fixunssfsi
+                  0x000398                  ___floatsisf
+                  0x0003ee                  __fpack
+                  0x00043a                  __funpack
+                  0x000464                  __funpack2
+                  0x000474                  __fPropagateNaN
+                  0x000486                  __fbopExit
+                  0x00048e                  __fbopReturnNaN
+                  0x000494                  ___mulsf3
+                  0x0004fc                  ___udivsi3
+                  0x00051c                  __fcompare
+                  0x000552                  _memset
+                  0x000560                  _strlen
+                  0x00056c                  _version
+                  0x00056e                  _C30_Version
+                  0x000b40                  _iopar
+                  0x0015dc                  _sintab
+                  0x0023ec                  _LCD_INIT_STRING
+                  0x0023f0                  _DegreeChar
+                  0x0023f8                  _EmptyHeart
+                  0x002400                  _FullHeart
+                  0x002424                  _PID_C245ToolPid
+                  0x002428                  _PID_C210ToolPid
+                  0x002432                  _EncoderClient_cfg
+                  0x002434                  _RotaryEncoderPinsPolarity_cfg
+                  0x002436                  _state_machine_T1
+                  0x002698                  _state_machine_T2
+                  0x002abe                  _state_machine_init
+                  0x002ad8                  _stm_timer_T2
+                  0x002af2                  _stm_timer_II_T2
+                  0x002b0c                  _stm_timer_T1
+                  0x002b26                  _PrintHibernationTime
+                  0x002b7c                  _PrintTriacState
+                  0x002b9a                  _Sirem_Engine
+                  0x00340a                  _ee_param_act
+                  0x003710                  _EE_CheckEEprom
+                  0x003c48                  _temp_ctrl
+                  0x003e1e                  _Reset_TMPCTRL
+                  0x003e48                  _Cartridge_overload_protection
+                  0x003e9a                  _temp_ctrl_init
+                  0x003ea6                  _Get_Temp_Actual
+                  0x003edc                  _Set_User_Temp
+                  0x003f18                  _Reset_User_Temp
+                  0x003f54                  _Get_User_Temp
+                  0x003f8a                  _Inc_User_Temp
+                  0x003fbe                  _Dec_User_Temp
+                  0x003ff2                  _tmpctrl_timer_t1
+                  0x004088                  _cartridge_ident
+                  0x004312                  _ident_get_current_tool
+                  0x004316                  _ident_timer_t1
+                  0x004330                  _ident_timeout_timer_t1
+                  0x00434a                  _IF_LCDInit
+                  0x0043ac                  _IF_LCDPutc
+                  0x0043e0                  _IF_LCDPutSpecialChar
+                  0x004406                  _IF_LCDGotoXY
+                  0x004430                  _IF_LCDPuts
+                  0x004454                  _IF_LCDPutn
+                  0x0044da                  _IF_LCD_UpdateState
+                  0x0044ec                  _LCDSendNibble
+                  0x00454e                  _LCDSendByte
+                  0x004594                  _LCD_printf
+                  0x00459a                  _ATAN
+                  0x004698                  _sqrt_16
+                  0x0046c6                  _sqrt_32
+                  0x0046fe                  _pow_16
+                  0x004730                  _sdiv_32
+                  0x004744                  _udiv_32
+                  0x004758                  _fmul_q15
+                  0x004768                  _fmul_qu15
+                  0x004778                  _mul_s16
+                  0x004780                  _DSP_Engine_Init
+                  0x004790                  _PidProcess
+                  0x004870                  _PidReset
+                  0x004966                  _IF_DigitalIO_Init
+                  0x0049b6                  _Dio_Scan_T2
+                  0x004a0a                  _cart_stat_det
+                  0x004b20                  _cart_stat_timer_T1
+                  0x004b3a                  _IF_Uart_Init
+                  0x004bd0                  _IF_Uart_MsgGetDataCnt
+                  0x004be0                  _IF_Uart_MsgGet
+                  0x004c12                  _IF_Uart_RxPurge
+                  0x004c22                  _IF_Uart_MsgPut
+                  0x004c4a                  _IF_UART_PutByte
+                  0x004c64                  __U1RXInterrupt
+                  0x004cc6                  _sci_timer
+                  0x004ce4                  __T3Interrupt
+                  0x004d40                  __T1Interrupt
+                  0x004d8a                  __INT0Interrupt
+                  0x004d8e                  _TaskTimesCalc
+                  0x004dc4                  _StationStatistic
+                  0x004e88                  _zero_cross_II
+                  0x004ef2                  _DC_Autotunning
+                  0x004f6c                  _Current_measure
+                  0x004fc0                  _measure_T2
+                  0x004fe8                  _measure_init
+                  0x00500c                  _IF_Get_TRSB_CntBytes
+                  0x005010                  _do_trace
+                  0x005130                  _trace_init_first
+                  0x0051f6                  _RotaryEncoder_Init
+                  0x005202                  _RotaryEncoder_Scan_T1
+                  0x00523c                  _RotaryEncoder_ConsumeStateEvent
+                  0x005254                  _main
+                  0x005334                  _IF_SysTmr1_Init
+                  0x00535a                  _IF_SysTmr3_Init
+                  0x00537e                  _IF_SysTmr2_Init
+                  0x0053a2                  _delay_us
+                  0x0053b0                  _delay_ms
+                  0x0053c0                  _Timestate_Cartridge_Control
+                  0x00540a                  _IF_Parlist_GetCntMembers
+                  0x00540e                  _IF_Parlist_GetCntBytes
+                  0x005412                  _IF_Parlist_bnu
+                  0x005440                  _Params_check_limit
+                  0x00547a                  _Params_Conversion
+                  0x00547c                  __OscillatorFail
+                  0x005496                  __AddressError
+                  0x0054b0                  __StackError
+                  0x0054ca                  __MathError
+                  0x0054e4                  _AdcDrv_Init
+                  0x005510                  _AdcReadAllChannels
+                  0x005522                  _AdcReadChannel
+                  0x005532                  _RotaryEncoder_cfg_InitPins
+                  0x00553a                  _RotaryEncoder_cfg_ReadPins
+                  0x005566                  _Crc_CalculateCRC16
+                  0x005596                  _triac_fire_timer
+                  0x0055b2                  _triac_control_init
+                  0x0055b8                  ___delay32
                   0xf8000a                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x005534                  _ADC_Sample_Read
-                  0x004814                  _ATAN
-                  0x000530                  _C30_Version
-                  0x0041c4                  _Cartridge_overload_protection
-                  0x0055e6                  _Crc_CalculateCRC16
-                  0x005134                  _Current_measure
-                  0x0050f4                  _DC_Autotunning
-                  0x004a0c                  _DSP_Engine_Init
-                  0x004278                  _Dec_User_Temp
-                  0x002482                  _DegreeChar
-                  0x004a6c                  _Dio_Scan_T2
-                  0x0037b0                  _EE_CheckEEprom
-                  0x00248a                  _EmptyHeart
-                  0x0024b6                  _EncoderClient_cfg
-                  0x002492                  _FullHeart
-                  0x004224                  _Get_Temp_Actual
-                  0x004262                  _Get_User_Temp
-                  0x0054de                  _IF_ADC_INIT
-                  0x004a1c                  _IF_DigitalIO_Init
-                  0x004f40                  _IF_Get_TRSB_CntBytes
-                  0x004680                  _IF_LCDGotoXY
-                  0x0045c4                  _IF_LCDInit
-                  0x00465a                  _IF_LCDPutSpecialChar
-                  0x004626                  _IF_LCDPutc
-                  0x0046ce                  _IF_LCDPutn
-                  0x0046aa                  _IF_LCDPuts
-                  0x004754                  _IF_LCD_UpdateState
-                  0x005462                  _IF_Parlist_GetCntBytes
-                  0x00545e                  _IF_Parlist_GetCntMembers
-                  0x005466                  _IF_Parlist_bnu
-                  0x005388                  _IF_SysTmr1_Init
-                  0x0053d2                  _IF_SysTmr2_Init
-                  0x0053ae                  _IF_SysTmr3_Init
-                  0x004d00                  _IF_UART_PutByte
-                  0x004bf0                  _IF_Uart_Init
-                  0x004c96                  _IF_Uart_MsgGet
-                  0x004c86                  _IF_Uart_MsgGetDataCnt
-                  0x004cd8                  _IF_Uart_MsgPut
-                  0x004cc8                  _IF_Uart_RxPurge
-                  0x004266                  _Inc_User_Temp
-                  0x0047c8                  _LCDSendByte
-                  0x004766                  _LCDSendNibble
-                  0x00247e                  _LCD_INIT_STRING
-                  0x00480e                  _LCD_printf
-                  0x0024ba                  _PID_C245ToolPid
-                  0x0054dc                  _Params_Conversion
-                  0x005494                  _Params_check_limit
-                  0x003cbe                  _PidProcess
-                  0x003eae                  _PidReset
-                  0x002bc6                  _PrintHibernationTime
-                  0x002c1c                  _PrintTriacState
-                  0x0041ae                  _Reset_TMPCTRL
-                  0x004248                  _Reset_User_Temp
-                  0x0024b8                  _RotaryEncoderPinsPolarity_cfg
-                  0x005290                  _RotaryEncoder_ConsumeStateEvent
-                  0x00524a                  _RotaryEncoder_Init
-                  0x005256                  _RotaryEncoder_Scan_T1
-                  0x0055b2                  _RotaryEncoder_cfg_InitPins
-                  0x0055ba                  _RotaryEncoder_cfg_ReadPins
-                  0x001972                  _SQRT_TAB
-                  0x001d72                  _SQRT_TAB2
-                  0x00422e                  _Set_User_Temp
-                  0x002c3a                  _Sirem_Engine
-                  0x004e7c                  _StationStatistic
-                  0x004e46                  _TaskTimesCalc
-                  0x005414                  _Timestate_Cartridge_Control
-                  0x005564                  __AddressError
+                  0x00459a                  _ATAN
+                  0x0054e4                  _AdcDrv_Init
+                  0x005510                  _AdcReadAllChannels
+                  0x005522                  _AdcReadChannel
+                  0x00056e                  _C30_Version
+                  0x003e48                  _Cartridge_overload_protection
+                  0x005566                  _Crc_CalculateCRC16
+                  0x004f6c                  _Current_measure
+                  0x004ef2                  _DC_Autotunning
+                  0x004780                  _DSP_Engine_Init
+                  0x003fbe                  _Dec_User_Temp
+                  0x0023f0                  _DegreeChar
+                  0x0049b6                  _Dio_Scan_T2
+                  0x003710                  _EE_CheckEEprom
+                  0x0023f8                  _EmptyHeart
+                  0x002432                  _EncoderClient_cfg
+                  0x002400                  _FullHeart
+                  0x003ea6                  _Get_Temp_Actual
+                  0x003f54                  _Get_User_Temp
+                  0x004966                  _IF_DigitalIO_Init
+                  0x00500c                  _IF_Get_TRSB_CntBytes
+                  0x004406                  _IF_LCDGotoXY
+                  0x00434a                  _IF_LCDInit
+                  0x0043e0                  _IF_LCDPutSpecialChar
+                  0x0043ac                  _IF_LCDPutc
+                  0x004454                  _IF_LCDPutn
+                  0x004430                  _IF_LCDPuts
+                  0x0044da                  _IF_LCD_UpdateState
+                  0x00540e                  _IF_Parlist_GetCntBytes
+                  0x00540a                  _IF_Parlist_GetCntMembers
+                  0x005412                  _IF_Parlist_bnu
+                  0x005334                  _IF_SysTmr1_Init
+                  0x00537e                  _IF_SysTmr2_Init
+                  0x00535a                  _IF_SysTmr3_Init
+                  0x004c4a                  _IF_UART_PutByte
+                  0x004b3a                  _IF_Uart_Init
+                  0x004be0                  _IF_Uart_MsgGet
+                  0x004bd0                  _IF_Uart_MsgGetDataCnt
+                  0x004c22                  _IF_Uart_MsgPut
+                  0x004c12                  _IF_Uart_RxPurge
+                  0x003f8a                  _Inc_User_Temp
+                  0x00454e                  _LCDSendByte
+                  0x0044ec                  _LCDSendNibble
+                  0x0023ec                  _LCD_INIT_STRING
+                  0x004594                  _LCD_printf
+                  0x002428                  _PID_C210ToolPid
+                  0x002424                  _PID_C245ToolPid
+                  0x00547a                  _Params_Conversion
+                  0x005440                  _Params_check_limit
+                  0x004790                  _PidProcess
+                  0x004870                  _PidReset
+                  0x002b26                  _PrintHibernationTime
+                  0x002b7c                  _PrintTriacState
+                  0x003e1e                  _Reset_TMPCTRL
+                  0x003f18                  _Reset_User_Temp
+                  0x002434                  _RotaryEncoderPinsPolarity_cfg
+                  0x00523c                  _RotaryEncoder_ConsumeStateEvent
+                  0x0051f6                  _RotaryEncoder_Init
+                  0x005202                  _RotaryEncoder_Scan_T1
+                  0x005532                  _RotaryEncoder_cfg_InitPins
+                  0x00553a                  _RotaryEncoder_cfg_ReadPins
+                  0x003edc                  _Set_User_Temp
+                  0x002b9a                  _Sirem_Engine
+                  0x004dc4                  _StationStatistic
+                  0x004d8e                  _TaskTimesCalc
+                  0x0053c0                  _Timestate_Cartridge_Control
+                  0x005496                  __AddressError
                   0x000190                  __DefaultInterrupt
                   0xf8000a                  __FGS.sec
-                  0x004e42                  __INT0Interrupt
-                  0x005598                  __MathError
-                  0x00554a                  __OscillatorFail
-                  0x00557e                  __StackError
-                  0x004df8                  __T1Interrupt
-                  0x004d9a                  __T3Interrupt
-                  0x004d1a                  __U1RXInterrupt
+                  0x004d8a                  __INT0Interrupt
+                  0x0054ca                  __MathError
+                  0x00547c                  __OscillatorFail
+                  0x0054b0                  __StackError
+                  0x004d40                  __T1Interrupt
+                  0x004ce4                  __T3Interrupt
+                  0x004c64                  __U1RXInterrupt
                   0x00021c                  ___addsf3
-                  0x005638                  ___delay32
+                  0x0055b8                  ___delay32
                   0x0002d6                  ___divsf3
-                  0x00035a                  ___fixunssfsi
-                  0x000390                  ___floatsisf
-                  0x00048c                  ___mulsf3
+                  0x00035a                  ___eqsf2
+                  0x000362                  ___fixunssfsi
+                  0x000398                  ___floatsisf
+                  0x00035e                  ___gesf2
+                  0x00035e                  ___gtsf2
+                  0x00035a                  ___lesf2
+                  0x00035a                  ___ltsf2
+                  0x000494                  ___mulsf3
                   0x00021a                  ___subsf3
-                  0x0004f4                  ___udivsi3
+                  0x0004fc                  ___udivsi3
                   0x000132                  __data_init
                   0x000132                  __data_init_standard
                   0x000194                  __eedata_helper1
                   0x0001be                  __eedata_helper2
                   0x0001c6                  __eedata_helper3
                   0x0001d2                  __eedata_helper4
-                  0x00046c                  __fPropagateNaN
-                  0x00047e                  __fbopExit
-                  0x000486                  __fbopReturnNaN
-                  0x0003e6                  __fpack
-                  0x000432                  __funpack
-                  0x00045c                  __funpack2
+                  0x000474                  __fPropagateNaN
+                  0x000486                  __fbopExit
+                  0x00048e                  __fbopReturnNaN
+                  0x00051c                  __fcompare
+                  0x0003ee                  __fpack
+                  0x00043a                  __funpack
+                  0x000464                  __funpack2
                   0x0001e4                  __memcpy_helper
                   0x000122                  __psv_init
                   0x000100                  __resetPRI
-                  0x004ac0                  _cart_stat_det
-                  0x004bd6                  _cart_stat_timer_T1
-                  0x004320                  _cartridge_ident
-                  0x005404                  _delay_ms
-                  0x0053f6                  _delay_us
-                  0x004f44                  _do_trace
-                  0x0034aa                  _ee_param_act
-                  0x0049d4                  _fmul_q15
-                  0x00458c                  _ident_get_current_tool
-                  0x0045aa                  _ident_timeout_timer_t1
-                  0x004590                  _ident_timer_t1
-                  0x000b46                  _iopar
-                  0x0052a8                  _main
-                  0x00516e                  _measure_T2
-                  0x00518c                  _measure_init
-                  0x000514                  _memset
-                  0x0049f6                  _mul_s16
-                  0x00497a                  _pow_16
-                  0x004d7c                  _sci_timer
-                  0x0049ac                  _sdiv_32
-                  0x001572                  _sintab
-                  0x004912                  _sqrt_16
-                  0x00492e                  _sqrt_32
-                  0x0024be                  _state_machine_T1
-                  0x002728                  _state_machine_T2
-                  0x002b5e                  _state_machine_init
-                  0x002b92                  _stm_timer_II_T2
-                  0x002bac                  _stm_timer_T1
-                  0x002b78                  _stm_timer_T2
-                  0x000522                  _strlen
-                  0x004010                  _temp_ctrl
-                  0x004216                  _temp_ctrl_init
-                  0x00428a                  _tmpctrl_timer_t1
-                  0x005064                  _trace_init_first
-                  0x005632                  _triac_control_init
-                  0x005616                  _triac_fire_timer
-                  0x0049c0                  _udiv_32
-                  0x00052e                  _version
-                  0x005090                  _zero_cross_II
+                  0x004a0a                  _cart_stat_det
+                  0x004b20                  _cart_stat_timer_T1
+                  0x004088                  _cartridge_ident
+                  0x0053b0                  _delay_ms
+                  0x0053a2                  _delay_us
+                  0x005010                  _do_trace
+                  0x00340a                  _ee_param_act
+                  0x004758                  _fmul_q15
+                  0x004768                  _fmul_qu15
+                  0x004312                  _ident_get_current_tool
+                  0x004330                  _ident_timeout_timer_t1
+                  0x004316                  _ident_timer_t1
+                  0x000b40                  _iopar
+                  0x005254                  _main
+                  0x004fc0                  _measure_T2
+                  0x004fe8                  _measure_init
+                  0x000552                  _memset
+                  0x004778                  _mul_s16
+                  0x0046fe                  _pow_16
+                  0x004cc6                  _sci_timer
+                  0x004730                  _sdiv_32
+                  0x0015dc                  _sintab
+                  0x004698                  _sqrt_16
+                  0x0046c6                  _sqrt_32
+                  0x002436                  _state_machine_T1
+                  0x002698                  _state_machine_T2
+                  0x002abe                  _state_machine_init
+                  0x002af2                  _stm_timer_II_T2
+                  0x002b0c                  _stm_timer_T1
+                  0x002ad8                  _stm_timer_T2
+                  0x000560                  _strlen
+                  0x003c48                  _temp_ctrl
+                  0x003e9a                  _temp_ctrl_init
+                  0x003ff2                  _tmpctrl_timer_t1
+                  0x005130                  _trace_init_first
+                  0x0055b2                  _triac_control_init
+                  0x005596                  _triac_fire_timer
+                  0x004744                  _udiv_32
+                  0x00056c                  _version
+                  0x004e88                  _zero_cross_II
 
 Memory Configuration
 
@@ -593,6 +615,8 @@ FICD             0xf8000c           0x000002
 
 Linker script and memory map
 
+LOAD build/default/production/_ext/659864977/pid.o
+LOAD build/default/production/_ext/659864977/pid_cfg.o
 LOAD build/default/production/_ext/1360937237/DigitalIO.o
 LOAD build/default/production/_ext/1360937237/main.o
 LOAD build/default/production/_ext/1360937237/systmr.o
@@ -601,7 +625,6 @@ LOAD build/default/production/_ext/1360937237/sirem.o
 LOAD build/default/production/_ext/1360937237/PARLIST.o
 LOAD build/default/production/_ext/1360937237/trace.o
 LOAD build/default/production/_ext/1360937237/vuart.o
-LOAD build/default/production/_ext/1360937237/vADC.o
 LOAD build/default/production/_ext/1360937237/statemachine.o
 LOAD build/default/production/_ext/1360937237/LCD.o
 LOAD build/default/production/_ext/1360937237/eeprom.o
@@ -614,8 +637,7 @@ LOAD build/default/production/_ext/2014683921/RotaryEncoder.o
 LOAD build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
 LOAD build/default/production/_ext/1360937237/Crc16.o
 LOAD build/default/production/_ext/1360937237/MathTools.o
-LOAD build/default/production/_ext/659864977/pid.o
-LOAD build/default/production/_ext/659864977/pid_cfg.o
+LOAD build/default/production/_ext/1360937237/adc_drv.o
                     0x0001                  __MPLAB_BUILD = 0x1
 LOAD c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp30F4013-elf.a
                     0x8005c0                  __FUID0 = 0x8005c0
@@ -644,7 +666,7 @@ LOAD c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp3
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000100        0x42e
+.text             0x000100        0x46c
  *(.init)
  .init            0x000100         0x32 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libpic30-elf.a(crt0_standard.o)
                   0x000100                  __resetPRI
@@ -676,36 +698,46 @@ LOAD c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib/dsPIC30F\libp3
                   0x00021c                  ___addsf3
  .libm.divfs3     0x0002d6         0x84 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(divsf3.eo)
                   0x0002d6                  ___divsf3
+ .libm.eqsf2      0x00035a          0x4 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(feqltle.eo)
+                  0x00035a                  ___eqsf2
+                  0x00035a                  ___ltsf2
+                  0x00035a                  ___lesf2
+ .libm.gtsf2      0x00035e          0x4 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fgtge.eo)
+                  0x00035e                  ___gesf2
+                  0x00035e                  ___gtsf2
  .libm.fixunssfsi
-                  0x00035a         0x36 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
-                  0x00035a                  ___fixunssfsi
+                  0x000362         0x36 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
+                  0x000362                  ___fixunssfsi
  .libm.floatsisf
-                  0x000390         0x56 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(floatsisf.eo)
-                  0x000390                  ___floatsisf
- .libm.fpack      0x0003e6         0x4c c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fpack.eo)
-                  0x0003e6                  __fpack
- .libm.funpack    0x000432         0x2a c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(funpack.eo)
-                  0x000432                  __funpack
+                  0x000398         0x56 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(floatsisf.eo)
+                  0x000398                  ___floatsisf
+ .libm.fpack      0x0003ee         0x4c c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fpack.eo)
+                  0x0003ee                  __fpack
+ .libm.funpack    0x00043a         0x2a c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(funpack.eo)
+                  0x00043a                  __funpack
  .libm.funpack2
-                  0x00045c         0x10 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(funpack2.eo)
-                  0x00045c                  __funpack2
+                  0x000464         0x10 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+                  0x000464                  __funpack2
  .libm.fPropagateNaN
-                  0x00046c         0x12 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(futil.eo)
-                  0x00046c                  __fPropagateNaN
+                  0x000474         0x12 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x000474                  __fPropagateNaN
  .libm.fbobExit
-                  0x00047e          0x8 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(futil.eo)
-                  0x00047e                  __fbopExit
+                  0x000486          0x8 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x000486                  __fbopExit
  .libm.fbopReturnNaN
-                  0x000486          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(futil.eo)
-                  0x000486                  __fbopReturnNaN
- .libm.mulsf3     0x00048c         0x68 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
-                  0x00048c                  ___mulsf3
- .libm.udivsi3    0x0004f4         0x20 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
-                  0x0004f4                  ___udivsi3
- .libc.memset     0x000514          0xe c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libc-elf.a(memset.XXeo)
-                  0x000514                  _memset
- .libc.strlen     0x000522          0xc c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libc-elf.a(strlen.XXeo)
-                  0x000522                  _strlen
+                  0x00048e          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x00048e                  __fbopReturnNaN
+ .libm.mulsf3     0x000494         0x68 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
+                  0x000494                  ___mulsf3
+ .libm.udivsi3    0x0004fc         0x20 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
+                  0x0004fc                  ___udivsi3
+ .libm.fcompare
+                  0x00051c         0x36 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fcompare.eo)
+                  0x00051c                  __fcompare
+ .libc.memset     0x000552          0xe c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libc-elf.a(memset.XXeo)
+                  0x000552                  _memset
+ .libc.strlen     0x000560          0xc c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libc-elf.a(strlen.XXeo)
+                  0x000560                  _strlen
 
 usercode
  *(usercode)
@@ -757,135 +789,135 @@ userdata
 .comment
  *(.comment)
 
-.debug_info       0x000000       0xcd46
+.debug_info       0x000000       0xd18f
  *(.debug_info)
- .debug_info      0x000000       0x108a build/default/production/_ext/1360937237/DigitalIO.o
- .debug_info      0x00108a        0x8ce build/default/production/_ext/1360937237/main.o
- .debug_info      0x001958        0xc8f build/default/production/_ext/1360937237/systmr.o
- .debug_info      0x0025e7        0x84c build/default/production/_ext/1360937237/task.o
- .debug_info      0x002e33        0xd8d build/default/production/_ext/1360937237/sirem.o
- .debug_info      0x003bc0       0x1282 build/default/production/_ext/1360937237/PARLIST.o
- .debug_info      0x004e42        0xa51 build/default/production/_ext/1360937237/trace.o
- .debug_info      0x005893        0xaf9 build/default/production/_ext/1360937237/vuart.o
- .debug_info      0x00638c        0xae1 build/default/production/_ext/1360937237/vADC.o
- .debug_info      0x006e6d        0x88d build/default/production/_ext/1360937237/statemachine.o
- .debug_info      0x0076fa        0x836 build/default/production/_ext/1360937237/LCD.o
- .debug_info      0x007f30        0xb48 build/default/production/_ext/1360937237/eeprom.o
- .debug_info      0x008a78        0x283 build/default/production/_ext/1360937237/triac_control.o
- .debug_info      0x008cfb        0x85b build/default/production/_ext/1360937237/IDENT.o
- .debug_info      0x009556        0xc71 build/default/production/_ext/1360937237/tempctrl.o
- .debug_info      0x00a1c7        0xb5a build/default/production/_ext/1360937237/measure.o
- .debug_info      0x00ad21        0x268 build/default/production/_ext/1360937237/traps.o
- .debug_info      0x00af89        0x574 build/default/production/_ext/2014683921/RotaryEncoder.o
- .debug_info      0x00b4fd        0x4a8 build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
- .debug_info      0x00b9a5        0x22c build/default/production/_ext/1360937237/Crc16.o
- .debug_info      0x00bbd1        0x659 build/default/production/_ext/1360937237/MathTools.o
- .debug_info      0x00c22a        0x6d0 build/default/production/_ext/659864977/pid.o
- .debug_info      0x00c8fa        0x44c build/default/production/_ext/659864977/pid_cfg.o
+ .debug_info      0x000000        0x5a5 build/default/production/_ext/659864977/pid.o
+ .debug_info      0x0005a5        0x411 build/default/production/_ext/659864977/pid_cfg.o
+ .debug_info      0x0009b6       0x1097 build/default/production/_ext/1360937237/DigitalIO.o
+ .debug_info      0x001a4d        0x8db build/default/production/_ext/1360937237/main.o
+ .debug_info      0x002328        0xcb2 build/default/production/_ext/1360937237/systmr.o
+ .debug_info      0x002fda        0x83c build/default/production/_ext/1360937237/task.o
+ .debug_info      0x003816        0xd9a build/default/production/_ext/1360937237/sirem.o
+ .debug_info      0x0045b0       0x12a8 build/default/production/_ext/1360937237/PARLIST.o
+ .debug_info      0x005858        0xaf4 build/default/production/_ext/1360937237/trace.o
+ .debug_info      0x00634c        0xb1c build/default/production/_ext/1360937237/vuart.o
+ .debug_info      0x006e68        0x6f9 build/default/production/_ext/1360937237/statemachine.o
+ .debug_info      0x007561        0x836 build/default/production/_ext/1360937237/LCD.o
+ .debug_info      0x007d97        0xb6b build/default/production/_ext/1360937237/eeprom.o
+ .debug_info      0x008902        0x2a6 build/default/production/_ext/1360937237/triac_control.o
+ .debug_info      0x008ba8        0x8f4 build/default/production/_ext/1360937237/IDENT.o
+ .debug_info      0x00949c       0x1193 build/default/production/_ext/1360937237/tempctrl.o
+ .debug_info      0x00a62f        0xd96 build/default/production/_ext/1360937237/measure.o
+ .debug_info      0x00b3c5        0x28b build/default/production/_ext/1360937237/traps.o
+ .debug_info      0x00b650        0x581 build/default/production/_ext/2014683921/RotaryEncoder.o
+ .debug_info      0x00bbd1        0x4b5 build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
+ .debug_info      0x00c086        0x24f build/default/production/_ext/1360937237/Crc16.o
+ .debug_info      0x00c2d5        0x724 build/default/production/_ext/1360937237/MathTools.o
+ .debug_info      0x00c9f9        0x796 build/default/production/_ext/1360937237/adc_drv.o
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000       0x1e97
+.debug_abbrev     0x000000       0x1ee9
  *(.debug_abbrev)
- .debug_abbrev    0x000000        0x178 build/default/production/_ext/1360937237/DigitalIO.o
- .debug_abbrev    0x000178        0x17c build/default/production/_ext/1360937237/main.o
- .debug_abbrev    0x0002f4        0x185 build/default/production/_ext/1360937237/systmr.o
- .debug_abbrev    0x000479        0x195 build/default/production/_ext/1360937237/task.o
- .debug_abbrev    0x00060e        0x1b0 build/default/production/_ext/1360937237/sirem.o
- .debug_abbrev    0x0007be        0x141 build/default/production/_ext/1360937237/PARLIST.o
- .debug_abbrev    0x0008ff        0x10d build/default/production/_ext/1360937237/trace.o
- .debug_abbrev    0x000a0c        0x1d7 build/default/production/_ext/1360937237/vuart.o
- .debug_abbrev    0x000be3        0x117 build/default/production/_ext/1360937237/vADC.o
- .debug_abbrev    0x000cfa        0x16d build/default/production/_ext/1360937237/statemachine.o
- .debug_abbrev    0x000e67        0x149 build/default/production/_ext/1360937237/LCD.o
- .debug_abbrev    0x000fb0        0x24b build/default/production/_ext/1360937237/eeprom.o
- .debug_abbrev    0x0011fb         0xca build/default/production/_ext/1360937237/triac_control.o
- .debug_abbrev    0x0012c5        0x195 build/default/production/_ext/1360937237/IDENT.o
- .debug_abbrev    0x00145a        0x213 build/default/production/_ext/1360937237/tempctrl.o
- .debug_abbrev    0x00166d        0x17b build/default/production/_ext/1360937237/measure.o
- .debug_abbrev    0x0017e8         0x88 build/default/production/_ext/1360937237/traps.o
- .debug_abbrev    0x001870        0x13b build/default/production/_ext/2014683921/RotaryEncoder.o
- .debug_abbrev    0x0019ab        0x119 build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
- .debug_abbrev    0x001ac4         0x9d build/default/production/_ext/1360937237/Crc16.o
- .debug_abbrev    0x001b61        0x16d build/default/production/_ext/1360937237/MathTools.o
- .debug_abbrev    0x001cce        0x146 build/default/production/_ext/659864977/pid.o
- .debug_abbrev    0x001e14         0x83 build/default/production/_ext/659864977/pid_cfg.o
+ .debug_abbrev    0x000000        0x128 build/default/production/_ext/659864977/pid.o
+ .debug_abbrev    0x000128         0x74 build/default/production/_ext/659864977/pid_cfg.o
+ .debug_abbrev    0x00019c        0x178 build/default/production/_ext/1360937237/DigitalIO.o
+ .debug_abbrev    0x000314        0x17c build/default/production/_ext/1360937237/main.o
+ .debug_abbrev    0x000490        0x185 build/default/production/_ext/1360937237/systmr.o
+ .debug_abbrev    0x000615        0x18c build/default/production/_ext/1360937237/task.o
+ .debug_abbrev    0x0007a1        0x1b0 build/default/production/_ext/1360937237/sirem.o
+ .debug_abbrev    0x000951        0x132 build/default/production/_ext/1360937237/PARLIST.o
+ .debug_abbrev    0x000a83        0x10d build/default/production/_ext/1360937237/trace.o
+ .debug_abbrev    0x000b90        0x1d7 build/default/production/_ext/1360937237/vuart.o
+ .debug_abbrev    0x000d67        0x16d build/default/production/_ext/1360937237/statemachine.o
+ .debug_abbrev    0x000ed4        0x149 build/default/production/_ext/1360937237/LCD.o
+ .debug_abbrev    0x00101d        0x24b build/default/production/_ext/1360937237/eeprom.o
+ .debug_abbrev    0x001268         0xca build/default/production/_ext/1360937237/triac_control.o
+ .debug_abbrev    0x001332        0x1a9 build/default/production/_ext/1360937237/IDENT.o
+ .debug_abbrev    0x0014db        0x244 build/default/production/_ext/1360937237/tempctrl.o
+ .debug_abbrev    0x00171f        0x1b7 build/default/production/_ext/1360937237/measure.o
+ .debug_abbrev    0x0018d6         0x88 build/default/production/_ext/1360937237/traps.o
+ .debug_abbrev    0x00195e        0x13b build/default/production/_ext/2014683921/RotaryEncoder.o
+ .debug_abbrev    0x001a99        0x119 build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
+ .debug_abbrev    0x001bb2         0x9d build/default/production/_ext/1360937237/Crc16.o
+ .debug_abbrev    0x001c4f        0x16d build/default/production/_ext/1360937237/MathTools.o
+ .debug_abbrev    0x001dbc        0x12d build/default/production/_ext/1360937237/adc_drv.o
 
-.debug_line       0x000000       0x535d
+.debug_line       0x000000       0x5ac5
  *(.debug_line)
- .debug_line      0x000000        0x4e5 build/default/production/_ext/1360937237/DigitalIO.o
- .debug_line      0x0004e5        0x313 build/default/production/_ext/1360937237/main.o
- .debug_line      0x0007f8        0x29f build/default/production/_ext/1360937237/systmr.o
- .debug_line      0x000a97        0x41c build/default/production/_ext/1360937237/task.o
- .debug_line      0x000eb3        0x836 build/default/production/_ext/1360937237/sirem.o
- .debug_line      0x0016e9        0x1eb build/default/production/_ext/1360937237/PARLIST.o
- .debug_line      0x0018d4        0x32b build/default/production/_ext/1360937237/trace.o
- .debug_line      0x001bff        0x36e build/default/production/_ext/1360937237/vuart.o
- .debug_line      0x001f6d        0x1c0 build/default/production/_ext/1360937237/vADC.o
- .debug_line      0x00212d        0xa89 build/default/production/_ext/1360937237/statemachine.o
- .debug_line      0x002bb6        0x3ed build/default/production/_ext/1360937237/LCD.o
- .debug_line      0x002fa3        0x6cf build/default/production/_ext/1360937237/eeprom.o
- .debug_line      0x003672        0x15e build/default/production/_ext/1360937237/triac_control.o
- .debug_line      0x0037d0        0x461 build/default/production/_ext/1360937237/IDENT.o
- .debug_line      0x003c31        0x5c5 build/default/production/_ext/1360937237/tempctrl.o
- .debug_line      0x0041f6        0x2b2 build/default/production/_ext/1360937237/measure.o
- .debug_line      0x0044a8        0x13a build/default/production/_ext/1360937237/traps.o
- .debug_line      0x0045e2        0x2a8 build/default/production/_ext/2014683921/RotaryEncoder.o
- .debug_line      0x00488a        0x1bc build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
- .debug_line      0x004a46         0xea build/default/production/_ext/1360937237/Crc16.o
- .debug_line      0x004b30        0x3ad build/default/production/_ext/1360937237/MathTools.o
- .debug_line      0x004edd        0x3b3 build/default/production/_ext/659864977/pid.o
- .debug_line      0x005290         0xcd build/default/production/_ext/659864977/pid_cfg.o
+ .debug_line      0x000000        0x397 build/default/production/_ext/659864977/pid.o
+ .debug_line      0x000397        0x139 build/default/production/_ext/659864977/pid_cfg.o
+ .debug_line      0x0004d0        0x504 build/default/production/_ext/1360937237/DigitalIO.o
+ .debug_line      0x0009d4        0x340 build/default/production/_ext/1360937237/main.o
+ .debug_line      0x000d14        0x30b build/default/production/_ext/1360937237/systmr.o
+ .debug_line      0x00101f        0x449 build/default/production/_ext/1360937237/task.o
+ .debug_line      0x001468        0x855 build/default/production/_ext/1360937237/sirem.o
+ .debug_line      0x001cbd        0x252 build/default/production/_ext/1360937237/PARLIST.o
+ .debug_line      0x001f0f        0x34d build/default/production/_ext/1360937237/trace.o
+ .debug_line      0x00225c        0x3da build/default/production/_ext/1360937237/vuart.o
+ .debug_line      0x002636        0xad3 build/default/production/_ext/1360937237/statemachine.o
+ .debug_line      0x003109        0x40c build/default/production/_ext/1360937237/LCD.o
+ .debug_line      0x003515        0x73b build/default/production/_ext/1360937237/eeprom.o
+ .debug_line      0x003c50        0x1d5 build/default/production/_ext/1360937237/triac_control.o
+ .debug_line      0x003e25        0x4c2 build/default/production/_ext/1360937237/IDENT.o
+ .debug_line      0x0042e7        0x6ae build/default/production/_ext/1360937237/tempctrl.o
+ .debug_line      0x004995        0x351 build/default/production/_ext/1360937237/measure.o
+ .debug_line      0x004ce6        0x1a6 build/default/production/_ext/1360937237/traps.o
+ .debug_line      0x004e8c        0x2c7 build/default/production/_ext/2014683921/RotaryEncoder.o
+ .debug_line      0x005153        0x1db build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
+ .debug_line      0x00532e        0x156 build/default/production/_ext/1360937237/Crc16.o
+ .debug_line      0x005484        0x44c build/default/production/_ext/1360937237/MathTools.o
+ .debug_line      0x0058d0        0x1f5 build/default/production/_ext/1360937237/adc_drv.o
 
-.debug_frame      0x000000        0x9ca
+.debug_frame      0x000000        0x9da
  *(.debug_frame)
- .debug_frame     0x000000         0x57 build/default/production/_ext/1360937237/DigitalIO.o
- .debug_frame     0x000057         0x27 build/default/production/_ext/1360937237/main.o
- .debug_frame     0x00007e         0x77 build/default/production/_ext/1360937237/systmr.o
- .debug_frame     0x0000f5         0x67 build/default/production/_ext/1360937237/task.o
- .debug_frame     0x00015c         0xc7 build/default/production/_ext/1360937237/sirem.o
- .debug_frame     0x000223         0x67 build/default/production/_ext/1360937237/PARLIST.o
- .debug_frame     0x00028a         0x47 build/default/production/_ext/1360937237/trace.o
- .debug_frame     0x0002d1         0x97 build/default/production/_ext/1360937237/vuart.o
- .debug_frame     0x000368         0x37 build/default/production/_ext/1360937237/vADC.o
- .debug_frame     0x00039f         0x97 build/default/production/_ext/1360937237/statemachine.o
- .debug_frame     0x000436         0xc7 build/default/production/_ext/1360937237/LCD.o
- .debug_frame     0x0004fd         0xc7 build/default/production/_ext/1360937237/eeprom.o
- .debug_frame     0x0005c4         0x37 build/default/production/_ext/1360937237/triac_control.o
- .debug_frame     0x0005fb         0x57 build/default/production/_ext/1360937237/IDENT.o
- .debug_frame     0x000652         0xd7 build/default/production/_ext/1360937237/tempctrl.o
- .debug_frame     0x000729         0x77 build/default/production/_ext/1360937237/measure.o
- .debug_frame     0x0007a0         0x57 build/default/production/_ext/1360937237/traps.o
- .debug_frame     0x0007f7         0x67 build/default/production/_ext/2014683921/RotaryEncoder.o
- .debug_frame     0x00085e         0x37 build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
- .debug_frame     0x000895         0x27 build/default/production/_ext/1360937237/Crc16.o
- .debug_frame     0x0008bc         0xa7 build/default/production/_ext/1360937237/MathTools.o
- .debug_frame     0x000963         0x67 build/default/production/_ext/659864977/pid.o
+ .debug_frame     0x000000         0x57 build/default/production/_ext/659864977/pid.o
+ .debug_frame     0x000057         0x57 build/default/production/_ext/1360937237/DigitalIO.o
+ .debug_frame     0x0000ae         0x27 build/default/production/_ext/1360937237/main.o
+ .debug_frame     0x0000d5         0x77 build/default/production/_ext/1360937237/systmr.o
+ .debug_frame     0x00014c         0x67 build/default/production/_ext/1360937237/task.o
+ .debug_frame     0x0001b3         0xc7 build/default/production/_ext/1360937237/sirem.o
+ .debug_frame     0x00027a         0x67 build/default/production/_ext/1360937237/PARLIST.o
+ .debug_frame     0x0002e1         0x47 build/default/production/_ext/1360937237/trace.o
+ .debug_frame     0x000328         0x97 build/default/production/_ext/1360937237/vuart.o
+ .debug_frame     0x0003bf         0x97 build/default/production/_ext/1360937237/statemachine.o
+ .debug_frame     0x000456         0xc7 build/default/production/_ext/1360937237/LCD.o
+ .debug_frame     0x00051d         0xc7 build/default/production/_ext/1360937237/eeprom.o
+ .debug_frame     0x0005e4         0x37 build/default/production/_ext/1360937237/triac_control.o
+ .debug_frame     0x00061b         0x57 build/default/production/_ext/1360937237/IDENT.o
+ .debug_frame     0x000672         0xd7 build/default/production/_ext/1360937237/tempctrl.o
+ .debug_frame     0x000749         0x77 build/default/production/_ext/1360937237/measure.o
+ .debug_frame     0x0007c0         0x57 build/default/production/_ext/1360937237/traps.o
+ .debug_frame     0x000817         0x67 build/default/production/_ext/2014683921/RotaryEncoder.o
+ .debug_frame     0x00087e         0x37 build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
+ .debug_frame     0x0008b5         0x27 build/default/production/_ext/1360937237/Crc16.o
+ .debug_frame     0x0008dc         0xb7 build/default/production/_ext/1360937237/MathTools.o
+ .debug_frame     0x000993         0x47 build/default/production/_ext/1360937237/adc_drv.o
 
-.debug_str        0x000000        0x280
+.debug_str        0x000000        0x22b
  *(.debug_str)
- .debug_str       0x000000          0xd build/default/production/_ext/1360937237/DigitalIO.o
- .debug_str       0x00000d         0x17 build/default/production/_ext/1360937237/main.o
- .debug_str       0x000024         0x1b build/default/production/_ext/1360937237/systmr.o
- .debug_str       0x00003f          0xd build/default/production/_ext/1360937237/task.o
- .debug_str       0x00004c         0x53 build/default/production/_ext/1360937237/sirem.o
- .debug_str       0x00009f         0x25 build/default/production/_ext/1360937237/PARLIST.o
- .debug_str       0x0000c4          0xd build/default/production/_ext/1360937237/trace.o
- .debug_str       0x0000d1         0x17 build/default/production/_ext/1360937237/vuart.o
- .debug_str       0x0000e8          0xd build/default/production/_ext/1360937237/vADC.o
- .debug_str       0x0000f5          0xd build/default/production/_ext/1360937237/statemachine.o
- .debug_str       0x000102          0xd build/default/production/_ext/1360937237/LCD.o
- .debug_str       0x00010f         0x3b build/default/production/_ext/1360937237/eeprom.o
- .debug_str       0x00014a          0xd build/default/production/_ext/1360937237/triac_control.o
- .debug_str       0x000157         0x1d build/default/production/_ext/1360937237/IDENT.o
- .debug_str       0x000174         0x49 build/default/production/_ext/1360937237/tempctrl.o
- .debug_str       0x0001bd          0xd build/default/production/_ext/1360937237/measure.o
- .debug_str       0x0001ca          0xd build/default/production/_ext/1360937237/traps.o
- .debug_str       0x0001d7          0xd build/default/production/_ext/2014683921/RotaryEncoder.o
- .debug_str       0x0001e4          0xd build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
- .debug_str       0x0001f1          0xd build/default/production/_ext/1360937237/Crc16.o
- .debug_str       0x0001fe         0x16 build/default/production/_ext/1360937237/MathTools.o
- .debug_str       0x000214         0x47 build/default/production/_ext/659864977/pid.o
- .debug_str       0x00025b         0x25 build/default/production/_ext/659864977/pid_cfg.o
+ .debug_str       0x000000         0x24 build/default/production/_ext/659864977/pid.o
+ .debug_str       0x000024          0xd build/default/production/_ext/659864977/pid_cfg.o
+ .debug_str       0x000031          0xd build/default/production/_ext/1360937237/DigitalIO.o
+ .debug_str       0x00003e         0x17 build/default/production/_ext/1360937237/main.o
+ .debug_str       0x000055         0x1b build/default/production/_ext/1360937237/systmr.o
+ .debug_str       0x000070          0xd build/default/production/_ext/1360937237/task.o
+ .debug_str       0x00007d         0x53 build/default/production/_ext/1360937237/sirem.o
+ .debug_str       0x0000d0          0xd build/default/production/_ext/1360937237/PARLIST.o
+ .debug_str       0x0000dd          0xd build/default/production/_ext/1360937237/trace.o
+ .debug_str       0x0000ea         0x17 build/default/production/_ext/1360937237/vuart.o
+ .debug_str       0x000101          0xd build/default/production/_ext/1360937237/statemachine.o
+ .debug_str       0x00010e          0xd build/default/production/_ext/1360937237/LCD.o
+ .debug_str       0x00011b         0x3b build/default/production/_ext/1360937237/eeprom.o
+ .debug_str       0x000156          0xd build/default/production/_ext/1360937237/triac_control.o
+ .debug_str       0x000163         0x1d build/default/production/_ext/1360937237/IDENT.o
+ .debug_str       0x000180         0x46 build/default/production/_ext/1360937237/tempctrl.o
+ .debug_str       0x0001c6         0x17 build/default/production/_ext/1360937237/measure.o
+ .debug_str       0x0001dd          0xd build/default/production/_ext/1360937237/traps.o
+ .debug_str       0x0001ea          0xd build/default/production/_ext/2014683921/RotaryEncoder.o
+ .debug_str       0x0001f7          0xd build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
+ .debug_str       0x000204          0xd build/default/production/_ext/1360937237/Crc16.o
+ .debug_str       0x000211          0xd build/default/production/_ext/1360937237/MathTools.o
+ .debug_str       0x00021e          0xd build/default/production/_ext/1360937237/adc_drv.o
 
 .debug_loc
  *(.debug_loc)
@@ -894,54 +926,54 @@ userdata
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0xd74
+                  0x000000        0xdc8
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0xc3 build/default/production/_ext/1360937237/DigitalIO.o
+                  0x000000         0x2e build/default/production/_ext/659864977/pid.o
  .debug_pubnames
-                  0x0000c3         0x45 build/default/production/_ext/1360937237/main.o
+                  0x00002e         0x9c build/default/production/_ext/659864977/pid_cfg.o
  .debug_pubnames
-                  0x000108         0x91 build/default/production/_ext/1360937237/systmr.o
+                  0x0000ca         0xc3 build/default/production/_ext/1360937237/DigitalIO.o
  .debug_pubnames
-                  0x000199         0x97 build/default/production/_ext/1360937237/task.o
+                  0x00018d         0x45 build/default/production/_ext/1360937237/main.o
  .debug_pubnames
-                  0x000230         0x23 build/default/production/_ext/1360937237/sirem.o
+                  0x0001d2         0x91 build/default/production/_ext/1360937237/systmr.o
  .debug_pubnames
-                  0x000253         0xcc build/default/production/_ext/1360937237/PARLIST.o
+                  0x000263         0x97 build/default/production/_ext/1360937237/task.o
  .debug_pubnames
-                  0x00031f        0x152 build/default/production/_ext/1360937237/trace.o
+                  0x0002fa         0x23 build/default/production/_ext/1360937237/sirem.o
  .debug_pubnames
-                  0x000471         0xac build/default/production/_ext/1360937237/vuart.o
+                  0x00031d         0xcc build/default/production/_ext/1360937237/PARLIST.o
  .debug_pubnames
-                  0x00051d         0x3e build/default/production/_ext/1360937237/vADC.o
+                  0x0003e9        0x152 build/default/production/_ext/1360937237/trace.o
  .debug_pubnames
-                  0x00055b        0x11b build/default/production/_ext/1360937237/statemachine.o
+                  0x00053b         0xac build/default/production/_ext/1360937237/vuart.o
  .debug_pubnames
-                  0x000676        0x113 build/default/production/_ext/1360937237/LCD.o
+                  0x0005e7        0x11b build/default/production/_ext/1360937237/statemachine.o
  .debug_pubnames
-                  0x000789         0xa5 build/default/production/_ext/1360937237/eeprom.o
+                  0x000702        0x113 build/default/production/_ext/1360937237/LCD.o
  .debug_pubnames
-                  0x00082e         0x3e build/default/production/_ext/1360937237/triac_control.o
+                  0x000815         0xa5 build/default/production/_ext/1360937237/eeprom.o
  .debug_pubnames
-                  0x00086c         0x79 build/default/production/_ext/1360937237/IDENT.o
+                  0x0008ba         0x3e build/default/production/_ext/1360937237/triac_control.o
  .debug_pubnames
-                  0x0008e5        0x130 build/default/production/_ext/1360937237/tempctrl.o
+                  0x0008f8         0x79 build/default/production/_ext/1360937237/IDENT.o
  .debug_pubnames
-                  0x000a15         0xa3 build/default/production/_ext/1360937237/measure.o
+                  0x000971        0x130 build/default/production/_ext/1360937237/tempctrl.o
  .debug_pubnames
-                  0x000ab8         0x57 build/default/production/_ext/1360937237/traps.o
+                  0x000aa1         0xa3 build/default/production/_ext/1360937237/measure.o
  .debug_pubnames
-                  0x000b0f         0x79 build/default/production/_ext/2014683921/RotaryEncoder.o
+                  0x000b44         0x57 build/default/production/_ext/1360937237/traps.o
  .debug_pubnames
-                  0x000b88         0x88 build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
+                  0x000b9b         0x79 build/default/production/_ext/2014683921/RotaryEncoder.o
  .debug_pubnames
-                  0x000c10         0x29 build/default/production/_ext/1360937237/Crc16.o
+                  0x000c14         0x88 build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
  .debug_pubnames
-                  0x000c39         0xb6 build/default/production/_ext/1360937237/MathTools.o
+                  0x000c9c         0x29 build/default/production/_ext/1360937237/Crc16.o
  .debug_pubnames
-                  0x000cef         0x2e build/default/production/_ext/659864977/pid.o
+                  0x000cc5         0xa9 build/default/production/_ext/1360937237/MathTools.o
  .debug_pubnames
-                  0x000d1d         0x57 build/default/production/_ext/659864977/pid_cfg.o
+                  0x000d6e         0x5a build/default/production/_ext/1360937237/adc_drv.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -949,23 +981,23 @@ userdata
 .debug_aranges    0x000000        0x2c0
  *(.debug_aranges)
  .debug_aranges
-                  0x000000         0x20 build/default/production/_ext/1360937237/DigitalIO.o
+                  0x000000         0x20 build/default/production/_ext/659864977/pid.o
  .debug_aranges
-                  0x000020         0x20 build/default/production/_ext/1360937237/main.o
+                  0x000020         0x20 build/default/production/_ext/1360937237/DigitalIO.o
  .debug_aranges
-                  0x000040         0x20 build/default/production/_ext/1360937237/systmr.o
+                  0x000040         0x20 build/default/production/_ext/1360937237/main.o
  .debug_aranges
-                  0x000060         0x20 build/default/production/_ext/1360937237/task.o
+                  0x000060         0x20 build/default/production/_ext/1360937237/systmr.o
  .debug_aranges
-                  0x000080         0x20 build/default/production/_ext/1360937237/sirem.o
+                  0x000080         0x20 build/default/production/_ext/1360937237/task.o
  .debug_aranges
-                  0x0000a0         0x20 build/default/production/_ext/1360937237/PARLIST.o
+                  0x0000a0         0x20 build/default/production/_ext/1360937237/sirem.o
  .debug_aranges
-                  0x0000c0         0x20 build/default/production/_ext/1360937237/trace.o
+                  0x0000c0         0x20 build/default/production/_ext/1360937237/PARLIST.o
  .debug_aranges
-                  0x0000e0         0x20 build/default/production/_ext/1360937237/vuart.o
+                  0x0000e0         0x20 build/default/production/_ext/1360937237/trace.o
  .debug_aranges
-                  0x000100         0x20 build/default/production/_ext/1360937237/vADC.o
+                  0x000100         0x20 build/default/production/_ext/1360937237/vuart.o
  .debug_aranges
                   0x000120         0x20 build/default/production/_ext/1360937237/statemachine.o
  .debug_aranges
@@ -991,27 +1023,27 @@ userdata
  .debug_aranges
                   0x000280         0x20 build/default/production/_ext/1360937237/MathTools.o
  .debug_aranges
-                  0x0002a0         0x20 build/default/production/_ext/659864977/pid.o
+                  0x0002a0         0x20 build/default/production/_ext/1360937237/adc_drv.o
 
 .ivt              0x000004         0x7c
                   0x000004          0x4 LONG 0x190 DEFINED (__ReservedTrap0)?ABSOLUTE (__ReservedTrap0):ABSOLUTE (__DefaultInterrupt)
-                  0x000006          0x4 LONG 0x554a DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
-                  0x000008          0x4 LONG 0x5564 DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
-                  0x00000a          0x4 LONG 0x557e DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
-                  0x00000c          0x4 LONG 0x5598 DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
+                  0x000006          0x4 LONG 0x547c DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
+                  0x000008          0x4 LONG 0x5496 DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
+                  0x00000a          0x4 LONG 0x54b0 DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
+                  0x00000c          0x4 LONG 0x54ca DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
                   0x00000e          0x4 LONG 0x190 DEFINED (__ReservedTrap5)?ABSOLUTE (__ReservedTrap5):ABSOLUTE (__DefaultInterrupt)
                   0x000010          0x4 LONG 0x190 DEFINED (__ReservedTrap6)?ABSOLUTE (__ReservedTrap6):ABSOLUTE (__DefaultInterrupt)
                   0x000012          0x4 LONG 0x190 DEFINED (__ReservedTrap7)?ABSOLUTE (__ReservedTrap7):ABSOLUTE (__DefaultInterrupt)
-                  0x000014          0x4 LONG 0x4e42 DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000014          0x4 LONG 0x4d8a DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000016          0x4 LONG 0x190 DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000018          0x4 LONG 0x190 DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00001a          0x4 LONG 0x4df8 DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00001a          0x4 LONG 0x4d40 DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001c          0x4 LONG 0x190 DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001e          0x4 LONG 0x190 DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000020          0x4 LONG 0x190 DEFINED (__T2Interrupt)?ABSOLUTE (__T2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000022          0x4 LONG 0x4d9a DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000022          0x4 LONG 0x4ce4 DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000024          0x4 LONG 0x190 DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x000026          0x4 LONG 0x4d1a DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000026          0x4 LONG 0x4c64 DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000028          0x4 LONG 0x190 DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00002a          0x4 LONG 0x190 DEFINED (__ADCInterrupt)?ABSOLUTE (__ADCInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00002c          0x4 LONG 0x190 DEFINED (__NVMInterrupt)?ABSOLUTE (__NVMInterrupt):ABSOLUTE (__DefaultInterrupt)
@@ -1059,23 +1091,23 @@ userdata
 
 .aivt             0x000084         0x7c
                   0x000084          0x4 LONG 0x190 DEFINED (__AltReservedTrap0)?ABSOLUTE (__AltReservedTrap0):DEFINED (__ReservedTrap0)?ABSOLUTE (__ReservedTrap0):ABSOLUTE (__DefaultInterrupt)
-                  0x000086          0x4 LONG 0x554a DEFINED (__AltOscillatorFail)?ABSOLUTE (__AltOscillatorFail):DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
-                  0x000088          0x4 LONG 0x5564 DEFINED (__AltAddressError)?ABSOLUTE (__AltAddressError):DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
-                  0x00008a          0x4 LONG 0x557e DEFINED (__AltStackError)?ABSOLUTE (__AltStackError):DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
-                  0x00008c          0x4 LONG 0x5598 DEFINED (__AltMathError)?ABSOLUTE (__AltMathError):DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
+                  0x000086          0x4 LONG 0x547c DEFINED (__AltOscillatorFail)?ABSOLUTE (__AltOscillatorFail):DEFINED (__OscillatorFail)?ABSOLUTE (__OscillatorFail):ABSOLUTE (__DefaultInterrupt)
+                  0x000088          0x4 LONG 0x5496 DEFINED (__AltAddressError)?ABSOLUTE (__AltAddressError):DEFINED (__AddressError)?ABSOLUTE (__AddressError):ABSOLUTE (__DefaultInterrupt)
+                  0x00008a          0x4 LONG 0x54b0 DEFINED (__AltStackError)?ABSOLUTE (__AltStackError):DEFINED (__StackError)?ABSOLUTE (__StackError):ABSOLUTE (__DefaultInterrupt)
+                  0x00008c          0x4 LONG 0x54ca DEFINED (__AltMathError)?ABSOLUTE (__AltMathError):DEFINED (__MathError)?ABSOLUTE (__MathError):ABSOLUTE (__DefaultInterrupt)
                   0x00008e          0x4 LONG 0x190 DEFINED (__AltReservedTrap5)?ABSOLUTE (__AltReservedTrap5):DEFINED (__ReservedTrap5)?ABSOLUTE (__ReservedTrap5):ABSOLUTE (__DefaultInterrupt)
                   0x000090          0x4 LONG 0x190 DEFINED (__AltReservedTrap6)?ABSOLUTE (__AltReservedTrap6):DEFINED (__ReservedTrap6)?ABSOLUTE (__ReservedTrap6):ABSOLUTE (__DefaultInterrupt)
                   0x000092          0x4 LONG 0x190 DEFINED (__AltReservedTrap7)?ABSOLUTE (__AltReservedTrap7):DEFINED (__ReservedTrap7)?ABSOLUTE (__ReservedTrap7):ABSOLUTE (__DefaultInterrupt)
-                  0x000094          0x4 LONG 0x4e42 DEFINED (__AltINT0Interrupt)?ABSOLUTE (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x000094          0x4 LONG 0x4d8a DEFINED (__AltINT0Interrupt)?ABSOLUTE (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000096          0x4 LONG 0x190 DEFINED (__AltIC1Interrupt)?ABSOLUTE (__AltIC1Interrupt):DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000098          0x4 LONG 0x190 DEFINED (__AltOC1Interrupt)?ABSOLUTE (__AltOC1Interrupt):DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00009a          0x4 LONG 0x4df8 DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00009a          0x4 LONG 0x4d40 DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00009c          0x4 LONG 0x190 DEFINED (__AltIC2Interrupt)?ABSOLUTE (__AltIC2Interrupt):DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00009e          0x4 LONG 0x190 DEFINED (__AltOC2Interrupt)?ABSOLUTE (__AltOC2Interrupt):DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000a0          0x4 LONG 0x190 DEFINED (__AltT2Interrupt)?ABSOLUTE (__AltT2Interrupt):DEFINED (__T2Interrupt)?ABSOLUTE (__T2Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000a2          0x4 LONG 0x4d9a DEFINED (__AltT3Interrupt)?ABSOLUTE (__AltT3Interrupt):DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000a2          0x4 LONG 0x4ce4 DEFINED (__AltT3Interrupt)?ABSOLUTE (__AltT3Interrupt):DEFINED (__T3Interrupt)?ABSOLUTE (__T3Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000a4          0x4 LONG 0x190 DEFINED (__AltSPI1Interrupt)?ABSOLUTE (__AltSPI1Interrupt):DEFINED (__SPI1Interrupt)?ABSOLUTE (__SPI1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x0000a6          0x4 LONG 0x4d1a DEFINED (__AltU1RXInterrupt)?ABSOLUTE (__AltU1RXInterrupt):DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000a6          0x4 LONG 0x4c64 DEFINED (__AltU1RXInterrupt)?ABSOLUTE (__AltU1RXInterrupt):DEFINED (__U1RXInterrupt)?ABSOLUTE (__U1RXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000a8          0x4 LONG 0x190 DEFINED (__AltU1TXInterrupt)?ABSOLUTE (__AltU1TXInterrupt):DEFINED (__U1TXInterrupt)?ABSOLUTE (__U1TXInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000aa          0x4 LONG 0x190 DEFINED (__AltADCInterrupt)?ABSOLUTE (__AltADCInterrupt):DEFINED (__ADCInterrupt)?ABSOLUTE (__ADCInterrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000ac          0x4 LONG 0x190 DEFINED (__AltNVMInterrupt)?ABSOLUTE (__AltNVMInterrupt):DEFINED (__NVMInterrupt)?ABSOLUTE (__NVMInterrupt):ABSOLUTE (__DefaultInterrupt)
@@ -1824,53 +1856,53 @@ LOAD default_isr
 LOAD data_init
 
 __c30_signature
-                  0x0002c0         0xf0
+                  0x0002c0        0x102
  __c30_signature
-                  0x0002c0          0x6 build/default/production/_ext/1360937237/DigitalIO.o
+                  0x0002c0          0x6 build/default/production/_ext/659864977/pid.o
  __c30_signature
-                  0x0002c6          0x6 build/default/production/_ext/1360937237/main.o
+                  0x0002c6          0x6 build/default/production/_ext/659864977/pid_cfg.o
  __c30_signature
-                  0x0002cc          0x6 build/default/production/_ext/1360937237/systmr.o
+                  0x0002cc          0x6 build/default/production/_ext/1360937237/DigitalIO.o
  __c30_signature
-                  0x0002d2          0x6 build/default/production/_ext/1360937237/task.o
+                  0x0002d2          0x6 build/default/production/_ext/1360937237/main.o
  __c30_signature
-                  0x0002d8          0x6 build/default/production/_ext/1360937237/sirem.o
+                  0x0002d8          0x6 build/default/production/_ext/1360937237/systmr.o
  __c30_signature
-                  0x0002de          0x6 build/default/production/_ext/1360937237/PARLIST.o
+                  0x0002de          0x6 build/default/production/_ext/1360937237/task.o
  __c30_signature
-                  0x0002e4          0x6 build/default/production/_ext/1360937237/trace.o
+                  0x0002e4          0x6 build/default/production/_ext/1360937237/sirem.o
  __c30_signature
-                  0x0002ea          0x6 build/default/production/_ext/1360937237/vuart.o
+                  0x0002ea          0x6 build/default/production/_ext/1360937237/PARLIST.o
  __c30_signature
-                  0x0002f0          0x6 build/default/production/_ext/1360937237/vADC.o
+                  0x0002f0          0x6 build/default/production/_ext/1360937237/trace.o
  __c30_signature
-                  0x0002f6          0x6 build/default/production/_ext/1360937237/statemachine.o
+                  0x0002f6          0x6 build/default/production/_ext/1360937237/vuart.o
  __c30_signature
-                  0x0002fc          0x6 build/default/production/_ext/1360937237/LCD.o
+                  0x0002fc          0x6 build/default/production/_ext/1360937237/statemachine.o
  __c30_signature
-                  0x000302          0x6 build/default/production/_ext/1360937237/eeprom.o
+                  0x000302          0x6 build/default/production/_ext/1360937237/LCD.o
  __c30_signature
-                  0x000308          0x6 build/default/production/_ext/1360937237/triac_control.o
+                  0x000308          0x6 build/default/production/_ext/1360937237/eeprom.o
  __c30_signature
-                  0x00030e          0x6 build/default/production/_ext/1360937237/IDENT.o
+                  0x00030e          0x6 build/default/production/_ext/1360937237/triac_control.o
  __c30_signature
-                  0x000314          0x6 build/default/production/_ext/1360937237/tempctrl.o
+                  0x000314          0x6 build/default/production/_ext/1360937237/IDENT.o
  __c30_signature
-                  0x00031a          0x6 build/default/production/_ext/1360937237/measure.o
+                  0x00031a          0x6 build/default/production/_ext/1360937237/tempctrl.o
  __c30_signature
-                  0x000320          0x6 build/default/production/_ext/1360937237/traps.o
+                  0x000320          0x6 build/default/production/_ext/1360937237/measure.o
  __c30_signature
-                  0x000326          0x6 build/default/production/_ext/2014683921/RotaryEncoder.o
+                  0x000326          0x6 build/default/production/_ext/1360937237/traps.o
  __c30_signature
-                  0x00032c          0x6 build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
+                  0x00032c          0x6 build/default/production/_ext/2014683921/RotaryEncoder.o
  __c30_signature
-                  0x000332          0x6 build/default/production/_ext/1360937237/Crc16.o
+                  0x000332          0x6 build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
  __c30_signature
-                  0x000338          0x6 build/default/production/_ext/1360937237/MathTools.o
+                  0x000338          0x6 build/default/production/_ext/1360937237/Crc16.o
  __c30_signature
-                  0x00033e          0x6 build/default/production/_ext/659864977/pid.o
+                  0x00033e          0x6 build/default/production/_ext/1360937237/MathTools.o
  __c30_signature
-                  0x000344          0x6 build/default/production/_ext/659864977/pid_cfg.o
+                  0x000344          0x6 build/default/production/_ext/1360937237/adc_drv.o
  __c30_signature
                   0x00034a          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libpic30-elf.a(crt0_standard.o)
  __c30_signature
@@ -1886,28 +1918,34 @@ __c30_signature
  __c30_signature
                   0x00036e          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(divsf3.eo)
  __c30_signature
-                  0x000374          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
+                  0x000374          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(feqltle.eo)
  __c30_signature
-                  0x00037a          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(floatsisf.eo)
+                  0x00037a          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fgtge.eo)
  __c30_signature
-                  0x000380          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fpack.eo)
+                  0x000380          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
  __c30_signature
-                  0x000386          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(funpack.eo)
+                  0x000386          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(floatsisf.eo)
  __c30_signature
-                  0x00038c          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+                  0x00038c          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fpack.eo)
  __c30_signature
-                  0x000392          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(futil.eo)
+                  0x000392          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(funpack.eo)
  __c30_signature
-                  0x000398          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
+                  0x000398          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(funpack2.eo)
  __c30_signature
-                  0x00039e          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
+                  0x00039e          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(futil.eo)
  __c30_signature
-                  0x0003a4          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libc-elf.a(memset.XXeo)
+                  0x0003a4          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
  __c30_signature
-                  0x0003aa          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libc-elf.a(strlen.XXeo)
+                  0x0003aa          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
+ __c30_signature
+                  0x0003b0          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fcompare.eo)
+ __c30_signature
+                  0x0003b6          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libc-elf.a(memset.XXeo)
+ __c30_signature
+                  0x0003bc          0x6 c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libc-elf.a(strlen.XXeo)
 
-.data               0x0800        0x4ce
- .data              0x0800        0x35e build/default/production/_ext/1360937237/trace.o
+.data               0x0800        0x4e0
+ .data              0x0800        0x358 build/default/production/_ext/1360937237/trace.o
                     0x0800                  _TRSB
                     0x0b24                  _trace_state
                     0x0b26                  _trace_control
@@ -1920,258 +1958,259 @@ __c30_signature
                     0x0b3a                  _u16CompareParameter
                     0x0b3c                  _s16CmpValue
                     0x0b3e                  _trace_source_addr
- .data              0x0b5e        0x102 build/default/production/_ext/1360937237/MathTools.o
-                    0x0b5e                  _ATAN_TAB
- .data              0x0c60         0x3c build/default/production/_ext/659864977/pid_cfg.o
-                    0x0c60                  _PID_C245ToolPid_Data
-                    0x0c90                  _PID_C245ToolPid_Cfg
- .data              0x0c9c         0x32 build/default/production/_ext/1360937237/IDENT.o
-                    0x0c9c                  _ident
+ .data              0x0b58        0x102 build/default/production/_ext/1360937237/MathTools.o
+                    0x0b58                  _ATAN_TAB
+ .data              0x0c5a         0x4c build/default/production/_ext/659864977/pid_cfg.o
+                    0x0c5a                  _PID_C245ToolPid_Data
+                    0x0c78                  _PID_C245ToolPid_Cfg
+                    0x0c80                  _PID_C210ToolPid_Data
+                    0x0c9e                  _PID_C210ToolPid_Cfg
+ .data              0x0ca6         0x3a build/default/production/_ext/1360937237/IDENT.o
+                    0x0ca6                  _ident
 
-.bss                0x0cce         0x30
- .bss               0x0cce         0x30 build/default/production/_ext/1360937237/sirem.o
+.bss                0x0ce0         0x30
+ .bss               0x0ce0         0x30 build/default/production/_ext/1360937237/sirem.o
 
-.data               0x0cfe         0x52
- .data              0x0cfe         0x2a build/default/production/_ext/1360937237/task.o
-                    0x0cfe                  _Ttime
-                    0x0d12                  _stat_stat
- .data              0x0d28         0x28 build/default/production/_ext/1360937237/tempctrl.o
-                    0x0d28                  _T_ctrl
-                    0x0d44                  _overprot
+.data               0x0d10         0x9a
+ .data              0x0d10         0x2a build/default/production/_ext/1360937237/task.o
+                    0x0d10                  _Ttime
+                    0x0d24                  _stat_stat
+ .data              0x0d3a         0x2a build/default/production/_ext/1360937237/tempctrl.o
+                    0x0d3a                  _tmpctrl_mainstate
+                    0x0d3c                  _tmpctrl_nextstate
+                    0x0d3e                  _T_ctrl
+                    0x0d58                  _overprot
+ .data              0x0d64         0x1a build/default/production/_ext/1360937237/statemachine.o
+                    0x0d64                  _mainstate_T2
+                    0x0d6a                  _mainstate_T1
+                    0x0d76                  _SYS_CONTROL
+                    0x0d78                  _PC_CONTROL
+                    0x0d7a                  _ERR_CONTROL
+                    0x0d7c                  _LCD_update_rate
+ .data              0x0d7e         0x1a build/default/production/_ext/1360937237/measure.o
+                    0x0d7e                  _mes1
+                    0x0d88                  _mes2
+                    0x0d8e                  _mespar
+ .data              0x0d98         0x12 build/default/production/_ext/1360937237/eeprom.o
+                    0x0d98                  _EE_CHKS
+                    0x0d9c                  _EE_Valid
+                    0x0d9e                  _EE_par_update
+                    0x0da0                  _ParamAct
 
-.bss                0x0d50         0x22
- .bss               0x0d50         0x22 build/default/production/_ext/1360937237/measure.o
-                    0x0d52                  _mes1
-                    0x0d5c                  _mes2
-                    0x0d62                  _mespar
-                    0x0d70                  _ZeroCrosDetectionState
+.bss                0x0daa         0x36
+ .bss               0x0daa         0x10 build/default/production/_ext/1360937237/vuart.o
+ .bss               0x0dba          0xe build/default/production/_ext/1360937237/tempctrl.o
+ .bss               0x0dc8          0xc build/default/production/_ext/1360937237/DigitalIO.o
+                    0x0dca                  _debounce_timer_2
+                    0x0dcc                  _deb_timer_cart
+                    0x0dce                  _deb_timer_stand
+                    0x0dd0                  _deb_timer_extr
+                    0x0dd2                  _cart_det_state
+ .bss               0x0dd4          0xc build/default/production/_ext/1360937237/task.o
+                    0x0dde                  _TASK_CONTROL
 
-.data               0x0d72         0x2c
- .data              0x0d72         0x1a build/default/production/_ext/1360937237/statemachine.o
-                    0x0d72                  _mainstate_T2
-                    0x0d78                  _mainstate_T1
-                    0x0d84                  _SYS_CONTROL
-                    0x0d86                  _PC_CONTROL
-                    0x0d88                  _ERR_CONTROL
-                    0x0d8a                  _LCD_update_rate
- .data              0x0d8c         0x12 build/default/production/_ext/1360937237/eeprom.o
-                    0x0d8c                  _EE_CHKS
-                    0x0d90                  _EE_Valid
-                    0x0d92                  _EE_par_update
-                    0x0d94                  _ParamAct
+.data               0x0de0          0xc
+ .data              0x0de0          0xc build/default/production/_ext/2014683921/RotaryEncoder.o
+                    0x0de0                  _RotaryEncoder
 
-.bss                0x0d9e         0x3a
- .bss               0x0d9e         0x12 build/default/production/_ext/1360937237/tempctrl.o
-                    0x0dac                  _tmpctrl_mainstate
-                    0x0dae                  _tmpctrl_nextstate
- .bss               0x0db0         0x10 build/default/production/_ext/1360937237/vuart.o
- .bss               0x0dc0          0xc build/default/production/_ext/1360937237/DigitalIO.o
-                    0x0dc2                  _debounce_timer_2
-                    0x0dc4                  _deb_timer_cart
-                    0x0dc6                  _deb_timer_stand
-                    0x0dc8                  _deb_timer_extr
-                    0x0dca                  _cart_det_state
- .bss               0x0dcc          0xc build/default/production/_ext/1360937237/task.o
-                    0x0dd6                  _TASK_CONTROL
+.bss                0x0dec         0x24
+ .bss               0x0dec          0x8 build/default/production/_ext/1360937237/systmr.o
+                    0x0dec                  _time
+ .bss               0x0df4          0x8 build/default/production/_ext/1360937237/statemachine.o
+ .bss               0x0dfc          0x6 build/default/production/_ext/1360937237/trace.o
+                    0x0dfe                  _trace_config
+                    0x0e00                  _trace_every_period
+ .bss               0x0e02          0x6 build/default/production/_ext/1360937237/eeprom.o
+ .bss               0x0e08          0x4 build/default/production/_ext/1360937237/IDENT.o
+ .bss               0x0e0c          0x4 build/default/production/_ext/1360937237/measure.o
+                    0x0e0e                  _ZeroCrosDetectionState
 
-.data               0x0dd8          0xc
- .data              0x0dd8          0xc build/default/production/_ext/2014683921/RotaryEncoder.o
-                    0x0dd8                  _RotaryEncoder
+.data               0x0e10          0x6
+ .data              0x0e10          0x4 build/default/production/_ext/1360937237/adc_drv.o
+                    0x0e10                  _AdcBuffer
+ .data              0x0e14          0x2 build/default/production/_ext/1360937237/PARLIST.o
+                    0x0e14                  _debug_var_1
 
-.bss                0x0de4         0x24
- .bss               0x0de4          0x8 build/default/production/_ext/1360937237/systmr.o
-                    0x0de4                  _time
- .bss               0x0dec          0x8 build/default/production/_ext/1360937237/statemachine.o
- .bss               0x0df4          0x6 build/default/production/_ext/1360937237/trace.o
-                    0x0df6                  _trace_config
-                    0x0df8                  _trace_every_period
- .bss               0x0dfa          0x6 build/default/production/_ext/1360937237/eeprom.o
- .bss               0x0e00          0x4 build/default/production/_ext/1360937237/vADC.o
-                    0x0e00                  _ADC
- .bss               0x0e04          0x4 build/default/production/_ext/1360937237/IDENT.o
+.bss                0x0e16          0x8
+ .bss               0x0e16          0x2 build/default/production/_ext/1360937237/PARLIST.o
+                    0x0e16                  _release
+ .bss               0x0e18          0x2 build/default/production/_ext/1360937237/LCD.o
+                    0x0e18                  _u16Nibble_Temp
+ .bss               0x0e1a          0x2 build/default/production/_ext/1360937237/triac_control.o
+ .bss               0x0e1c          0x2 build/default/production/_ext/2014683921/RotaryEncoder.o
 
-.data               0x0e08          0x2
- .data              0x0e08          0x2 build/default/production/_ext/1360937237/PARLIST.o
-                    0x0e08                  _debug_var_1
+.const              0x856c       0x1eca load address 0x00056c  
+ .const             0x856c       0x1070 build/default/production/_ext/1360937237/PARLIST.o
+                    0x856c                  _version
+                    0x856e                  _C30_Version
+                    0x8b40                  _iopar
+ .const             0x95dc        0xb04 build/default/production/_ext/1360937237/MathTools.o
+                    0x95dc                  _sintab
+ .const             0xa0e0        0x200 build/default/production/_ext/1360937237/Crc16.o
+ .const             0xa2e0         0xd6 build/default/production/_ext/1360937237/statemachine.o
+ .const             0xa3b6         0x36 build/default/production/_ext/1360937237/traps.o
+ .const             0xa3ec         0x1c build/default/production/_ext/1360937237/LCD.o
+                    0xa3ec                  _LCD_INIT_STRING
+                    0xa3f0                  _DegreeChar
+                    0xa3f8                  _EmptyHeart
+                    0xa400                  _FullHeart
+ .const             0xa408         0x1c build/default/production/_ext/2014683921/RotaryEncoder.o
+ .const             0xa424          0x8 build/default/production/_ext/659864977/pid_cfg.o
+                    0xa424                  _PID_C245ToolPid
+                    0xa428                  _PID_C210ToolPid
+ .const             0xa42c          0x6 build/default/production/_ext/1360937237/tempctrl.o
+ .const             0xa432          0x4 build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
+                    0xa432                  _EncoderClient_cfg
+                    0xa434                  _RotaryEncoderPinsPolarity_cfg
 
-.bss                0x0e0a          0x8
- .bss               0x0e0a          0x2 build/default/production/_ext/1360937237/PARLIST.o
-                    0x0e0a                  _release
- .bss               0x0e0c          0x2 build/default/production/_ext/1360937237/LCD.o
-                    0x0e0c                  _u16Nibble_Temp
- .bss               0x0e0e          0x2 build/default/production/_ext/1360937237/triac_control.o
- .bss               0x0e10          0x2 build/default/production/_ext/2014683921/RotaryEncoder.o
+.text             0x002436       0x13b4
+ .text            0x002436        0x764 build/default/production/_ext/1360937237/statemachine.o
+                  0x002436                  _state_machine_T1
+                  0x002698                  _state_machine_T2
+                  0x002abe                  _state_machine_init
+                  0x002ad8                  _stm_timer_T2
+                  0x002af2                  _stm_timer_II_T2
+                  0x002b0c                  _stm_timer_T1
+                  0x002b26                  _PrintHibernationTime
+                  0x002b7c                  _PrintTriacState
+ .text            0x002b9a        0x64c build/default/production/_ext/1360937237/sirem.o
+                  0x002b9a                  _Sirem_Engine
+ .text            0x0031e6        0x604 build/default/production/_ext/1360937237/eeprom.o
+                  0x00340a                  _ee_param_act
+                  0x003710                  _EE_CheckEEprom
 
-.const              0x852e       0x1f90 load address 0x00052e  
- .const             0x852e       0x1044 build/default/production/_ext/1360937237/PARLIST.o
-                    0x852e                  _version
-                    0x8530                  _C30_Version
-                    0x8b46                  _iopar
- .const             0x9572        0xc00 build/default/production/_ext/1360937237/MathTools.o
-                    0x9572                  _sintab
-                    0x9972                  _SQRT_TAB
-                    0x9d72                  _SQRT_TAB2
- .const             0xa172        0x200 build/default/production/_ext/1360937237/Crc16.o
- .const             0xa372         0xd6 build/default/production/_ext/1360937237/statemachine.o
- .const             0xa448         0x36 build/default/production/_ext/1360937237/traps.o
- .const             0xa47e         0x1c build/default/production/_ext/1360937237/LCD.o
-                    0xa47e                  _LCD_INIT_STRING
-                    0xa482                  _DegreeChar
-                    0xa48a                  _EmptyHeart
-                    0xa492                  _FullHeart
- .const             0xa49a         0x1c build/default/production/_ext/2014683921/RotaryEncoder.o
- .const             0xa4b6          0x4 build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
-                    0xa4b6                  _EncoderClient_cfg
-                    0xa4b8                  _RotaryEncoderPinsPolarity_cfg
- .const             0xa4ba          0x4 build/default/production/_ext/659864977/pid_cfg.o
-                    0xa4ba                  _PID_C245ToolPid
+.dinit            0x0037ea        0x45e
+ .dinit           0x0037ea        0x45e data_init
 
-.text             0x0024be       0x13cc
- .text            0x0024be        0x77c build/default/production/_ext/1360937237/statemachine.o
-                  0x0024be                  _state_machine_T1
-                  0x002728                  _state_machine_T2
-                  0x002b5e                  _state_machine_init
-                  0x002b78                  _stm_timer_T2
-                  0x002b92                  _stm_timer_II_T2
-                  0x002bac                  _stm_timer_T1
-                  0x002bc6                  _PrintHibernationTime
-                  0x002c1c                  _PrintTriacState
- .text            0x002c3a        0x64c build/default/production/_ext/1360937237/sirem.o
-                  0x002c3a                  _Sirem_Engine
- .text            0x003286        0x604 build/default/production/_ext/1360937237/eeprom.o
-                  0x0034aa                  _ee_param_act
-                  0x0037b0                  _EE_CheckEEprom
+.text             0x003c48       0x1970
+ .text            0x003c48        0x440 build/default/production/_ext/1360937237/tempctrl.o
+                  0x003c48                  _temp_ctrl
+                  0x003e1e                  _Reset_TMPCTRL
+                  0x003e48                  _Cartridge_overload_protection
+                  0x003e9a                  _temp_ctrl_init
+                  0x003ea6                  _Get_Temp_Actual
+                  0x003edc                  _Set_User_Temp
+                  0x003f18                  _Reset_User_Temp
+                  0x003f54                  _Get_User_Temp
+                  0x003f8a                  _Inc_User_Temp
+                  0x003fbe                  _Dec_User_Temp
+                  0x003ff2                  _tmpctrl_timer_t1
+ .text            0x004088        0x2c2 build/default/production/_ext/1360937237/IDENT.o
+                  0x004088                  _cartridge_ident
+                  0x004312                  _ident_get_current_tool
+                  0x004316                  _ident_timer_t1
+                  0x004330                  _ident_timeout_timer_t1
+ .text            0x00434a        0x250 build/default/production/_ext/1360937237/LCD.o
+                  0x00434a                  _IF_LCDInit
+                  0x0043ac                  _IF_LCDPutc
+                  0x0043e0                  _IF_LCDPutSpecialChar
+                  0x004406                  _IF_LCDGotoXY
+                  0x004430                  _IF_LCDPuts
+                  0x004454                  _IF_LCDPutn
+                  0x0044da                  _IF_LCD_UpdateState
+                  0x0044ec                  _LCDSendNibble
+                  0x00454e                  _LCDSendByte
+                  0x004594                  _LCD_printf
+ .text            0x00459a        0x1f6 build/default/production/_ext/1360937237/MathTools.o
+                  0x00459a                  _ATAN
+                  0x004698                  _sqrt_16
+                  0x0046c6                  _sqrt_32
+                  0x0046fe                  _pow_16
+                  0x004730                  _sdiv_32
+                  0x004744                  _udiv_32
+                  0x004758                  _fmul_q15
+                  0x004768                  _fmul_qu15
+                  0x004778                  _mul_s16
+                  0x004780                  _DSP_Engine_Init
+ .text            0x004790        0x1d6 build/default/production/_ext/659864977/pid.o
+                  0x004790                  _PidProcess
+                  0x004870                  _PidReset
+ .text            0x004966        0x1d4 build/default/production/_ext/1360937237/DigitalIO.o
+                  0x004966                  _IF_DigitalIO_Init
+                  0x0049b6                  _Dio_Scan_T2
+                  0x004a0a                  _cart_stat_det
+                  0x004b20                  _cart_stat_timer_T1
+ .text            0x004b3a        0x1aa build/default/production/_ext/1360937237/vuart.o
+                  0x004b3a                  _IF_Uart_Init
+                  0x004bd0                  _IF_Uart_MsgGetDataCnt
+                  0x004be0                  _IF_Uart_MsgGet
+                  0x004c12                  _IF_Uart_RxPurge
+                  0x004c22                  _IF_Uart_MsgPut
+                  0x004c4a                  _IF_UART_PutByte
+                  0x004c64                  __U1RXInterrupt
+                  0x004cc6                  _sci_timer
+ .text            0x004ce4        0x1a4 build/default/production/_ext/1360937237/task.o
+                  0x004ce4                  __T3Interrupt
+                  0x004d40                  __T1Interrupt
+                  0x004d8a                  __INT0Interrupt
+                  0x004d8e                  _TaskTimesCalc
+                  0x004dc4                  _StationStatistic
+ .text            0x004e88        0x184 build/default/production/_ext/1360937237/measure.o
+                  0x004e88                  _zero_cross_II
+                  0x004ef2                  _DC_Autotunning
+                  0x004f6c                  _Current_measure
+                  0x004fc0                  _measure_T2
+                  0x004fe8                  _measure_init
+ .text            0x00500c        0x150 build/default/production/_ext/1360937237/trace.o
+                  0x00500c                  _IF_Get_TRSB_CntBytes
+                  0x005010                  _do_trace
+                  0x005130                  _trace_init_first
+ .text            0x00515c         0xf8 build/default/production/_ext/2014683921/RotaryEncoder.o
+                  0x0051f6                  _RotaryEncoder_Init
+                  0x005202                  _RotaryEncoder_Scan_T1
+                  0x00523c                  _RotaryEncoder_ConsumeStateEvent
+ .text            0x005254         0xe0 build/default/production/_ext/1360937237/main.o
+                  0x005254                  _main
+ .text            0x005334         0xd6 build/default/production/_ext/1360937237/systmr.o
+                  0x005334                  _IF_SysTmr1_Init
+                  0x00535a                  _IF_SysTmr3_Init
+                  0x00537e                  _IF_SysTmr2_Init
+                  0x0053a2                  _delay_us
+                  0x0053b0                  _delay_ms
+                  0x0053c0                  _Timestate_Cartridge_Control
+ .text            0x00540a         0x72 build/default/production/_ext/1360937237/PARLIST.o
+                  0x00540a                  _IF_Parlist_GetCntMembers
+                  0x00540e                  _IF_Parlist_GetCntBytes
+                  0x005412                  _IF_Parlist_bnu
+                  0x005440                  _Params_check_limit
+                  0x00547a                  _Params_Conversion
+ .text            0x00547c         0x68 build/default/production/_ext/1360937237/traps.o
+                  0x00547c                  __OscillatorFail
+                  0x005496                  __AddressError
+                  0x0054b0                  __StackError
+                  0x0054ca                  __MathError
+ .text            0x0054e4         0x4e build/default/production/_ext/1360937237/adc_drv.o
+                  0x0054e4                  _AdcDrv_Init
+                  0x005510                  _AdcReadAllChannels
+                  0x005522                  _AdcReadChannel
+ .text            0x005532         0x34 build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
+                  0x005532                  _RotaryEncoder_cfg_InitPins
+                  0x00553a                  _RotaryEncoder_cfg_ReadPins
+ .text            0x005566         0x30 build/default/production/_ext/1360937237/Crc16.o
+                  0x005566                  _Crc_CalculateCRC16
+ .text            0x005596         0x22 build/default/production/_ext/1360937237/triac_control.o
+                  0x005596                  _triac_fire_timer
+                  0x0055b2                  _triac_control_init
 
-.dinit            0x00388a        0x434
- .dinit           0x00388a        0x434 data_init
+.init.delay32     0x0055b8         0x1c
+ .init.delay32    0x0055b8         0x1c c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libpic30-elf.a(delay32.eo)
+                  0x0055b8                  ___delay32
 
-.text             0x003cbe       0x197a
- .text            0x003cbe        0x352 build/default/production/_ext/659864977/pid.o
-                  0x003cbe                  _PidProcess
-                  0x003eae                  _PidReset
- .text            0x004010        0x310 build/default/production/_ext/1360937237/tempctrl.o
-                  0x004010                  _temp_ctrl
-                  0x0041ae                  _Reset_TMPCTRL
-                  0x0041c4                  _Cartridge_overload_protection
-                  0x004216                  _temp_ctrl_init
-                  0x004224                  _Get_Temp_Actual
-                  0x00422e                  _Set_User_Temp
-                  0x004248                  _Reset_User_Temp
-                  0x004262                  _Get_User_Temp
-                  0x004266                  _Inc_User_Temp
-                  0x004278                  _Dec_User_Temp
-                  0x00428a                  _tmpctrl_timer_t1
- .text            0x004320        0x2a4 build/default/production/_ext/1360937237/IDENT.o
-                  0x004320                  _cartridge_ident
-                  0x00458c                  _ident_get_current_tool
-                  0x004590                  _ident_timer_t1
-                  0x0045aa                  _ident_timeout_timer_t1
- .text            0x0045c4        0x250 build/default/production/_ext/1360937237/LCD.o
-                  0x0045c4                  _IF_LCDInit
-                  0x004626                  _IF_LCDPutc
-                  0x00465a                  _IF_LCDPutSpecialChar
-                  0x004680                  _IF_LCDGotoXY
-                  0x0046aa                  _IF_LCDPuts
-                  0x0046ce                  _IF_LCDPutn
-                  0x004754                  _IF_LCD_UpdateState
-                  0x004766                  _LCDSendNibble
-                  0x0047c8                  _LCDSendByte
-                  0x00480e                  _LCD_printf
- .text            0x004814        0x208 build/default/production/_ext/1360937237/MathTools.o
-                  0x004814                  _ATAN
-                  0x004912                  _sqrt_16
-                  0x00492e                  _sqrt_32
-                  0x00497a                  _pow_16
-                  0x0049ac                  _sdiv_32
-                  0x0049c0                  _udiv_32
-                  0x0049d4                  _fmul_q15
-                  0x0049f6                  _mul_s16
-                  0x004a0c                  _DSP_Engine_Init
- .text            0x004a1c        0x1d4 build/default/production/_ext/1360937237/DigitalIO.o
-                  0x004a1c                  _IF_DigitalIO_Init
-                  0x004a6c                  _Dio_Scan_T2
-                  0x004ac0                  _cart_stat_det
-                  0x004bd6                  _cart_stat_timer_T1
- .text            0x004bf0        0x1aa build/default/production/_ext/1360937237/vuart.o
-                  0x004bf0                  _IF_Uart_Init
-                  0x004c86                  _IF_Uart_MsgGetDataCnt
-                  0x004c96                  _IF_Uart_MsgGet
-                  0x004cc8                  _IF_Uart_RxPurge
-                  0x004cd8                  _IF_Uart_MsgPut
-                  0x004d00                  _IF_UART_PutByte
-                  0x004d1a                  __U1RXInterrupt
-                  0x004d7c                  _sci_timer
- .text            0x004d9a        0x1a6 build/default/production/_ext/1360937237/task.o
-                  0x004d9a                  __T3Interrupt
-                  0x004df8                  __T1Interrupt
-                  0x004e42                  __INT0Interrupt
-                  0x004e46                  _TaskTimesCalc
-                  0x004e7c                  _StationStatistic
- .text            0x004f40        0x150 build/default/production/_ext/1360937237/trace.o
-                  0x004f40                  _IF_Get_TRSB_CntBytes
-                  0x004f44                  _do_trace
-                  0x005064                  _trace_init_first
- .text            0x005090        0x120 build/default/production/_ext/1360937237/measure.o
-                  0x005090                  _zero_cross_II
-                  0x0050f4                  _DC_Autotunning
-                  0x005134                  _Current_measure
-                  0x00516e                  _measure_T2
-                  0x00518c                  _measure_init
- .text            0x0051b0         0xf8 build/default/production/_ext/2014683921/RotaryEncoder.o
-                  0x00524a                  _RotaryEncoder_Init
-                  0x005256                  _RotaryEncoder_Scan_T1
-                  0x005290                  _RotaryEncoder_ConsumeStateEvent
- .text            0x0052a8         0xe0 build/default/production/_ext/1360937237/main.o
-                  0x0052a8                  _main
- .text            0x005388         0xd6 build/default/production/_ext/1360937237/systmr.o
-                  0x005388                  _IF_SysTmr1_Init
-                  0x0053ae                  _IF_SysTmr3_Init
-                  0x0053d2                  _IF_SysTmr2_Init
-                  0x0053f6                  _delay_us
-                  0x005404                  _delay_ms
-                  0x005414                  _Timestate_Cartridge_Control
- .text            0x00545e         0x80 build/default/production/_ext/1360937237/PARLIST.o
-                  0x00545e                  _IF_Parlist_GetCntMembers
-                  0x005462                  _IF_Parlist_GetCntBytes
-                  0x005466                  _IF_Parlist_bnu
-                  0x005494                  _Params_check_limit
-                  0x0054dc                  _Params_Conversion
- .text            0x0054de         0x6c build/default/production/_ext/1360937237/vADC.o
-                  0x0054de                  _IF_ADC_INIT
-                  0x005534                  _ADC_Sample_Read
- .text            0x00554a         0x68 build/default/production/_ext/1360937237/traps.o
-                  0x00554a                  __OscillatorFail
-                  0x005564                  __AddressError
-                  0x00557e                  __StackError
-                  0x005598                  __MathError
- .text            0x0055b2         0x34 build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
-                  0x0055b2                  _RotaryEncoder_cfg_InitPins
-                  0x0055ba                  _RotaryEncoder_cfg_ReadPins
- .text            0x0055e6         0x30 build/default/production/_ext/1360937237/Crc16.o
-                  0x0055e6                  _Crc_CalculateCRC16
- .text            0x005616         0x22 build/default/production/_ext/1360937237/triac_control.o
-                  0x005616                  _triac_fire_timer
-                  0x005632                  _triac_control_init
-
-.init.delay32     0x005638         0x1c
- .init.delay32    0x005638         0x1c c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libpic30-elf.a(delay32.eo)
-                  0x005638                  ___delay32
-
-_0347bf5061e68458
+_031cea1064a68d4e
                     0xfc00        0x1fe load address 0x7ffc00  
- _0347bf5061e68458
+ _031cea1064a68d4e
                     0xfc00        0x1fe build/default/production/_ext/1360937237/eeprom.o
                     0xfc00                  _EEdata_Bank1
 
-_0347c0e061e68458
+_031ceb6064a68d4e
                     0xfdfe        0x1fe load address 0x7ffdfe  
- _0347c0e061e68458
+ _031ceb6064a68d4e
                     0xfdfe        0x1fe build/default/production/_ext/1360937237/eeprom.o
                     0xfdfe                  _EEdata_Bank2
 
-_0347c15061e68458
+_031cebd064a68d4e
                     0xfffc          0x2 load address 0x7ffffc  
- _0347c15061e68458
+ _031cebd064a68d4e
                     0xfffc          0x2 build/default/production/_ext/1360937237/eeprom.o
                     0xfffc                  _EEdata_ValidFlag
 
@@ -2181,23 +2220,28 @@ Symbol                                            File
 NVMCON                                            c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libpic30-elf.a(eedata_helper.eo)
 NVMKEY                                            c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libpic30-elf.a(eedata_helper.eo)
 TBLPAG                                            c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libpic30-elf.a(eedata_helper.eo)
-_ADC                                              build/default/production/_ext/1360937237/vADC.o
-                                                  build/default/production/_ext/1360937237/statemachine.o
-                                                  build/default/production/_ext/1360937237/trace.o
-                                                  build/default/production/_ext/1360937237/PARLIST.o
-                                                  build/default/production/_ext/1360937237/task.o
-_ADCBUF0                                          build/default/production/_ext/1360937237/vADC.o
-_ADCBUF1                                          build/default/production/_ext/1360937237/vADC.o
-_ADCHS                                            build/default/production/_ext/1360937237/vADC.o
-_ADCON1bits                                       build/default/production/_ext/1360937237/vADC.o
-_ADCON2bits                                       build/default/production/_ext/1360937237/vADC.o
-_ADCON3bits                                       build/default/production/_ext/1360937237/vADC.o
-_ADCSSL                                           build/default/production/_ext/1360937237/vADC.o
-_ADC_Sample_Read                                  build/default/production/_ext/1360937237/vADC.o
-                                                  build/default/production/_ext/1360937237/task.o
-_ADPCFG                                           build/default/production/_ext/1360937237/vADC.o
+_ADCBUF0                                          build/default/production/_ext/1360937237/adc_drv.o
+_ADCBUF1                                          build/default/production/_ext/1360937237/adc_drv.o
+_ADCHS                                            build/default/production/_ext/1360937237/adc_drv.o
+_ADCON1                                           build/default/production/_ext/1360937237/adc_drv.o
+_ADCON1bits                                       build/default/production/_ext/1360937237/adc_drv.o
+_ADCON2                                           build/default/production/_ext/1360937237/adc_drv.o
+_ADCON3                                           build/default/production/_ext/1360937237/adc_drv.o
+_ADCSSL                                           build/default/production/_ext/1360937237/adc_drv.o
+_ADPCFG                                           build/default/production/_ext/1360937237/adc_drv.o
 _ATAN                                             build/default/production/_ext/1360937237/MathTools.o
 _ATAN_TAB                                         build/default/production/_ext/1360937237/MathTools.o
+_AdcBuffer                                        build/default/production/_ext/1360937237/adc_drv.o
+                                                  build/default/production/_ext/1360937237/trace.o
+                                                  build/default/production/_ext/1360937237/PARLIST.o
+_AdcDrv_Init                                      build/default/production/_ext/1360937237/adc_drv.o
+                                                  build/default/production/_ext/1360937237/main.o
+_AdcReadAllChannels                               build/default/production/_ext/1360937237/adc_drv.o
+                                                  build/default/production/_ext/1360937237/task.o
+_AdcReadChannel                                   build/default/production/_ext/1360937237/adc_drv.o
+                                                  build/default/production/_ext/1360937237/measure.o
+                                                  build/default/production/_ext/1360937237/tempctrl.o
+                                                  build/default/production/_ext/1360937237/IDENT.o
 _C30_Version                                      build/default/production/_ext/1360937237/PARLIST.o
 _CORCON                                           c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libpic30-elf.a(crt0_standard.o)
 _CORCONbits                                       build/default/production/_ext/1360937237/MathTools.o
@@ -2209,7 +2253,9 @@ _Current_measure                                  build/default/production/_ext/
                                                   build/default/production/_ext/1360937237/task.o
 _DC_Autotunning                                   build/default/production/_ext/1360937237/measure.o
                                                   build/default/production/_ext/1360937237/statemachine.o
-_DISICNT                                          build/default/production/_ext/1360937237/main.o
+_DISICNT                                          build/default/production/_ext/1360937237/measure.o
+                                                  build/default/production/_ext/1360937237/tempctrl.o
+                                                  build/default/production/_ext/1360937237/main.o
 _DSP_Engine_Init                                  build/default/production/_ext/1360937237/MathTools.o
                                                   build/default/production/_ext/1360937237/main.o
 _Dec_User_Temp                                    build/default/production/_ext/1360937237/tempctrl.o
@@ -2229,7 +2275,6 @@ _EEdata_Bank1                                     build/default/production/_ext/
 _EEdata_Bank2                                     build/default/production/_ext/1360937237/eeprom.o
 _EEdata_ValidFlag                                 build/default/production/_ext/1360937237/eeprom.o
 _ERR_CONTROL                                      build/default/production/_ext/1360937237/statemachine.o
-                                                  build/default/production/_ext/659864977/pid.o
                                                   build/default/production/_ext/1360937237/measure.o
                                                   build/default/production/_ext/1360937237/tempctrl.o
                                                   build/default/production/_ext/1360937237/IDENT.o
@@ -2238,6 +2283,7 @@ _ERR_CONTROL                                      build/default/production/_ext/
                                                   build/default/production/_ext/1360937237/PARLIST.o
                                                   build/default/production/_ext/1360937237/task.o
                                                   build/default/production/_ext/1360937237/DigitalIO.o
+                                                  build/default/production/_ext/659864977/pid.o
 _EmptyHeart                                       build/default/production/_ext/1360937237/LCD.o
 _EncoderClient_cfg                                build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
                                                   build/default/production/_ext/2014683921/RotaryEncoder.o
@@ -2246,18 +2292,15 @@ _Get_Temp_Actual                                  build/default/production/_ext/
                                                   build/default/production/_ext/1360937237/statemachine.o
 _Get_User_Temp                                    build/default/production/_ext/1360937237/tempctrl.o
                                                   build/default/production/_ext/1360937237/statemachine.o
-_IEC0bits                                         build/default/production/_ext/1360937237/vADC.o
+_IEC0bits                                         build/default/production/_ext/1360937237/adc_drv.o
                                                   build/default/production/_ext/1360937237/vuart.o
                                                   build/default/production/_ext/1360937237/systmr.o
                                                   build/default/production/_ext/1360937237/DigitalIO.o
 _IFS0bits                                         build/default/production/_ext/1360937237/measure.o
-                                                  build/default/production/_ext/1360937237/vADC.o
                                                   build/default/production/_ext/1360937237/vuart.o
                                                   build/default/production/_ext/1360937237/task.o
                                                   build/default/production/_ext/1360937237/systmr.o
                                                   build/default/production/_ext/1360937237/DigitalIO.o
-_IF_ADC_INIT                                      build/default/production/_ext/1360937237/vADC.o
-                                                  build/default/production/_ext/1360937237/main.o
 _IF_DigitalIO_Init                                build/default/production/_ext/1360937237/DigitalIO.o
                                                   build/default/production/_ext/1360937237/main.o
 _IF_Get_TRSB_CntBytes                             build/default/production/_ext/1360937237/trace.o
@@ -2305,7 +2348,7 @@ _INTCON2bits                                      build/default/production/_ext/
 _IPC0bits                                         build/default/production/_ext/1360937237/systmr.o
                                                   build/default/production/_ext/1360937237/DigitalIO.o
 _IPC1bits                                         build/default/production/_ext/1360937237/systmr.o
-_IPC2bits                                         build/default/production/_ext/1360937237/vADC.o
+_IPC2bits                                         build/default/production/_ext/1360937237/adc_drv.o
                                                   build/default/production/_ext/1360937237/vuart.o
 _Inc_User_Temp                                    build/default/production/_ext/1360937237/tempctrl.o
                                                   build/default/production/_ext/1360937237/statemachine.o
@@ -2329,8 +2372,17 @@ _LCD_update_rate                                  build/default/production/_ext/
 _NVMCONbits                                       build/default/production/_ext/1360937237/eeprom.o
 _OSCCONbits                                       build/default/production/_ext/1360937237/main.o
 _PC_CONTROL                                       build/default/production/_ext/1360937237/statemachine.o
+                                                  build/default/production/_ext/1360937237/measure.o
+                                                  build/default/production/_ext/1360937237/tempctrl.o
+                                                  build/default/production/_ext/1360937237/IDENT.o
                                                   build/default/production/_ext/1360937237/PARLIST.o
                                                   build/default/production/_ext/1360937237/task.o
+_PID_C210ToolPid                                  build/default/production/_ext/659864977/pid_cfg.o
+                                                  build/default/production/_ext/1360937237/tempctrl.o
+_PID_C210ToolPid_Cfg                              build/default/production/_ext/659864977/pid_cfg.o
+                                                  build/default/production/_ext/1360937237/PARLIST.o
+_PID_C210ToolPid_Data                             build/default/production/_ext/659864977/pid_cfg.o
+                                                  build/default/production/_ext/1360937237/PARLIST.o
 _PID_C245ToolPid                                  build/default/production/_ext/659864977/pid_cfg.o
                                                   build/default/production/_ext/1360937237/tempctrl.o
 _PID_C245ToolPid_Cfg                              build/default/production/_ext/659864977/pid_cfg.o
@@ -2375,9 +2427,9 @@ _RotaryEncoder_cfg_InitPins                       build/default/production/_ext/
 _RotaryEncoder_cfg_ReadPins                       build/default/production/_ext/2014683921/RotaryEncoder_cfg.o
                                                   build/default/production/_ext/2014683921/RotaryEncoder.o
 _SPLIM                                            c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libpic30-elf.a(crt0_standard.o)
-_SQRT_TAB                                         build/default/production/_ext/1360937237/MathTools.o
-_SQRT_TAB2                                        build/default/production/_ext/1360937237/MathTools.o
-_SRbits                                           build/default/production/_ext/1360937237/main.o
+_SRbits                                           build/default/production/_ext/1360937237/measure.o
+                                                  build/default/production/_ext/1360937237/tempctrl.o
+                                                  build/default/production/_ext/1360937237/main.o
 _STORE_POS                                        build/default/production/_ext/1360937237/trace.o
                                                   build/default/production/_ext/1360937237/PARLIST.o
 _SYS_CONTROL                                      build/default/production/_ext/1360937237/statemachine.o
@@ -2416,7 +2468,6 @@ _TRISFbits                                        build/default/production/_ext/
 _TRSB                                             build/default/production/_ext/1360937237/trace.o
                                                   build/default/production/_ext/1360937237/sirem.o
 _T_ctrl                                           build/default/production/_ext/1360937237/tempctrl.o
-                                                  build/default/production/_ext/1360937237/statemachine.o
                                                   build/default/production/_ext/1360937237/trace.o
                                                   build/default/production/_ext/1360937237/PARLIST.o
 _TaskTimesCalc                                    build/default/production/_ext/1360937237/task.o
@@ -2454,21 +2505,29 @@ __T1Interrupt                                     build/default/production/_ext/
 __T3Interrupt                                     build/default/production/_ext/1360937237/task.o
 __U1RXInterrupt                                   build/default/production/_ext/1360937237/vuart.o
 ___addsf3                                         c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(addsf3.eo)
+                                                  build/default/production/_ext/1360937237/measure.o
                                                   build/default/production/_ext/1360937237/vuart.o
 ___delay32                                        c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libpic30-elf.a(delay32.eo)
                                                   build/default/production/_ext/1360937237/systmr.o
 ___divsf3                                         c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(divsf3.eo)
                                                   build/default/production/_ext/1360937237/vuart.o
+___eqsf2                                          c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(feqltle.eo)
 ___fixunssfsi                                     c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
                                                   build/default/production/_ext/1360937237/vuart.o
 ___floatsisf                                      c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(floatsisf.eo)
+                                                  build/default/production/_ext/1360937237/measure.o
                                                   build/default/production/_ext/1360937237/vuart.o
+___gesf2                                          c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fgtge.eo)
+___gtsf2                                          c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fgtge.eo)
+                                                  build/default/production/_ext/1360937237/measure.o
+___lesf2                                          c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(feqltle.eo)
+___ltsf2                                          c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(feqltle.eo)
+                                                  build/default/production/_ext/1360937237/measure.o
 ___mulsf3                                         c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
                                                   build/default/production/_ext/1360937237/vuart.o
 ___subsf3                                         c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(addsf3.eo)
                                                   build/default/production/_ext/1360937237/vuart.o
 ___udivsi3                                        c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(udivsi3.eo)
-                                                  build/default/production/_ext/1360937237/IDENT.o
                                                   build/default/production/_ext/1360937237/LCD.o
 __bootconst_psvpage                               dist/default/production/SST40_V4.0.X.production.elf
 __const_length                                    dist/default/production/SST40_V4.0.X.production.elf
@@ -2502,6 +2561,9 @@ __fbopReturnNaN                                   c:/program files (x86)/microch
                                                   c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
                                                   c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(divsf3.eo)
                                                   c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(addsf3.eo)
+__fcompare                                        c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fcompare.eo)
+                                                  c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fgtge.eo)
+                                                  c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(feqltle.eo)
 __fpack                                           c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fpack.eo)
                                                   c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
                                                   c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(floatsisf.eo)
@@ -2511,6 +2573,7 @@ __funpack                                         c:/program files (x86)/microch
                                                   c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(funpack2.eo)
                                                   c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fixunssfsi.eo)
 __funpack2                                        c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(funpack2.eo)
+                                                  c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(fcompare.eo)
                                                   c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(mulsf3.eo)
                                                   c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(divsf3.eo)
                                                   c:/program files (x86)/microchip/mplab c30/bin/bin/../../lib\libm-elf.a(addsf3.eo)
@@ -2547,6 +2610,11 @@ _do_trace                                         build/default/production/_ext/
 _ee_param_act                                     build/default/production/_ext/1360937237/eeprom.o
                                                   build/default/production/_ext/1360937237/main.o
 _fmul_q15                                         build/default/production/_ext/1360937237/MathTools.o
+                                                  build/default/production/_ext/1360937237/measure.o
+                                                  build/default/production/_ext/1360937237/tempctrl.o
+                                                  build/default/production/_ext/659864977/pid.o
+_fmul_qu15                                        build/default/production/_ext/1360937237/MathTools.o
+                                                  build/default/production/_ext/1360937237/IDENT.o
 _ident                                            build/default/production/_ext/1360937237/IDENT.o
                                                   build/default/production/_ext/1360937237/measure.o
                                                   build/default/production/_ext/1360937237/trace.o
@@ -2621,7 +2689,6 @@ _tmpctrl_timer_t1                                 build/default/production/_ext/
 _trace_config                                     build/default/production/_ext/1360937237/trace.o
                                                   build/default/production/_ext/1360937237/PARLIST.o
 _trace_control                                    build/default/production/_ext/1360937237/trace.o
-                                                  build/default/production/_ext/1360937237/IDENT.o
                                                   build/default/production/_ext/1360937237/PARLIST.o
 _trace_counter                                    build/default/production/_ext/1360937237/trace.o
 _trace_every_period                               build/default/production/_ext/1360937237/trace.o
@@ -2630,7 +2697,6 @@ _trace_init_first                                 build/default/production/_ext/
                                                   build/default/production/_ext/1360937237/main.o
 _trace_source_addr                                build/default/production/_ext/1360937237/trace.o
 _trace_state                                      build/default/production/_ext/1360937237/trace.o
-                                                  build/default/production/_ext/1360937237/IDENT.o
                                                   build/default/production/_ext/1360937237/PARLIST.o
 _trace_trigger                                    build/default/production/_ext/1360937237/trace.o
 _triac_control_init                               build/default/production/_ext/1360937237/triac_control.o

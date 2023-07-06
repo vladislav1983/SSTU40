@@ -43,7 +43,7 @@
 #define TEMP_SCALE                        (32768.0 / TEMP_MAX)
 
 #define TEMP_TRIP                         460u
-#define TEMP_USER_MAX                     450u
+#define TEMP_USER_MAX                     420u
 #define TEMP_USER_MIN                     100u
 #define TEMP_DISPLAY_ACCURACY_DIV         1u
 #define TEMP_DISPLAY_ACCURACY             (1u << TEMP_DISPLAY_ACCURACY_DIV)
